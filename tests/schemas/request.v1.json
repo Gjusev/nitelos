@@ -1,0 +1,580 @@
+{
+  "$defs": {
+    "ActionEvidence": {
+      "additionalProperties": false,
+      "description": "Agent action record; may reference a later tool-channel observation.",
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "captured_at": {
+          "format": "date-time",
+          "title": "Captured At",
+          "type": "string"
+        },
+        "checkpoint_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Checkpoint Id",
+          "type": "string"
+        },
+        "source_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "subject": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Subject",
+          "type": "object"
+        },
+        "phase": {
+          "$ref": "#/$defs/Phase"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "kind": {
+          "const": "action",
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "arguments": {
+          "additionalProperties": true,
+          "title": "Arguments",
+          "type": "object"
+        },
+        "reported_status": {
+          "$ref": "#/$defs/ReportedStatus"
+        },
+        "tool_result_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tool Result Id"
+        }
+      },
+      "required": [
+        "id",
+        "sequence",
+        "captured_at",
+        "checkpoint_id",
+        "source_id",
+        "subject",
+        "phase",
+        "sha256",
+        "kind",
+        "name",
+        "arguments",
+        "reported_status"
+      ],
+      "title": "ActionEvidence",
+      "type": "object"
+    },
+    "AssertionCriterion": {
+      "additionalProperties": false,
+      "description": "Deterministic JSON-pointer assertion; semantics are evaluated in NIT-004.",
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+            "type": "string"
+          },
+          "maxLength": 16,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "subject": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Subject",
+          "type": "object"
+        },
+        "max_age_seconds": {
+          "default": 300,
+          "maximum": 86400,
+          "minimum": 0,
+          "title": "Max Age Seconds",
+          "type": "integer"
+        },
+        "kind": {
+          "const": "assertion",
+          "title": "Kind",
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/$defs/Scope"
+        },
+        "pointer": {
+          "pattern": "^(/([^~/]|~[01])*)*$",
+          "title": "Pointer",
+          "type": "string"
+        },
+        "operator": {
+          "$ref": "#/$defs/Operator"
+        },
+        "expected": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected"
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "evidence_ids",
+        "subject",
+        "kind",
+        "scope",
+        "pointer",
+        "operator"
+      ],
+      "title": "AssertionCriterion",
+      "type": "object"
+    },
+    "Channel": {
+      "enum": [
+        "dom",
+        "accessibility",
+        "tool",
+        "external_api",
+        "database",
+        "human"
+      ],
+      "title": "Channel",
+      "type": "string"
+    },
+    "MediaType": {
+      "enum": [
+        "image/png",
+        "image/jpeg"
+      ],
+      "title": "MediaType",
+      "type": "string"
+    },
+    "ObservationEvidence": {
+      "additionalProperties": false,
+      "description": "Normalized JSON observation on a named channel; content is untrusted.",
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "captured_at": {
+          "format": "date-time",
+          "title": "Captured At",
+          "type": "string"
+        },
+        "checkpoint_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Checkpoint Id",
+          "type": "string"
+        },
+        "source_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "subject": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Subject",
+          "type": "object"
+        },
+        "phase": {
+          "$ref": "#/$defs/Phase"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "kind": {
+          "const": "observation",
+          "title": "Kind",
+          "type": "string"
+        },
+        "channel": {
+          "$ref": "#/$defs/Channel"
+        },
+        "data": {
+          "additionalProperties": true,
+          "title": "Data",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "sequence",
+        "captured_at",
+        "checkpoint_id",
+        "source_id",
+        "subject",
+        "phase",
+        "sha256",
+        "kind",
+        "channel",
+        "data"
+      ],
+      "title": "ObservationEvidence",
+      "type": "object"
+    },
+    "Operator": {
+      "enum": [
+        "equals",
+        "in",
+        "exists"
+      ],
+      "title": "Operator",
+      "type": "string"
+    },
+    "Phase": {
+      "enum": [
+        "final",
+        "pending"
+      ],
+      "title": "Phase",
+      "type": "string"
+    },
+    "ReportedStatus": {
+      "enum": [
+        "completed",
+        "failed",
+        "unknown"
+      ],
+      "title": "ReportedStatus",
+      "type": "string"
+    },
+    "Scope": {
+      "enum": [
+        "observed_state",
+        "behavioral",
+        "external",
+        "visual"
+      ],
+      "title": "Scope",
+      "type": "string"
+    },
+    "ScreenshotEvidence": {
+      "additionalProperties": false,
+      "description": "Image artifact capture; bytes live in the ArtifactStore (NIT-003).",
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "captured_at": {
+          "format": "date-time",
+          "title": "Captured At",
+          "type": "string"
+        },
+        "checkpoint_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Checkpoint Id",
+          "type": "string"
+        },
+        "source_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "subject": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Subject",
+          "type": "object"
+        },
+        "phase": {
+          "$ref": "#/$defs/Phase"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "kind": {
+          "const": "screenshot",
+          "title": "Kind",
+          "type": "string"
+        },
+        "artifact_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Artifact Id",
+          "type": "string"
+        },
+        "media_type": {
+          "$ref": "#/$defs/MediaType"
+        },
+        "width": {
+          "minimum": 1,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "minimum": 1,
+          "title": "Height",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "sequence",
+        "captured_at",
+        "checkpoint_id",
+        "source_id",
+        "subject",
+        "phase",
+        "sha256",
+        "kind",
+        "artifact_id",
+        "media_type",
+        "width",
+        "height"
+      ],
+      "title": "ScreenshotEvidence",
+      "type": "object"
+    },
+    "VisualCriterion": {
+      "additionalProperties": false,
+      "description": "Visually assessable criterion; decided by model inference when policy allows.",
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+            "type": "string"
+          },
+          "maxLength": 16,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "subject": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Subject",
+          "type": "object"
+        },
+        "max_age_seconds": {
+          "default": 300,
+          "maximum": 86400,
+          "minimum": 0,
+          "title": "Max Age Seconds",
+          "type": "integer"
+        },
+        "kind": {
+          "const": "visual",
+          "title": "Kind",
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/$defs/Scope"
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "evidence_ids",
+        "subject",
+        "kind",
+        "scope"
+      ],
+      "title": "VisualCriterion",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Immutable verification request (document 03 \"Request\").\n\nStructural invariants (unique ids, ascending sequences, timestamp and\nreference rules, action/screenshot counts) hold for direct construction\ntoo; ``parse_request`` maps violations to safe coded issues.",
+  "properties": {
+    "schema_version": {
+      "const": "1",
+      "default": "1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "request_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+      "title": "Request Id",
+      "type": "string"
+    },
+    "objective": {
+      "maxLength": 4096,
+      "minLength": 1,
+      "title": "Objective",
+      "type": "string"
+    },
+    "checkpoint_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+      "title": "Checkpoint Id",
+      "type": "string"
+    },
+    "as_of": {
+      "format": "date-time",
+      "title": "As Of",
+      "type": "string"
+    },
+    "criteria": {
+      "items": {
+        "discriminator": {
+          "mapping": {
+            "assertion": "#/$defs/AssertionCriterion",
+            "visual": "#/$defs/VisualCriterion"
+          },
+          "propertyName": "kind"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/AssertionCriterion"
+          },
+          {
+            "$ref": "#/$defs/VisualCriterion"
+          }
+        ]
+      },
+      "maxLength": 16,
+      "minLength": 1,
+      "title": "Criteria",
+      "type": "array"
+    },
+    "evidence": {
+      "items": {
+        "discriminator": {
+          "mapping": {
+            "action": "#/$defs/ActionEvidence",
+            "observation": "#/$defs/ObservationEvidence",
+            "screenshot": "#/$defs/ScreenshotEvidence"
+          },
+          "propertyName": "kind"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/ScreenshotEvidence"
+          },
+          {
+            "$ref": "#/$defs/ObservationEvidence"
+          },
+          {
+            "$ref": "#/$defs/ActionEvidence"
+          }
+        ]
+      },
+      "maxLength": 128,
+      "title": "Evidence",
+      "type": "array"
+    },
+    "metadata": {
+      "additionalProperties": true,
+      "title": "Metadata",
+      "type": "object"
+    }
+  },
+  "required": [
+    "request_id",
+    "objective",
+    "checkpoint_id",
+    "as_of",
+    "criteria",
+    "evidence"
+  ],
+  "title": "VerificationRequest",
+  "type": "object"
+}
