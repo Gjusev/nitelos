@@ -82,10 +82,25 @@ from nitelos.schemas import (
 
 logger = logging.getLogger("nitelos")
 
+_DEV_RERAISE_TRUE = {"1", "true", "yes", "on"}
+
+
+def _parse_dev_reraise_env() -> bool:
+    """AR-2 F2: only explicit truth words enable re-raise; junk is a config error."""
+    value = os.environ.get("NITELOS_DEV_RERAISE", "")
+    if value == "":
+        return False
+    normalized = value.strip().lower()
+    if normalized in _DEV_RERAISE_TRUE:
+        return True
+    raise ConfigurationError("NITELOS_DEV_RERAISE must be one of 1/true/yes/on (case-insensitive) or unset")
+
+
 _GENERIC_PATH_SUFFIXES = {
     "$.evidence": ".evidence",
     "$.pointer": ".pointer",
     "$.evidence_refs": ".evidence_refs",
+    "$.criteria": "",
 }
 _TA_ID = TypeAdapter(IDType)
 
@@ -177,7 +192,7 @@ class Verifier:
                 raise ConfigurationError("duplicate trust bindings for the same evidence id")
             seen.add(binding.evidence_id)
         if dev_reraise is None:
-            dev_reraise = os.environ.get("NITELOS_DEV_RERAISE", "") not in ("", "0")
+            dev_reraise = _parse_dev_reraise_env()
         self._backend = effective_backend
         self._policy = effective_policy
         self._bindings = bindings
@@ -267,11 +282,14 @@ class Verifier:
             self._busy = True
             if self._executor is None:
                 self._executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="nitelos-verifier")
-            executor = self._executor
-        loop = asyncio.get_running_loop()
-        # cancellation of the awaiting task leaves the worker running; _run
-        # itself clears the busy flag when the invocation really finishes
-        return await loop.run_in_executor(executor, self._run, request_or_mapping, artifacts)
+            loop = asyncio.get_running_loop()
+            # AR-2 F1: submit while still holding the state lock so a concurrent
+            # close() can never shut the executor down inside the submit window
+            # (run_in_executor enqueues synchronously and never blocks on work).
+            # Cancellation of the awaiting task leaves the worker running; _run
+            # itself clears the busy flag when the invocation really finishes.
+            submission = loop.run_in_executor(self._executor, self._run, request_or_mapping, artifacts)
+        return await submission
 
     def _run(self, data: Any, artifacts: Mapping[str, Any] | None) -> VerificationResult:
         try:

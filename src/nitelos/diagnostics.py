@@ -14,6 +14,7 @@ import hashlib
 from collections.abc import Mapping
 
 from nitelos import __version__
+from nitelos.errors import LimitationCode
 from nitelos.policy import VerificationPolicy, policy_hash
 from nitelos.schemas import BackendDescriptor, Diagnostics, Measurements, VerificationRequest, canonical_json
 
@@ -53,7 +54,9 @@ def build_diagnostics(
     fingerprints are then null. ``partial_results`` marks a backend-error
     result whose completed criteria are explicitly non-authoritative.
     """
-    limitations: tuple[str, ...] = ("PARTIAL_RESULTS_NONAUTHORITATIVE",) if partial_results else ()
+    limitations: tuple[str, ...] = (
+        (LimitationCode.PARTIAL_RESULTS_NONAUTHORITATIVE,) if partial_results else ()
+    )
     return Diagnostics(
         package_version=__version__,
         schema_version="1",

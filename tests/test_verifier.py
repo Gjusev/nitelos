@@ -445,3 +445,31 @@ def test_verifier_is_reusable_across_calls() -> None:
     second = verifier.verify(request)
     assert first.execution_status == second.execution_status == ExecutionStatus.OK
     assert first.verification_id != second.verification_id
+
+
+@pytest.mark.parametrize(
+    ("value", "expected"),
+    [
+        ("1", True),
+        ("true", True),
+        ("YES", True),
+        ("On", True),
+        ("", False),
+    ],
+)
+def test_dev_reraise_env_parsing(value: str, expected: bool, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("NITELOS_DEV_RERAISE", value)
+    assert Verifier()._dev_reraise is expected
+
+
+@pytest.mark.parametrize("value", ["false", "no", "off", "0", "2", "maybe"])
+def test_dev_reraise_env_invalid_values_raise(value: str, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("NITELOS_DEV_RERAISE", value)
+    with pytest.raises(nitelos.ConfigurationError, match="NITELOS_DEV_RERAISE"):
+        Verifier()
+
+
+def test_partial_results_limitation_is_a_public_code() -> None:
+    from nitelos.errors import LimitationCode
+
+    assert LimitationCode.PARTIAL_RESULTS_NONAUTHORITATIVE == "PARTIAL_RESULTS_NONAUTHORITATIVE"
