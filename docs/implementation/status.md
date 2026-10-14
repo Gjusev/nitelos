@@ -10,7 +10,7 @@ No secrets or sensitive evidence are stored here.
 | Task | State | Owner | Branch / worktree | Depends | Tests / results | Deviations / blockers |
 |---|---|---|---|---|---|---|
 | NIT-001 Foundations | done | orchestrator | integration/v0.1 (`1b1f074`,`+fix`) | — | PKG-01..03 5/5 pass on Win+Linux × py3.12/3.13; ruff, format, mypy strict, wheel+sdist OK | Linux run found uv-not-on-PATH defect in packaging test; fixed via `UV` env var |
-| NIT-002 Contracts | running | nitelos-69 | nit/002-contracts | 001 | | Earlier subagent attempt stopped by user before writing code; reassigned |
+| NIT-002 Contracts | review (AR-1) | nitelos-69 | nit/002-contracts `d2afc1d` | 001 | 59 contract tests; suite 64 passed Win py3.12, Linux py3.12/3.13; ruff/mypy clean (orchestrator re-run) | 10 interpretations listed by implementer; key AR-1 questions: byte limits only in parse_request, top-level `canonical_json` export |
 | NIT-003 Evidence | pending | | | 002, AR-1 | | |
 | NIT-004 Assertions | pending | | | 003 | | |
 | NIT-005 Policy | pending | | | 004 | | |
@@ -19,7 +19,7 @@ No secrets or sensitive evidence are stored here.
 | NIT-008 Local VLM | pending (smoke-set subtask done+integrated `5843f80`; adapter awaits NIT-007) | nitelos-0f | nit/008-smoke-fixtures | 007 (adapter); fixtures independent | | Weights pre-provisioned outside repo, SHA-256 verified; WSL CPU probe: torch 2.14.1+cpu / transformers 5.19.0 load+generate OK; `AutoModelForVision2Seq` absent in TF5, use `AutoModelForImageTextToText`; probe output `' UNKNOWN.'` would be INVALID_OUTPUT under strict parser |
 | NIT-009 Traces | pending | | | 006, AR-2 | | |
 | NIT-010 Fixtures | pending | | | 003, 009 | | |
-| NIT-011 Metrics | running (part A: statistics.py, contract-independent) | nitelos-0f | nit/011-metrics | 002, AR-1 (part B metrics.py) | | Split: statistics first; metrics over result records after AR-1 |
+| NIT-011 Metrics | review (part A `8e04c23`, reviewer nitelos-69); part B pending AR-1 | nitelos-0f | nit/011-metrics | 002, AR-1 (part B metrics.py) | | Split: statistics first; metrics over result records after AR-1 |
 | NIT-012 Runner | pending | | | 006, 010, 011 | | |
 | NIT-013 Evaluation | pending | | | 008, 012, AR-4 | | |
 | NIT-014 Docs/demo | pending | | | 006, 009, 012 | | |
@@ -29,7 +29,7 @@ No secrets or sensitive evidence are stored here.
 
 | Review | State | Reviewer | Evidence |
 |---|---|---|---|
-| AR-1 contracts | pending | | |
+| AR-1 contracts | running | nitelos-0f (independent of implementer) | brief sent 2026-10-14 |
 | AR-2 deterministic flow | pending | | |
 | AR-3 local integration | pending | | |
 | AR-4 protocol freeze | pending | | |
