@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import email
+import os
 import shutil
 import subprocess
 import sys
@@ -19,7 +20,7 @@ FORBIDDEN_SUFFIXES = (".safetensors", ".bin", ".pt", ".pth", ".onnx", ".gguf", "
 
 @pytest.fixture(scope="session")
 def dist_dir(tmp_path_factory: pytest.TempPathFactory) -> Path:
-    uv = shutil.which("uv")
+    uv = os.environ.get("UV") or shutil.which("uv")
     if uv is None:
         pytest.fail("uv is required to build distributions")
     out = tmp_path_factory.mktemp("dist")
@@ -109,6 +110,4 @@ def test_pkg03_supported_python_metadata(dist_dir: Path) -> None:
 
 
 def _systemroot() -> str:
-    import os
-
     return os.environ.get("SYSTEMROOT", "")
