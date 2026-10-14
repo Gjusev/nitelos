@@ -10,7 +10,7 @@ No secrets or sensitive evidence are stored here.
 | Task | State | Owner | Branch / worktree | Depends | Tests / results | Deviations / blockers |
 |---|---|---|---|---|---|---|
 | NIT-001 Foundations | done | orchestrator | integration/v0.1 (`1b1f074`,`+fix`) | — | PKG-01..03 5/5 pass on Win+Linux × py3.12/3.13; ruff, format, mypy strict, wheel+sdist OK | Linux run found uv-not-on-PATH defect in packaging test; fixed via `UV` env var |
-| NIT-002 Contracts | done (merged `3a04870`; isolation fix pending) | nitelos-69 | nit/002-contracts `2671d5f` | 001 | 59 contract tests; suite 64 passed Win py3.12, Linux py3.12/3.13; ruff/mypy clean (orchestrator re-run) | 10 interpretations listed by implementer; key AR-1 questions: byte limits only in parse_request, top-level `canonical_json` export |
+| NIT-002 Contracts | done (merged `3a04870`; isolation fix `06ce9dc` merged) | nitelos-69 | nit/002-contracts `2671d5f` | 001 | 59 contract tests; suite 64 passed Win py3.12, Linux py3.12/3.13; ruff/mypy clean (orchestrator re-run) | 10 interpretations listed by implementer; key AR-1 questions: byte limits only in parse_request, top-level `canonical_json` export |
 | NIT-003 Evidence | running | nitelos-69 | nit/003-evidence | 002, AR-1 | | |
 | NIT-004 Assertions | pending | | | 003 | | |
 | NIT-005 Policy | pending | | | 004 | | |
@@ -50,3 +50,4 @@ All pending.
 - 2026-10-14: AR-1 APPROVE-WITH-CHANGES. Orchestrator adds requirement: bound depth on constructor path (RecursionError on 5,000-deep dict). Decisions recorded in decisions.md.
 - 2026-10-14: NIT-011A fixes verified (39 passed) and merged into integration; full regression green.
 - 2026-10-14: NIT-002 merged. Post-merge regression found order-dependent test (in-process `PIL not in sys.modules` broken by smoke tests importing Pillow) on Win+Linux; fix assigned to nitelos-69 (nit/002-test-isolation). NIT-003 (nitelos-69) and NIT-011B (nitelos-0f) started.
+- 2026-10-14: isolation fix merged; integration green (Win 99 passed; Linux py3.12/3.13 98 passed + 1 platform skip).
