@@ -84,8 +84,8 @@ def _validate_counts(k: int, n: int) -> None:
 
 
 def _clean(value: float | None) -> float | None:
-    """Map NaN to None; undefined stays None; valid floats pass through."""
-    if value is None or math.isnan(value):
+    """Map any non-finite float (NaN, +/-inf) to None; valid floats pass through."""
+    if value is None or not math.isfinite(value):
         return None
     return value
 
@@ -138,11 +138,13 @@ def group_bootstrap[T](
     Each replicate draws ``len(groups)`` groups with replacement from a numpy PCG64 stream
     seeded with ``seed``, so counterfactual pairs, template lineages and other clustered
     records stay together; individuals are never split across the sampling boundary.
-    The interval is the empirical 2.5/97.5 percentiles over the replicates where the
-    statistic is defined. A replicate whose statistic returns None or NaN is excluded and
-    counted in ``excluded`` - never silently kept as NaN. If every replicate is undefined,
-    the result is undefined with reason ``all_replicates_undefined``. ``value`` is the
-    statistic over all records and may independently be None. ``n`` counts records.
+    The interval is the empirical 2.5/97.5 percentiles (numpy's default linear
+    interpolation) over the replicates where the statistic is defined. A replicate whose
+    statistic returns None or any non-finite float (NaN, +/-inf) is excluded and counted
+    in ``excluded`` - never silently kept as NaN or infinity. If every replicate is
+    undefined, the result is undefined with reason ``all_replicates_undefined``.
+    ``value`` is the statistic over all records (also None when non-finite) and may
+    independently be None. ``n`` counts records.
 
     Exceptions: ``EvalExtraRequired`` when numpy is missing; ``ValueError`` for
     ``replicates < 1``.
@@ -163,7 +165,7 @@ def group_bootstrap[T](
         drawn = rng.integers(0, n_groups, size=n_groups)
         sample = [record for index in drawn for record in units[int(index)]]
         estimate = statistic(sample)
-        if estimate is None or math.isnan(estimate):
+        if estimate is None or not math.isfinite(estimate):
             excluded += 1
         else:
             values.append(estimate)

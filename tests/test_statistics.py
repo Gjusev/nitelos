@@ -98,7 +98,6 @@ def test_stat01_zero_error_upper_bound_exact_formula(n: int, expected: float) ->
     res = statistics.clopper_pearson_upper_bound(0, n)
     assert res.value == pytest.approx(0.0)
     assert res.low is None
-    assert res.high == pytest.approx(1.0 - 0.05 ** (1.0 / n), abs=1e-12)
     assert res.high == pytest.approx(expected, abs=1e-12)
     assert res.undefined_reason is None
     assert _all_finite(res)
@@ -113,12 +112,14 @@ def test_stat01_about_299_zero_errors_needed_below_one_percent() -> None:
     assert above > 0.01
 
 
-@pytest.mark.parametrize(("k", "n"), [(1, 40), (3, 20)])
-def test_stat01_positive_error_bound_matches_scipy_beta(k: int, n: int) -> None:
-    stats = _scipy_stats_or_skip()
+@pytest.mark.parametrize(
+    ("k", "n", "expected"),
+    [(1, 40, 0.11318836094473754), (3, 20, 0.3436638043142818)],
+)
+def test_stat01_positive_error_bound_matches_hand_known_literals(k: int, n: int, expected: float) -> None:
+    _scipy_stats_or_skip()  # implementation lazy-imports scipy for 0 < k < n
     res = statistics.clopper_pearson_upper_bound(k, n)
-    expected = float(stats.beta.ppf(0.95, k + 1, n - k))
-    assert res.high == pytest.approx(expected, rel=1e-12)
+    assert res.high == pytest.approx(expected, abs=1e-12)
     assert res.value == pytest.approx(k / n)
     assert res.low is None
     assert _all_finite(res)
@@ -223,6 +224,28 @@ def test_stat02_bootstrap_nan_statistics_count_as_undefined() -> None:
     res = statistics.group_bootstrap(_demo_groups(), nan_on_poison, seed=11, replicates=400)
     assert 0 < res.excluded < 400
     assert _all_finite(res)
+
+
+def test_stat02_bootstrap_infinite_statistics_count_as_undefined() -> None:
+    _numpy_or_skip()
+    poison_tag = 3
+
+    def inf_on_poison(records: list[tuple[int, float]]) -> float:
+        return math.inf if any(tag == poison_tag for tag, _ in records) else _mean(records)
+
+    res = statistics.group_bootstrap(_demo_groups(), inf_on_poison, seed=11, replicates=400)
+    assert 0 < res.excluded < 400
+    assert res.low is not None
+    assert res.high is not None
+    assert _all_finite(res)
+    assert res.undefined_reason is None
+
+    always_inf = statistics.group_bootstrap(_demo_groups(), lambda records: -math.inf, seed=3, replicates=25)
+    assert always_inf.excluded == 25
+    assert always_inf.value is None
+    assert always_inf.low is None
+    assert always_inf.high is None
+    assert always_inf.undefined_reason == "all_replicates_undefined"
 
 
 def test_stat02_bootstrap_all_undefined_is_reported_not_nan() -> None:
