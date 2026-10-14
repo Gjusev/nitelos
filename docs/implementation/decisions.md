@@ -71,3 +71,9 @@ Author: nitelos-0f. The orchestrator accepted readings A1–A7:
 - A6: the cooperative deadline runs between generation steps; there is no hard-stop claim.
 - A7: images are reconstructed from `PreparedImage.rgb`, with no second decode.
 The initial validated combination is CPU float32 only.
+
+## NIT-005 review — 2026-10-15
+
+Reviewer: nitelos-0f. Verdict: APPROVE-WITH-CHANGES. No path to success was found under adversarial trust probes.
+Accepted: no scope admits the `human` channel (citing it gives `UNSUPPORTED_CAPABILITY`); basis is NONE for empty or all-ineligible criteria; MISSING_EVIDENCE applies only to empty citations; ValueError is raised for a missing finding when eligible images exist (a programming-error guard).
+Required: visual results carry the validated finding refs (model_inferred); a pure `eligible_evidence` helper is shared by the policy and NIT-006; `CriterionOutcome.ineligible` is immutable.
