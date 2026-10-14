@@ -40,3 +40,16 @@ Accepted interpretations: cold/warm latency series contain ok executions only an
 Carried forward to **NIT-012**:
 - The manifest/oracle loader must validate the conformance expectation triples: an error status requires a null expected decision, and `ok` requires a decision.
 - Cost, RAM/VRAM and throughput are run-level report fields, not CaseRecord fields. Unmeasured values stay null with a reason. Semantic grounding needs a human-audit protocol and is not automated.
+
+## NIT-010 design (docs/implementation/nit-010-benchmark-design.md) — 2026-10-15
+
+Author: nitelos-0f. The orchestrator accepted readings A1–A6:
+- A1: 8 disjoint lineage groups per family (L1–L4 dev, L5–L8 final). S13 uses 4 pairs as grouping units.
+- A2: four 60-case manifests (dev, dev-visual, test, test-visual).
+- A3: the frozen benchmark's S14 cases are known-absent-content scenes. Fabricated-reference injection is covered by the NIT-007 BAK suite, not by a benchmark arm.
+- A4: aHash 8×8, Hamming ≤ 6, as a detector only; hits go to human review and are never deleted automatically.
+- A5: the visual-view `expected_decision` assumes a correct visual finding under strict policy plus the explicit opt-in configuration declared in the manifest.
+- A6: the visual view keeps the external observations its external criteria need; S06 alone withholds them.
+The deterministic dry run over the assertion view runs at NIT-010 implementation time, after NIT-006.
+The design is an input to AR-4; any change after AR-4 creates synthetic-v2.
+**Open (user decision):** staffing of the two independent human reviewers plus an adjudicator for all 60 final-test cases (estimated 6–8 person-hours). Agents cannot satisfy this gate.
