@@ -10,8 +10,8 @@ No secrets or sensitive evidence are stored here.
 | Task | State | Owner | Branch / worktree | Depends | Tests / results | Deviations / blockers |
 |---|---|---|---|---|---|---|
 | NIT-001 Foundations | done | orchestrator | integration/v0.1 (`1b1f074`,`+fix`) | — | PKG-01..03 5/5 pass on Win+Linux × py3.12/3.13; ruff, format, mypy strict, wheel+sdist OK | Linux run found uv-not-on-PATH defect in packaging test; fixed via `UV` env var |
-| NIT-002 Contracts | review (AR-1) | nitelos-69 | nit/002-contracts `d2afc1d` | 001 | 59 contract tests; suite 64 passed Win py3.12, Linux py3.12/3.13; ruff/mypy clean (orchestrator re-run) | 10 interpretations listed by implementer; key AR-1 questions: byte limits only in parse_request, top-level `canonical_json` export |
-| NIT-003 Evidence | pending | | | 002, AR-1 | | |
+| NIT-002 Contracts | done (merged `3a04870`; isolation fix pending) | nitelos-69 | nit/002-contracts `2671d5f` | 001 | 59 contract tests; suite 64 passed Win py3.12, Linux py3.12/3.13; ruff/mypy clean (orchestrator re-run) | 10 interpretations listed by implementer; key AR-1 questions: byte limits only in parse_request, top-level `canonical_json` export |
+| NIT-003 Evidence | running | nitelos-69 | nit/003-evidence | 002, AR-1 | | |
 | NIT-004 Assertions | pending | | | 003 | | |
 | NIT-005 Policy | pending | | | 004 | | |
 | NIT-006 SDK | pending | | | 005 | | |
@@ -19,7 +19,7 @@ No secrets or sensitive evidence are stored here.
 | NIT-008 Local VLM | pending (smoke-set subtask done+integrated `5843f80`; adapter awaits NIT-007) | nitelos-0f | nit/008-smoke-fixtures | 007 (adapter); fixtures independent | | Weights pre-provisioned outside repo, SHA-256 verified; WSL CPU probe: torch 2.14.1+cpu / transformers 5.19.0 load+generate OK; `AutoModelForVision2Seq` absent in TF5, use `AutoModelForImageTextToText`; probe output `' UNKNOWN.'` would be INVALID_OUTPUT under strict parser |
 | NIT-009 Traces | pending | | | 006, AR-2 | | |
 | NIT-010 Fixtures | pending | | | 003, 009 | | |
-| NIT-011 Metrics | part A done+integrated (`3d168e2`, reviewed nitelos-69); part B pending NIT-002 merge | nitelos-0f | nit/011-metrics | 002, AR-1 (part B metrics.py) | | Split: statistics first; metrics over result records after AR-1 |
+| NIT-011 Metrics | part A done; part B running | nitelos-0f | nit/011-metrics (A), nit/011b-metrics (B) | 002, AR-1 | | Split: statistics first; metrics over result records after AR-1 |
 | NIT-012 Runner | pending | | | 006, 010, 011 | | |
 | NIT-013 Evaluation | pending | | | 008, 012, AR-4 | | |
 | NIT-014 Docs/demo | pending | | | 006, 009, 012 | | |
@@ -29,7 +29,7 @@ No secrets or sensitive evidence are stored here.
 
 | Review | State | Reviewer | Evidence |
 |---|---|---|---|
-| AR-1 contracts | approved-with-changes (merge after fixes) | nitelos-0f | see decisions.md; constructor-path RecursionError fix + snapshot caveat requested from nitelos-69 |
+| AR-1 contracts | done (approved with changes; fixes `2671d5f` verified) | nitelos-0f | see decisions.md; constructor-path RecursionError fix + snapshot caveat requested from nitelos-69 |
 | AR-2 deterministic flow | pending | | |
 | AR-3 local integration | pending | | |
 | AR-4 protocol freeze | pending | | |
@@ -49,3 +49,4 @@ All pending.
 - 2026-10-14: NIT-011A review by nitelos-69: APPROVE-WITH-CHANGES. Required: ±inf replicate statistics leak NaN (screen with isfinite, regression test); replace circular CP oracle with independent literals. Sent to nitelos-0f to apply after AR-1.
 - 2026-10-14: AR-1 APPROVE-WITH-CHANGES. Orchestrator adds requirement: bound depth on constructor path (RecursionError on 5,000-deep dict). Decisions recorded in decisions.md.
 - 2026-10-14: NIT-011A fixes verified (39 passed) and merged into integration; full regression green.
+- 2026-10-14: NIT-002 merged. Post-merge regression found order-dependent test (in-process `PIL not in sys.modules` broken by smoke tests importing Pillow) on Win+Linux; fix assigned to nitelos-69 (nit/002-test-isolation). NIT-003 (nitelos-69) and NIT-011B (nitelos-0f) started.
