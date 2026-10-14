@@ -46,3 +46,4 @@ All pending.
 - 2026-10-14: user instruction: orchestrator session only plans/orchestrates; work delegated to peer sessions.
 - 2026-10-14: smoke-set fixtures delivered by nitelos-0f (`7ab6871`): 12 cases/14 images, 13 tests pass on Windows; orchestrator re-run on WSL Linux fails byte-identical regeneration (FreeType rendering differs). Fix requested: declare renderer platform and scope regeneration check to it (doc 06 DATA-04); justify UNKNOWN labels (slot 4 questioned).
 - 2026-10-14: smoke-set fix `5843f80` re-verified (Win 13 passed; Linux 12 passed + 1 platform-scoped skip); slot 4 relabeled REFUTED with rationale; merged into integration/v0.1.
+- 2026-10-14: NIT-011A review by nitelos-69: APPROVE-WITH-CHANGES. Required: ±inf replicate statistics leak NaN (screen with isfinite, regression test); replace circular CP oracle with independent literals. Sent to nitelos-0f to apply after AR-1.
