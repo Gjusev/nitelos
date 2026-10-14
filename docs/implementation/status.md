@@ -14,7 +14,7 @@ No secrets or sensitive evidence are stored here.
 | NIT-003 Evidence | done (merged) | nitelos-69 | nit/003-evidence `cf25f7b` | 002, AR-1 | 31+2 tests (EVD-01..04, SEC-05/06); Win 132 passed; Linux py3.12/3.13 131 passed + 1 platform skip | reviewer nitelos-0f APPROVE-WITH-CHANGES; F2 decoded-vs-header dims made required |
 | NIT-004 Assertions | done (merged) | nitelos-69 | nit/004-assertions `d06767e` | 003 | 17 DET tests; Win 172 passed; Linux full-offline replay OK | reviewer nitelos-0f APPROVE-WITH-CHANGES (huge index fix) |
 | NIT-005 Policy | done (merged) | nitelos-69 | nit/005-policy `42ef33a` | 004 | Win 246 passed; Linux 245 + 1 platform skip | reviewer nitelos-0f APPROVE-WITH-CHANGES (visual refs, eligible_evidence helper, immutable map) |
-| NIT-006 SDK | running (branched from nit/005) | nitelos-69 | nit/006-sdk | 005 | | binding AR-1/NIT-003/NIT-004 carry-forwards in brief |
+| NIT-006 SDK | review (AR-2, reviewer nitelos-0f) + ADR-011 commit pending | nitelos-69 | nit/006-sdk `2c4609c` | 005 | 48 tests (SDK-01/02, LIFE-01/02, SEC-03/04); Win 274 passed; Linux py3.12/3.13 273 + 1 platform skip | async lifecycle tests run in subprocess (Windows asyncio self-pipe vs socket-deny conftest) |
 | NIT-007 Backend boundary | pending | | | 006, AR-2 | | |
 | NIT-008 Local VLM | smoke set done; adapter design spec running (nitelos-0f, nit/008-design); adapter awaits NIT-007 | nitelos-0f | nit/008-smoke-fixtures | 007 (adapter); fixtures independent | | Weights pre-provisioned outside repo, SHA-256 verified; WSL CPU probe: torch 2.14.1+cpu / transformers 5.19.0 load+generate OK; `AutoModelForVision2Seq` absent in TF5, use `AutoModelForImageTextToText`; probe output `' UNKNOWN.'` would be INVALID_OUTPUT under strict parser |
 | NIT-009 Traces | pending | | | 006, AR-2 | | |
@@ -30,7 +30,7 @@ No secrets or sensitive evidence are stored here.
 | Review | State | Reviewer | Evidence |
 |---|---|---|---|
 | AR-1 contracts | done (approved with changes; fixes `2671d5f` verified) | nitelos-0f | see decisions.md; constructor-path RecursionError fix + snapshot caveat requested from nitelos-69 |
-| AR-2 deterministic flow | pending | | |
+| AR-2 deterministic flow | running | nitelos-0f | brief sent 2026-10-15; covers NIT-002..006 end to end |
 | AR-3 local integration | pending | | |
 | AR-4 protocol freeze | pending | | |
 | AR-5 release candidate | pending | | |
@@ -64,3 +64,4 @@ All pending.
 - 2026-10-15: NIT-008 adapter design merged (A1–A7 accepted). NIT-005 delivered+verified, to review; NIT-006 started.
 - 2026-10-15: NIT-005 merged. Orchestrator process defect found: merged NIT-008 design doc fails `ruff format --check` (Ruff formats Markdown code blocks); orchestrator's WSL replay script masked the failure (`&&` chain under `set -e`). Script fixed; doc fix assigned to nitelos-0f. Integration format check RED until merged.
 - 2026-10-15: format fix merged with NIT-012 design (`18e16d0`); integration fully green on Win and Linux (strict replay script).
+- 2026-10-15: NIT-006 delivered+verified; AR-2 started. User approved ADR-011 (nullable request_id on input_error). G4 human reviewers: user will organize later (G4 pending).
