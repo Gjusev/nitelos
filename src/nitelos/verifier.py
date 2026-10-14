@@ -26,10 +26,11 @@ non-authoritative.
 Logging uses the "nitelos" logger with no installed handlers and only safe
 event names, codes, counts and durations.
 
-Known limitation: when an input is too invalid to carry a readable
-request_id, doc 02 says to use null, but the result schema requires an ID
-string — the placeholder "unknown-request" is used instead (reported to the
-orchestrator as a doc-02/doc-03 inconsistency).
+ADR-011: VerificationResult.request_id is null exactly when an input error
+left no readable caller ID; a readable valid ID is always preserved, and ok
+or backend_error results always carry it (immediate BUSY/CLOSED results
+salvage the ID from the incoming data, and an unreadable input surfaces as
+input_error rather than an id-less backend error).
 """
 
 from __future__ import annotations
@@ -81,7 +82,6 @@ from nitelos.schemas import (
 
 logger = logging.getLogger("nitelos")
 
-UNKNOWN_REQUEST_ID = "unknown-request"
 _GENERIC_PATH_SUFFIXES = {
     "$.evidence": ".evidence",
     "$.pointer": ".pointer",
@@ -230,10 +230,15 @@ class Verifier:
             # still operating (retryable), even if close has been requested
             if self._busy:
                 return self._immediate_error(
-                    BackendErrorCode.BUSY, "another verification is in flight", retryable=True
+                    BackendErrorCode.BUSY,
+                    "another verification is in flight",
+                    retryable=True,
+                    data=request_or_mapping,
                 )
             if self._closed:
-                return self._immediate_error(BackendErrorCode.CLOSED, "verifier is closed")
+                return self._immediate_error(
+                    BackendErrorCode.CLOSED, "verifier is closed", data=request_or_mapping
+                )
             self._busy = True
         try:
             return self._run(request_or_mapping, artifacts)
@@ -250,10 +255,15 @@ class Verifier:
             # still operating (retryable), even if close has been requested
             if self._busy:
                 return self._immediate_error(
-                    BackendErrorCode.BUSY, "another verification is in flight", retryable=True
+                    BackendErrorCode.BUSY,
+                    "another verification is in flight",
+                    retryable=True,
+                    data=request_or_mapping,
                 )
             if self._closed:
-                return self._immediate_error(BackendErrorCode.CLOSED, "verifier is closed")
+                return self._immediate_error(
+                    BackendErrorCode.CLOSED, "verifier is closed", data=request_or_mapping
+                )
             self._busy = True
             if self._executor is None:
                 self._executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="nitelos-verifier")
@@ -347,8 +357,7 @@ class Verifier:
                 path=issue.field_path,
                 message=issue.safe_message,
                 request=request,
-                request_id=(request.request_id if request is not None else _salvage_request_id(data))
-                or UNKNOWN_REQUEST_ID,
+                request_id=request.request_id if request is not None else _salvage_request_id(data),
                 start=start,
             )
         except EvidenceValidationError as error:
@@ -357,8 +366,7 @@ class Verifier:
                 path=error.issue.field_path,
                 message=error.issue.safe_message,
                 request=request,
-                request_id=(request.request_id if request is not None else _salvage_request_id(data))
-                or UNKNOWN_REQUEST_ID,
+                request_id=request.request_id if request is not None else _salvage_request_id(data),
                 start=start,
             )
         except (KeyboardInterrupt, SystemExit, asyncio.CancelledError):
@@ -372,7 +380,7 @@ class Verifier:
             elapsed_ms = (perf_counter() - start) * 1000.0
             return VerificationResult(
                 schema_version="1",
-                request_id=(request.request_id if request is not None else UNKNOWN_REQUEST_ID),
+                request_id=(request.request_id if request is not None else _salvage_request_id(data)),
                 verification_id=str(uuid.uuid4()),
                 execution_status=ExecutionStatus.BACKEND_ERROR,
                 decision=None,
@@ -397,13 +405,25 @@ class Verifier:
     # ------------------------------------------------------------------
 
     def _immediate_error(
-        self, code: BackendErrorCode, message: str, *, retryable: bool = False
+        self, code: BackendErrorCode, message: str, *, retryable: bool = False, data: Any = None
     ) -> VerificationResult:
         start = perf_counter()
         elapsed_ms = (perf_counter() - start) * 1000.0
+        request_id = data.request_id if isinstance(data, VerificationRequest) else _salvage_request_id(data)
+        if request_id is None:
+            # ADR-011: backend errors must carry an ID; an input with none is
+            # itself invalid, so it surfaces as input_error instead
+            return self._error_result(
+                code=InputErrorCode.INVALID_SCHEMA,
+                path="$",
+                message="request must be a mapping or VerificationRequest",
+                request=None,
+                request_id=None,
+                start=start,
+            )
         return VerificationResult(
             schema_version="1",
-            request_id=UNKNOWN_REQUEST_ID,
+            request_id=request_id,
             verification_id=str(uuid.uuid4()),
             execution_status=ExecutionStatus.BACKEND_ERROR,
             decision=None,
@@ -426,7 +446,7 @@ class Verifier:
         path: str,
         message: str,
         request: VerificationRequest | None,
-        request_id: str,
+        request_id: str | None,
         start: float,
     ) -> VerificationResult:
         elapsed_ms = (perf_counter() - start) * 1000.0

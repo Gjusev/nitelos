@@ -787,9 +787,16 @@
       "type": "string"
     },
     "request_id": {
-      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
-      "title": "Request Id",
-      "type": "string"
+      "anyOf": [
+        {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Request Id"
     },
     "verification_id": {
       "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",

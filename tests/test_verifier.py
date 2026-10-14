@@ -275,10 +275,10 @@ def test_sdk02_prepare_evidence_gates_are_input_errors() -> None:
     assert result.error.code == "MISSING_ARTIFACT"
 
 
-def test_sdk02_unreadable_request_id_uses_documented_placeholder() -> None:
+def test_sdk02_unreadable_request_id_is_null_only_on_input_error() -> None:
     result = Verifier().verify(42)  # type: ignore[arg-type]
     assert result.execution_status == ExecutionStatus.INPUT_ERROR
-    assert result.request_id == "unknown-request"
+    assert result.request_id is None  # ADR-011
     # a salvageable request_id is preserved on input errors
     bad = _request(objective="")
     salvaged = Verifier().verify(bad)
