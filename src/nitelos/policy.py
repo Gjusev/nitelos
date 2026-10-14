@@ -48,6 +48,7 @@ from __future__ import annotations
 import hashlib
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
+from types import MappingProxyType
 from typing import Literal, cast
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
@@ -71,6 +72,8 @@ from nitelos.schemas import (
     CriterionResult,
     CriterionState,
     Decision,
+    EvidenceRef,
+    Grounding,
     IDType,
     ObservationEvidence,
     Phase,
@@ -89,6 +92,7 @@ __all__ = [
     "TrustBinding",
     "VerificationPolicy",
     "aggregate_decision",
+    "eligible_evidence",
     "evaluate_criterion",
     "parse_policy",
     "policy_hash",
@@ -252,13 +256,54 @@ class CriterionOutcome:
     reason_codes: tuple[str, ...]
     limitations: tuple[str, ...] = ()
     evaluations: tuple[CriterionEvaluation, ...] = ()
+    evidence_refs: tuple[EvidenceRef, ...] = ()
     cited_ids: tuple[str, ...] = ()
     eligible_ids: tuple[str, ...] = ()
-    ineligible: Mapping[str, tuple[str, ...]] = field(default_factory=dict)
+    ineligible: Mapping[str, tuple[str, ...]] = field(default_factory=lambda: MappingProxyType({}))
 
 
 def _dedupe(codes: Sequence[str]) -> tuple[str, ...]:
     return tuple(dict.fromkeys(codes))
+
+
+def eligible_evidence(
+    criterion: AssertionCriterion | VisualCriterion,
+    request: VerificationRequest,
+    bindings: Sequence[TrustBinding] = (),
+) -> tuple[tuple[AnyEvidence, ...], Mapping[str, tuple[str, ...]]]:
+    """Pure doc-05 steps 2-5 filter over the cited evidence of one criterion.
+
+    Returns the eligible items in citation order plus an immutable mapping of
+    ineligible evidence IDs to their ordered reason tuples. Raises
+    EvidenceValidationError/UNSUPPORTED_CAPABILITY for an incompatible kind
+    or channel (step 3), including for every scope citing a human-channel
+    observation. evaluate_criterion reuses this single implementation.
+    """
+    by_id = {item.id: item for item in request.evidence}
+    eligible: list[AnyEvidence] = []
+    ineligible: dict[str, tuple[str, ...]] = {}
+    for evidence_id in criterion.evidence_ids:  # citation order
+        item = by_id[evidence_id]
+        _check_capability(criterion, item)
+        reasons = _ineligibility_reasons(criterion, item, request, bindings)
+        if reasons:
+            ineligible[item.id] = reasons
+        else:
+            eligible.append(item)
+    return tuple(eligible), MappingProxyType(ineligible)
+
+
+def _model_inferred_refs(finding: BackendFinding) -> tuple[EvidenceRef, ...]:
+    """Adopt a validated finding's refs; only the core assigns the grounding."""
+    return tuple(
+        EvidenceRef(
+            evidence_id=ref.evidence_id,
+            pointer=ref.pointer,
+            bbox=ref.bbox,
+            grounding=Grounding.MODEL_INFERRED,
+        )
+        for ref in finding.evidence_refs
+    )
 
 
 def evaluate_criterion(
@@ -277,23 +322,13 @@ def evaluate_criterion(
     already-validated backend finding for a visual criterion when policy
     allows model inference and eligible images exist.
     """
-    cited: list[AnyEvidence] = []
-    by_id = {item.id: item for item in request.evidence}
-    for evidence_id in criterion.evidence_ids:
-        item = by_id[evidence_id]
-        _check_capability(criterion, item)
-        cited.append(item)
-    ineligible: dict[str, tuple[str, ...]] = {}
-    eligible: list[AnyEvidence] = []
-    for item in cited:
-        reasons = _ineligibility_reasons(criterion, item, request, bindings)
-        if reasons:
-            ineligible[item.id] = reasons
-        else:
-            eligible.append(item)
-    ineligibility_codes = _dedupe([code for item in cited for code in ineligible.get(item.id, ())])
+    eligible, ineligible = eligible_evidence(criterion, request, bindings)
+    cited_ids = tuple(criterion.evidence_ids)
+    ineligibility_codes = _dedupe(
+        [code for evidence_id in cited_ids for code in ineligible.get(evidence_id, ())]
+    )
 
-    if not cited:
+    if not cited_ids:
         return CriterionOutcome(
             state=CriterionState.UNKNOWN,
             basis=Basis.NONE,
@@ -324,7 +359,8 @@ def evaluate_criterion(
             basis=basis,
             reason_codes=_dedupe((*ineligibility_codes, *comparison)),
             evaluations=evaluations,
-            cited_ids=tuple(item.id for item in cited),
+            evidence_refs=tuple(evaluation.evidence_ref for evaluation in evaluations),
+            cited_ids=cited_ids,
             eligible_ids=tuple(item.id for item in eligible),
             ineligible=ineligible,
         )
@@ -335,7 +371,7 @@ def evaluate_criterion(
             state=CriterionState.UNKNOWN,
             basis=Basis.NONE,
             reason_codes=_dedupe((*ineligibility_codes, "MODEL_INFERENCE_DISALLOWED")),
-            cited_ids=tuple(item.id for item in cited),
+            cited_ids=cited_ids,
             eligible_ids=tuple(item.id for item in eligible),
             ineligible=ineligible,
         )
@@ -344,7 +380,7 @@ def evaluate_criterion(
             state=CriterionState.UNKNOWN,
             basis=Basis.NONE,
             reason_codes=ineligibility_codes,
-            cited_ids=tuple(item.id for item in cited),
+            cited_ids=cited_ids,
             eligible_ids=(),
             ineligible=ineligible,
         )
@@ -357,7 +393,7 @@ def evaluate_criterion(
             state=CriterionState.UNKNOWN,
             basis=Basis.NONE,
             reason_codes=_dedupe((*ineligibility_codes, "MODEL_UNCERTAIN")),
-            cited_ids=tuple(item.id for item in cited),
+            cited_ids=cited_ids,
             eligible_ids=tuple(item.id for item in eligible),
             ineligible=ineligible,
         )
@@ -366,7 +402,8 @@ def evaluate_criterion(
         basis=Basis.MODEL_INFERRED,
         reason_codes=ineligibility_codes,
         limitations=("VISUAL_GROUNDING_UNVERIFIED",),
-        cited_ids=tuple(item.id for item in cited),
+        evidence_refs=_model_inferred_refs(visual_finding),
+        cited_ids=cited_ids,
         eligible_ids=tuple(item.id for item in eligible),
         ineligible=ineligible,
     )
@@ -409,7 +446,7 @@ def to_criterion_result(
         state=outcome.state,
         basis=outcome.basis,
         scope=criterion.scope,
-        evidence_refs=tuple(evaluation.evidence_ref for evaluation in outcome.evaluations),
+        evidence_refs=outcome.evidence_refs,
         reason_codes=outcome.reason_codes,
         score=score,
         limitations=outcome.limitations,

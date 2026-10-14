@@ -770,3 +770,75 @@ def test_to_criterion_result_assembly() -> None:
     assert visual_result.basis == Basis.MODEL_INFERRED
     assert visual_result.limitations == ("VISUAL_GROUNDING_UNVERIFIED",)
     assert visual_result.evaluations == ()
+
+
+# --------------------------------------------------------------------------
+# AR review fixes: result refs for visual outcomes, pure eligibility helper,
+# immutable ineligible mapping
+# --------------------------------------------------------------------------
+
+
+def test_visual_outcomes_carry_validated_refs() -> None:
+    request = _pol05_visual_request()
+    supported = evaluate_criterion(
+        request.criteria[0], request, ALLOW_MODEL, visual_finding=_visual_finding(CriterionState.SUPPORTED)
+    )
+    result = to_criterion_result(request.criteria[0], supported)
+    assert result.evidence_refs, "a supported visual result must carry at least one validated reference"
+    assert all(ref.evidence_id == "shot-1" for ref in result.evidence_refs)
+    assert all(ref.grounding == "model_inferred" for ref in result.evidence_refs)
+    refuted = evaluate_criterion(
+        request.criteria[0], request, ALLOW_MODEL, visual_finding=_visual_finding(CriterionState.REFUTED)
+    )
+    refuted_result = to_criterion_result(request.criteria[0], refuted)
+    assert refuted_result.evidence_refs
+    assert all(ref.grounding == "model_inferred" for ref in refuted_result.evidence_refs)
+    unknown = evaluate_criterion(
+        request.criteria[0], request, ALLOW_MODEL, visual_finding=_visual_finding(CriterionState.UNKNOWN)
+    )
+    assert to_criterion_result(request.criteria[0], unknown).evidence_refs == ()
+
+
+def test_eligible_evidence_is_pure_and_split() -> None:
+    from nitelos.policy import eligible_evidence
+
+    request = parse_request(
+        _request(
+            criteria=[_criterion(evidence_ids=["good", "stale-one", "pending-one"])],
+            evidence=[
+                _observation(id="stale-one", captured_at="2024-06-01T09:00:00Z"),
+                _observation(id="good", sequence=1, data={"validation_error": False}),
+                _observation(id="pending-one", sequence=2, phase="pending"),
+            ],
+        )
+    )
+    eligible, ineligible = eligible_evidence(request.criteria[0], request)
+    assert [item.id for item in eligible] == ["good"]
+    assert dict(ineligible) == {"stale-one": ("STALE_EVIDENCE",), "pending-one": ("PENDING_STATE",)}
+    # external bindings participate in the same helper
+    ext_request = parse_request(
+        _request(criteria=[_ext_crit(["ledger-1"])], evidence=[_obs_ext("ledger-1", {"status": "paid"})])
+    )
+    eligible, ineligible = eligible_evidence(ext_request.criteria[0], ext_request, (_binding("ledger-1"),))
+    assert [item.id for item in eligible] == ["ledger-1"]
+    assert dict(ineligible) == {}
+    eligible, ineligible = eligible_evidence(ext_request.criteria[0], ext_request)
+    assert [item.id for item in eligible] == []
+    assert dict(ineligible) == {"ledger-1": ("UNTRUSTED_EXTERNAL",)}
+    screenshot_request = parse_request(
+        _request(criteria=[_criterion(evidence_ids=["shot-1"])], evidence=[_screenshot()])
+    )
+    with pytest.raises(EvidenceValidationError):
+        eligible_evidence(screenshot_request.criteria[0], screenshot_request)
+
+
+def test_outcome_ineligible_mapping_is_immutable() -> None:
+    request = parse_request(
+        _request(
+            criteria=[_criterion(evidence_ids=["stale-one"])],
+            evidence=[_observation(id="stale-one", captured_at="2024-06-01T09:00:00Z")],
+        )
+    )
+    outcome = _first_outcome(request)
+    with pytest.raises(TypeError):
+        outcome.ineligible["stale-one"] = ("Tampered",)  # type: ignore[index]
