@@ -12,15 +12,15 @@ No secrets or sensitive evidence are stored here.
 | NIT-001 Foundations | done | orchestrator | integration/v0.1 (`1b1f074`,`+fix`) | — | PKG-01..03 5/5 pass on Win+Linux × py3.12/3.13; ruff, format, mypy strict, wheel+sdist OK | Linux run found uv-not-on-PATH defect in packaging test; fixed via `UV` env var |
 | NIT-002 Contracts | done (merged `3a04870`; isolation fix `06ce9dc` merged) | nitelos-69 | nit/002-contracts `2671d5f` | 001 | 59 contract tests; suite 64 passed Win py3.12, Linux py3.12/3.13; ruff/mypy clean (orchestrator re-run) | 10 interpretations listed by implementer; key AR-1 questions: byte limits only in parse_request, top-level `canonical_json` export |
 | NIT-003 Evidence | done (merged) | nitelos-69 | nit/003-evidence `cf25f7b` | 002, AR-1 | 31+2 tests (EVD-01..04, SEC-05/06); Win 132 passed; Linux py3.12/3.13 131 passed + 1 platform skip | reviewer nitelos-0f APPROVE-WITH-CHANGES; F2 decoded-vs-header dims made required |
-| NIT-004 Assertions | ready (queued for nitelos-69 after NIT-011B review) | nitelos-69 | nit/004-assertions | 003 | | |
-| NIT-005 Policy | pending | | | 004 | | |
-| NIT-006 SDK | pending | | | 005 | | |
+| NIT-004 Assertions | done (merged) | nitelos-69 | nit/004-assertions `d06767e` | 003 | 17 DET tests; Win 172 passed; Linux full-offline replay OK | reviewer nitelos-0f APPROVE-WITH-CHANGES (huge index fix) |
+| NIT-005 Policy | done (merged) | nitelos-69 | nit/005-policy `42ef33a` | 004 | Win 246 passed; Linux 245 + 1 platform skip | reviewer nitelos-0f APPROVE-WITH-CHANGES (visual refs, eligible_evidence helper, immutable map) |
+| NIT-006 SDK | review (AR-2, reviewer nitelos-0f) + ADR-011 commit pending | nitelos-69 | nit/006-sdk `2c4609c` | 005 | 48 tests (SDK-01/02, LIFE-01/02, SEC-03/04); Win 274 passed; Linux py3.12/3.13 273 + 1 platform skip | async lifecycle tests run in subprocess (Windows asyncio self-pipe vs socket-deny conftest) |
 | NIT-007 Backend boundary | pending | | | 006, AR-2 | | |
-| NIT-008 Local VLM | pending (smoke-set subtask done+integrated `5843f80`; adapter awaits NIT-007) | nitelos-0f | nit/008-smoke-fixtures | 007 (adapter); fixtures independent | | Weights pre-provisioned outside repo, SHA-256 verified; WSL CPU probe: torch 2.14.1+cpu / transformers 5.19.0 load+generate OK; `AutoModelForVision2Seq` absent in TF5, use `AutoModelForImageTextToText`; probe output `' UNKNOWN.'` would be INVALID_OUTPUT under strict parser |
-| NIT-009 Traces | pending | | | 006, AR-2 | | |
-| NIT-010 Fixtures | pending | | | 003, 009 | | |
+| NIT-008 Local VLM | smoke set done; adapter design spec running (nitelos-0f, nit/008-design); adapter awaits NIT-007 | nitelos-0f | nit/008-smoke-fixtures | 007 (adapter); fixtures independent | | Weights pre-provisioned outside repo, SHA-256 verified; WSL CPU probe: torch 2.14.1+cpu / transformers 5.19.0 load+generate OK; `AutoModelForVision2Seq` absent in TF5, use `AutoModelForImageTextToText`; probe output `' UNKNOWN.'` would be INVALID_OUTPUT under strict parser |
+| NIT-009 Traces | running (branched from nit/006) | nitelos-0f | nit/009-traces | 006, AR-2 | | |
+| NIT-010 Fixtures | design done (`3c888e2`, A1–A6 accepted); implementation pending 009 | nitelos-0f | — | 003, 009 | | human two-reviewer audit of 60 final cases = user staffing decision |
 | NIT-011 Metrics | done (merged) | nitelos-0f | nit/011-metrics + nit/011b-metrics `5ffd8e8` | 002, AR-1 | STAT 26 + MET 19 tests; reviews by nitelos-69 (A: approve-with-changes fixed; B: approve) | metrics numpy/scipy-free; Wilson endpoints exact |
-| NIT-012 Runner | pending | | | 006, 010, 011 | | |
+| NIT-012 Runner | design done (`738f439`, A1–A7 accepted); implementation pending 006/010 | nitelos-0f | — | 006, 010, 011 | | |
 | NIT-013 Evaluation | pending | | | 008, 012, AR-4 | | |
 | NIT-014 Docs/demo | pending | | | 006, 009, 012 | | |
 | NIT-015 Release audit | pending | | | 013, 014 | | |
@@ -30,7 +30,7 @@ No secrets or sensitive evidence are stored here.
 | Review | State | Reviewer | Evidence |
 |---|---|---|---|
 | AR-1 contracts | done (approved with changes; fixes `2671d5f` verified) | nitelos-0f | see decisions.md; constructor-path RecursionError fix + snapshot caveat requested from nitelos-69 |
-| AR-2 deterministic flow | pending | | |
+| AR-2 deterministic flow | approved (conditional on NIT-006 F1–F3 + ADR-011 commit) | nitelos-0f | decisions.md AR-2 |
 | AR-3 local integration | pending | | |
 | AR-4 protocol freeze | pending | | |
 | AR-5 release candidate | pending | | |
@@ -59,3 +59,10 @@ All pending.
 - 2026-10-14: NIT-011B Wilson fix verified (`5ffd8e8`, 122 passed). NIT-003 delivered; Linux portability failure found by orchestrator; reviews launched: 0f→NIT-003, 69→NIT-011B.
 - 2026-10-15: NIT-003 merged after Win + Linux py3.12/3.13 verification.
 - 2026-10-15: CI jobs merged; NIT-011B merged; integration regression green.
+- 2026-10-15: NIT-010 design merged; NIT-004 delivered+verified, to review; NIT-005 started test-first on top of NIT-004 branch.
+- 2026-10-15: NIT-004 merged (Win 172 passed; Linux full-offline replay OK).
+- 2026-10-15: NIT-008 adapter design merged (A1–A7 accepted). NIT-005 delivered+verified, to review; NIT-006 started.
+- 2026-10-15: NIT-005 merged. Orchestrator process defect found: merged NIT-008 design doc fails `ruff format --check` (Ruff formats Markdown code blocks); orchestrator's WSL replay script masked the failure (`&&` chain under `set -e`). Script fixed; doc fix assigned to nitelos-0f. Integration format check RED until merged.
+- 2026-10-15: format fix merged with NIT-012 design (`18e16d0`); integration fully green on Win and Linux (strict replay script).
+- 2026-10-15: NIT-006 delivered+verified; AR-2 started. User approved ADR-011 (nullable request_id on input_error). G4 human reviewers: user will organize later (G4 pending).
+- 2026-10-15: AR-2 approved conditionally (F1 averify/close race, F2 strict env parsing, F3 record new limitation code, ADR-011 commit). NIT-009 started.

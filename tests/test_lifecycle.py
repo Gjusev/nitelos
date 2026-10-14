@@ -169,3 +169,18 @@ def test_life02_keyboard_interrupt_and_system_exit_propagate(monkeypatch: pytest
     monkeypatch.setattr(verifier_module, "evaluate_criterion", exiting)
     with pytest.raises(SystemExit):
         Verifier().verify(request)
+
+
+def test_life02_close_during_averify_submit_window_is_safe() -> None:
+    # AR-2 F1 regression: a close() racing the averify submit must not surface
+    # "cannot schedule new futures after shutdown"; the scenario lives in the
+    # subprocess runner (see module docstring for the Windows asyncio reason).
+    proc = subprocess.run(
+        [sys.executable, str(ROOT / "tests" / "_async_race_check.py")],
+        check=False,
+        capture_output=True,
+        text=True,
+        timeout=120,
+    )
+    assert proc.returncode == 0, proc.stderr
+    assert "scenario-close-races-submit" in proc.stdout

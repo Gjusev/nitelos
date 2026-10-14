@@ -40,3 +40,72 @@ Accepted interpretations: cold/warm latency series contain ok executions only an
 Carried forward to **NIT-012**:
 - The manifest/oracle loader must validate the conformance expectation triples: an error status requires a null expected decision, and `ok` requires a decision.
 - Cost, RAM/VRAM and throughput are run-level report fields, not CaseRecord fields. Unmeasured values stay null with a reason. Semantic grounding needs a human-audit protocol and is not automated.
+
+## NIT-010 design (docs/implementation/nit-010-benchmark-design.md) — 2026-10-15
+
+Author: nitelos-0f. The orchestrator accepted readings A1–A6:
+- A1: 8 disjoint lineage groups per family (L1–L4 dev, L5–L8 final). S13 uses 4 pairs as grouping units.
+- A2: four 60-case manifests (dev, dev-visual, test, test-visual).
+- A3: the frozen benchmark's S14 cases are known-absent-content scenes. Fabricated-reference injection is covered by the NIT-007 BAK suite, not by a benchmark arm.
+- A4: aHash 8×8, Hamming ≤ 6, as a detector only; hits go to human review and are never deleted automatically.
+- A5: the visual-view `expected_decision` assumes a correct visual finding under strict policy plus the explicit opt-in configuration declared in the manifest.
+- A6: the visual view keeps the external observations its external criteria need; S06 alone withholds them.
+The deterministic dry run over the assertion view runs at NIT-010 implementation time, after NIT-006.
+The design is an input to AR-4; any change after AR-4 creates synthetic-v2.
+**Open (user decision):** staffing of the two independent human reviewers plus an adjudicator for all 60 final-test cases (estimated 6–8 person-hours). Agents cannot satisfy this gate.
+
+## NIT-004 review — 2026-10-15
+
+Reviewer: nitelos-0f. Verdict: APPROVE-WITH-CHANGES. Required: an over-long canonical array-index token (e.g. 5,000 digits) → out of range → unknown/MISSING_VALUE instead of a raw ValueError.
+Accepted: "-", leading zeros and non-digit tokens on an array → INVALID_POINTER, decided at traversal time; -0.0 equals 0 (numeric equality); no Unicode normalization.
+Carried forward to **NIT-006**: re-export `DeterministicBackend` at top level (an additive public name); `evaluate_assertion`/`evaluate_reference` stay in `nitelos.backends`.
+
+## NIT-008 adapter design (docs/implementation/nit-008-adapter-design.md) — 2026-10-15
+
+Author: nitelos-0f. The orchestrator accepted readings A1–A7:
+- A1: the upstream `pad_token_id` warning is recorded, and the model config is never mutated.
+- A2: a manifest digest mismatch is `MODEL_UNAVAILABLE`.
+- A3: text tokens are counted with compact image markers; the total is `input_ids.shape[-1]`.
+- A4: Windows is declared unvalidated for `local` until a recorded smoke run.
+- A5: prompt template v1, including "Do not add punctuation", is fixed before any smoke result. The parser stays strict. Each dev-only iteration is logged in this file, and the template freezes before AR-4.
+- A6: the cooperative deadline runs between generation steps; there is no hard-stop claim.
+- A7: images are reconstructed from `PreparedImage.rgb`, with no second decode.
+The initial validated combination is CPU float32 only.
+
+## NIT-005 review — 2026-10-15
+
+Reviewer: nitelos-0f. Verdict: APPROVE-WITH-CHANGES. No path to success was found under adversarial trust probes.
+Accepted: no scope admits the `human` channel (citing it gives `UNSUPPORTED_CAPABILITY`); basis is NONE for empty or all-ineligible criteria; MISSING_EVIDENCE applies only to empty citations; ValueError is raised for a missing finding when eligible images exist (a programming-error guard).
+Required: visual results carry the validated finding refs (model_inferred); a pure `eligible_evidence` helper is shared by the policy and NIT-006; `CriterionOutcome.ineligible` is immutable.
+
+## NIT-012 runner design (docs/implementation/nit-012-runner-design.md) — 2026-10-15
+
+Author: nitelos-0f. The orchestrator accepted readings A1–A7:
+- A1: one oracle file per case, amending the NIT-010 layout.
+- A2: the output directory must not exist.
+- A3: an atomic COMPLETE marker signals a complete run.
+- A4: manifests use extra=forbid, so trust-like fields are a hard error.
+- A5: peak RSS is read via ru_maxrss on Linux and GetProcessMemoryInfo on Windows; null otherwise, and the baseline is not subtracted.
+- A6: cases.jsonl is flushed after each case.
+- A7: control exceptions are caught only at the CLI top level to write the incomplete state, then re-raised.
+
+## ADR-011 — Nullable result `request_id` on unreadable input (user-approved 2026-10-15)
+
+**Context:** Doc 02 (invocation lifecycle step 1) says to keep a valid caller request ID and otherwise use null. The doc 03 result schema (implemented in NIT-002) requires an ID string. NIT-006 initially used a placeholder `"unknown-request"`, which could collide with a real caller ID.
+**Decision (user-approved):** `VerificationResult.request_id` is `ID | null`. Null is legal only when `execution_status == "input_error"` and no valid caller ID can be read from the input. A readable valid ID is always preserved. No placeholder IDs are used.
+**Alternatives rejected:** a placeholder, because of collision risk and fabricated identity; raising instead of returning, because it contradicts structured input errors.
+**Impact:** additive v1 wire change. The result snapshot is regenerated; CON-01 rules are extended (ok/backend_error require a non-null request_id); NIT-006 tests are updated. Migration: callers must treat `request_id` as optional on input errors.
+
+## G4 human annotation
+
+User decision 2026-10-15: the user will organize the two independent reviewers and the adjudicator later. G4 stays pending until reviewer IDs are supplied. Review packets will be prepared at NIT-010.
+
+## AR-2 (deterministic slice NIT-002..006) — 2026-10-15
+
+Reviewer: nitelos-0f (independent of implementer nitelos-69). Verdict: APPROVE, conditional on the NIT-006 fixes F1–F3 and the ADR-011 commit. End-to-end trust attacks through `verify()` found no path to a false success.
+Accepted:
+- BUSY takes precedence over CLOSED while a call is in flight.
+- Async lifecycle tests run in a subprocess, because Windows asyncio's self-pipe uses loopback socketpair, which the socket-deny conftest blocks. The conftest is not weakened.
+- A `NITELOS_DEV_RERAISE` env fallback is acceptable, provided its value parsing is strict.
+Additive public name: limitation code `PARTIAL_RESULTS_NONAUTHORITATIVE`, placed in `diagnostics.limitations` on backend_error results that carry partial criteria.
+Model integration (NIT-007/008) is authorized once the conditions are met.
