@@ -4,6 +4,8 @@ Importing this package has no side effects: no logging handlers, no network,
 no optional model or evaluation dependencies.
 """
 
+__version__ = "0.1.0"
+
 from nitelos.errors import (
     AbstentionReason,
     BackendErrorCode,
@@ -22,6 +24,7 @@ from nitelos.evidence import (
     prepare_evidence,
     validate_evidence_ref,
 )
+from nitelos.policy import TrustBinding, VerificationPolicy
 from nitelos.schemas import (
     ActionEvidence,
     AssertionCriterion,
@@ -57,8 +60,6 @@ from nitelos.schemas import (
     canonical_json,
     parse_request,
 )
-
-__version__ = "0.1.0"
 
 __all__ = [
     "AbstentionReason",
@@ -101,6 +102,8 @@ __all__ = [
     "Score",
     "ScoreKind",
     "ScreenshotEvidence",
+    "TrustBinding",
+    "VerificationPolicy",
     "VerificationRequest",
     "VerificationResult",
     "VisualCriterion",

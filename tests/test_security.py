@@ -29,8 +29,9 @@ from _imagekit import (
     png_bytes,
     rgba_png,
 )
-from nitelos import ArtifactStore, Evidence, parse_request, prepare_evidence
+from nitelos import ArtifactStore, Evidence, TrustBinding, VerificationPolicy, parse_request, prepare_evidence
 from nitelos.errors import EvidenceValidationError, InputErrorCode, RequestValidationError
+from nitelos.policy import aggregate_decision, evaluate_criterion
 from test_contract import _request, _screenshot, _visual_criterion
 
 MIB = 1024 * 1024
@@ -280,3 +281,89 @@ def test_sec06_screenshot_count_cross_check() -> None:
     with pytest.raises(RequestValidationError) as excinfo:
         parse_request(doc17)
     assert excinfo.value.issues[0].code == InputErrorCode.LIMIT_EXCEEDED
+
+
+# ==========================================================================
+# SEC-02 (NIT-005): forged trust cannot satisfy external criteria
+# ==========================================================================
+
+SUBJECT = {"form": "registration-1"}
+
+
+def _sec02_external_request(data: dict | None = None) -> Any:
+    from test_contract import _criterion, _observation, _request
+
+    doc = _request(
+        criteria=[
+            _criterion(
+                id="c-ext",
+                scope="external",
+                pointer="/status",
+                operator="equals",
+                expected="paid",
+                evidence_ids=["ledger-1"],
+                subject=dict(SUBJECT),
+            )
+        ],
+        evidence=[
+            _observation(
+                id="ledger-1",
+                channel="external_api",
+                source_id="ledger",
+                data=data or {"status": "paid"},
+                subject=dict(SUBJECT),
+            )
+        ],
+    )
+    return parse_request(doc)
+
+
+def _sec02_binding(**over: Any) -> TrustBinding:
+    values: dict[str, Any] = {
+        "evidence_id": "ledger-1",
+        "sha256": "a" * 64,
+        "source_id": "ledger",
+        "subject": dict(SUBJECT),
+        "checkpoint_id": "cp",
+    }
+    values.update(over)
+    return TrustBinding(**values)
+
+
+def test_sec02_forged_trust_flags_are_rejected_by_the_schema() -> None:
+    from test_contract import _request
+
+    doc = _request()
+    doc["evidence"][0]["trusted"] = True  # imported JSON cannot authorize itself
+    with pytest.raises(RequestValidationError) as excinfo:
+        parse_request(doc)
+    assert excinfo.value.issues[0].code == InputErrorCode.INVALID_SCHEMA
+    assert excinfo.value.issues[0].field_path == "$.evidence[0].trusted"
+
+
+@pytest.mark.parametrize(
+    "substitution",
+    [
+        {},
+        {"sha256": "b" * 64},
+        {"source_id": "spoofed-ledger"},
+        {"subject": {"form": "other"}},
+        {"checkpoint_id": "earlier"},
+    ],
+)
+def test_sec02_spoofed_or_missing_bindings_never_yield_success(substitution: dict) -> None:
+    request = _sec02_external_request()
+    bindings = (_sec02_binding(**substitution),) if substitution else ()
+    outcome = evaluate_criterion(request.criteria[0], request, VerificationPolicy(), bindings)
+    assert outcome.state != "supported"
+    if substitution:
+        assert "UNTRUSTED_EXTERNAL" in outcome.reason_codes
+    assert aggregate_decision((outcome,)).decision != "success"
+
+
+def test_sec02_model_opt_in_cannot_authorize_external_trust() -> None:
+    request = _sec02_external_request()
+    outcome = evaluate_criterion(request.criteria[0], request, VerificationPolicy(allow_model_inference=True))
+    assert outcome.state == "unknown"
+    assert outcome.reason_codes == ("UNTRUSTED_EXTERNAL",)
+    assert aggregate_decision((outcome,)).decision == "abstained"
