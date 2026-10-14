@@ -1,0 +1,72 @@
+[project]
+name = "nitelos"
+version = "0.1.0"
+description = "Verify the outcome, not the attempt: evidence-based success verification for AI agents."
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "Nitelos contributors" }]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
+dependencies = [
+    "pydantic>=2.14.1,<3",
+    "pillow>=12.3.0,<13",
+]
+
+[dependency-groups]
+dev = [
+    "hatchling>=1.32.4",
+    "mypy>=2.4.0",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.17.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/nitelos"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/nitelos", "tests", "README.md", "LICENSE", "pyproject.toml"]
+exclude = ["tests/**/*.safetensors"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-markers", "--strict-config", "-m", "not local_model and not paid_api"]
+markers = [
+    "local_model: real local model inference; requires NITELOS_RUN_LOCAL=1 and NITELOS_MODEL_DIR",
+    "paid_api: reserved; v0.1 ships no paid adapter",
+]
+asyncio_mode = "strict"
+asyncio_default_fixture_loop_scope = "function"
+filterwarnings = ["error"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "BLE", "RUF", "SIM", "PT", "C4", "PL"]
+ignore = ["PLR0911", "PLR0912", "PLR0913", "PLR0915", "PLR2004"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101", "S603", "S607", "S108", "PLC0415"]
+
+[tool.mypy]
+strict = true
+python_version = "3.12"
+mypy_path = "src"
+packages = ["nitelos"]
+warn_unreachable = true
