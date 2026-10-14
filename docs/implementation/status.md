@@ -19,7 +19,7 @@ No secrets or sensitive evidence are stored here.
 | NIT-008 Local VLM | pending (smoke-set subtask done+integrated `5843f80`; adapter awaits NIT-007) | nitelos-0f | nit/008-smoke-fixtures | 007 (adapter); fixtures independent | | Weights pre-provisioned outside repo, SHA-256 verified; WSL CPU probe: torch 2.14.1+cpu / transformers 5.19.0 load+generate OK; `AutoModelForVision2Seq` absent in TF5, use `AutoModelForImageTextToText`; probe output `' UNKNOWN.'` would be INVALID_OUTPUT under strict parser |
 | NIT-009 Traces | pending | | | 006, AR-2 | | |
 | NIT-010 Fixtures | pending | | | 003, 009 | | |
-| NIT-011 Metrics | part A done; part B review pending (`236b868`, 118 passed; reviewer nitelos-69 after NIT-003) | nitelos-0f | nit/011-metrics (A), nit/011b-metrics (B) | 002, AR-1 | | Split: statistics first; metrics over result records after AR-1 |
+| NIT-011 Metrics | done (merged) | nitelos-0f | nit/011-metrics + nit/011b-metrics `5ffd8e8` | 002, AR-1 | STAT 26 + MET 19 tests; reviews by nitelos-69 (A: approve-with-changes fixed; B: approve) | metrics numpy/scipy-free; Wilson endpoints exact |
 | NIT-012 Runner | pending | | | 006, 010, 011 | | |
 | NIT-013 Evaluation | pending | | | 008, 012, AR-4 | | |
 | NIT-014 Docs/demo | pending | | | 006, 009, 012 | | |
@@ -37,7 +37,7 @@ No secrets or sensitive evidence are stored here.
 
 ## Open orchestrator items
 
-- CI lacks doc-12 "Full offline" job (Linux py3.12 `--extra eval`, coverage) and "Packaging" job; add before AR-2 (via an implementer, per user instruction that this session does not write code).
+- DONE 2026-10-15: CI full-offline + packaging jobs added by nitelos-0f (`5eb6bbc`), replayed on WSL Ubuntu by orchestrator against integration incl. NIT-003: 131 passed + 1 platform skip, no eval skips, coverage 87% (diagnostic). GitHub Actions itself never executed (no push authorized).
 
 ## Gates G1–G8
 
@@ -58,3 +58,4 @@ All pending.
 - 2026-10-14: NIT-011B delivered (`236b868`) and verified. Confirmed float noise wilson_interval(0,3).low=5.55e-17; exact-endpoint fix assigned to nitelos-0f.
 - 2026-10-14: NIT-011B Wilson fix verified (`5ffd8e8`, 122 passed). NIT-003 delivered; Linux portability failure found by orchestrator; reviews launched: 0f→NIT-003, 69→NIT-011B.
 - 2026-10-15: NIT-003 merged after Win + Linux py3.12/3.13 verification.
+- 2026-10-15: CI jobs merged; NIT-011B merged; integration regression green.

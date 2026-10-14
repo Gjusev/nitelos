@@ -31,3 +31,12 @@ Reviewer: nitelos-0f. Verdict: APPROVE-WITH-CHANGES. Accepted: factories perform
 Carried forward:
 - **NIT-006 (binding):** `verify()` must call `prepare_evidence` unconditionally on every invocation, before any assertion or backend runs.
 - **NIT-004/005/007:** `validate_evidence_ref` reports a generic `$.evidence_refs` path; callers re-path to the criterion position.
+
+## NIT-011 reviews — 2026-10-15
+
+Part A reviewer nitelos-69 (APPROVE-WITH-CHANGES, fixed); part B reviewer nitelos-69 (APPROVE, MET-01 recomputed by hand).
+Accepted interpretations: cold/warm latency series contain ok executions only and the all-attempts series includes errors; nearest-rank percentiles (the even-length median is the lower middle); `calibrated_probability` is treated as a non-probability (no validated calibration in v0.1); conformance requires the full expected triple.
+
+Carried forward to **NIT-012**:
+- The manifest/oracle loader must validate the conformance expectation triples: an error status requires a null expected decision, and `ok` requires a decision.
+- Cost, RAM/VRAM and throughput are run-level report fields, not CaseRecord fields. Unmeasured values stay null with a reason. Semantic grounding needs a human-audit protocol and is not automated.
