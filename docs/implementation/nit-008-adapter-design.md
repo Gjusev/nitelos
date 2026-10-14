@@ -66,10 +66,16 @@ or the runner's `--backend smolvlm` path).
 
 ```python
 class SmolVLMBackend:
-    def __init__(self, model_dir: Path | str, revision: str, *,
-                 device: Literal["cpu", "cuda"] = "cpu",
-                 dtype: Literal["float32", "bfloat16"] = "float32",
-                 deadline_s: float = 120.0) -> None: ...
+    def __init__(
+        self,
+        model_dir: Path | str,
+        revision: str,
+        *,
+        device: Literal["cpu", "cuda"] = "cpu",
+        dtype: Literal["float32", "bfloat16"] = "float32",
+        deadline_s: float = 120.0,
+    ) -> None: ...
+
     # Backend protocol surface (NIT-007): descriptor, capabilities, infer, close
 ```
 
