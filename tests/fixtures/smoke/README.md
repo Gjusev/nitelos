@@ -28,13 +28,46 @@ uv run python tests/fixtures/smoke/generate_smoke.py [OUT_DIR]
 Determinism: the generator uses **no RNG** - every coordinate, color and string is a fixed
 constant in the script, so regeneration is byte-identical for a given Pillow build and
 platform. Fonts come from `ImageFont.load_default(size=...)` (Pillow's bundled default font);
-no font files are redistributed with this repository. Cross-platform byte equality is not
-promised, since font rasterization differs between platforms.
+no font files are redistributed with this repository.
 
-Generation environment of the committed files:
+## Declared renderer platform
 
-- Pillow 12.3.0, Python 3.12.2, Windows 11 (10.0.26200)
-- Generated: 2026-10-14
+Byte-identity of regeneration is asserted **only** on the renderer recorded here (doc 06,
+DATA-04: deterministic generator hashes for a declared renderer platform). Font rasterization
+and PNG compression differ between platforms, so on any other renderer the byte-regeneration
+check skips with a reason naming the mismatch; the committed files and their digests above
+remain the source of truth on every platform, and every other fixture check runs everywhere.
+`libpng` is recorded for information (Pillow reports none on the generation platform).
+
+| Key | Value |
+|---|---|
+| os | Windows |
+| python | 3.12 |
+| pillow | 12.3.0 |
+| freetype | 2.14.3 |
+| zlib | 1.3.1.zlib-ng |
+| libpng | unavailable |
+
+Generated: 2026-10-14.
+
+## Label notes (development-only)
+
+Slot 4 is **REFUTED**, not UNKNOWN: the whole page is visible and shows a filled form with no
+confirmation state anywhere on it, which plainly contradicts a criterion that the page shows a
+final confirmation - a filled form is not a submitted form.
+
+The UNKNOWN labels are not softened REFUTED votes; each is unknown for a concrete reason:
+
+- Slot 5 (loading spinner, pending phase): a spinner is a transient, nonfinal state - it is
+  evidence of neither completion nor failure, and the pending evidence phase means strict
+  policy abstains (`PENDING_STATE`) without model execution.
+- Slot 6 (two final screenshots with conflicting banners): one image supports the criterion
+  and the other refutes it; contradiction inside one criterion resolves to unknown, not to a
+  decisive negative.
+- Slot 8 (unreadably tiny status): the status text physically cannot be read at native
+  resolution; an unreadable detail is unassessed, not contradicted.
+- Slot 12 (blank image): a blank image shows no content at all, so nothing visible
+  contradicts the criterion; missing visual evidence is unknown.
 
 ## File digests (SHA-256)
 

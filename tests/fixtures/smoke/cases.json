@@ -45,8 +45,8 @@
       "objective": "Verify the feedback survey response reached a submitted final state.",
       "phase": "final",
       "action_context": [],
-      "expected_label": "UNKNOWN",
-      "rationale": "The form is filled but no confirmation or error state is visible anywhere; one screenshot cannot establish submission (doc-04 slot 4, filled form without confirmation)."
+      "expected_label": "REFUTED",
+      "rationale": "The entire page is visible and contains no confirmation or error state anywhere; filled fields alone are not a submitted state, so the confirmation claim is visibly contradicted (doc-04 slot 4, filled form without confirmation)."
     },
     {
       "case_id": "SMK-005",

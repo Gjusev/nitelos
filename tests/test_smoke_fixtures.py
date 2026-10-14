@@ -2,8 +2,11 @@
 
 The smoke set exists for interface/hardware testing only: it is not an accuracy benchmark and
 never enters the final-test split (docs/planning/06). These tests pin the fixture artifacts
-themselves: doc-04 case order, per-file digests, byte-identical regeneration, hard image
-limits, single-frame metadata-free PNGs, and label-neutral filenames.
+themselves: doc-04 case order, per-file digests, renderer-scoped byte-identical regeneration
+(doc 06 DATA-04: deterministic generator hashes for the declared renderer platform), hard
+image limits, single-frame metadata-free PNGs, and label-neutral filenames. Committed files
+and their digests are the source of truth on every platform; only byte-regeneration is
+scoped to the declared renderer.
 """
 
 from __future__ import annotations
@@ -11,11 +14,14 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import platform
 import re
 from pathlib import Path
 from typing import Any
 
-from PIL import Image
+import PIL
+import pytest
+from PIL import Image, features
 
 SMOKE_DIR = Path(__file__).resolve().parent / "fixtures" / "smoke"
 GENERATOR = SMOKE_DIR / "generate_smoke.py"
@@ -43,6 +49,8 @@ MAX_PIXELS = 4_194_304
 MAX_SIDE = 4096
 MAX_BYTES = 8 * 1024 * 1024
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
+# Renderer facts that must match the README declaration before byte-identity is asserted.
+_RENDERER_KEYS = ("os", "python", "pillow", "freetype", "zlib")
 # Chunks that would carry text metadata, EXIF, or extra animation frames (doc 03 limits).
 FORBIDDEN_CHUNKS = {"tEXt", "zTXt", "iTXt", "eXIf", "acTL", "fcTL", "fdAT"}
 # Doc-04 "Executability gate" slots in order; each case table row must mention its keyword.
@@ -79,6 +87,28 @@ def _recorded_digests() -> dict[str, str]:
         README.read_text(encoding="utf-8"),
     )
     return dict(rows)
+
+
+def _declared_renderer() -> dict[str, str]:
+    """Renderer environment recorded in the README data card (doc 06 DATA-04 contract)."""
+    text = README.read_text(encoding="utf-8")
+    section = re.search(r"## Declared renderer platform.*?(?=\n## |\Z)", text, re.DOTALL)
+    assert section is not None, "README must declare the renderer platform"
+    rows = re.findall(r"^\|\s*([a-z]+)\s*\|\s*([^|\n]+?)\s*\|\s*$", section.group(0), re.MULTILINE)
+    declared = dict(rows)
+    for key in _RENDERER_KEYS:
+        assert key in declared, key
+    return declared
+
+
+def _running_renderer() -> dict[str, str]:
+    return {
+        "os": platform.system(),
+        "python": ".".join(platform.python_version_tuple()[:2]),
+        "pillow": PIL.__version__,
+        "freetype": features.version("freetype2") or "unavailable",
+        "zlib": features.version("zlib") or "unavailable",
+    }
 
 
 def _png_chunks(path: Path) -> list[str]:
@@ -121,7 +151,19 @@ def test_case_images_exist_with_recorded_digests() -> None:
         assert digest == recorded[path.name], path.name
 
 
-def test_regeneration_is_byte_identical(tmp_path: Path) -> None:
+def test_regeneration_is_byte_identical_on_declared_renderer(tmp_path: Path) -> None:
+    declared = _declared_renderer()
+    running = _running_renderer()
+    mismatches = [
+        f"{key}: running {running[key]!r}, declared {declared[key]!r}"
+        for key in _RENDERER_KEYS
+        if running[key] != declared[key]
+    ]
+    if mismatches:
+        pytest.skip(
+            "byte-identity is declared only for the recorded renderer platform "
+            f"(doc 06 DATA-04): {'; '.join(mismatches)}"
+        )
     spec = importlib.util.spec_from_file_location("generate_smoke", GENERATOR)
     assert spec is not None
     assert spec.loader is not None
