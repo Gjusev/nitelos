@@ -293,7 +293,7 @@ def _tup(value: object) -> object:
 # ---------------------------------------------------------------------------
 
 
-def _freeze_json(value: object) -> object:
+def _freeze_json(value: object, depth: int = 1) -> object:
     if value is None or isinstance(value, (bool, str, int)):
         return value
     if isinstance(value, float):
@@ -301,14 +301,18 @@ def _freeze_json(value: object) -> object:
             raise ValueError("non-finite numbers are not allowed")
         return value
     if isinstance(value, Mapping):
+        if depth > MAX_JSON_DEPTH:
+            raise ValueError("nesting exceeds the allowed depth")
         out: dict[str, object] = {}
         for key, item in value.items():
             if not isinstance(key, str):
                 raise ValueError("object keys must be strings")
-            out[key] = _freeze_json(item)
+            out[key] = _freeze_json(item, depth + 1)
         return MappingProxyType(out)
     if isinstance(value, (list, tuple)):
-        return tuple(_freeze_json(item) for item in value)
+        if depth > MAX_JSON_DEPTH:
+            raise ValueError("nesting exceeds the allowed depth")
+        return tuple(_freeze_json(item, depth + 1) for item in value)
     raise ValueError("value is not JSON")
 
 
@@ -1196,10 +1200,10 @@ def _build_request(mapping: Mapping[str, object]) -> VerificationRequest:
         ) from None
 
 
-def parse_request(data: Mapping[str, object] | str | bytes) -> VerificationRequest:
+def parse_request(data: Mapping[str, object] | str | bytes | bytearray) -> VerificationRequest:
     """Validate untrusted request input and build a :class:`VerificationRequest`.
 
-    Accepts a mapping, JSON text or UTF-8 bytes. Raises
+    Accepts a mapping, JSON text, or UTF-8 bytes (bytearray included). Raises
     :class:`~nitelos.errors.RequestValidationError` whose first issue is the
     deterministic first error (see module docstring for the exact order);
     issues never contain offending values. Structural invariants and byte
@@ -1217,7 +1221,7 @@ def parse_request(data: Mapping[str, object] | str | bytes) -> VerificationReque
         raise RequestValidationError([reject.issue]) from None
 
 
-def _ingest(data: Mapping[str, object] | str | bytes) -> object:
+def _ingest(data: Mapping[str, object] | str | bytes | bytearray) -> object:
     if isinstance(data, (str, bytes, bytearray)):
         try:
             raw = data.encode("utf-8") if isinstance(data, str) else bytes(data)

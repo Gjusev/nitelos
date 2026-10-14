@@ -878,13 +878,16 @@ def test_con04_request_size_limit() -> None:
     assert_parse_error(over, InputErrorCode.LIMIT_EXCEEDED, "$")
 
 
-def test_con04_json_depth_limit() -> None:
-    def nested(depth: int) -> dict[str, Any]:
-        value: dict[str, Any] = {"leaf": True}
-        for _ in range(depth):
-            value = {"a": value}
-        return value
+def _nested(depth: int) -> dict[str, Any]:
+    """``depth`` wrapper objects around a leaf: depth+1 nested containers."""
+    value: dict[str, Any] = {"leaf": True}
+    for _ in range(depth):
+        value = {"a": value}
+    return value
 
+
+def test_con04_json_depth_limit() -> None:
+    nested = _nested
     # container depth: root object = 1; each nested container adds one level.
     # The reported path points at the first container beyond the limit.
     parse_request(_request(metadata=nested(14)))  # deepest container at depth 16
@@ -899,6 +902,36 @@ def test_con04_json_depth_limit() -> None:
         _request(evidence=[_observation(data=nested(13))]),
         InputErrorCode.LIMIT_EXCEEDED,
         "$.evidence[0].data" + ".a" * 13,
+    )
+
+
+def test_con04_constructor_depth_bound() -> None:
+    # Direct construction must raise its documented ValidationError for over-deep
+    # payloads, never an unhandled RecursionError; the payload subtree itself is
+    # bounded to 16 nested containers (the parse path keeps its absolute bound).
+    criteria = [AssertionCriterion.model_validate(_criterion())]
+    evidence = [ObservationEvidence.model_validate(_observation())]
+    common: dict[str, Any] = {
+        "request_id": "demo-1",
+        "objective": "o",
+        "checkpoint_id": "cp",
+        "as_of": datetime(2024, 6, 1, 10, 0, tzinfo=UTC),
+        "criteria": criteria,
+        "evidence": evidence,
+    }
+    VerificationRequest(metadata=_nested(15), **common)  # 16 container levels: accepted
+    for too_deep in (16, 5000):
+        with pytest.raises(ValidationError):
+            VerificationRequest(metadata=_nested(too_deep), **common)
+    ObservationEvidence.model_validate(_observation(data=_nested(15)))
+    for too_deep in (16, 5000):
+        with pytest.raises(ValidationError):
+            ObservationEvidence.model_validate(_observation(data=_nested(too_deep)))
+    with pytest.raises(ValidationError):
+        ActionEvidence.model_validate(_action(arguments=_nested(5000)))
+    # parse path unchanged: absolute depth still LIMIT_EXCEEDED with a path
+    assert_parse_error(
+        _request(metadata=_nested(15)), InputErrorCode.LIMIT_EXCEEDED, "$.metadata" + ".a" * 15
     )
 
 
