@@ -1332,3 +1332,22 @@ def test_error_module_issue_shape() -> None:
     assert issue.field_path == "$"
     assert issue.safe_message
     assert repr(excinfo.value)
+
+
+def test_con01_request_id_null_only_on_input_error() -> None:
+    # ADR-011: null is legal exactly when execution_status is input_error
+    error = ErrorInfo(code=InputErrorCode.INVALID_SCHEMA, safe_message="invalid request")
+    null_input_error = _result(
+        execution_status=ExecutionStatus.INPUT_ERROR, decision=None, criteria=(), error=error, request_id=None
+    )
+    assert null_input_error.request_id is None
+    with pytest.raises(ValidationError):
+        _result(request_id=None)  # ok requires the caller's id
+    backend_error = ErrorInfo(code=BackendErrorCode.BACKEND_EXCEPTION, safe_message="m")
+    with pytest.raises(ValidationError):
+        _result(
+            execution_status=ExecutionStatus.BACKEND_ERROR,
+            decision=None,
+            error=backend_error,
+            request_id=None,
+        )

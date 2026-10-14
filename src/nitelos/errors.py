@@ -78,6 +78,7 @@ class LimitationCode(StrEnum):
     """Reported residual limitations of a criterion evaluation."""
 
     VISUAL_GROUNDING_UNVERIFIED = "VISUAL_GROUNDING_UNVERIFIED"
+    PARTIAL_RESULTS_NONAUTHORITATIVE = "PARTIAL_RESULTS_NONAUTHORITATIVE"
 
 
 class Issue:

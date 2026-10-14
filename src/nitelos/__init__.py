@@ -6,6 +6,7 @@ no optional model or evaluation dependencies.
 
 __version__ = "0.1.0"
 
+from nitelos.backends import DeterministicBackend
 from nitelos.errors import (
     AbstentionReason,
     BackendErrorCode,
@@ -60,6 +61,7 @@ from nitelos.schemas import (
     canonical_json,
     parse_request,
 )
+from nitelos.verifier import Verifier
 
 __all__ = [
     "AbstentionReason",
@@ -78,6 +80,7 @@ __all__ = [
     "CriterionState",
     "Decision",
     "DecisionCode",
+    "DeterministicBackend",
     "Diagnostics",
     "ErrorInfo",
     "Evidence",
@@ -106,6 +109,7 @@ __all__ = [
     "VerificationPolicy",
     "VerificationRequest",
     "VerificationResult",
+    "Verifier",
     "VisualCriterion",
     "__version__",
     "canonical_json",

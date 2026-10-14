@@ -857,7 +857,7 @@ class VerificationResult(_Model):
     """Final verification outcome enforcing the five legal (status, decision) pairs."""
 
     schema_version: Literal["1"] = "1"
-    request_id: IDType
+    request_id: IDType | None  # ADR-011: null only on input errors
     verification_id: IDType
     execution_status: WireExecutionStatus
     decision: WireDecision | None = None
@@ -877,6 +877,8 @@ class VerificationResult(_Model):
 
     @model_validator(mode="after")
     def _check_legal_states(self) -> Self:
+        if self.request_id is None and self.execution_status != ExecutionStatus.INPUT_ERROR:
+            raise ValueError("request_id may only be null on input errors")
         if self.execution_status == ExecutionStatus.OK:
             if self.error is not None:
                 raise ValueError("error must be null when execution_status is ok")
