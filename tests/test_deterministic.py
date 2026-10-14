@@ -353,3 +353,14 @@ def test_unsupported_evidence_and_criteria_raise_coded_errors() -> None:
     with pytest.raises(EvidenceValidationError) as kind_error:
         evaluate_reference(visual, _obs())  # type: ignore[arg-type]
     assert kind_error.value.issue.code == InputErrorCode.UNSUPPORTED_CAPABILITY
+
+
+def test_det03_huge_array_index_is_out_of_range_not_a_crash() -> None:
+    # "/arr/" + "9"*5000 is schema-legal; CPython's int-conversion limit must not
+    # surface as a raw ValueError. Doc 04: out-of-range indices produce unknown.
+    huge = "9" * 5000
+    evaluation = _eval(f"/arr/{huge}", "equals", 10)
+    assert evaluation.state == CriterionState.UNKNOWN
+    assert evaluation.reason_codes == ("MISSING_VALUE",)
+    # a 19-digit canonical index converts normally and is simply out of range
+    assert _state("/arr/" + "1" * 19, "equals", 10) == CriterionState.UNKNOWN

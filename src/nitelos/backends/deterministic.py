@@ -36,6 +36,7 @@ filter before calling this evaluator).
 
 from __future__ import annotations
 
+import sys
 from collections.abc import Mapping, Sequence
 
 from pydantic import TypeAdapter, ValidationError
@@ -76,6 +77,9 @@ def _unescape(token: str) -> str:
     return token.replace("~1", "/").replace("~0", "~")
 
 
+_MAX_INDEX_DIGITS = 19  # longer canonical tokens stay out of range without int() conversion
+
+
 def _array_index(token: str) -> int:
     if not token or any(ch not in _DIGITS for ch in token) or (len(token) > 1 and token[0] == "0"):
         raise _ev(
@@ -83,6 +87,12 @@ def _array_index(token: str) -> int:
             "$.pointer",
             "array indices must be canonical nonnegative decimal numbers",
         )
+    if len(token) > _MAX_INDEX_DIGITS:
+        # CPython's integer string-conversion limit must not surface as a raw
+        # ValueError; such an index is astronomically out of range anyway
+        # (arrays are bounded by the request size limits), so it resolves to
+        # a missing target -> unknown/MISSING_VALUE (doc 04).
+        return sys.maxsize
     return int(token)
 
 
