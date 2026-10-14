@@ -68,6 +68,8 @@ __all__ = [
     "ActionEvidence",
     "ArtifactStore",
     "AssertionCriterion",
+    "Backend",
+    "BackendCapabilities",
     "BackendDescriptor",
     "BackendErrorCode",
     "BackendFinding",
