@@ -23,3 +23,11 @@ Carried forward:
 - **NIT-006 (binding):** `Verifier.verify` must re-check the request byte ceiling (1 MiB canonical), the metadata (8 KiB) and per-payload (64 KiB) ceilings, and nesting depth for typed requests that bypass `parse_request`, returning `input_error/LIMIT_EXCEEDED`. This needs acceptance tests on the typed-request path. It must also guarantee that `(ok, *)` results always carry one CriterionResult per request criterion (the schema permits an empty list).
 - **NIT-003:** evidence factories return the concrete variants (the `Evidence` base is instantiable but cannot enter a request).
 - **NIT-004:** reuse the RFC 6901 pointer grammar from `schemas.py` rather than a second implementation.
+
+## NIT-003 review — 2026-10-14
+
+Reviewer: nitelos-0f. Verdict: APPROVE-WITH-CHANGES. Accepted: factories perform header-level checks only; `prepare_evidence` is the full safety gate (decode of every store artifact). bbox OOB / bbox-on-structured → `INVALID_IMAGE`; pointer-on-screenshot → `INVALID_POINTER`. LA mode accepted as `rgba_on_white`. Artifact error paths use `$.artifacts[<id>]`.
+
+Carried forward:
+- **NIT-006 (binding):** `verify()` must call `prepare_evidence` unconditionally on every invocation, before any assertion or backend runs.
+- **NIT-004/005/007:** `validate_evidence_ref` reports a generic `$.evidence_refs` path; callers re-path to the criterion position.
