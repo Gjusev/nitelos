@@ -9,10 +9,18 @@ from nitelos.errors import (
     BackendErrorCode,
     ConfigurationError,
     DecisionCode,
+    EvidenceValidationError,
     InputErrorCode,
     Issue,
     LimitationCode,
     RequestValidationError,
+)
+from nitelos.evidence import (
+    ArtifactStore,
+    PreparedEvidence,
+    PreparedImage,
+    prepare_evidence,
+    validate_evidence_ref,
 )
 from nitelos.schemas import (
     ActionEvidence,
@@ -55,6 +63,7 @@ __version__ = "0.1.0"
 __all__ = [
     "AbstentionReason",
     "ActionEvidence",
+    "ArtifactStore",
     "AssertionCriterion",
     "BackendDescriptor",
     "BackendErrorCode",
@@ -72,6 +81,7 @@ __all__ = [
     "ErrorInfo",
     "Evidence",
     "EvidenceRef",
+    "EvidenceValidationError",
     "ExecutionStatus",
     "Grounding",
     "InputErrorCode",
@@ -82,6 +92,8 @@ __all__ = [
     "ObservationEvidence",
     "Operator",
     "Phase",
+    "PreparedEvidence",
+    "PreparedImage",
     "PreprocessingRecord",
     "ReportedStatus",
     "RequestValidationError",
@@ -95,4 +107,6 @@ __all__ = [
     "__version__",
     "canonical_json",
     "parse_request",
+    "prepare_evidence",
+    "validate_evidence_ref",
 ]

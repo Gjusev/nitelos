@@ -517,7 +517,10 @@ Criterion = Annotated[AssertionCriterion | VisualCriterion, Field(discriminator=
 class Evidence(_Model):
     """Common evidence fields (document 03 "Evidence"); use the kind subclasses.
 
-    Hashing helper factories (``Evidence.screenshot`` etc.) arrive in NIT-003.
+    The hashing factory classmethods delegate to ``nitelos.evidence`` (imported
+    lazily so this contract module stays light): screenshots digest the exact
+    artifact bytes; observations and actions digest canonical JSON v1 payloads.
+    Factories never accept a ``trusted`` flag.
     """
 
     id: IDType
@@ -531,6 +534,97 @@ class Evidence(_Model):
 
     def __repr__(self) -> str:
         return f"{type(self).__name__}(id={self.id!r}, sequence={self.sequence}, phase={self.phase!s})"
+
+    @classmethod
+    def screenshot(
+        cls,
+        *,
+        id: str,
+        artifact_id: str,
+        data: bytes | bytearray | memoryview,
+        sequence: int,
+        captured_at: datetime | str,
+        checkpoint_id: str,
+        source_id: str,
+        subject: Mapping[str, str],
+        phase: Phase | str,
+    ) -> ScreenshotEvidence:
+        """Inspect artifact bytes (signature, dimensions, digest) and build the event."""
+        from nitelos.evidence import build_screenshot  # noqa: PLC0415 - lazy import keeps this module light
+
+        return build_screenshot(
+            id=id,
+            artifact_id=artifact_id,
+            data=data,
+            sequence=sequence,
+            captured_at=captured_at,
+            checkpoint_id=checkpoint_id,
+            source_id=source_id,
+            subject=subject,
+            phase=phase,
+        )
+
+    @classmethod
+    def observation(
+        cls,
+        *,
+        id: str,
+        sequence: int,
+        captured_at: datetime | str,
+        checkpoint_id: str,
+        source_id: str,
+        subject: Mapping[str, str],
+        phase: Phase | str,
+        channel: Channel | str,
+        data: Mapping[str, object],
+    ) -> ObservationEvidence:
+        """Build an observation whose sha256 is the canonical JSON v1 digest of ``data``."""
+        from nitelos.evidence import build_observation  # noqa: PLC0415 - lazy import keeps this module light
+
+        return build_observation(
+            id=id,
+            sequence=sequence,
+            captured_at=captured_at,
+            checkpoint_id=checkpoint_id,
+            source_id=source_id,
+            subject=subject,
+            phase=phase,
+            channel=channel,
+            data=data,
+        )
+
+    @classmethod
+    def action(
+        cls,
+        *,
+        id: str,
+        sequence: int,
+        captured_at: datetime | str,
+        checkpoint_id: str,
+        source_id: str,
+        subject: Mapping[str, str],
+        phase: Phase | str,
+        name: str,
+        arguments: Mapping[str, object],
+        reported_status: ReportedStatus | str,
+        tool_result_id: str | None = None,
+    ) -> ActionEvidence:
+        """Build an action; the digest covers {name, arguments, reported_status, tool_result_id}."""
+        from nitelos.evidence import build_action  # noqa: PLC0415 - lazy import keeps this module light
+
+        return build_action(
+            id=id,
+            sequence=sequence,
+            captured_at=captured_at,
+            checkpoint_id=checkpoint_id,
+            source_id=source_id,
+            subject=subject,
+            phase=phase,
+            name=name,
+            arguments=arguments,
+            reported_status=reported_status,
+            tool_result_id=tool_result_id,
+        )
 
 
 class ScreenshotEvidence(Evidence):
