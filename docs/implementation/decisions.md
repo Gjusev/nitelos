@@ -88,3 +88,14 @@ Author: nitelos-0f. The orchestrator accepted readings A1–A7:
 - A5: peak RSS is read via ru_maxrss on Linux and GetProcessMemoryInfo on Windows; null otherwise, and the baseline is not subtracted.
 - A6: cases.jsonl is flushed after each case.
 - A7: control exceptions are caught only at the CLI top level to write the incomplete state, then re-raised.
+
+## ADR-011 — Nullable result `request_id` on unreadable input (user-approved 2026-10-15)
+
+**Context:** Doc 02 (invocation lifecycle step 1) says to keep a valid caller request ID and otherwise use null. The doc 03 result schema (implemented in NIT-002) requires an ID string. NIT-006 initially used a placeholder `"unknown-request"`, which could collide with a real caller ID.
+**Decision (user-approved):** `VerificationResult.request_id` is `ID | null`. Null is legal only when `execution_status == "input_error"` and no valid caller ID can be read from the input. A readable valid ID is always preserved. No placeholder IDs are used.
+**Alternatives rejected:** a placeholder, because of collision risk and fabricated identity; raising instead of returning, because it contradicts structured input errors.
+**Impact:** additive v1 wire change. The result snapshot is regenerated; CON-01 rules are extended (ok/backend_error require a non-null request_id); NIT-006 tests are updated. Migration: callers must treat `request_id` as optional on input errors.
+
+## G4 human annotation
+
+User decision 2026-10-15: the user will organize the two independent reviewers and the adjudicator later. G4 stays pending until reviewer IDs are supplied. Review packets will be prepared at NIT-010.
