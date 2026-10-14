@@ -1,0 +1,852 @@
+{
+  "$defs": {
+    "BackendDescriptor": {
+      "additionalProperties": false,
+      "description": "Identity of the backend that produced findings; hashes pin behavior.",
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        },
+        "model_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Id"
+        },
+        "model_revision": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Revision"
+        },
+        "prompt_hash": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prompt Hash"
+        },
+        "preprocessing_hash": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Preprocessing Hash"
+        },
+        "runtime_lock_hash": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Runtime Lock Hash"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "title": "BackendDescriptor",
+      "type": "object"
+    },
+    "BackendErrorCode": {
+      "description": "Backend execution failures: decision is null, no fabricated findings.",
+      "enum": [
+        "DEPENDENCY_MISSING",
+        "MODEL_UNAVAILABLE",
+        "MODEL_LOAD_FAILED",
+        "INVALID_OUTPUT",
+        "INVALID_EVIDENCE_REFERENCE",
+        "UNSUPPORTED_CALIBRATION",
+        "RESOURCE_EXHAUSTED",
+        "TIMEOUT",
+        "BACKEND_EXCEPTION",
+        "BUSY",
+        "CLOSED"
+      ],
+      "title": "BackendErrorCode",
+      "type": "string"
+    },
+    "Basis": {
+      "enum": [
+        "deterministic",
+        "model_inferred",
+        "none"
+      ],
+      "title": "Basis",
+      "type": "string"
+    },
+    "ColorConversion": {
+      "enum": [
+        "none",
+        "grayscale_to_rgb",
+        "rgba_on_white"
+      ],
+      "title": "ColorConversion",
+      "type": "string"
+    },
+    "CriterionEvaluation": {
+      "additionalProperties": false,
+      "description": "One per-reference deterministic comparison inside a criterion result.",
+      "properties": {
+        "evidence_ref": {
+          "$ref": "#/$defs/EvidenceRef"
+        },
+        "state": {
+          "$ref": "#/$defs/CriterionState"
+        },
+        "reason_codes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "evidence_ref",
+        "state"
+      ],
+      "title": "CriterionEvaluation",
+      "type": "object"
+    },
+    "CriterionResult": {
+      "additionalProperties": false,
+      "description": "Final outcome for one criterion. Model rationale is never a field here;\ndefault serialization therefore omits it entirely.",
+      "properties": {
+        "criterion_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Criterion Id",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/$defs/CriterionState"
+        },
+        "basis": {
+          "$ref": "#/$defs/Basis"
+        },
+        "scope": {
+          "$ref": "#/$defs/Scope"
+        },
+        "evidence_refs": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/EvidenceRef"
+          },
+          "title": "Evidence Refs",
+          "type": "array"
+        },
+        "reason_codes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "score": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Score"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "limitations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        },
+        "evaluations": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/CriterionEvaluation"
+          },
+          "title": "Evaluations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "criterion_id",
+        "state",
+        "basis",
+        "scope"
+      ],
+      "title": "CriterionResult",
+      "type": "object"
+    },
+    "CriterionState": {
+      "enum": [
+        "supported",
+        "refuted",
+        "unknown"
+      ],
+      "title": "CriterionState",
+      "type": "string"
+    },
+    "Decision": {
+      "enum": [
+        "success",
+        "failure",
+        "abstained"
+      ],
+      "title": "Decision",
+      "type": "string"
+    },
+    "Diagnostics": {
+      "additionalProperties": false,
+      "description": "Execution diagnostics; serializes without request text or payload values.",
+      "properties": {
+        "package_version": {
+          "minLength": 1,
+          "title": "Package Version",
+          "type": "string"
+        },
+        "schema_version": {
+          "minLength": 1,
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "request_hash": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Request Hash"
+        },
+        "evidence_manifest_hash": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence Manifest Hash"
+        },
+        "policy_id": {
+          "minLength": 1,
+          "title": "Policy Id",
+          "type": "string"
+        },
+        "policy_version": {
+          "minLength": 1,
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "policy_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Policy Hash",
+          "type": "string"
+        },
+        "backend": {
+          "$ref": "#/$defs/BackendDescriptor"
+        },
+        "elapsed_ms": {
+          "minimum": 0,
+          "title": "Elapsed Ms",
+          "type": "number"
+        },
+        "model_load_ms": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model Load Ms"
+        },
+        "criterion_durations_ms": {
+          "additionalProperties": {
+            "type": "number"
+          },
+          "title": "Criterion Durations Ms",
+          "type": "object"
+        },
+        "omitted_context_ids": {
+          "default": [],
+          "items": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Omitted Context Ids",
+          "type": "array"
+        },
+        "preprocessing": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/PreprocessingRecord"
+          },
+          "title": "Preprocessing",
+          "type": "array"
+        },
+        "measurements": {
+          "$ref": "#/$defs/Measurements"
+        },
+        "limitations": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "package_version",
+        "schema_version",
+        "policy_id",
+        "policy_version",
+        "policy_hash",
+        "backend",
+        "elapsed_ms",
+        "measurements"
+      ],
+      "title": "Diagnostics",
+      "type": "object"
+    },
+    "ErrorInfo": {
+      "additionalProperties": false,
+      "description": "Safe error payload: code, fixed message, optional field path.",
+      "properties": {
+        "code": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/InputErrorCode"
+            },
+            {
+              "$ref": "#/$defs/BackendErrorCode"
+            }
+          ],
+          "title": "Code"
+        },
+        "safe_message": {
+          "minLength": 1,
+          "title": "Safe Message",
+          "type": "string"
+        },
+        "field_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Field Path"
+        },
+        "retryable": {
+          "default": false,
+          "title": "Retryable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "safe_message"
+      ],
+      "title": "ErrorInfo",
+      "type": "object"
+    },
+    "EvidenceRef": {
+      "additionalProperties": false,
+      "description": "Citation of one evidence item: a pointer for structured data or a box\nfor screenshots, never both. Box bounds against decoded dimensions are\nchecked in NIT-003.",
+      "properties": {
+        "evidence_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "pointer": {
+          "anyOf": [
+            {
+              "pattern": "^(/([^~/]|~[01])*)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pointer"
+        },
+        "bbox": {
+          "anyOf": [
+            {
+              "maxItems": 4,
+              "minItems": 4,
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bbox"
+        },
+        "grounding": {
+          "$ref": "#/$defs/Grounding",
+          "default": "reference_validated"
+        }
+      },
+      "required": [
+        "evidence_id"
+      ],
+      "title": "EvidenceRef",
+      "type": "object"
+    },
+    "ExecutionStatus": {
+      "enum": [
+        "ok",
+        "input_error",
+        "backend_error"
+      ],
+      "title": "ExecutionStatus",
+      "type": "string"
+    },
+    "Grounding": {
+      "enum": [
+        "reference_validated",
+        "assertion_checked",
+        "model_inferred"
+      ],
+      "title": "Grounding",
+      "type": "string"
+    },
+    "InputErrorCode": {
+      "description": "Input validation failures: no backend inference runs, retryable is always false.",
+      "enum": [
+        "INVALID_SCHEMA",
+        "UNSUPPORTED_SCHEMA",
+        "LIMIT_EXCEEDED",
+        "UNKNOWN_REFERENCE",
+        "DUPLICATE_ID",
+        "INVALID_SEQUENCE",
+        "INVALID_TIMESTAMP",
+        "INVALID_POINTER",
+        "INVALID_IMAGE",
+        "HASH_MISMATCH",
+        "MISSING_ARTIFACT",
+        "UNSUPPORTED_CAPABILITY",
+        "INVALID_POLICY",
+        "PATH_NOT_ALLOWED"
+      ],
+      "title": "InputErrorCode",
+      "type": "string"
+    },
+    "Measurements": {
+      "additionalProperties": false,
+      "description": "Nullable resource measurements; cost fields are all-or-nothing.",
+      "properties": {
+        "input_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Input Tokens"
+        },
+        "output_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Tokens"
+        },
+        "peak_rss_bytes": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Peak Rss Bytes"
+        },
+        "peak_device_bytes": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Peak Device Bytes"
+        },
+        "cost_amount": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cost Amount"
+        },
+        "cost_currency": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cost Currency"
+        },
+        "cost_source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cost Source"
+        },
+        "cost_as_of": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cost As Of"
+        },
+        "unavailable_reasons": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Unavailable Reasons",
+          "type": "object"
+        }
+      },
+      "title": "Measurements",
+      "type": "object"
+    },
+    "PreprocessingRecord": {
+      "additionalProperties": false,
+      "description": "Image preprocessing actually applied; never invents dimensions.",
+      "properties": {
+        "evidence_id": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "input_width": {
+          "minimum": 1,
+          "title": "Input Width",
+          "type": "integer"
+        },
+        "input_height": {
+          "minimum": 1,
+          "title": "Input Height",
+          "type": "integer"
+        },
+        "color_conversion": {
+          "$ref": "#/$defs/ColorConversion"
+        },
+        "processor_longest_edge": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Processor Longest Edge"
+        },
+        "output_width": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Width"
+        },
+        "output_height": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Height"
+        },
+        "patch_count": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Patch Count"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "input_width",
+        "input_height",
+        "color_conversion"
+      ],
+      "title": "PreprocessingRecord",
+      "type": "object"
+    },
+    "Scope": {
+      "enum": [
+        "observed_state",
+        "behavioral",
+        "external",
+        "visual"
+      ],
+      "title": "Scope",
+      "type": "string"
+    },
+    "Score": {
+      "additionalProperties": false,
+      "description": "Backend-reported score. ``calibrated_probability`` is representable but\nrejected at runtime in v0.1 (UNSUPPORTED_CALIBRATION, NIT-007).",
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/ScoreKind"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        },
+        "target": {
+          "minLength": 1,
+          "title": "Target",
+          "type": "string"
+        },
+        "scale": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Scale"
+        },
+        "calibration_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Calibration Id"
+        }
+      },
+      "required": [
+        "kind",
+        "value",
+        "target"
+      ],
+      "title": "Score",
+      "type": "object"
+    },
+    "ScoreKind": {
+      "enum": [
+        "uncalibrated_score",
+        "uncalibrated_probability",
+        "calibrated_probability"
+      ],
+      "title": "ScoreKind",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Final verification outcome enforcing the five legal (status, decision) pairs.",
+  "properties": {
+    "schema_version": {
+      "const": "1",
+      "default": "1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "request_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+      "title": "Request Id",
+      "type": "string"
+    },
+    "verification_id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$",
+      "title": "Verification Id",
+      "type": "string"
+    },
+    "execution_status": {
+      "$ref": "#/$defs/ExecutionStatus"
+    },
+    "decision": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Decision"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "criteria": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/CriterionResult"
+      },
+      "title": "Criteria",
+      "type": "array"
+    },
+    "reason_codes": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Reason Codes",
+      "type": "array"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ErrorInfo"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "diagnostics": {
+      "$ref": "#/$defs/Diagnostics"
+    }
+  },
+  "required": [
+    "request_id",
+    "verification_id",
+    "execution_status",
+    "diagnostics"
+  ],
+  "title": "VerificationResult",
+  "type": "object"
+}
