@@ -93,8 +93,10 @@ def _clean(value: float | None) -> float | None:
 def wilson_interval(k: int, n: int) -> Interval:
     """Two-sided 95% Wilson score interval for k successes of n.
 
-    Pure math (no eval extra); z is the pinned constant ``_Z_975``. Bounds are clamped to
-    [0, 1] only to remove floating-point overshoot at the boundaries (k=0 low, k=n high).
+    Pure math (no eval extra); z is the pinned constant ``_Z_975``. k = 0 gives low
+    exactly 0.0 and k = n gives high exactly 1.0 (the analytic boundary values; the
+    center -/+ half expression only cancels symbolically, so it is not evaluated at the
+    boundaries). Interior bounds are clamped to [0, 1] against floating-point overshoot.
     n == 0 returns an undefined interval with reason ``empty_denominator`` (doc 06).
     """
     _validate_counts(k, n)
@@ -104,6 +106,10 @@ def wilson_interval(k: int, n: int) -> Interval:
     denom = n + z2
     center = (k + z2 / 2) / denom
     half = _Z_975 / denom * math.sqrt(k * (n - k) / n + z2 / 4)
+    if k == 0:
+        return Interval(0.0, 0.0, min(1.0, center + half), n)
+    if k == n:
+        return Interval(1.0, max(0.0, center - half), 1.0, n)
     return Interval(k / n, max(0.0, center - half), min(1.0, center + half), n)
 
 

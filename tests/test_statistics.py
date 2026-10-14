@@ -85,6 +85,17 @@ def test_stat01_zero_n_is_undefined_never_nan() -> None:
         assert res.undefined_reason == "empty_denominator"
 
 
+@pytest.mark.parametrize(("k", "n"), [(0, 3), (0, 10), (3, 3), (10, 10)])
+def test_stat01_wilson_boundaries_are_exact(k: int, n: int) -> None:
+    # The analytic boundary values are exact, not float arithmetic: k = 0 gives low 0.0
+    # and k = n gives high 1.0 (center -/+ half cancels only symbolically otherwise).
+    res = statistics.wilson_interval(k, n)
+    if k == 0:
+        assert res.low == 0.0
+    if k == n:
+        assert res.high == 1.0
+
+
 @pytest.mark.parametrize(
     ("n", "expected"),
     [

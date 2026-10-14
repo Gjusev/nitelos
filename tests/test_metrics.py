@@ -88,9 +88,8 @@ def _check_rate(report: MetricReport, name: str, value: float, numerator: int, d
     assert record.denominator == denominator, name
     assert record.undefined_reason is None, name
     assert record.interval is not None, name
-    # part A Wilson bounds can overshoot the point estimate by float noise at k=0/k=n
     assert record.interval.low is not None
-    assert record.interval.low <= value + 1e-12, name
+    assert record.interval.low <= value, name
     assert record.interval.high is not None
     assert record.interval.high >= value, name
 
