@@ -367,3 +367,81 @@ def test_sec02_model_opt_in_cannot_authorize_external_trust() -> None:
     assert outcome.state == "unknown"
     assert outcome.reason_codes == ("UNTRUSTED_EXTERNAL",)
     assert aggregate_decision((outcome,)).decision == "abstained"
+
+
+# ==========================================================================
+# SEC-03 (NIT-006): secrets never leak into results, reprs or logs
+# ==========================================================================
+
+SEC03_SENTINEL = "SECRET-SENTINEL-7c31dd"
+
+
+def _sec03_request():
+    from test_contract import _criterion, _request
+    from test_verifier import _obs
+
+    doc = _request(
+        objective=f"Complete registration for {SEC03_SENTINEL}",
+        criteria=[_criterion(operator="equals", expected=True)],
+        evidence=[
+            _obs(data={"validation_error": True, "token": SEC03_SENTINEL}, subject={"form": SEC03_SENTINEL})
+        ],
+    )
+    return doc
+
+
+def test_sec03_sentinel_absent_from_ok_results_reprs_and_logs(caplog: Any) -> None:
+    import logging
+
+    from nitelos import ExecutionStatus, Verifier, parse_request
+
+    with caplog.at_level(logging.DEBUG, logger="nitelos"):
+        result = Verifier().verify(parse_request(_sec03_request()))
+    assert result.execution_status == ExecutionStatus.OK
+    blob = result.model_dump_json()
+    blob += repr(result) + repr(result.diagnostics) + repr(result.criteria[0])
+    blob += "".join(f"{record.getMessage()}" for record in caplog.records)
+    assert SEC03_SENTINEL not in blob
+    assert any(record.name == "nitelos" for record in caplog.records)  # logging is live but safe
+
+
+def test_sec03_sentinel_absent_from_error_paths(caplog: Any) -> None:
+    import logging
+
+    import nitelos.verifier as verifier_module
+    from nitelos import ExecutionStatus, Verifier, parse_request
+
+    def exploding(criterion: Any, *args: Any, **kwargs: Any) -> Any:
+        raise RuntimeError(f"boom {SEC03_SENTINEL}")
+
+    with caplog.at_level(logging.DEBUG, logger="nitelos"):
+        original = verifier_module.evaluate_criterion
+        verifier_module.evaluate_criterion = exploding
+        try:
+            result = Verifier().verify(parse_request(_sec03_request()))
+        finally:
+            verifier_module.evaluate_criterion = original
+    assert result.execution_status == ExecutionStatus.BACKEND_ERROR
+    blob = result.model_dump_json() + repr(result)
+    blob += "".join(f"{record.getMessage()}" for record in caplog.records)
+    assert SEC03_SENTINEL not in blob
+
+
+# ==========================================================================
+# SEC-04 (NIT-006): verification completes with network access denied
+# ==========================================================================
+
+
+def test_sec04_verify_completes_offline() -> None:
+    # the autouse conftest fixture denies socket connections for every test;
+    # any socket attempt would surface as a backend error instead of ok
+    from nitelos import ExecutionStatus, Verifier, parse_request
+    from test_contract import _criterion, _request
+    from test_verifier import _obs
+
+    request = parse_request(
+        _request(criteria=[_criterion(operator="equals", expected=True)], evidence=[_obs()])
+    )
+    result = Verifier().verify(request)
+    assert result.execution_status == ExecutionStatus.OK
+    assert result.decision is not None
