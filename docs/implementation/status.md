@@ -63,3 +63,4 @@ All pending.
 - 2026-10-15: NIT-004 merged (Win 172 passed; Linux full-offline replay OK).
 - 2026-10-15: NIT-008 adapter design merged (A1–A7 accepted). NIT-005 delivered+verified, to review; NIT-006 started.
 - 2026-10-15: NIT-005 merged. Orchestrator process defect found: merged NIT-008 design doc fails `ruff format --check` (Ruff formats Markdown code blocks); orchestrator's WSL replay script masked the failure (`&&` chain under `set -e`). Script fixed; doc fix assigned to nitelos-0f. Integration format check RED until merged.
+- 2026-10-15: format fix merged with NIT-012 design (`18e16d0`); integration fully green on Win and Linux (strict replay script).
