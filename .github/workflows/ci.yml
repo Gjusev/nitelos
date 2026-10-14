@@ -43,3 +43,90 @@ jobs:
         run: uv run --frozen mypy
       - name: Build wheel and sdist
         run: uv build
+
+  # Doc 12 "Full offline": everything except live integrations, with the eval extra
+  # installed. Coverage is a diagnostic, never a percentage gate. Tests skipped for a
+  # missing eval extra fail this job (the extra is installed, so those skips mean an
+  # environment bug); the platform-scoped smoke renderer skip carries no "eval extra"
+  # text and remains allowed.
+  full-offline:
+    name: full-offline (ubuntu, py3.12)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          python-version: "3.12"
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - name: Frozen dev+eval sync
+        run: uv sync --frozen --group dev --extra eval
+      - name: Offline tests with coverage (eval skips forbidden)
+        run: |
+          set -euo pipefail
+          uv run --frozen pytest -q -ras --cov=nitelos --cov-branch --cov-report=term 2>&1 | tee pytest-output.txt
+          if grep -q "eval extra" pytest-output.txt; then
+            echo "::error::a test skipped for a missing eval extra although the eval extra is installed"
+            grep -n "eval extra" pytest-output.txt || true
+            exit 1
+          fi
+      - name: Lint and format
+        run: |
+          uv run --frozen ruff check .
+          uv run --frozen ruff format --check .
+      - name: Strict types
+        run: uv run --frozen mypy
+
+  # Doc 12 "Packaging": build, inspect contents for forbidden files, then prove the
+  # wheel installs and imports in a fresh venv with only core dependencies, from
+  # outside the repository. Demo/example execution arrives with NIT-014.
+  packaging:
+    name: packaging (ubuntu, py3.12)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          python-version: "3.12"
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - name: Frozen dev sync
+        run: uv sync --frozen --group dev
+      - name: Build wheel and sdist
+        run: uv build
+      - name: List and check distribution contents
+        run: |
+          set -euo pipefail
+          echo "== wheel contents =="
+          uv run --frozen python -c "import glob, zipfile; names = zipfile.ZipFile(glob.glob('dist/nitelos-*.whl')[0]).namelist(); print(chr(10).join(names))" | tee wheel-files.txt
+          echo "== sdist contents =="
+          tar -tzf dist/nitelos-*.tar.gz | tee sdist-files.txt
+          if grep -Eq '\.(safetensors|bin|pt|pth|onnx|gguf|env|pem|key)$' wheel-files.txt; then
+            echo "::error::forbidden file (weights or secret material) in the wheel"
+            exit 1
+          fi
+          if grep -Eq '^tests/' wheel-files.txt; then
+            echo "::error::tests and fixtures must not ship in the wheel"
+            exit 1
+          fi
+          if grep -Eq '\.(safetensors|bin|pt|pth|onnx|gguf|env|pem|key)$' sdist-files.txt; then
+            echo "::error::forbidden file (weights or secret material) in the sdist"
+            exit 1
+          fi
+          if grep -Eq '/\.venv/|/models/' sdist-files.txt; then
+            echo "::error::environment or model directory in the sdist"
+            exit 1
+          fi
+      - name: Clean-room wheel install and import
+        run: |
+          set -euo pipefail
+          uv venv /tmp/nitelos-cleanroom --python 3.12
+          uv pip install --python /tmp/nitelos-cleanroom/bin/python dist/nitelos-*.whl
+          cd /tmp
+          /tmp/nitelos-cleanroom/bin/python -c "import nitelos; print(nitelos.__version__)"
