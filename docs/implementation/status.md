@@ -29,7 +29,7 @@ No secrets or sensitive evidence are stored here.
 
 | Review | State | Reviewer | Evidence |
 |---|---|---|---|
-| AR-1 contracts | running | nitelos-0f (independent of implementer) | brief sent 2026-10-14 |
+| AR-1 contracts | approved-with-changes (merge after fixes) | nitelos-0f | see decisions.md; constructor-path RecursionError fix + snapshot caveat requested from nitelos-69 |
 | AR-2 deterministic flow | pending | | |
 | AR-3 local integration | pending | | |
 | AR-4 protocol freeze | pending | | |
@@ -47,3 +47,4 @@ All pending.
 - 2026-10-14: smoke-set fixtures delivered by nitelos-0f (`7ab6871`): 12 cases/14 images, 13 tests pass on Windows; orchestrator re-run on WSL Linux fails byte-identical regeneration (FreeType rendering differs). Fix requested: declare renderer platform and scope regeneration check to it (doc 06 DATA-04); justify UNKNOWN labels (slot 4 questioned).
 - 2026-10-14: smoke-set fix `5843f80` re-verified (Win 13 passed; Linux 12 passed + 1 platform-scoped skip); slot 4 relabeled REFUTED with rationale; merged into integration/v0.1.
 - 2026-10-14: NIT-011A review by nitelos-69: APPROVE-WITH-CHANGES. Required: ±inf replicate statistics leak NaN (screen with isfinite, regression test); replace circular CP oracle with independent literals. Sent to nitelos-0f to apply after AR-1.
+- 2026-10-14: AR-1 APPROVE-WITH-CHANGES. Orchestrator adds requirement: bound depth on constructor path (RecursionError on 5,000-deep dict). Decisions recorded in decisions.md.
