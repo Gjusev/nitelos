@@ -10,13 +10,13 @@ No secrets or sensitive evidence are stored here.
 | Task | State | Owner | Branch / worktree | Depends | Tests / results | Deviations / blockers |
 |---|---|---|---|---|---|---|
 | NIT-001 Foundations | done | orchestrator | integration/v0.1 (`1b1f074`,`+fix`) | — | PKG-01..03 5/5 pass on Win+Linux × py3.12/3.13; ruff, format, mypy strict, wheel+sdist OK | Linux run found uv-not-on-PATH defect in packaging test; fixed via `UV` env var |
-| NIT-002 Contracts | running | implementer-002 | nit/002-contracts | 001 | | |
+| NIT-002 Contracts | running | nitelos-69 | nit/002-contracts | 001 | | Earlier subagent attempt stopped by user before writing code; reassigned |
 | NIT-003 Evidence | pending | | | 002, AR-1 | | |
 | NIT-004 Assertions | pending | | | 003 | | |
 | NIT-005 Policy | pending | | | 004 | | |
 | NIT-006 SDK | pending | | | 005 | | |
 | NIT-007 Backend boundary | pending | | | 006, AR-2 | | |
-| NIT-008 Local VLM | pending | | | 007 | | |
+| NIT-008 Local VLM | running (smoke-set subtask only) | nitelos-0f | nit/008-smoke-fixtures | 007 (adapter); fixtures independent | | Weights pre-provisioned outside repo, SHA-256 verified; WSL CPU probe: torch 2.14.1+cpu / transformers 5.19.0 load+generate OK; `AutoModelForVision2Seq` absent in TF5, use `AutoModelForImageTextToText`; probe output `' UNKNOWN.'` would be INVALID_OUTPUT under strict parser |
 | NIT-009 Traces | pending | | | 006, AR-2 | | |
 | NIT-010 Fixtures | pending | | | 003, 009 | | |
 | NIT-011 Metrics | pending | | | 002, AR-1 | | |
@@ -42,3 +42,5 @@ All pending.
 ## Log
 
 - 2026-10-14: planning baseline committed (`3fbcdf4`); NIT-001 completed by orchestrator.
+- 2026-10-14: eval extra (numpy 2.5.4, scipy 1.18.1) added centrally (`de32fe3`).
+- 2026-10-14: user instruction: orchestrator session only plans/orchestrates; work delegated to peer sessions.
