@@ -11,7 +11,7 @@ No secrets or sensitive evidence are stored here.
 |---|---|---|---|---|---|---|
 | NIT-001 Foundations | done | orchestrator | integration/v0.1 (`1b1f074`,`+fix`) | — | PKG-01..03 5/5 pass on Win+Linux × py3.12/3.13; ruff, format, mypy strict, wheel+sdist OK | Linux run found uv-not-on-PATH defect in packaging test; fixed via `UV` env var |
 | NIT-002 Contracts | done (merged `3a04870`; isolation fix `06ce9dc` merged) | nitelos-69 | nit/002-contracts `2671d5f` | 001 | 59 contract tests; suite 64 passed Win py3.12, Linux py3.12/3.13; ruff/mypy clean (orchestrator re-run) | 10 interpretations listed by implementer; key AR-1 questions: byte limits only in parse_request, top-level `canonical_json` export |
-| NIT-003 Evidence | running | nitelos-69 | nit/003-evidence | 002, AR-1 | | |
+| NIT-003 Evidence | review (reviewer nitelos-0f) + Linux fix pending | nitelos-69 | nit/003-evidence `cd9e224` | 002, AR-1 | Win 130 passed; Linux 8 failed (Pillow PNG bytes differ zlib-ng vs zlib; literal SHA of runtime-encoded PNG) | fixture portability fix assigned |
 | NIT-004 Assertions | pending | | | 003 | | |
 | NIT-005 Policy | pending | | | 004 | | |
 | NIT-006 SDK | pending | | | 005 | | |
@@ -35,6 +35,10 @@ No secrets or sensitive evidence are stored here.
 | AR-4 protocol freeze | pending | | |
 | AR-5 release candidate | pending | | |
 
+## Open orchestrator items
+
+- CI lacks doc-12 "Full offline" job (Linux py3.12 `--extra eval`, coverage) and "Packaging" job; add before AR-2 (via an implementer, per user instruction that this session does not write code).
+
 ## Gates G1–G8
 
 All pending.
@@ -52,3 +56,4 @@ All pending.
 - 2026-10-14: NIT-002 merged. Post-merge regression found order-dependent test (in-process `PIL not in sys.modules` broken by smoke tests importing Pillow) on Win+Linux; fix assigned to nitelos-69 (nit/002-test-isolation). NIT-003 (nitelos-69) and NIT-011B (nitelos-0f) started.
 - 2026-10-14: isolation fix merged; integration green (Win 99 passed; Linux py3.12/3.13 98 passed + 1 platform skip).
 - 2026-10-14: NIT-011B delivered (`236b868`) and verified. Confirmed float noise wilson_interval(0,3).low=5.55e-17; exact-endpoint fix assigned to nitelos-0f.
+- 2026-10-14: NIT-011B Wilson fix verified (`5ffd8e8`, 122 passed). NIT-003 delivered; Linux portability failure found by orchestrator; reviews launched: 0f→NIT-003, 69→NIT-011B.
