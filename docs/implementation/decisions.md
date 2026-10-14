@@ -59,3 +59,15 @@ The design is an input to AR-4; any change after AR-4 creates synthetic-v2.
 Reviewer: nitelos-0f. Verdict: APPROVE-WITH-CHANGES. Required: an over-long canonical array-index token (e.g. 5,000 digits) → out of range → unknown/MISSING_VALUE instead of a raw ValueError.
 Accepted: "-", leading zeros and non-digit tokens on an array → INVALID_POINTER, decided at traversal time; -0.0 equals 0 (numeric equality); no Unicode normalization.
 Carried forward to **NIT-006**: re-export `DeterministicBackend` at top level (an additive public name); `evaluate_assertion`/`evaluate_reference` stay in `nitelos.backends`.
+
+## NIT-008 adapter design (docs/implementation/nit-008-adapter-design.md) — 2026-10-15
+
+Author: nitelos-0f. The orchestrator accepted readings A1–A7:
+- A1: the upstream `pad_token_id` warning is recorded, and the model config is never mutated.
+- A2: a manifest digest mismatch is `MODEL_UNAVAILABLE`.
+- A3: text tokens are counted with compact image markers; the total is `input_ids.shape[-1]`.
+- A4: Windows is declared unvalidated for `local` until a recorded smoke run.
+- A5: prompt template v1, including "Do not add punctuation", is fixed before any smoke result. The parser stays strict. Each dev-only iteration is logged in this file, and the template freezes before AR-4.
+- A6: the cooperative deadline runs between generation steps; there is no hard-stop claim.
+- A7: images are reconstructed from `PreparedImage.rgb`, with no second decode.
+The initial validated combination is CPU float32 only.
