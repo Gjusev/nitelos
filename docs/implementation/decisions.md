@@ -53,3 +53,9 @@ Author: nitelos-0f. The orchestrator accepted readings A1–A6:
 The deterministic dry run over the assertion view runs at NIT-010 implementation time, after NIT-006.
 The design is an input to AR-4; any change after AR-4 creates synthetic-v2.
 **Open (user decision):** staffing of the two independent human reviewers plus an adjudicator for all 60 final-test cases (estimated 6–8 person-hours). Agents cannot satisfy this gate.
+
+## NIT-004 review — 2026-10-15
+
+Reviewer: nitelos-0f. Verdict: APPROVE-WITH-CHANGES. Required: an over-long canonical array-index token (e.g. 5,000 digits) → out of range → unknown/MISSING_VALUE instead of a raw ValueError.
+Accepted: "-", leading zeros and non-digit tokens on an array → INVALID_POINTER, decided at traversal time; -0.0 equals 0 (numeric equality); no Unicode normalization.
+Carried forward to **NIT-006**: re-export `DeterministicBackend` at top level (an additive public name); `evaluate_assertion`/`evaluate_reference` stay in `nitelos.backends`.
