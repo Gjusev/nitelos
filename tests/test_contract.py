@@ -15,6 +15,8 @@ import os
 from collections.abc import Callable
 from datetime import UTC, datetime, timedelta, timezone
 from pathlib import Path
+from subprocess import run
+from sys import executable
 from typing import Any
 
 import pytest
@@ -489,9 +491,18 @@ def test_con02_exports_explicit_and_light() -> None:
         "canonical_json",
     }
     assert required <= set(nitelos.__all__)
-    import sys
-
-    assert "PIL" not in sys.modules, "schemas must not import pillow"
+    # Import lightness must be checked in a fresh interpreter: the shared pytest
+    # process may legitimately have Pillow loaded (smoke-fixture tests), which
+    # would make this assertion depend on test order.
+    code = (
+        "import sys\n"
+        "import nitelos\n"
+        "heavy = [m for m in ('PIL', 'PIL.Image', 'numpy', 'scipy') if m in sys.modules]\n"
+        "assert not heavy, heavy\n"
+    )
+    proc = run([executable, "-c", code], check=False, capture_output=True, text=True)
+    assert proc.returncode == 0, proc.stderr
+    assert proc.stdout == ""
 
 
 # --------------------------------------------------------------------------
