@@ -9,6 +9,7 @@ file currently contains:
 
 from __future__ import annotations
 
+import hashlib
 from typing import Any
 
 import pytest
@@ -34,7 +35,10 @@ from test_contract import _request, _screenshot, _visual_criterion
 
 MIB = 1024 * 1024
 PNG_BYTES = png_bytes(2, 3, "RGB", (255, 0, 0))
-PNG_SHA = "18d0dcd567c88738923774a8dfaa470edd635d66c16ace15ab0331a6f57e02b5"
+# declared digests are computed from the bytes actually built: Pillow's PNG
+# encoding differs across platforms (zlib vs zlib-ng), so a fixed literal here
+# would not match on Linux
+PNG_SHA = hashlib.sha256(PNG_BYTES).hexdigest()
 
 
 def _shot(data: bytes, **over: Any) -> Any:
@@ -105,8 +109,6 @@ def test_sec05_truncated_images_rejected() -> None:
 
 
 def pytest_sha(data: bytes) -> str:
-    import hashlib
-
     return hashlib.sha256(data).hexdigest()
 
 
@@ -121,9 +123,9 @@ def test_sec05_overlimit_header_dims_rejected_before_decode(monkeypatch: pytest.
     calls: list[int] = []
     real = evidence_module._decode_artifact
 
-    def counting(data: bytes, media_type: str) -> Any:
+    def counting(data: bytes) -> Any:
         calls.append(len(data))
-        return real(data, media_type)
+        return real(data)
 
     monkeypatch.setattr(evidence_module, "_decode_artifact", counting)
     crafted = patch_png_dims(PNG_BYTES, 4097, 8)

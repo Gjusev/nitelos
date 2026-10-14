@@ -9,6 +9,7 @@ independently with hashlib/canonical JSON and pasted as hex.
 
 from __future__ import annotations
 
+import hashlib
 from datetime import UTC, datetime
 from subprocess import run
 from sys import executable
@@ -17,7 +18,7 @@ from typing import Any
 import pytest
 from pydantic import ValidationError
 
-from _imagekit import jpeg_bytes, patch_png_dims, png_bytes
+from _imagekit import patch_png_dims, png_bytes
 from nitelos import (
     ArtifactStore,
     Evidence,
@@ -31,10 +32,43 @@ from nitelos.errors import EvidenceValidationError, InputErrorCode
 from nitelos.schemas import ActionEvidence, ObservationEvidence, ScreenshotEvidence, VerificationRequest
 from test_contract import _observation, _request, _screenshot, _visual_criterion
 
+# Known-byte fixtures are embedded as hex literals so no encoder runs at test
+# time: Pillow's PNG output differs across platforms (zlib vs zlib-ng), which
+# would make byte-level digests platform-dependent. The digests below are
+# literals of exactly these bytes, independent of the code under test.
+LITERAL_PNG = bytes.fromhex(
+    "89504e470d0a1a0a0000000d4948445200000002000000030802000000368849"
+    "d60000001149444154789c63fccf00024c60124601001440010550d52e380000"
+    "000049454e44ae426082"
+)
+LITERAL_PNG_SHA = "18d0dcd567c88738923774a8dfaa470edd635d66c16ace15ab0331a6f57e02b5"
+LITERAL_JPEG = bytes.fromhex(
+    "ffd8ffe000104a46494600010100000100010000ffdb00430006040506050406"
+    "060506070706080a100a0a09090a140e0f0c1017141818171416161a1d251f1a"
+    "1b231c1616202c20232627292a29191f2d302d283025282928ffdb0043010707"
+    "070a080a130a0a13281a161a2828282828282828282828282828282828282828"
+    "282828282828282828282828282828282828282828282828282828282828ffc0"
+    "0011080002000403012200021101031101ffc4001f0000010501010101010100"
+    "000000000000000102030405060708090a0bffc400b510000201030302040305"
+    "0504040000017d01020300041105122131410613516107227114328191a10823"
+    "42b1c11552d1f02433627282090a161718191a25262728292a3435363738393a"
+    "434445464748494a535455565758595a636465666768696a737475767778797a"
+    "838485868788898a92939495969798999aa2a3a4a5a6a7a8a9aab2b3b4b5b6b7"
+    "b8b9bac2c3c4c5c6c7c8c9cad2d3d4d5d6d7d8d9dae1e2e3e4e5e6e7e8e9eaf1"
+    "f2f3f4f5f6f7f8f9faffc4001f01000301010101010101010100000000000001"
+    "02030405060708090a0bffc400b5110002010204040304070504040001027700"
+    "0102031104052131061241510761711322328108144291a1b1c109233352f015"
+    "6272d10a162434e125f11718191a262728292a35363738393a43444546474849"
+    "4a535455565758595a636465666768696a737475767778797a82838485868788"
+    "898a92939495969798999aa2a3a4a5a6a7a8a9aab2b3b4b5b6b7b8b9bac2c3c4"
+    "c5c6c7c8c9cad2d3d4d5d6d7d8d9dae2e3e4e5e6e7e8e9eaf2f3f4f5f6f7f8f9"
+    "faffda000c03010002110311003f00e7e8a28afd84fca8ffd9"
+)
+LITERAL_JPEG_SHA = "b83dbe31c68034f2e8ea4f62c97b4990f8295ee661efa44199d637225b2fc46b"
+# Runtime-generated images exercise the decode path; their declared digests are
+# always computed from the bytes actually built, never from a fixed constant.
 PNG_BYTES = png_bytes(2, 3, "RGB", (255, 0, 0))
-JPEG_BYTES = jpeg_bytes(4, 2)
-PNG_SHA = "18d0dcd567c88738923774a8dfaa470edd635d66c16ace15ab0331a6f57e02b5"
-JPEG_SHA = "b83dbe31c68034f2e8ea4f62c97b4990f8295ee661efa44199d637225b2fc46b"
+PNG_SHA = hashlib.sha256(PNG_BYTES).hexdigest()
 OBS_SHA = "87993d0e64bfaa5251deb84357195a6568e45d5c3424778f1c433b56927f6a7b"
 ACT_SHA = "fffb81389f29c40a9a90c78c7ca4a4ae40b67827d04d8ebd5a4cc30f47268181"
 CAPTURED = datetime(2024, 6, 1, 10, 0, tzinfo=UTC)
@@ -87,15 +121,17 @@ def _expect_error(action: Any, code: InputErrorCode, path: str | None = None) ->
 
 
 def test_evd01_screenshot_digest_is_known_byte_sha() -> None:
-    shot = _shot()
+    shot = _shot(data=LITERAL_PNG)
     assert type(shot) is ScreenshotEvidence
-    assert shot.sha256 == PNG_SHA
+    assert shot.sha256 == LITERAL_PNG_SHA
     assert shot.media_type == "image/png"
     assert (shot.width, shot.height) == (2, 3)
-    jpeg = _shot(data=JPEG_BYTES, artifact_id="art-j")
-    assert jpeg.sha256 == JPEG_SHA
+    jpeg = _shot(data=LITERAL_JPEG, artifact_id="art-j")
+    assert jpeg.sha256 == LITERAL_JPEG_SHA
     assert jpeg.media_type == "image/jpeg"
     assert (jpeg.width, jpeg.height) == (4, 2)
+    # runtime-encoded images digest their own exact bytes on every platform
+    assert _shot().sha256 == PNG_SHA
 
 
 def test_evd01_observation_digest_is_canonical_json_sha() -> None:
@@ -181,9 +217,9 @@ def test_evd03_identical_bytes_preserve_events_and_decode_once(monkeypatch: pyte
     calls: list[int] = []
     real = evidence_module._decode_artifact
 
-    def counting(data: bytes, media_type: str) -> Any:
+    def counting(data: bytes) -> Any:
         calls.append(len(data))
-        return real(data, media_type)
+        return real(data)
 
     monkeypatch.setattr(evidence_module, "_decode_artifact", counting)
     doc = _visual_doc(
@@ -339,6 +375,36 @@ def test_prepare_hash_and_declaration_mismatches() -> None:
         lambda: prepare_evidence(parse_request(doc), ArtifactStore()),
         InputErrorCode.HASH_MISMATCH,
         "$.evidence[0].sha256",
+    )
+
+
+def test_prepare_rejects_decoded_dimension_mismatch(monkeypatch: pytest.MonkeyPatch) -> None:
+    # A decoder (or a dual-SOF file) disagreeing with the header must fail closed
+    # instead of producing a PreparedImage with inconsistent geometry.
+    import nitelos.evidence as evidence_module
+
+    def lying_decoder(data: bytes) -> Any:
+        return (b"\x00" * (7 * 8 * 3), 7, 8, evidence_module.ColorConversion.NONE)
+
+    monkeypatch.setattr(evidence_module, "_decode_artifact", lying_decoder)
+    parsed = parse_request(_visual_doc([_shot_doc()], evidence_ids=["shot-1"]))
+    _expect_error(
+        lambda: prepare_evidence(parsed, ArtifactStore.from_bytes("art-1", PNG_BYTES)),
+        InputErrorCode.INVALID_IMAGE,
+    )
+
+
+def test_prepare_rejects_inconsistent_pixel_buffer(monkeypatch: pytest.MonkeyPatch) -> None:
+    import nitelos.evidence as evidence_module
+
+    def short_buffer(data: bytes) -> Any:
+        return (b"\x00" * 5, 2, 3, evidence_module.ColorConversion.NONE)
+
+    monkeypatch.setattr(evidence_module, "_decode_artifact", short_buffer)
+    parsed = parse_request(_visual_doc([_shot_doc()], evidence_ids=["shot-1"]))
+    _expect_error(
+        lambda: prepare_evidence(parsed, ArtifactStore.from_bytes("art-1", PNG_BYTES)),
+        InputErrorCode.INVALID_IMAGE,
     )
 
 

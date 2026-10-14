@@ -235,7 +235,7 @@ def _inspect_image(data: bytes) -> tuple[str, int, int]:
 # ---------------------------------------------------------------------------
 
 
-def _decode_artifact(data: bytes, media_type: str) -> tuple[bytes, int, int, ColorConversion]:
+def _decode_artifact(data: bytes) -> tuple[bytes, int, int, ColorConversion]:
     """Full decode with EXIF/mode/frame checks; returns RGB bytes.
 
     Pillow's decompression-bomb warning/error are turned into coded failures
@@ -450,7 +450,16 @@ def prepare_evidence(request: VerificationRequest, store: ArtifactStore) -> Prep
             digest = _digest(data)
             headers[artifact_id] = (media_type, width, height, digest)
             if digest not in decoded:
-                decoded[digest] = _decode_artifact(data, media_type)
+                rgb, decoded_width, decoded_height, conversion = _decode_artifact(data)
+                if (decoded_width, decoded_height) != (width, height):
+                    raise _ev(
+                        InputErrorCode.INVALID_IMAGE, path, "decoded dimensions do not match the header"
+                    )
+                if len(rgb) != decoded_width * decoded_height * 3:
+                    raise _ev(
+                        InputErrorCode.INVALID_IMAGE, path, "decoded pixel buffer has an unexpected size"
+                    )
+                decoded[digest] = (rgb, decoded_width, decoded_height, conversion)
         except EvidenceValidationError as error:
             raise _ev(error.issue.code, path, error.issue.safe_message) from None
     images: dict[str, PreparedImage] = {}
