@@ -19,7 +19,7 @@ No secrets or sensitive evidence are stored here.
 | NIT-008 Local VLM | pending (smoke-set subtask done+integrated `5843f80`; adapter awaits NIT-007) | nitelos-0f | nit/008-smoke-fixtures | 007 (adapter); fixtures independent | | Weights pre-provisioned outside repo, SHA-256 verified; WSL CPU probe: torch 2.14.1+cpu / transformers 5.19.0 load+generate OK; `AutoModelForVision2Seq` absent in TF5, use `AutoModelForImageTextToText`; probe output `' UNKNOWN.'` would be INVALID_OUTPUT under strict parser |
 | NIT-009 Traces | pending | | | 006, AR-2 | | |
 | NIT-010 Fixtures | pending | | | 003, 009 | | |
-| NIT-011 Metrics | part A done; part B running | nitelos-0f | nit/011-metrics (A), nit/011b-metrics (B) | 002, AR-1 | | Split: statistics first; metrics over result records after AR-1 |
+| NIT-011 Metrics | part A done; part B review pending (`236b868`, 118 passed; reviewer nitelos-69 after NIT-003) | nitelos-0f | nit/011-metrics (A), nit/011b-metrics (B) | 002, AR-1 | | Split: statistics first; metrics over result records after AR-1 |
 | NIT-012 Runner | pending | | | 006, 010, 011 | | |
 | NIT-013 Evaluation | pending | | | 008, 012, AR-4 | | |
 | NIT-014 Docs/demo | pending | | | 006, 009, 012 | | |
@@ -51,3 +51,4 @@ All pending.
 - 2026-10-14: NIT-011A fixes verified (39 passed) and merged into integration; full regression green.
 - 2026-10-14: NIT-002 merged. Post-merge regression found order-dependent test (in-process `PIL not in sys.modules` broken by smoke tests importing Pillow) on Win+Linux; fix assigned to nitelos-69 (nit/002-test-isolation). NIT-003 (nitelos-69) and NIT-011B (nitelos-0f) started.
 - 2026-10-14: isolation fix merged; integration green (Win 99 passed; Linux py3.12/3.13 98 passed + 1 platform skip).
+- 2026-10-14: NIT-011B delivered (`236b868`) and verified. Confirmed float noise wilson_interval(0,3).low=5.55e-17; exact-endpoint fix assigned to nitelos-0f.
