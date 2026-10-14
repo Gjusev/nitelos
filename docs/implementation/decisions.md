@@ -77,3 +77,14 @@ The initial validated combination is CPU float32 only.
 Reviewer: nitelos-0f. Verdict: APPROVE-WITH-CHANGES. No path to success was found under adversarial trust probes.
 Accepted: no scope admits the `human` channel (citing it gives `UNSUPPORTED_CAPABILITY`); basis is NONE for empty or all-ineligible criteria; MISSING_EVIDENCE applies only to empty citations; ValueError is raised for a missing finding when eligible images exist (a programming-error guard).
 Required: visual results carry the validated finding refs (model_inferred); a pure `eligible_evidence` helper is shared by the policy and NIT-006; `CriterionOutcome.ineligible` is immutable.
+
+## NIT-012 runner design (docs/implementation/nit-012-runner-design.md) — 2026-10-15
+
+Author: nitelos-0f. The orchestrator accepted readings A1–A7:
+- A1: one oracle file per case, amending the NIT-010 layout.
+- A2: the output directory must not exist.
+- A3: an atomic COMPLETE marker signals a complete run.
+- A4: manifests use extra=forbid, so trust-like fields are a hard error.
+- A5: peak RSS is read via ru_maxrss on Linux and GetProcessMemoryInfo on Windows; null otherwise, and the baseline is not subtracted.
+- A6: cases.jsonl is flushed after each case.
+- A7: control exceptions are caught only at the CLI top level to write the incomplete state, then re-raised.
