@@ -116,3 +116,19 @@ class RequestValidationError(ValueError):
 
 class ConfigurationError(Exception):
     """Raised when a Verifier is constructed with invalid trusted configuration."""
+
+
+class EvidenceValidationError(ValueError):
+    """Raised by evidence factories and evidence preparation for invalid input.
+
+    Carries one safe :class:`Issue` (stable code, field path, fixed message);
+    never exposes offending values, bytes or payloads. The NIT-006 verifier
+    converts these into result-level ``input_error`` payloads.
+    """
+
+    def __init__(self, issue: Issue) -> None:
+        self.issue = issue
+        super().__init__(str(issue))
+
+    def __repr__(self) -> str:
+        return f"EvidenceValidationError(issue={self.issue!r})"
