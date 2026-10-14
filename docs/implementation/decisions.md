@@ -99,3 +99,13 @@ Author: nitelos-0f. The orchestrator accepted readings A1–A7:
 ## G4 human annotation
 
 User decision 2026-10-15: the user will organize the two independent reviewers and the adjudicator later. G4 stays pending until reviewer IDs are supplied. Review packets will be prepared at NIT-010.
+
+## AR-2 (deterministic slice NIT-002..006) — 2026-10-15
+
+Reviewer: nitelos-0f (independent of implementer nitelos-69). Verdict: APPROVE, conditional on the NIT-006 fixes F1–F3 and the ADR-011 commit. End-to-end trust attacks through `verify()` found no path to a false success.
+Accepted:
+- BUSY takes precedence over CLOSED while a call is in flight.
+- Async lifecycle tests run in a subprocess, because Windows asyncio's self-pipe uses loopback socketpair, which the socket-deny conftest blocks. The conftest is not weakened.
+- A `NITELOS_DEV_RERAISE` env fallback is acceptable, provided its value parsing is strict.
+Additive public name: limitation code `PARTIAL_RESULTS_NONAUTHORITATIVE`, placed in `diagnostics.limitations` on backend_error results that carry partial criteria.
+Model integration (NIT-007/008) is authorized once the conditions are met.

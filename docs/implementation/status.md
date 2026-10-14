@@ -30,7 +30,7 @@ No secrets or sensitive evidence are stored here.
 | Review | State | Reviewer | Evidence |
 |---|---|---|---|
 | AR-1 contracts | done (approved with changes; fixes `2671d5f` verified) | nitelos-0f | see decisions.md; constructor-path RecursionError fix + snapshot caveat requested from nitelos-69 |
-| AR-2 deterministic flow | running | nitelos-0f | brief sent 2026-10-15; covers NIT-002..006 end to end |
+| AR-2 deterministic flow | approved (conditional on NIT-006 F1–F3 + ADR-011 commit) | nitelos-0f | decisions.md AR-2 |
 | AR-3 local integration | pending | | |
 | AR-4 protocol freeze | pending | | |
 | AR-5 release candidate | pending | | |
