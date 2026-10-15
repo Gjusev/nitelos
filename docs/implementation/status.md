@@ -23,7 +23,7 @@ No secrets or sensitive evidence are stored here.
 | NIT-012 Runner | delivered+verified; review queued (nitelos-3a) | nitelos-08 | nit/012-runner `3631943` | 006, 010, 011 | Win 478+1 skip; Linux fresh clone 476+3 skips; real CLI dev.json exit 0 (60/60/0, conformance 1.0) | smolvlm CLI path exits 2 until NIT-008; no faked runs |
 | NIT-013 Evaluation | part A (RUN validator) delivered+verified (`b451a6a`, Win 496+1 skip, Linux 494+3 skips); real runs pending AR-4 + human gate | nitelos-f2 | nit/013-reports | 008, 012, AR-4 | validator caught real runner bug (run_id stamping) | |
 | NIT-014 Docs/demo | review pending (nitelos-14) | nitelos-f2 | nit/014-docs `f0ba219` | 006, 009, 012 | Win 506+1 skip; Linux 504+3 skips; DOC-01 wheel-install quickstart | |
-| NIT-015 Release audit | prep running | nitelos-f2 | nit/015-release | 013, 014 | | gates table/NOTICE/license inventory/workflow sketch |
+| NIT-015 Release audit | prep delivered+verified (`41bce6d`, Win 506+1 skip, Linux 504+3 skips); gates/final audit pending | nitelos-f2 | nit/015-release | 013, 014 | | gates table/NOTICE/license inventory/workflow sketch |
 
 ## Architectural reviews
 
@@ -78,3 +78,4 @@ All pending.
 - 2026-10-15: user decision — the G4 human reviewers come at the very end of all work. Final-test audit, freeze and final benchmark runs wait for them; everything else proceeds.
 - 2026-10-15: NIT-013A verified. NIT-008 G3 attempt 1 failed (0/11 valid, all ' UNKNOWN.'); ruling: one pre-declared prompt iteration round (v2/v3 + D1/D2 diagnostics), then viability review if still 0.
 - 2026-10-15: ADR-012 user-approved: checkpoint swap to SmolVLM2-2.2B-Instruct @482adb5. Weights provisioned by orchestrator; shard 2 corrupt on first download (hash mismatch caught by upstream-oid cross-check; sidecar regenerated after clean re-download). NIT-007 merged; NIT-014 verified; NIT-015 prep assigned.
+- 2026-10-15: SmolVLM2-2.2B weights fully provisioned and digest-verified on Windows and WSL (shard-2 corruption caught and fixed via upstream-oid cross-check). 2.2B smoke green-lit for nitelos-14. NIT-015 prep verified.
