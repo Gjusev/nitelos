@@ -1,9 +1,11 @@
 # NIT-013 part B — development-split runs and report methodology
 
-Status: **development split executed; FINAL-TEST RUNS DEFERRED** pending the
-AR-4 freeze approval and the G4 human-annotation gate. Nothing in this document
-was tuned on observed results; the deterministic and visual dev runs below are
-the first and only runs.
+Status: **development split executed; preflight finding resolved by ruling and
+the visual view re-run on the fixed pipeline; FINAL-TEST RUNS DEFERRED**
+pending the AR-4 freeze approval and the G4 human-annotation gate. Nothing in
+this document was tuned on observed results; the deterministic run and the two
+visual records below are first runs of their respective pipelines, kept
+side by side.
 
 ## What ran (development split only)
 
@@ -19,13 +21,20 @@ torchvision 0.29.1+cpu / num2words 0.5.14 (the frozen `local` extra); lock hash
 | Run | Manifest | View | Backend | Output |
 |---|---|---|---|---|
 | dev-deterministic | `benchmarks/synthetic_v1/dev.json` | assertion | `DeterministicBackend` via the evaluation CLI | `reports/dev-split/dev-deterministic/` |
-| dev-visual-smolvlm | `benchmarks/synthetic_v1/dev-visual.json` | visual | `SmolVLMBackend` (2.2B) via the labeled driver `benchmarks/run_dev_visual_013b.py` | `reports/dev-split/dev-visual-smolvlm/` |
+| dev-visual-smolvlm | `benchmarks/synthetic_v1/dev-visual.json` | visual | `SmolVLMBackend` (2.2B) via the labeled driver `benchmarks/run_dev_visual_013b.py`, pre-preflight-fix pipeline | `reports/dev-split/dev-visual-smolvlm/` |
+| dev-visual-smolvlm-fixed | `benchmarks/synthetic_v1/dev-visual.json` | visual | same driver, pipeline with the preflight fix (assertion criteria core-evaluated on any backend) | `reports/dev-split/dev-visual-smolvlm-fixed/` |
 
 The visual driver is TEMPORARY and clearly labeled in its docstring: it reuses
 the runner's own `evaluate()` pipeline with one shared, lazily loaded backend
 (the model is NOT reloaded per case), and produces the runner's exact report
-shapes so the RUN-01/02 validator applies unchanged. It is replaced by
-`--backend smolvlm --model-dir` as soon as the NIT-012 wiring merge lands.
+shapes so the RUN-01/02 validator applies unchanged. The NIT-012 CLI wiring
+(`--backend smolvlm --model-dir`) has merged, but it is NOT equivalent: its
+factory constructs one `SmolVLMBackend` per case (`_build_verifier_factory`,
+runner), and each instance lazily loads the model on first infer — a per-case
+cold load (~59 s and ~10 GB each) instead of the driver's single shared load.
+The driver is therefore retained until the CLI grows a shared-backend mode;
+the first dev-visual record documents the pre-fix interaction and is
+superseded (for conclusions) by the fixed re-run below.
 
 Both runs are validated by `nitelos.evaluation.report_validation.validate_run_report`
 (RUN-01 structure/coherence/leak scan; RUN-02 counts and per-family
@@ -78,38 +87,57 @@ uv run python -m nitelos.evaluation run \
 ```
 
 Expected durations from the dev runs: the deterministic view completed in
-seconds; the visual dev run measured 491.4 s wall (~8.2 min) for 60 cases —
-20 model invocations at 48.4 s cold / 18.6 s warm median (37.6 s p95), peak
-RSS 10.27 GB (ru_maxrss). The final visual run's wall time depends on how many
-cases invoke the model after the preflight finding below is resolved.
+seconds; the fixed visual re-run measured 880 s wall (~14.7 min) for 60 cases
+— 40 model invocations at 59.0 s cold / 18.6 s warm median (34.6 s p95), peak
+RSS 10.33 GB (ru_maxrss). The final visual run should land near the re-run's
+shape (60 executed cases, ~40 invocations under the same policy).
 Both runs are then validated with `validate_run_report` and the family tables
 regenerated. Any result is reported as found — a poor accuracy number is
 a finding, never a tuning input.
 
 ## Dev-run findings (reported, not tuned)
 
-1. **Preflight rejects carried external/behavioral criteria on a visual-only
-   backend (30/60 dev-visual cases, all UNSUPPORTED_CAPABILITY).** The
-   visual-view requests of 7 families (S01/S02/S04/S06/S07-v2/S10/S11/S15)
-   legitimately carry external or behavioral criteria alongside their visual
-   criterion (doc 06: external criteria remain external in both views). The
-   NIT-007 preflight validates every criterion kind against the backend's
-   declared `criterion_kinds`, and the SmolVLM backend declares
-   `("visual",)` per the NIT-008 design §10 — so those requests are rejected
-   before any inference. Doc 04's capability table, however, assigns
-   assertion criteria to the core evaluator for every backend. Resolution is
-   a contract decision (declare assertion handling in the backend's
-   capabilities vs special-case core-evaluated kinds in the preflight); per
-   the task rules this is reported, not adjusted.
-2. **Dev-label agreement on the 30 executed cases: 13/30.** The mismatch
-   patterns confirm and extend the smoke-set over-support observation: every
-   S03/S14 case answered success where the dev oracle expects failure
-   (refuted-by-state scenes over-claimed), S12 ambiguous scenes answered
-   success where abstain was expected, S09 contradictory scenes split
-   3 success / 1 failure where abstain was expected, and one S13
-   counterfactual member flipped. Model-invoked cases only (20); the 10
-   abstentions without model invocation (S05 pending, S08 empty-evidence and
-   2 S07-v1 subject-mismatch cases resolved by policy, correctly) are not
-   model behavior. Consistent with the honest NIT-008 record (format
-   compliant, over-claiming); no tuning was performed or is proposed on dev
-   labels.
+1. **Preflight rejected carried external/behavioral criteria on a visual-only
+   backend (30/60 dev-visual cases, all UNSUPPORTED_CAPABILITY) — RESOLVED
+   by ruling.** The visual-view requests of 7 families (S01/S02/S04/S06/
+   S07-v2/S10/S11/S15) legitimately carry external or behavioral criteria
+   alongside their visual criterion (doc 06: external criteria remain
+   external in both views). The NIT-007 preflight validated every criterion
+   kind against the backend's declared `criterion_kinds`, and the SmolVLM
+   backend declares `("visual",)` per the NIT-008 design §10 — so those
+   requests were rejected before any inference, while doc 02 step 5 / doc 04
+   assign assertion criteria to the core evaluator for every backend. The
+   ruling (decisions.md, integration commit 3454f0b) settles it: assertion
+   criteria are ALWAYS core-evaluated and NEVER consult backend capabilities;
+   the kind check applies to visual criteria only. The preflight fix landed
+   on this branch; `reports/dev-split/dev-visual-smolvlm/` is retained as
+   the record of the interaction, and
+   `reports/dev-split/dev-visual-smolvlm-fixed/` is the corrected pipeline's
+   record.
+2. **Dev-label agreement, first visual record (pre-fix, 30 executed of 60):
+   13/30.** The mismatch patterns confirm and extend the smoke-set
+   over-support observation: every S03/S14 case answered success where the
+   dev oracle expects failure (refuted-by-state scenes over-claimed), S12
+   ambiguous scenes answered success where abstain was expected, S09
+   contradictory scenes split 3 success / 1 failure where abstain was
+   expected, and one S13 counterfactual member flipped. Model-invoked cases
+   only (20); the 10 abstentions without model invocation (S05 pending, S08
+   empty-evidence and 2 S07-v1 subject-mismatch cases resolved by policy,
+   correctly) are not model behavior. Consistent with the honest NIT-008
+   record (format compliant, over-claiming); no tuning was performed or is
+   proposed on dev labels.
+3. **Dev-label agreement, fixed re-run (60/60 executed): 41/60.** All 60
+   cases now execute; 40 invoke the model and 20 resolve without any model
+   call (S05, S06, S08 and S10 in full — S10 as policy failures — plus two
+   S07-v1 and two S15 members). Decisions: 29 success /
+   13 failure / 18 abstained. The 30 previously-executed cases reproduce
+   their first-record decisions identically — the fix changed admission,
+   not evaluation. The 30 newly-admitted cases agree with their dev oracles
+   in 28/30: every newly-admitted family (S01, S02, S04, S06, S10, S11, S15)
+   matches its expected decisions in full, and the only two new mismatches
+   are S07-v2's two model-invoked members (expected failure, answered
+   success — the same over-support pattern). Total mismatch table:
+   S03 failure→success ×4, S14 failure→success ×4, S12 abstain→success ×4,
+   S09 abstain→success ×3 + abstain→failure ×1, S13 failure→success ×1,
+   S07 failure→success ×2. The over-support observation is unchanged by the
+   fix and now measured over 40 invocations; reported, not tuned.

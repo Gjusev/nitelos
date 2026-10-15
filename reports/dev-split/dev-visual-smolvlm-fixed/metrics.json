@@ -1,0 +1,190 @@
+{
+  "counts": {
+    "a": 18,
+    "b": 0,
+    "d": 42,
+    "e": 0,
+    "n": 60,
+    "o": 60
+  },
+  "latency": {
+    "all_attempts": {
+      "median": 18579.552,
+      "n": 60,
+      "p95": 34562.913
+    },
+    "cold": {
+      "median": 58954.012,
+      "n": 1,
+      "p95": 58954.012
+    },
+    "warm": {
+      "median": 18579.552,
+      "n": 59,
+      "p95": 34562.913
+    }
+  },
+  "metrics": [
+    {
+      "denominator": 60,
+      "name": "execution_success_rate",
+      "numerator": 60,
+      "undefined_reason": null,
+      "value": 1.0
+    },
+    {
+      "denominator": 60,
+      "name": "input_error_rate",
+      "numerator": 0,
+      "undefined_reason": null,
+      "value": 0.0
+    },
+    {
+      "denominator": 60,
+      "name": "backend_error_rate",
+      "numerator": 0,
+      "undefined_reason": null,
+      "value": 0.0
+    },
+    {
+      "denominator": 60,
+      "name": "overall_coverage",
+      "numerator": 42,
+      "undefined_reason": null,
+      "value": 0.7
+    },
+    {
+      "denominator": 50,
+      "name": "binary_label_coverage",
+      "numerator": 38,
+      "undefined_reason": null,
+      "value": 0.76
+    },
+    {
+      "denominator": 60,
+      "name": "conditional_coverage_d_over_o",
+      "numerator": 42,
+      "undefined_reason": null,
+      "value": 0.7
+    },
+    {
+      "denominator": 60,
+      "name": "abstention_rate_over_n",
+      "numerator": 18,
+      "undefined_reason": null,
+      "value": 0.3
+    },
+    {
+      "denominator": 60,
+      "name": "abstention_rate_over_o",
+      "numerator": 18,
+      "undefined_reason": null,
+      "value": 0.3
+    },
+    {
+      "denominator": 38,
+      "name": "decisive_accuracy",
+      "numerator": 26,
+      "undefined_reason": null,
+      "value": 0.6842105263157895
+    },
+    {
+      "denominator": 38,
+      "name": "selective_risk",
+      "numerator": 12,
+      "undefined_reason": null,
+      "value": 0.3157894736842105
+    },
+    {
+      "denominator": 50,
+      "name": "end_to_end_correct_decision_rate",
+      "numerator": 26,
+      "undefined_reason": null,
+      "value": 0.52
+    },
+    {
+      "denominator": 34,
+      "name": "false_acceptance_rate",
+      "numerator": 12,
+      "undefined_reason": null,
+      "value": 0.35294117647058826
+    },
+    {
+      "denominator": 24,
+      "name": "decisive_negative_far",
+      "numerator": 12,
+      "undefined_reason": null,
+      "value": 0.5
+    },
+    {
+      "denominator": 16,
+      "name": "false_rejection_rate",
+      "numerator": 0,
+      "undefined_reason": null,
+      "value": 0.0
+    },
+    {
+      "denominator": 14,
+      "name": "decisive_positive_frr",
+      "numerator": 0,
+      "undefined_reason": null,
+      "value": 0.0
+    },
+    {
+      "denominator": 26,
+      "name": "success_precision",
+      "numerator": 14,
+      "undefined_reason": null,
+      "value": 0.5384615384615384
+    },
+    {
+      "denominator": 16,
+      "name": "success_recall",
+      "numerator": 14,
+      "undefined_reason": null,
+      "value": 0.875
+    },
+    {
+      "denominator": 12,
+      "name": "failure_precision",
+      "numerator": 12,
+      "undefined_reason": null,
+      "value": 1.0
+    },
+    {
+      "denominator": 34,
+      "name": "failure_recall",
+      "numerator": 12,
+      "undefined_reason": null,
+      "value": 0.35294117647058826
+    },
+    {
+      "denominator": 18,
+      "name": "unsafe_acceptance_insufficient_evidence",
+      "numerator": 7,
+      "undefined_reason": null,
+      "value": 0.3888888888888889
+    },
+    {
+      "denominator": 60,
+      "name": "policy_conformance_accuracy",
+      "numerator": 41,
+      "undefined_reason": null,
+      "value": 0.6833333333333333
+    },
+    {
+      "denominator": 0,
+      "name": "reference_validity",
+      "numerator": 0,
+      "undefined_reason": "no_emitted_references",
+      "value": null
+    }
+  ],
+  "run_level": {
+    "cost_amount": null,
+    "cost_unavailable_reason": "no_price_source",
+    "peak_rss_bytes": 10330951680,
+    "peak_rss_method": "ru_maxrss",
+    "throughput_cases_per_second": 0.068149
+  }
+}
