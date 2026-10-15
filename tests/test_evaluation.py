@@ -15,7 +15,7 @@ import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, ClassVar
 
 import pytest
 
@@ -389,7 +389,15 @@ def test_eval04_oracle_never_reaches_verifier_or_reports(tmp_path: Path) -> None
     _write_json(oracle_path, oracle)
     manifest = load_evaluation_manifest(mini.manifest_path, mini.root)
     recorded: list[Any] = []
-    summary = evaluate(manifest, _factory(recorder=recorded), tmp_path / "out")
+
+    class RecordingFactory:
+        def __call__(self, case_id: str, request: Any, artifacts: Any, bindings: Any) -> Any:
+            if case_id.startswith("#preprocessing-probe"):
+                return Verifier(policy=VerificationPolicy(), trust_bindings=())
+            recorded.append((case_id, request, artifacts, bindings))
+            return Verifier(policy=VerificationPolicy(), trust_bindings=bindings)
+
+    summary = evaluate(manifest, RecordingFactory(), tmp_path / "out")
     assert summary.status == "complete"
     for _case_id, request, _artifacts, _bindings in recorded:
         assert SENTINEL not in canonical_json({"id": request.request_id, "objective": request.objective})
@@ -702,3 +710,143 @@ def test_safe_relative_path_accepts_clean_relative(tmp_path: Path) -> None:
     (target / "f.txt").write_text("x", encoding="utf-8")
     resolved = safe_relative_path(tmp_path, "sub/f.txt")
     assert resolved.name == "f.txt"
+
+
+# --------------------------------------------------------------------------
+# NIT-012 review fix: smolvlm wiring (mocked), collector reclassification,
+# preprocessing-hash fingerprint
+# --------------------------------------------------------------------------
+
+
+def _visual_manifest(tmp_path: Path) -> MiniBenchmark:
+    bench = build_mini_benchmark(tmp_path / "bench", cases=["c-ok"], view="visual")
+    # visual manifests must declare the model opt-in for the factory path
+    doc = json.loads(bench.manifest_path.read_text(encoding="utf-8"))
+    policy = {"id": "visual-strict", "version": "1", "allow_model_inference": True}
+    policy["hash"] = _digest(policy)
+    doc["policy"] = policy
+    _write_json(bench.manifest_path, doc)
+    # the visual request cites an observation; a visual criterion on it reaches
+    # the backend regardless of eligibility content in the mocked wiring test
+    return bench
+
+
+class _MockSmolVLMBackend:
+    """Mocked backend: records construction args; a deterministic verifier wrapper."""
+
+    instances: ClassVar[list[Any]] = []
+
+    def __init__(self, model_dir: object, revision: object, **kwargs: object) -> None:
+        self.model_dir = model_dir
+        self.revision = revision
+        self.kwargs = kwargs
+        _MockSmolVLMBackend.instances.append(self)
+
+    @property
+    def descriptor(self) -> Any:
+        from nitelos.schemas import BackendDescriptor
+
+        return BackendDescriptor(
+            id="smolvlm",
+            version="1.0",
+            preprocessing_hash="e" * 64,
+        )
+
+    @property
+    def capabilities(self) -> Any:
+        from nitelos.backends import BackendCapabilities
+
+        return BackendCapabilities(
+            evidence_kinds=("screenshot",),
+            criterion_kinds=("visual",),
+            supports_images=True,
+            supports_evidence_references=True,
+            max_images_per_criterion=2,
+        )
+
+    def infer(self, prepared: object, context: object) -> object:
+        raise AssertionError("no inference in the wiring test")
+
+    def close(self) -> None:
+        return None
+
+
+def test_smolvlm_factory_constructs_backend_and_verifier(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    import types
+
+    bench = _visual_manifest(tmp_path)
+    manifest = load_evaluation_manifest(bench.manifest_path, bench.root)
+    _MockSmolVLMBackend.instances.clear()
+    import importlib.util
+
+    fake_module = types.ModuleType("nitelos.backends.smolvlm")
+    fake_module.SmolVLMBackend = _MockSmolVLMBackend  # type: ignore[attr-defined]
+    fake_module.DEFAULT_REVISION = "482adb537c021c86670beed01cd58990d01e72e4"
+    fake_spec = importlib.util.spec_from_file_location("nitelos.backends.smolvlm", __file__)
+    fake_module.__spec__ = fake_spec
+    monkeypatch.setitem(sys.modules, "nitelos.backends.smolvlm", fake_module)
+    from nitelos.evaluation.runner import _build_verifier_factory
+
+    factory = _build_verifier_factory("smolvlm", str(tmp_path / "weights"), manifest.policy)
+    verifier = factory("c-ok", object(), {}, ())
+    assert _MockSmolVLMBackend.instances, "the factory must construct SmolVLMBackend"
+    (instance,) = _MockSmolVLMBackend.instances
+    assert str(instance.model_dir).endswith("weights")
+    assert instance.revision, "the pinned default revision is passed"
+    assert verifier is not None
+
+
+def test_smolvlm_factory_still_probes_module_availability(monkeypatch: pytest.MonkeyPatch) -> None:
+    import importlib.util
+
+    real = importlib.util.find_spec
+    monkeypatch.setattr(
+        importlib.util, "find_spec", lambda name: None if name == "nitelos.backends.smolvlm" else real(name)
+    )
+    from nitelos.evaluation.runner import ConfigError, _build_verifier_factory
+
+    with pytest.raises(ConfigError, match="local"):
+        _build_verifier_factory("smolvlm", "/weights", VerificationPolicy())
+
+
+def test_collector_shape_error_is_configuration_exit_two(tmp_path: Path) -> None:
+    mini = build_mini_benchmark(tmp_path / "bench", cases=["c-ok"])
+    collector_path = mini.root / "fixture-collector.json"
+    collector = json.loads(collector_path.read_text(encoding="utf-8"))
+    collector["collector_id"] = "wrong-collector"  # trusted runner configuration error
+    _write_json(collector_path, collector)
+    from nitelos.evaluation.runner import ConfigError
+
+    manifest = load_evaluation_manifest(mini.manifest_path, mini.root)
+    with pytest.raises(ConfigError, match="collector"):
+        evaluate(manifest, _factory(), tmp_path / "out")
+
+
+def test_collector_missing_file_is_configuration_exit_two(tmp_path: Path) -> None:
+    mini = build_mini_benchmark(tmp_path / "bench", cases=["c-ok"])
+    (mini.root / "fixture-collector.json").unlink()
+    from nitelos.evaluation.runner import ConfigError
+
+    manifest = load_evaluation_manifest(mini.manifest_path, mini.root)
+    with pytest.raises(ConfigError, match="collector"):
+        evaluate(manifest, _factory(), tmp_path / "out")
+
+
+def test_preprocessing_hash_captured_and_compared(tmp_path: Path) -> None:
+    bench_a = build_mini_benchmark(tmp_path / "bench-a", cases=["c-ok"])
+    run_a = _run_into(tmp_path, "pha", bench_a)
+    run_meta = json.loads((run_a / "run.json").read_text(encoding="utf-8"))
+    assert "preprocessing_hash" in run_meta
+    bench_b = build_mini_benchmark(tmp_path / "bench-b", cases=["c-ok"])
+    run_b = _run_into(tmp_path, "phb", bench_b)
+    assert compare_reports(run_a, run_b)["compatible"] is True
+    # mutate the recorded preprocessing hash -> disclosed mismatch
+    meta = json.loads((run_b / "run.json").read_text(encoding="utf-8"))
+    meta["preprocessing_hash"] = "f" * 64
+    _write_json(run_b / "run.json", meta)
+    comparison = compare_reports(run_a, run_b)
+    assert comparison["compatible"] is True  # disclosed, not refused
+    assert comparison["preprocessing"]["matched"] is False
+    assert comparison["preprocessing"]["delta"]

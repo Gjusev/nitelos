@@ -306,12 +306,16 @@ def _load_collector(root: Path) -> list[dict[str, Any]]:
 
 
 class VerifierFactory(Protocol):
-    """Builds one verifier per case from backend case data (never oracle data)."""
+    """Builds one verifier per case from backend case data (never oracle data).
+
+    ``request`` is None only for the run's preprocessing probe (case id
+    ``#preprocessing-probe``); real calls always receive the parsed request.
+    """
 
     def __call__(
         self,
         case_id: str,
-        request: VerificationRequest,
+        request: VerificationRequest | None,
         artifacts: dict[str, bytes],
         bindings: tuple[TrustBinding, ...],
     ) -> Any: ...
@@ -416,6 +420,7 @@ def evaluate(
         raise ConfigError(f"output directory already exists: {output_dir.name}")
     output_dir.mkdir(parents=True)
     run_id = str(uuid.uuid4())
+    backend_preprocessing_hash = _probe_preprocessing_hash(manifest, verifier_factory)
     started = time.perf_counter()
     run_meta = {
         "run_id": run_id,
@@ -431,17 +436,20 @@ def evaluate(
         "started_at": _now_utc(),
         "package_version": __version__,
         "policy_hash": policy_hash(manifest.policy),
+        "preprocessing_hash": backend_preprocessing_hash,
         "configuration_fingerprint": manifest.raw["configuration_fingerprint"],
     }
     _write_json(output_dir / "run.json", run_meta)
     rows: list[dict[str, Any]] = []
     results: list[Any] = []
     cases_lines = output_dir / "cases.jsonl"
+    # the fixture collector is trusted runner configuration (doc 06): a missing
+    # or unreadable collector is a configuration failure (exit 2), not
+    # infrastructure (review F2)
     try:
         collector = _load_collector(manifest.root)
-    except ConfigError as error:
-        _fail_incomplete(output_dir, run_id, manifest, rows, started, str(error))
-        raise InfraError(f"infrastructure failure: {error}") from error
+    except InfraError as error:
+        raise ConfigError(f"fixture collector is not readable: {error}") from error
     with cases_lines.open("w", encoding="utf-8") as sink:
         for case in manifest.cases:
             try:
@@ -794,18 +802,41 @@ def compare_reports(run_a: Path, run_b: Path) -> dict[str, Any]:
             raise ConfigError("comparison refused: evidence manifests differ between runs")
         if counterpart.get("trust_fingerprint") != row.get("trust_fingerprint"):
             raise ConfigError("comparison refused: trust eligibility differs between runs")
+    preprocessing_a = meta_a.get("preprocessing_hash")
+    preprocessing_b = meta_b.get("preprocessing_hash")
+    preprocessing_matched = preprocessing_a == preprocessing_b
     return {
         "compatible": True,
         "case_count": len(rows_a),
         "case_ids": ids_a,
-        "preprocessing": {"matched": True, "delta": []},
-        "note": "model/backend versions and timings may differ by design",
+        "preprocessing": {
+            "matched": preprocessing_matched,
+            "delta": [] if preprocessing_matched else [preprocessing_a, preprocessing_b],
+        },
+        "note": "model/backend versions and timings may differ by design; "
+        "preprocessing differences are disclosed, never silently compared",
     }
 
 
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
+
+
+def _probe_preprocessing_hash(manifest: LoadedManifest, verifier_factory: VerifierFactory) -> str | None:
+    """The run's backend preprocessing fingerprint (review F4).
+
+    Builds one throwaway verifier from the factory and reads its backend
+    descriptor's preprocessing_hash; deterministic backends yield None. Never
+    invokes inference - construction only.
+    """
+    try:
+        probe = verifier_factory("#preprocessing-probe", None, {}, ())
+        backend = getattr(probe, "backend", None)
+        descriptor = getattr(backend, "descriptor", None)
+        return getattr(descriptor, "preprocessing_hash", None)
+    except Exception:  # noqa: BLE001 - probe only; a null hash is the honest fallback
+        return None
 
 
 def _build_verifier_factory(
@@ -831,13 +862,15 @@ def _build_verifier_factory(
         if model_dir is None:
             raise ConfigError("--model-dir is required with --backend smolvlm")
 
-        def factory(  # pragma: no cover - wired when NIT-008 lands
-            case_id: str,
-            request: Any,
-            artifacts: Any,
-            bindings: Any,
-        ) -> Any:
-            raise NotImplementedError("wired when NIT-008 lands")
+        def factory(case_id: str, request: Any, artifacts: Any, bindings: Any) -> Any:
+            from nitelos import Verifier  # noqa: PLC0415 - lazy backend wiring
+            from nitelos.backends.smolvlm import (  # noqa: PLC0415 - lazy NIT-008 module
+                DEFAULT_REVISION,
+                SmolVLMBackend,
+            )
+
+            backend_instance: Any = SmolVLMBackend(model_dir, DEFAULT_REVISION, device="cpu", dtype="float32")
+            return Verifier(backend=backend_instance, policy=policy, trust_bindings=bindings)
 
         return factory
     raise ConfigError(f"unknown backend: {backend}")
