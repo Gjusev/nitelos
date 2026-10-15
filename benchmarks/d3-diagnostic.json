@@ -1,0 +1,19 @@
+{
+  "run": "NIT-008 D3 final pure diagnostic (post-decision; escalation evidence only)",
+  "settings": {
+    "greedy": true,
+    "sampling_params": null,
+    "max_new_tokens": 40,
+    "decode": "new tokens only, skip_special_tokens=True",
+    "image": "smoke-01.png",
+    "image_sha256": "2cf65d9bd17128a28d5b301363e86b337b56b264ad08ab10e5b14885df72874a"
+  },
+  "outputs": {
+    "D3_caption": " This image is a screenshot of a webpage. The page is titled \"Export complete\". Below the title, there is a green button labeled \"Export complete\". To the left of the green button, there",
+    "D3_qa": " Page showing export details."
+  },
+  "platform": {
+    "os": "Linux",
+    "python": "3.12.15"
+  }
+}
