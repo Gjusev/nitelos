@@ -20,8 +20,8 @@ No secrets or sensitive evidence are stored here.
 | NIT-009 Traces | done (merged) | nitelos-0f/08 | nit/009-traces `2d5d3be` | 006, AR-2 | Win 307 passed after merge; Linux strict replay OK | reviewer nitelos-3a APPROVE-WITH-CHANGES (naive as_of fix) |
 | NIT-010 Fixtures | done (merged; human gate pending for final-test audit/freeze) | nitelos-f2 impl, nitelos-14 review | nit/010-fixtures `f93e4d8` | 003, 009 | full truth table re-verified independently; compositions structural; numerals removed | G4 human reviewers scheduled by user at the end |
 | NIT-011 Metrics | done (merged) | nitelos-0f | nit/011-metrics + nit/011b-metrics `5ffd8e8` | 002, AR-1 | STAT 26 + MET 19 tests; reviews by nitelos-69 (A: approve-with-changes fixed; B: approve) | metrics numpy/scipy-free; Wilson endpoints exact |
-| NIT-012 Runner | delivered+verified; review queued (nitelos-3a) | nitelos-08 | nit/012-runner `3631943` | 006, 010, 011 | Win 478+1 skip; Linux fresh clone 476+3 skips; real CLI dev.json exit 0 (60/60/0, conformance 1.0) | smolvlm CLI path exits 2 until NIT-008; no faked runs |
-| NIT-013 Evaluation | part A (RUN validator) delivered+verified (`b451a6a`, Win 496+1 skip, Linux 494+3 skips); real runs pending AR-4 + human gate | nitelos-f2 | nit/013-reports | 008, 012, AR-4 | validator caught real runner bug (run_id stamping) | |
+| NIT-012 Runner | done (merged with review fixes `82021a2`: smolvlm wiring, collector exit-2, preprocessing fingerprint) | nitelos-f2 impl, nitelos-14 review | nit/012-runner → nit/012-review-fix | 006, 010, 011 | Win 569+1 skip+1 desel; Linux 567+3 skips+1 desel | |
+| NIT-013 Evaluation | part A merged; part B (dev-split runs) running (nitelos-14); final runs pending AR-4 + G4 | nitelos-14 | nit/013b-runs | 008, 012, AR-4 | | |
 | NIT-014 Docs/demo | review pending (nitelos-14) | nitelos-f2 | nit/014-docs `f0ba219` | 006, 009, 012 | Win 506+1 skip; Linux 504+3 skips; DOC-01 wheel-install quickstart | |
 | NIT-015 Release audit | prep delivered+verified (`41bce6d`, Win 506+1 skip, Linux 504+3 skips); gates/final audit pending | nitelos-f2 | nit/015-release | 013, 014 | | gates table/NOTICE/license inventory/workflow sketch |
 
@@ -82,3 +82,4 @@ All pending.
 - 2026-10-15: G3 PASSED with SmolVLM2-2.2B (11/11 valid, 10 decisive). Orchestrator re-ran the real-model integration test independently (pass). AR-3 review assigned to nitelos-f2; NIT-012 review brief sent to nitelos-14.
 - 2026-10-15: AR-3 APPROVED; NIT-008 merged (integration 375 passed + 1 deselected; Linux replay OK). Next: NIT-012 fix chain 010→012→013 merges.
 - 2026-10-15: NIT-010 re-verification APPROVE; merged (511+1 deselected Win; Linux replay OK).
+- 2026-10-15: NIT-012+NIT-013A chain merged (integration 569 passed +1 skip +1 deselected; Linux replay OK).
