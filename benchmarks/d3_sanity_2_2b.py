@@ -13,22 +13,18 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from d3_diagnostic_008 import D3_PROMPTS, IMAGE, MAX_NEW_TOKENS  # noqa: E402
-from nitelos.backends.smolvlm import (  # noqa: E402
-    _load_model,
-    _load_processor,
-    _import_torch,
-    _import_transformers,
-)
-from PIL import Image  # noqa: E402
+from d3_diagnostic_008 import D3_PROMPTS, IMAGE, MAX_NEW_TOKENS
+from PIL import Image
+
+from nitelos.backends import smolvlm
 
 
 def main() -> int:
     model_dir = Path(os.environ["NITELOS_MODEL_DIR"])
-    torch = _import_torch()
-    transformers = _import_transformers()
-    processor = _load_processor(model_dir, transformers)
-    model = _load_model(model_dir, transformers, torch, "float32")
+    torch = smolvlm._import_torch()
+    transformers = smolvlm._import_transformers()
+    processor = smolvlm._load_processor(model_dir, transformers)
+    model = smolvlm._load_model(model_dir, transformers, torch, "float32")
     image = Image.open(IMAGE).convert("RGB")
     results: dict[str, str] = {}
     for name, prompt in D3_PROMPTS.items():
