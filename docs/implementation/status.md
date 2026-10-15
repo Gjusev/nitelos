@@ -16,7 +16,7 @@ No secrets or sensitive evidence are stored here.
 | NIT-005 Policy | done (merged) | nitelos-69 | nit/005-policy `42ef33a` | 004 | Win 246 passed; Linux 245 + 1 platform skip | reviewer nitelos-0f APPROVE-WITH-CHANGES (visual refs, eligible_evidence helper, immutable map) |
 | NIT-006 SDK | done (merged) | nitelos-69 | nit/006-sdk `fc7e278` | 005 | Win 288 passed; Linux strict replay OK | AR-2 approved; ADR-011 nullable request_id; F1 race, F2 strict env, F3 limitation code |
 | NIT-007 Backend boundary | review (reviewer nitelos-08, queued after NIT-010 fixes) | nitelos-3a | nit/007-backend-boundary `4e24012` | 006, AR-2, 009 | 26 BAK/contract tests; Win 333 passed; Linux 332 + 1 platform skip | rationale export deferred; deadline None until NIT-008 |
-| NIT-008 Local VLM | running (ADR-012: swap to SmolVLM2-2.2B @482adb5, smoke re-run; 500M attempt records kept) | nitelos-14 | nit/008-smolvlm | 007 | attempt 1: 0/44 decisive, all ' UNKNOWN.'; D3: captions fine | G3 fallback pre-agreed: release candidate with G3 failed |
+| NIT-008 Local VLM | delivered; G3 PASSED (2.2B); AR-3 review running | nitelos-14 | nit/008-smolvlm `f1140e3` | 007 | 11/11 valid, 10 decisive, strict parser, prompt v1; orchestrator re-ran real-model integration test (pass) | dev agreement 4/12, over-support bias recorded; torchvision+num2words added to local extra |
 | NIT-009 Traces | done (merged) | nitelos-0f/08 | nit/009-traces `2d5d3be` | 006, AR-2 | Win 307 passed after merge; Linux strict replay OK | reviewer nitelos-3a APPROVE-WITH-CHANGES (naive as_of fix) |
 | NIT-010 Fixtures | re-verification pending (fixes `5d5f35e..756968d` verified by orchestrator) | nitelos-08 (= resumed nitelos-0f) | nit/010-fixtures `2940b01` | 003, 009 | 120 cases/240 requests/128 PNGs; deterministic dry run 120/120 exact; Win 438 passed (eval); Linux 436 + 2 platform skips; freeze refuses (exit 1, 60 pending) | final-test audit + freeze PENDING human gate (G4) |
 | NIT-011 Metrics | done (merged) | nitelos-0f | nit/011-metrics + nit/011b-metrics `5ffd8e8` | 002, AR-1 | STAT 26 + MET 19 tests; reviews by nitelos-69 (A: approve-with-changes fixed; B: approve) | metrics numpy/scipy-free; Wilson endpoints exact |
@@ -31,7 +31,7 @@ No secrets or sensitive evidence are stored here.
 |---|---|---|---|
 | AR-1 contracts | done (approved with changes; fixes `2671d5f` verified) | nitelos-0f | see decisions.md; constructor-path RecursionError fix + snapshot caveat requested from nitelos-69 |
 | AR-2 deterministic flow | done (approved; conditions verified 2026-10-15) | nitelos-0f | decisions.md AR-2 |
-| AR-3 local integration | pending | | |
+| AR-3 local integration | running | nitelos-f2 (independent) | brief sent 2026-10-15 |
 | AR-4 protocol freeze | pending | | |
 | AR-5 release candidate | pending | | |
 
@@ -79,3 +79,4 @@ All pending.
 - 2026-10-15: NIT-013A verified. NIT-008 G3 attempt 1 failed (0/11 valid, all ' UNKNOWN.'); ruling: one pre-declared prompt iteration round (v2/v3 + D1/D2 diagnostics), then viability review if still 0.
 - 2026-10-15: ADR-012 user-approved: checkpoint swap to SmolVLM2-2.2B-Instruct @482adb5. Weights provisioned by orchestrator; shard 2 corrupt on first download (hash mismatch caught by upstream-oid cross-check; sidecar regenerated after clean re-download). NIT-007 merged; NIT-014 verified; NIT-015 prep assigned.
 - 2026-10-15: SmolVLM2-2.2B weights fully provisioned and digest-verified on Windows and WSL (shard-2 corruption caught and fixed via upstream-oid cross-check). 2.2B smoke green-lit for nitelos-14. NIT-015 prep verified.
+- 2026-10-15: G3 PASSED with SmolVLM2-2.2B (11/11 valid, 10 decisive). Orchestrator re-ran the real-model integration test independently (pass). AR-3 review assigned to nitelos-f2; NIT-012 review brief sent to nitelos-14.
