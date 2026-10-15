@@ -23,7 +23,7 @@ No secrets or sensitive evidence are stored here.
 | NIT-012 Runner | done (merged with review fixes `82021a2`: smolvlm wiring, collector exit-2, preprocessing fingerprint) | nitelos-f2 impl, nitelos-14 review | nit/012-runner → nit/012-review-fix | 006, 010, 011 | Win 569+1 skip+1 desel; Linux 567+3 skips+1 desel | |
 | NIT-013 Evaluation | dev-split done+merged (deterministic 60/60 exact; visual 60/60, agreement 41/60, over-support recorded); FINAL runs pending AR-4 + G4 human gate | nitelos-14 impl, nitelos-f2 review | nit/013b-runs `94baa2e` | 008, 012 | preflight ruling applied; both dev-visual records kept | shared-backend runner mode assigned (nitelos-f2) before final runs |
 | NIT-014 Docs/demo | done (merged `8f19a3e` after merge-time update) | nitelos-f2 impl, nitelos-14 review | nit/014-docs | 006, 009, 012 | Win 575+1+1desel; Linux 573+3+1desel; visual demo wired and gated | |
-| NIT-015 Release audit | prep delivered+verified (`41bce6d`, Win 506+1 skip, Linux 504+3 skips); gates/final audit pending | nitelos-f2 | nit/015-release | 013, 014 | | gates table/NOTICE/license inventory/workflow sketch |
+| NIT-015 Release audit | finalization done+merged (`10b4d0c`: REL-01..04, license-inventory test, release-prep workflow); G4/final-runs/AR-5 pending | nitelos-f2 | nit/015-release | 013, 014 | Win 601+2 skips+1 desel; Linux 599+4+1 | dispatch-only workflow; no publish executed |
 
 ## Architectural reviews
 
