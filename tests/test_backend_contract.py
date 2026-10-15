@@ -238,10 +238,14 @@ def test_bak01_unsupported_evidence_kind_rejected() -> None:
     assert result.execution_status == ExecutionStatus.INPUT_ERROR
     assert _error(result).code == "UNSUPPORTED_CAPABILITY"
     assert fake.calls == []
-    # an assertion criterion on a visual-only backend is equally unsupported
-    doc = _visual_doc([_obs()], criteria=[_criterion(operator="equals", expected=True)])
+    # preflight ruling (decisions.md): an assertion criterion on a visual-only
+    # backend is core-evaluated — here refuted, with no backend call at all
+    doc = _visual_doc([_obs()], criteria=[_criterion(operator="equals", expected=False)])
     result = Verifier(backend=fake, policy=ALLOW_MODEL).verify(parse_request(doc))
-    assert _error(result).code == "UNSUPPORTED_CAPABILITY"
+    assert result.execution_status == ExecutionStatus.OK
+    assert result.decision == Decision.FAILURE
+    assert result.criteria[0].basis == "deterministic"
+    assert fake.calls == []
 
 
 def test_bak05_wrong_kind_unsupported_even_with_inference_disallowed() -> None:
@@ -253,13 +257,68 @@ def test_bak05_wrong_kind_unsupported_even_with_inference_disallowed() -> None:
     assert result.decision is None or result.decision == Decision.ABSTAINED
     assert result.criteria[0].reason_codes == ("MODEL_INFERENCE_DISALLOWED",)
     assert fake.calls == []
-    # but an unsupported criterion KIND is an input error even when disallowed
+    # preflight ruling (decisions.md): an assertion criterion never consults
+    # backend capabilities — core-evaluated even when inference is disallowed
     from test_verifier import _obs
 
-    doc = _visual_doc([_obs()], criteria=[_criterion(operator="equals", expected=True)])
-    wrong = verifier.verify(parse_request(doc))
-    assert wrong.execution_status == ExecutionStatus.INPUT_ERROR
-    assert _error(wrong).code == "UNSUPPORTED_CAPABILITY"
+    doc = _visual_doc([_obs()], criteria=[_criterion(operator="equals", expected=False)])
+    asserted = verifier.verify(parse_request(doc))
+    assert asserted.execution_status == ExecutionStatus.OK
+    assert asserted.decision == Decision.FAILURE
+    assert asserted.criteria[0].basis == "deterministic"
+    assert fake.calls == []
+
+
+def test_bak01_mixed_assertion_and_visual_on_visual_only_backend() -> None:
+    """Preflight ruling (decisions.md): assertion criteria are core-evaluated
+    on ANY backend; only visual criteria consult backend capabilities. The
+    decision is the conjunction — assertion refuted + visual supported fails."""
+    from test_verifier import _obs
+
+    fake = FakeVisualBackend()
+    doc = _visual_doc(
+        [_obs(), _shot_doc("s0", 1)],
+        criteria=[
+            _criterion(operator="equals", expected=False),  # refuted by state
+            _visual_criterion(evidence_ids=["s0"]),
+        ],
+    )
+    result = Verifier(backend=fake, policy=ALLOW_MODEL).verify(parse_request(doc), artifacts=_store(1))
+    assert result.execution_status == ExecutionStatus.OK
+    assert result.decision == Decision.FAILURE  # refuted ∧ supported
+    assert result.criteria[0].basis == "deterministic"
+    assert result.criteria[0].state == "refuted"
+    assert result.criteria[1].basis == "model_inferred"
+    assert result.criteria[1].state == "supported"
+    assert len(fake.calls) == 1  # only the visual criterion reaches the backend
+
+
+def test_bak01_mixed_on_deterministic_backend_rejects_only_the_visual_criterion() -> None:
+    """The default deterministic backend still rejects the visual criterion of
+    a mixed request before any inference, while the same assertion alone on
+    the same evidence passes its preflight and is core-evaluated."""
+    from test_verifier import _obs
+
+    mixed = parse_request(
+        _visual_doc(
+            [_obs(), _shot_doc("s0", 1)],
+            criteria=[
+                _criterion(operator="equals", expected=False),
+                _visual_criterion(evidence_ids=["s0"]),
+            ],
+        )
+    )
+    result = Verifier().verify(mixed, artifacts=_store(1))
+    assert result.execution_status == ExecutionStatus.INPUT_ERROR
+    assert _error(result).code == "UNSUPPORTED_CAPABILITY"
+    assert _error(result).field_path == "$.criteria[1]"  # the visual criterion only
+
+    only_assertion = parse_request(
+        _visual_doc([_obs()], criteria=[_criterion(operator="equals", expected=False)])
+    )
+    ok = Verifier().verify(only_assertion)
+    assert ok.execution_status == ExecutionStatus.OK
+    assert ok.decision == Decision.FAILURE
 
 
 def test_disallowed_policy_never_invokes_the_backend() -> None:
