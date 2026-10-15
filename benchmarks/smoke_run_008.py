@@ -111,7 +111,7 @@ def main() -> int:
     for case in cases:
         case_started = time.monotonic()
         request = parse_request(build_request(case, images))
-        result = verifier.verify(request, artifacts=ArtifactStore(images))
+        result = verifier.verify(request, artifacts=images)
         elapsed_ms = (time.monotonic() - case_started) * 1000.0
         criterion = result.criteria[0] if result.criteria else None
         invoked = bool(result.diagnostics.preprocessing)
