@@ -1,6 +1,9 @@
 {
-  "annotation_status": "pending_human_review",
-  "annotators": [],
+  "annotation_status": "agent_audited_2026-10-15",
+  "annotators": [
+    "ai-reviewer-1:nitelos-14",
+    "ai-reviewer-2:fresh-agent-r2"
+  ],
   "case_id": "f4467e8a-bbfb-5917-9fdb-4692f577d399",
   "evidence_sufficiency": "insufficient",
   "expected": {
@@ -21,17 +24,21 @@
   },
   "group_id": "s07:L5",
   "oracle_source_id": "state-machine:s07:v1",
-  "outcome_truth": "failure",
+  "outcome_truth": "unknown",
   "pair": null,
   "primary_family": "S07",
-  "rationale": "evidence names a different record than the criterion subject; unknown, not failure",
+  "rationale": "the oracle state names only the visible record CA-0150 and carries no information about the criterion record CA-0999; the outcome is unknowable from the supplied record, and doc 06 forbids converting an unknowable outcome into a negative (ADR-013 adjudication)",
   "scope": [
     "observed_state",
     "external",
     "visual"
   ],
   "secondary_tags": [],
-  "sign_off": null,
+  "sign_off": {
+    "adjudicator": "orchestrator:nitelos-8b",
+    "basis": "ADR-013: two independent AI reviewers plus orchestrator adjudication; no human annotation audit performed",
+    "date": "2026-10-15"
+  },
   "split": "test",
   "state": {
     "criterion_id": "CA-0999",

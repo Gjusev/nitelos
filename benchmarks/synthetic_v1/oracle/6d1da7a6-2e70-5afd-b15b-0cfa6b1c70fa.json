@@ -1,6 +1,9 @@
 {
-  "annotation_status": "pending_human_review",
-  "annotators": [],
+  "annotation_status": "agent_audited_2026-10-15",
+  "annotators": [
+    "ai-reviewer-1:nitelos-14",
+    "ai-reviewer-2:fresh-agent-r2"
+  ],
   "case_id": "6d1da7a6-2e70-5afd-b15b-0cfa6b1c70fa",
   "evidence_sufficiency": "sufficient",
   "expected": {
@@ -22,14 +25,18 @@
   "outcome_truth": "failure",
   "pair": null,
   "primary_family": "S07",
-  "rationale": "",
+  "rationale": "the page names record CD-0180, never the criterion record CD-0999; the interface claim is refuted by the visible content",
   "scope": [
     "observed_state",
     "external",
     "visual"
   ],
   "secondary_tags": [],
-  "sign_off": null,
+  "sign_off": {
+    "adjudicator": "orchestrator:nitelos-8b",
+    "basis": "ADR-013: two independent AI reviewers plus orchestrator adjudication; no human annotation audit performed",
+    "date": "2026-10-15"
+  },
   "split": "test",
   "state": {
     "criterion_id": "CD-0999",

@@ -1,6 +1,9 @@
 {
-  "annotation_status": "pending_human_review",
-  "annotators": [],
+  "annotation_status": "agent_audited_2026-10-15",
+  "annotators": [
+    "ai-reviewer-1:nitelos-14",
+    "ai-reviewer-2:fresh-agent-r2"
+  ],
   "case_id": "95049a74-01b3-5d79-9abb-f372a83a139f",
   "evidence_sufficiency": "contradictory",
   "expected": {
@@ -30,7 +33,11 @@
     "visual"
   ],
   "secondary_tags": [],
-  "sign_off": null,
+  "sign_off": {
+    "adjudicator": "orchestrator:nitelos-8b",
+    "basis": "ADR-013: two independent AI reviewers plus orchestrator adjudication; no human annotation audit performed",
+    "date": "2026-10-15"
+  },
   "split": "test",
   "state": {
     "contradiction": true

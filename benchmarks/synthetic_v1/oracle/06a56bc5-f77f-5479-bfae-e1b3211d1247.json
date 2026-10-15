@@ -1,6 +1,9 @@
 {
-  "annotation_status": "pending_human_review",
-  "annotators": [],
+  "annotation_status": "agent_audited_2026-10-15",
+  "annotators": [
+    "ai-reviewer-1:nitelos-14",
+    "ai-reviewer-2:fresh-agent-r2"
+  ],
   "case_id": "06a56bc5-f77f-5479-bfae-e1b3211d1247",
   "evidence_sufficiency": "sufficient",
   "expected": {
@@ -22,7 +25,7 @@
   "outcome_truth": "failure",
   "pair": null,
   "primary_family": "S15",
-  "rationale": "",
+  "rationale": "the final image shows Import failed with 0 of 812 items; the completion claim is refuted by the visible result",
   "scope": [
     "observed_state",
     "external",
@@ -30,7 +33,11 @@
     "visual"
   ],
   "secondary_tags": [],
-  "sign_off": null,
+  "sign_off": {
+    "adjudicator": "orchestrator:nitelos-8b",
+    "basis": "ADR-013: two independent AI reviewers plus orchestrator adjudication; no human annotation audit performed",
+    "date": "2026-10-15"
+  },
   "split": "test",
   "state": {
     "final_predicate": "failed"
