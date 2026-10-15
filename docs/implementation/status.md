@@ -31,7 +31,7 @@ No secrets or sensitive evidence are stored here.
 |---|---|---|---|
 | AR-1 contracts | done (approved with changes; fixes `2671d5f` verified) | nitelos-0f | see decisions.md; constructor-path RecursionError fix + snapshot caveat requested from nitelos-69 |
 | AR-2 deterministic flow | done (approved; conditions verified 2026-10-15) | nitelos-0f | decisions.md AR-2 |
-| AR-3 local integration | running | nitelos-f2 (independent) | brief sent 2026-10-15 |
+| AR-3 local integration | done (approved; NIT-008 merged) | nitelos-f2 (independent) | brief sent 2026-10-15 |
 | AR-4 protocol freeze | pending | | |
 | AR-5 release candidate | pending | | |
 
@@ -80,3 +80,4 @@ All pending.
 - 2026-10-15: ADR-012 user-approved: checkpoint swap to SmolVLM2-2.2B-Instruct @482adb5. Weights provisioned by orchestrator; shard 2 corrupt on first download (hash mismatch caught by upstream-oid cross-check; sidecar regenerated after clean re-download). NIT-007 merged; NIT-014 verified; NIT-015 prep assigned.
 - 2026-10-15: SmolVLM2-2.2B weights fully provisioned and digest-verified on Windows and WSL (shard-2 corruption caught and fixed via upstream-oid cross-check). 2.2B smoke green-lit for nitelos-14. NIT-015 prep verified.
 - 2026-10-15: G3 PASSED with SmolVLM2-2.2B (11/11 valid, 10 decisive). Orchestrator re-ran the real-model integration test independently (pass). AR-3 review assigned to nitelos-f2; NIT-012 review brief sent to nitelos-14.
+- 2026-10-15: AR-3 APPROVED; NIT-008 merged (integration 375 passed + 1 deselected; Linux replay OK). Next: NIT-012 fix chain 010→012→013 merges.
