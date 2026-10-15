@@ -12,7 +12,9 @@ side by side.
 Environment: WSL Ubuntu, Python 3.12.15, AMD Ryzen 5 7600X, 15 GiB allocation,
 nothing else heavy running. torch 2.14.1+cpu / transformers 5.19.0 /
 torchvision 0.29.1+cpu / num2words 0.5.14 (the frozen `local` extra); lock hash
-`60381e31…`; package version from the branch HEAD. The pinned checkpoint is
+`83a01dc0…` (sha256 of `uv.lock` at the run refs — the earlier `60381e31…` value
+predates the torchvision/num2words lock commits the same sentence names and was
+stale); package version from the branch HEAD. The pinned checkpoint is
 `HuggingFaceTB/SmolVLM2-2.2B-Instruct @ 482adb537c021c86670beed01cd58990d01e72e4`
 (ADR-012), manifest-verified per file before the run; the honest history of the
 500M era (attempt 1, bounded iteration round, D3) is in
@@ -82,7 +84,7 @@ uv run python -m nitelos.evaluation run \
   --manifest benchmarks/synthetic_v1/test-visual.json \
   --artifacts benchmarks/synthetic_v1 \
   --output reports/final-test/test-visual-smolvlm \
-  --backend smolvlm --model-dir "$NITELOS_MODEL_DIR"   # or the labeled driver until the wiring merges
+  --backend smolvlm --model-dir "$NITELOS_MODEL_DIR"
 ```
 
 Expected durations from the dev runs: the deterministic view completed in
