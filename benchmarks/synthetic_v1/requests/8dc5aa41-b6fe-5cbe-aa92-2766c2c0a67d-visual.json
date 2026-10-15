@@ -1,0 +1,59 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Push Console BK window shows a final completion state for BK-0150",
+      "evidence_ids": [
+        "8dc5aa41b6fe-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "deployment": "BK-0150"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "8dc5aa41b6fe-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "8dc5aa41b6fe-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "pending",
+      "sequence": 0,
+      "sha256": "5c3f5bc69a4d9b4c9c13693a1bf319631663ff7878acd56e204b37f6159ff85a",
+      "source_id": "fixture-ui",
+      "subject": {
+        "deployment": "BK-0150"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "deploy_state": "running",
+        "progress": 25
+      },
+      "id": "8dc5aa41b6fe-dom-1",
+      "kind": "observation",
+      "phase": "pending",
+      "sequence": 1,
+      "sha256": "285f4fcae87ed948603a60daca16806c7047ea05bd3b0088be3b53d1e35fa4fa",
+      "source_id": "fixture-ui",
+      "subject": {
+        "deployment": "BK-0150"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the push task for BK-0150 in Push Console BK",
+  "request_id": "8dc5aa41b6fe-v",
+  "schema_version": "1"
+}

@@ -1,0 +1,62 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for BH-0120 reports the deployment completed",
+      "evidence_ids": [
+        "dac6131a95b2-dom-1"
+      ],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/deploy_state",
+      "scope": "observed_state",
+      "subject": {
+        "deployment": "BH-0120"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "dac6131a95b2-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "dac6131a95b2-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "pending",
+      "sequence": 0,
+      "sha256": "690055d6ee5c49f914343f9c6326300c44687a8d5e87dd730c77ad1aa7127a94",
+      "source_id": "fixture-ui",
+      "subject": {
+        "deployment": "BH-0120"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "deploy_state": "running",
+        "progress": 35
+      },
+      "id": "dac6131a95b2-dom-1",
+      "kind": "observation",
+      "phase": "pending",
+      "sequence": 1,
+      "sha256": "d5921a6755a83878a5cc3431895d8110ebd015ef7259d37d290b28281a20c541",
+      "source_id": "fixture-ui",
+      "subject": {
+        "deployment": "BH-0120"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the release task for BH-0120 in Release Console BH",
+  "request_id": "dac6131a95b2-a",
+  "schema_version": "1"
+}

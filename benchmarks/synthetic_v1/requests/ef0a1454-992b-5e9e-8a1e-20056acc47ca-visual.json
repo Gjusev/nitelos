@@ -1,0 +1,58 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Shift Console DX window shows STATUS passed for DX-0161",
+      "evidence_ids": [
+        "ef0a1454992b-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "task": "DX-0161"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "ef0a1454992b-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "ef0a1454992b-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "7228428795878aae6189b5c04d077da366e0e69b1ae40be7e1a7ec0a6f97c86e",
+      "source_id": "fixture-ui",
+      "subject": {
+        "task": "DX-0161"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "passed"
+      },
+      "id": "ef0a1454992b-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "76f1805001bc4f155c8efa5651c57c4f1858af1f6786cbe4596214a4b64375a6",
+      "source_id": "fixture-ui",
+      "subject": {
+        "task": "DX-0161"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the shift task for DX-0161 in Shift Console DX",
+  "request_id": "ef0a1454992b-v",
+  "schema_version": "1"
+}

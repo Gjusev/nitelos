@@ -1,0 +1,62 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for BJ-0140 reports the deployment completed",
+      "evidence_ids": [
+        "fb7260a58407-dom-1"
+      ],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/deploy_state",
+      "scope": "observed_state",
+      "subject": {
+        "deployment": "BJ-0140"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "fb7260a58407-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "fb7260a58407-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "pending",
+      "sequence": 0,
+      "sha256": "0e95a47a187e765652a393396e621f799ef2115e03ed3248ac93981ea2dc766c",
+      "source_id": "fixture-ui",
+      "subject": {
+        "deployment": "BJ-0140"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "deploy_state": "running",
+        "progress": 65
+      },
+      "id": "fb7260a58407-dom-1",
+      "kind": "observation",
+      "phase": "pending",
+      "sequence": 1,
+      "sha256": "69154402dbf3744dc92dcfe73b6246b0abf518bf4ac08f5ebf7e45ddfc3d5f19",
+      "source_id": "fixture-ui",
+      "subject": {
+        "deployment": "BJ-0140"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the canary task for BJ-0140 in Canary Console BJ",
+  "request_id": "fb7260a58407-a",
+  "schema_version": "1"
+}

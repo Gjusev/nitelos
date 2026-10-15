@@ -1,0 +1,58 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Brief Console ED window shows a confirmation banner for ED-0140",
+      "evidence_ids": [
+        "7486d0a56e11-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "report": "ED-0140"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "7486d0a56e11-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "7486d0a56e11-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "b6f4276a54c4949ca567f6c3b4eccc1d82d9d482ed54da892039f445a94b372e",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "ED-0140"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "confirm_banner_present": false
+      },
+      "id": "7486d0a56e11-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "23603fc7b22654aee7a14fc43a88fa1925ac4b2b85fcbe7d164b0b86ad8fef96",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "ED-0140"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the brief task for ED-0140 in Brief Console ED",
+  "request_id": "7486d0a56e11-v",
+  "schema_version": "1"
+}

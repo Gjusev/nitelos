@@ -1,0 +1,42 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Ledger record for BA-0130 reports the payment settled",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "payment": "BA-0130"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "7719a23c6b15-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "7719a23c6b15-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "0410f4381dfda302e491b14acec2c8a777fdb67264b4b26d7c0d16353188bf63",
+      "source_id": "fixture-ui",
+      "subject": {
+        "payment": "BA-0130"
+      },
+      "width": 1200
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the payout task for BA-0130 in Payout Console BA",
+  "request_id": "7719a23c6b15-a",
+  "schema_version": "1"
+}

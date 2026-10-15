@@ -1,0 +1,92 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for AM-0150 reports status completed",
+      "evidence_ids": [
+        "145ffa238378-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "submission": "AM-0150"
+      }
+    },
+    {
+      "description": "The Backup Console AM window shows a banner stating the submission was accepted",
+      "evidence_ids": [
+        "145ffa238378-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "submission": "AM-0150"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "145ffa238378-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "145ffa238378-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "53efd819a9e063024be29b4b56ce68027f5d557d7c57be2f87aed4fdc323e6eb",
+      "source_id": "fixture-ui",
+      "subject": {
+        "submission": "AM-0150"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "E210",
+        "job_status": "failed"
+      },
+      "id": "145ffa238378-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "88e80face8413368c2d6830476e2d3e4f5d817edefc31fe8f170d9e772c1b03d",
+      "source_id": "fixture-ui",
+      "subject": {
+        "submission": "AM-0150"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "E210",
+        "status": "failed"
+      },
+      "id": "145ffa238378-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "9aa4aa3d778d577150ae737d20e6ad9ed8879df499c04101466d30b290724889",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "submission": "AM-0150"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the backup task for AM-0150 in Backup Console AM",
+  "request_id": "145ffa238378-v",
+  "schema_version": "1"
+}

@@ -1,0 +1,59 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Restart Console BN window shows a final completion state for BN-0180",
+      "evidence_ids": [
+        "cb0b4932c391-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "deployment": "BN-0180"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "cb0b4932c391-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "cb0b4932c391-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "pending",
+      "sequence": 0,
+      "sha256": "05c57d4dd70176bff9b135922b081e98042c28c6f0e2adc6ece3ad51eeb00808",
+      "source_id": "fixture-ui",
+      "subject": {
+        "deployment": "BN-0180"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "deploy_state": "running",
+        "progress": 70
+      },
+      "id": "cb0b4932c391-dom-1",
+      "kind": "observation",
+      "phase": "pending",
+      "sequence": 1,
+      "sha256": "333ebffbb47a930b7ebfb5120247bff8783d206824c8b5465ee2144a6f255616",
+      "source_id": "fixture-ui",
+      "subject": {
+        "deployment": "BN-0180"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the restart task for BN-0180 in Restart Console BN",
+  "request_id": "cb0b4932c391-v",
+  "schema_version": "1"
+}

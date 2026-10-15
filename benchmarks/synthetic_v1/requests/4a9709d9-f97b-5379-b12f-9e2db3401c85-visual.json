@@ -1,0 +1,60 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Member Console AU form for AU-0150 shows no validation error",
+      "evidence_ids": [
+        "4a9709d9f97b-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "form": "AU-0150"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "4a9709d9f97b-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "4a9709d9f97b-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "aa6025601e1c900dd5a0ebab2de5d92ea5650f763554619c8740a98b38a6aa1e",
+      "source_id": "fixture-ui",
+      "subject": {
+        "form": "AU-0150"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "display_name": "Cai Mill",
+        "email": "",
+        "validation_error": true
+      },
+      "id": "4a9709d9f97b-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "b6f692fdf51b758361d2d7e8e8e3ba63c6bee89e260d90baad843b12bfb31183",
+      "source_id": "fixture-ui",
+      "subject": {
+        "form": "AU-0150"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the member task for AU-0150 in Member Console AU",
+  "request_id": "4a9709d9f97b-v",
+  "schema_version": "1"
+}

@@ -1,0 +1,61 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Ledger record for BC-0150 reports the payment settled",
+      "evidence_ids": [
+        "14db48587f3b-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "payment": "BC-0150"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "14db48587f3b-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "14db48587f3b-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "472f92f0b45c86f799d153a1b5795a0ee9e0014dff4b2fd30fe7e593e23cb1f8",
+      "source_id": "fixture-ui",
+      "subject": {
+        "payment": "BC-0150"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "14db48587f3b-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "payment": "BC-0150"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the settle task for BC-0150 in Settle Console BC",
+  "request_id": "14db48587f3b-a",
+  "schema_version": "1"
+}

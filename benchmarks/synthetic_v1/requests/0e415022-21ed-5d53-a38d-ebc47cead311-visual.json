@@ -1,0 +1,21 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The File Console CJ window shows a completion banner for CJ-0160",
+      "evidence_ids": [],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "record": "CJ-0160"
+      }
+    }
+  ],
+  "evidence": [],
+  "metadata": {},
+  "objective": "Complete the file task for CJ-0160 in File Console CJ",
+  "request_id": "0e41502221ed-v",
+  "schema_version": "1"
+}

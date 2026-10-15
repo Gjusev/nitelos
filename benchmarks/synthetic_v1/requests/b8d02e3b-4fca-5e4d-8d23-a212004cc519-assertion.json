@@ -1,0 +1,62 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for DO-0150 reports the final result passed",
+      "evidence_ids": [
+        "b8d02e3b4fca-dom-1"
+      ],
+      "expected": "passed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/final_result",
+      "scope": "observed_state",
+      "subject": {
+        "build": "DO-0150"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "b8d02e3b4fca-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "b8d02e3b4fca-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "a877338c064e351ee868c37f647a001de2e13bcfb59993257351f9f740fdc213",
+      "source_id": "fixture-ui",
+      "subject": {
+        "build": "DO-0150"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "progress": 100,
+        "steps": 14
+      },
+      "id": "b8d02e3b4fca-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "bc8f97216858a546c22ba5d0e6042dd3afd7a1e95bbd5485c762a24b708eda5e",
+      "source_id": "fixture-ui",
+      "subject": {
+        "build": "DO-0150"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the compile task for DO-0150 in Compile Console DO",
+  "request_id": "b8d02e3b4fca-a",
+  "schema_version": "1"
+}

@@ -1,0 +1,58 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Task Console DS window shows STATUS passed for DS-0111",
+      "evidence_ids": [
+        "13760d4c3c2e-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "task": "DS-0111"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "13760d4c3c2e-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "13760d4c3c2e-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "9d84d9388d41acdc000f606779da39cb9b73132ae1ea625f30fe8c2782a2e9be",
+      "source_id": "fixture-ui",
+      "subject": {
+        "task": "DS-0111"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "13760d4c3c2e-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-ui",
+      "subject": {
+        "task": "DS-0111"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the task task for DS-0111 in Task Console DS",
+  "request_id": "13760d4c3c2e-v",
+  "schema_version": "1"
+}

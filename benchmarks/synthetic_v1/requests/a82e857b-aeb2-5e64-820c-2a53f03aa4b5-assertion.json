@@ -1,0 +1,80 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for EM-0150 reports the import completed",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "import": "EM-0150"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "arguments": {
+        "target": "EM-0150"
+      },
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-01",
+      "id": "a82e857baeb2-act-open",
+      "kind": "action",
+      "name": "open-import",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 0,
+      "sha256": "35c3ce364246489a110450be75bfda9173f5d45d209f62f5078f04bba58d1aca",
+      "source_id": "agent-runner",
+      "subject": {
+        "import": "EM-0150"
+      },
+      "tool_result_id": null
+    },
+    {
+      "arguments": {
+        "target": "EM-0150"
+      },
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-02",
+      "id": "a82e857baeb2-act-map",
+      "kind": "action",
+      "name": "map-columns",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 1,
+      "sha256": "1c949891c3486464d67deea4cba05292602bd6298a546a4e6625d7f864f70fb4",
+      "source_id": "agent-runner",
+      "subject": {
+        "import": "EM-0150"
+      },
+      "tool_result_id": null
+    },
+    {
+      "artifact_id": "a82e857baeb2-art-1",
+      "captured_at": "2026-10-20T10:00:02Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "a82e857baeb2-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "7065553745bd0b30ba73559b9a5129f336effcf3656daba807663ee8f6850586",
+      "source_id": "fixture-ui",
+      "subject": {
+        "import": "EM-0150"
+      },
+      "width": 1200
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the feed task for EM-0150 in Feed Console EM",
+  "request_id": "a82e857baeb2-a",
+  "schema_version": "1"
+}

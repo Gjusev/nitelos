@@ -1,0 +1,94 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface names record BZ-0999",
+      "evidence_ids": [
+        "f6f69a32bceb-dom-1"
+      ],
+      "expected": "BZ-0999",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/order_id",
+      "scope": "observed_state",
+      "subject": {
+        "order": "BZ-0140"
+      }
+    },
+    {
+      "description": "Backend names record BZ-0140",
+      "evidence_ids": [
+        "f6f69a32bceb-ext-1"
+      ],
+      "expected": "BZ-0140",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/record_id",
+      "scope": "external",
+      "subject": {
+        "order": "BZ-0140"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "f6f69a32bceb-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "f6f69a32bceb-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "23b2c3e886ddce07d4235810787cee53d681bdfc0b69f603773dfe99230cf7cf",
+      "source_id": "fixture-ui",
+      "subject": {
+        "order": "BZ-0140"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "order_id": "BZ-0140",
+        "status": "updated"
+      },
+      "id": "f6f69a32bceb-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "f501f106d0ca4d1118e6401af264fc03f98bf39e59cf246bdeef8347b6b1e4a8",
+      "source_id": "fixture-ui",
+      "subject": {
+        "order": "BZ-0140"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "record_id": "BZ-0140"
+      },
+      "id": "f6f69a32bceb-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "9d4c38196ceea03d84c74e1876fa3a77215e8dcc7736eaa31ea0f234e8df9159",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "order": "BZ-0140"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the ticket task for BZ-0140 in Ticket Console BZ",
+  "request_id": "f6f69a32bceb-a",
+  "schema_version": "1"
+}

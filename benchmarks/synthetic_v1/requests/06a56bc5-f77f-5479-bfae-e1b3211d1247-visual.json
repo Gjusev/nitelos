@@ -1,0 +1,99 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for EO-0170 reports the import completed",
+      "evidence_ids": [
+        "06a56bc5f77f-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "import": "EO-0170"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "arguments": {
+        "target": "EO-0170"
+      },
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-01",
+      "id": "06a56bc5f77f-act-open",
+      "kind": "action",
+      "name": "open-import",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 0,
+      "sha256": "5346ed265332fa9c853ed189633e99212fbbcd6be971b46b77126a487c645232",
+      "source_id": "agent-runner",
+      "subject": {
+        "import": "EO-0170"
+      },
+      "tool_result_id": null
+    },
+    {
+      "arguments": {
+        "target": "EO-0170"
+      },
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-02",
+      "id": "06a56bc5f77f-act-map",
+      "kind": "action",
+      "name": "map-columns",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 1,
+      "sha256": "53aabf29baa989c36c7a9e6c2872baeb610a7aa3e8819d86468dfa234997517d",
+      "source_id": "agent-runner",
+      "subject": {
+        "import": "EO-0170"
+      },
+      "tool_result_id": null
+    },
+    {
+      "artifact_id": "06a56bc5f77f-art-1",
+      "captured_at": "2026-10-20T10:00:02Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "06a56bc5f77f-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "ba93b1750dcd0e2eb74cd5e7455219cdced68f72dcfeaf2ce0c717c5c3aa2ac8",
+      "source_id": "fixture-ui",
+      "subject": {
+        "import": "EO-0170"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "06a56bc5f77f-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "import": "EO-0170"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the migrate task for EO-0170 in Migrate Console EO",
+  "request_id": "06a56bc5f77f-v",
+  "schema_version": "1"
+}

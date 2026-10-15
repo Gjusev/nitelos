@@ -1,0 +1,21 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Card Console CL window shows a completion banner for CL-0180",
+      "evidence_ids": [],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "record": "CL-0180"
+      }
+    }
+  ],
+  "evidence": [],
+  "metadata": {},
+  "objective": "Complete the card task for CL-0180 in Card Console CL",
+  "request_id": "91a387bf687b-v",
+  "schema_version": "1"
+}

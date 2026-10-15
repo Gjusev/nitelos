@@ -1,0 +1,94 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface names record CD-0999",
+      "evidence_ids": [
+        "6d1da7a62e70-dom-1"
+      ],
+      "expected": "CD-0999",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/order_id",
+      "scope": "observed_state",
+      "subject": {
+        "order": "CD-0180"
+      }
+    },
+    {
+      "description": "Backend names record CD-0180",
+      "evidence_ids": [
+        "6d1da7a62e70-ext-1"
+      ],
+      "expected": "CD-0180",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/record_id",
+      "scope": "external",
+      "subject": {
+        "order": "CD-0180"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "6d1da7a62e70-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "6d1da7a62e70-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "439bfade374374cbd9d0efbb8191bde6b9dcd39086fe18d5c8e85246f43c9ae8",
+      "source_id": "fixture-ui",
+      "subject": {
+        "order": "CD-0180"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "order_id": "CD-0180",
+        "status": "updated"
+      },
+      "id": "6d1da7a62e70-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "35e2783d2a6d5cf53da025464a96a2ea5640c5c46729a5c06b8bc80a748bb03b",
+      "source_id": "fixture-ui",
+      "subject": {
+        "order": "CD-0180"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "record_id": "CD-0180"
+      },
+      "id": "6d1da7a62e70-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "6428ec5eb1247e85d696c7c33fe22ea2da090a3a9d52edcc340d98b0799ddc64",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "order": "CD-0180"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the case task for CD-0180 in Case Console CD",
+  "request_id": "6d1da7a62e70-a",
+  "schema_version": "1"
+}

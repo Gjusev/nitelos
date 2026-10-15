@@ -1,0 +1,59 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Ship Console BL window shows a final completion state for BL-0160",
+      "evidence_ids": [
+        "f3d1a4a5d090-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "deployment": "BL-0160"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "f3d1a4a5d090-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "f3d1a4a5d090-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "pending",
+      "sequence": 0,
+      "sha256": "73ca1df5eebd56ed85d3c61ce5f3ce8050ba2f7b6126cd2e7eb8255e590398ce",
+      "source_id": "fixture-ui",
+      "subject": {
+        "deployment": "BL-0160"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "deploy_state": "running",
+        "progress": 40
+      },
+      "id": "f3d1a4a5d090-dom-1",
+      "kind": "observation",
+      "phase": "pending",
+      "sequence": 1,
+      "sha256": "e8615868fb1b0a9da7c4836f9a5f13d4d10fbb44ad13c80dde9af2ecdb7be9f8",
+      "source_id": "fixture-ui",
+      "subject": {
+        "deployment": "BL-0160"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the ship task for BL-0160 in Ship Console BL",
+  "request_id": "f3d1a4a5d090-v",
+  "schema_version": "1"
+}

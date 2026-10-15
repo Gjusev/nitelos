@@ -1,0 +1,62 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for BG-0110 reports the deployment completed",
+      "evidence_ids": [
+        "afd2f3291c9b-dom-1"
+      ],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/deploy_state",
+      "scope": "observed_state",
+      "subject": {
+        "deployment": "BG-0110"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "afd2f3291c9b-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "afd2f3291c9b-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "pending",
+      "sequence": 0,
+      "sha256": "da204547b3ff3d09159644d919cb582a994cdcea28490a44aa0896fb6593430e",
+      "source_id": "fixture-ui",
+      "subject": {
+        "deployment": "BG-0110"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "deploy_state": "running",
+        "progress": 20
+      },
+      "id": "afd2f3291c9b-dom-1",
+      "kind": "observation",
+      "phase": "pending",
+      "sequence": 1,
+      "sha256": "8d40d67802b8c7e9ef1e078d1349d9cc97eb3f96c8d7422affab490a2ca7fbbd",
+      "source_id": "fixture-ui",
+      "subject": {
+        "deployment": "BG-0110"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the deploy task for BG-0110 in Deploy Console BG",
+  "request_id": "afd2f3291c9b-a",
+  "schema_version": "1"
+}

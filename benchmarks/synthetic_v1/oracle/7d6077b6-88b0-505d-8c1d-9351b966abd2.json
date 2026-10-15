@@ -1,0 +1,39 @@
+{
+  "annotation_status": "pending_human_review",
+  "annotators": [],
+  "case_id": "7d6077b6-88b0-505d-8c1d-9351b966abd2",
+  "evidence_sufficiency": "insufficient",
+  "expected": {
+    "assertion": {
+      "decision": "abstained",
+      "reason_codes": [
+        "INSUFFICIENT_EVIDENCE",
+        "MISSING_EVIDENCE"
+      ]
+    },
+    "visual": {
+      "decision": "abstained",
+      "reason_codes": [
+        "INSUFFICIENT_EVIDENCE",
+        "MISSING_EVIDENCE"
+      ]
+    }
+  },
+  "group_id": "s15:L1",
+  "oracle_source_id": "state-machine:s15:v1",
+  "outcome_truth": "unknown",
+  "pair": null,
+  "primary_family": "S15",
+  "rationale": "history cannot substitute for the missing final predicate",
+  "scope": [
+    "observed_state",
+    "external",
+    "behavioral"
+  ],
+  "secondary_tags": [],
+  "sign_off": null,
+  "split": "dev",
+  "state": {
+    "final_predicate": "absent"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface names record CA-0999",
+      "evidence_ids": [
+        "f4467e8abbfb-dom-1"
+      ],
+      "expected": "CA-0999",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/order_id",
+      "scope": "observed_state",
+      "subject": {
+        "order": "CA-0999"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "f4467e8abbfb-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "f4467e8abbfb-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "ea72c56dd66351d267ecb4cffc859dd01d5ed263e6ebf39446a025789d087691",
+      "source_id": "fixture-ui",
+      "subject": {
+        "order": "CA-0150"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "order_id": "CA-0150",
+        "status": "updated"
+      },
+      "id": "f4467e8abbfb-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "b85b4920aa18b7fe52889350e6404391a619858c19630ebd06f237a9f20dac94",
+      "source_id": "fixture-ui",
+      "subject": {
+        "order": "CA-0150"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the booking task for CA-0150 in Booking Console CA",
+  "request_id": "f4467e8abbfb-v",
+  "schema_version": "1"
+}

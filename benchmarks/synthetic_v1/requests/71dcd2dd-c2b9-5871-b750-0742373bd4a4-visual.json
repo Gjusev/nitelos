@@ -1,0 +1,92 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for AP-0180 reports status completed",
+      "evidence_ids": [
+        "71dcd2ddc2b9-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "submission": "AP-0180"
+      }
+    },
+    {
+      "description": "The Index Console AP window shows a banner stating the submission was accepted",
+      "evidence_ids": [
+        "71dcd2ddc2b9-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "submission": "AP-0180"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "71dcd2ddc2b9-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "71dcd2ddc2b9-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "bebbd8cc6980ff3ce3159631d33926d69fa06bbc83e14ba9518d25eaf85d735d",
+      "source_id": "fixture-ui",
+      "subject": {
+        "submission": "AP-0180"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "E213",
+        "job_status": "failed"
+      },
+      "id": "71dcd2ddc2b9-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "395bd65d6a65232792a7e49bc16c313ebb4d17f2899b8c9ff63b2db2c6806420",
+      "source_id": "fixture-ui",
+      "subject": {
+        "submission": "AP-0180"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "E213",
+        "status": "failed"
+      },
+      "id": "71dcd2ddc2b9-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "aaa275bc0382e12cf9d470e99e0801605e72b941984a7814ed12c1f6c58f0536",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "submission": "AP-0180"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the index task for AP-0180 in Index Console AP",
+  "request_id": "71dcd2ddc2b9-v",
+  "schema_version": "1"
+}

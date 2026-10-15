@@ -1,0 +1,113 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The upload action for CY-0150 completed",
+      "evidence_ids": [
+        "e78d7dd88f8c-act-1"
+      ],
+      "expected": "completed",
+      "id": "c-beh",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/reported_status",
+      "scope": "behavioral",
+      "subject": {
+        "upload": "CY-0150"
+      }
+    },
+    {
+      "description": "Backend record for CY-0150 reports the upload stored",
+      "evidence_ids": [
+        "e78d7dd88f8c-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "upload": "CY-0150"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "e78d7dd88f8c-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "e78d7dd88f8c-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "220460d69d5385fdc633ea47dfb83fc10a895d8ff99e198bf4a826b4d700854c",
+      "source_id": "fixture-ui",
+      "subject": {
+        "upload": "CY-0150"
+      },
+      "width": 1200
+    },
+    {
+      "arguments": {
+        "target": "CY-0150"
+      },
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-final",
+      "id": "e78d7dd88f8c-act-1",
+      "kind": "action",
+      "name": "upload-file",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 1,
+      "sha256": "19ca7fecb05266acb1fc7d99788988d794a5c1337bd09b91dc8217f43ec6f7a3",
+      "source_id": "agent-runner",
+      "subject": {
+        "upload": "CY-0150"
+      },
+      "tool_result_id": null
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "quota exceeded",
+        "job_status": "failed"
+      },
+      "id": "e78d7dd88f8c-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "656fe331ed8b43a167ad99287279ac988f141ae51bebd979e08022ff0694316d",
+      "source_id": "fixture-ui",
+      "subject": {
+        "upload": "CY-0150"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "e78d7dd88f8c-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "upload": "CY-0150"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the image task for CY-0150 in Image Console CY",
+  "request_id": "e78d7dd88f8c-a",
+  "schema_version": "1"
+}

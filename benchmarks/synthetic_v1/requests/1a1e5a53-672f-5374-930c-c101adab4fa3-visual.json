@@ -1,0 +1,93 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Drive Console CO window shows a completion banner for CO-0130",
+      "evidence_ids": [
+        "1a1e5a53672f-shot-a",
+        "1a1e5a53672f-shot-b"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "syncjob": "CO-0130"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "1a1e5a53672f-art-a",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "1a1e5a53672f-shot-a",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "0d3b728fb50f401e4fd094460e9c2a4d09ffc81eb32831cf97a05d143fdef6c9",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CO-0130"
+      },
+      "width": 1200
+    },
+    {
+      "artifact_id": "1a1e5a53672f-art-b",
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "1a1e5a53672f-shot-b",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "22c811dab0a45162c154052a1a0716aa4d65def7d19ccc67052bc26f8b12c51d",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CO-0130"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "completed"
+      },
+      "id": "1a1e5a53672f-dom-a",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CO-0130"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "1a1e5a53672f-dom-b",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CO-0130"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the drive task for CO-0130 in Drive Console CO",
+  "request_id": "1a1e5a53672f-v",
+  "schema_version": "1"
+}

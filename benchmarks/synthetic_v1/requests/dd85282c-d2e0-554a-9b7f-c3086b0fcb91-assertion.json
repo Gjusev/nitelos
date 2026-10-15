@@ -1,0 +1,61 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for EB-0120 reports the confirmation banner present",
+      "evidence_ids": [
+        "dd85282cd2e0-dom-1"
+      ],
+      "expected": true,
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/confirm_banner_present",
+      "scope": "observed_state",
+      "subject": {
+        "report": "EB-0120"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "dd85282cd2e0-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "dd85282cd2e0-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "598a6103bfb758427e79c9eb6c7bbbfa1809ed76418774e6f81f2d15babca5a8",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "EB-0120"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "confirm_banner_present": false
+      },
+      "id": "dd85282cd2e0-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "23603fc7b22654aee7a14fc43a88fa1925ac4b2b85fcbe7d164b0b86ad8fef96",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "EB-0120"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the digest task for EB-0120 in Digest Console EB",
+  "request_id": "dd85282cd2e0-a",
+  "schema_version": "1"
+}

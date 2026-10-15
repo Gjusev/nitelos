@@ -1,0 +1,39 @@
+{
+  "annotation_status": "pending_human_review",
+  "annotators": [],
+  "case_id": "42826ced-fbe9-5dd6-a812-eaf715021b76",
+  "evidence_sufficiency": "insufficient",
+  "expected": {
+    "assertion": {
+      "decision": "abstained",
+      "reason_codes": [
+        "INSUFFICIENT_EVIDENCE",
+        "MISSING_VALUE"
+      ]
+    },
+    "visual": {
+      "decision": "abstained",
+      "reason_codes": [
+        "INSUFFICIENT_EVIDENCE",
+        "MODEL_UNCERTAIN"
+      ]
+    }
+  },
+  "group_id": "s12:L7",
+  "oracle_source_id": "state-machine:s12:v1",
+  "outcome_truth": "success",
+  "pair": null,
+  "primary_family": "S12",
+  "rationale": "the decisive detail is unreadable/absent from the evidence; unknown expectation",
+  "scope": [
+    "observed_state",
+    "visual"
+  ],
+  "secondary_tags": [],
+  "sign_off": null,
+  "split": "test",
+  "state": {
+    "decisive_key_present": false,
+    "underlying": "success"
+  }
+}

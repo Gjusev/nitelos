@@ -1,0 +1,90 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Ledger record for DG-0150 reports the transfer completed",
+      "evidence_ids": [
+        "72a39098afc7-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "transfer": "DG-0150"
+      }
+    },
+    {
+      "description": "The Wire Console DG window shows a completion banner for DG-0150",
+      "evidence_ids": [
+        "72a39098afc7-shot-1"
+      ],
+      "id": "c-vis",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "transfer": "DG-0150"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "72a39098afc7-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "72a39098afc7-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "9bcbbfb1d465cdf7b8d4f23953a89d8e74f86d277800ddf51992cf6318dc9292",
+      "source_id": "fixture-ui",
+      "subject": {
+        "transfer": "DG-0150"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "summary": "failed"
+      },
+      "id": "72a39098afc7-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "f66f83e36d5d7876f3112b577be85291d030c5914f06ef4b015154d26d2e7af0",
+      "source_id": "fixture-ui",
+      "subject": {
+        "transfer": "DG-0150"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "completed"
+      },
+      "id": "72a39098afc7-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "transfer": "DG-0150"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the wire task for DG-0150 in Wire Console DG",
+  "request_id": "72a39098afc7-v",
+  "schema_version": "1"
+}

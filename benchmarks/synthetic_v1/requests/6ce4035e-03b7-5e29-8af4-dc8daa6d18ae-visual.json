@@ -1,0 +1,59 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Database record for BQ-0130 reports the sync completed",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "sync": "BQ-0130"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "6ce4035e03b7-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "6ce4035e03b7-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "e7ebc7c14a648141407f93843a535aef2d5d9cc5ff80d9e332a694b63d29dfb4",
+      "source_id": "fixture-ui",
+      "subject": {
+        "sync": "BQ-0130"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "database",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "6ce4035e03b7-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "sync": "BQ-0130"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the drive task for BQ-0130 in Drive Console BQ",
+  "request_id": "6ce4035e03b7-v",
+  "schema_version": "1"
+}

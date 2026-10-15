@@ -1,0 +1,95 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for AK-0130 reports status completed",
+      "evidence_ids": [
+        "1e6d9ce18928-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "submission": "AK-0130"
+      }
+    },
+    {
+      "description": "Interface state for AK-0130 reports the submission completed",
+      "evidence_ids": [
+        "1e6d9ce18928-dom-1"
+      ],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/job_status",
+      "scope": "observed_state",
+      "subject": {
+        "submission": "AK-0130"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "1e6d9ce18928-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "1e6d9ce18928-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "7d148245aa2a3f2a1dd4a8ff59feafc40a5cee03e2d758a5c4ff75919cfbaeb1",
+      "source_id": "fixture-ui",
+      "subject": {
+        "submission": "AK-0130"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "E203",
+        "job_status": "failed"
+      },
+      "id": "1e6d9ce18928-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "832086ba0692550a65f20a67aa23e52a3f9142b4ffd6715787d81cea259170c5",
+      "source_id": "fixture-ui",
+      "subject": {
+        "submission": "AK-0130"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "E203",
+        "status": "failed"
+      },
+      "id": "1e6d9ce18928-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "7502672337e585a8cbb6de5008b9d2af4372866ef08e6d045dd751d7de39682c",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "submission": "AK-0130"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the sync task for AK-0130 in Sync Console AK",
+  "request_id": "1e6d9ce18928-a",
+  "schema_version": "1"
+}

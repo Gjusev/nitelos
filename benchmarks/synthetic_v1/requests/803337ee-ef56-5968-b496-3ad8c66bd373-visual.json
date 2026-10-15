@@ -1,0 +1,58 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Quest Console DW window shows STATUS passed for DW-0150",
+      "evidence_ids": [
+        "803337eeef56-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "task": "DW-0150"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "803337eeef56-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "803337eeef56-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "1d072735195d13d886ec2a93ea4b8248d44505956ab0210ab304d3db5c16f869",
+      "source_id": "fixture-ui",
+      "subject": {
+        "task": "DW-0150"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "passed"
+      },
+      "id": "803337eeef56-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "76f1805001bc4f155c8efa5651c57c4f1858af1f6786cbe4596214a4b64375a6",
+      "source_id": "fixture-ui",
+      "subject": {
+        "task": "DW-0150"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the quest task for DW-0150 in Quest Console DW",
+  "request_id": "803337eeef56-v",
+  "schema_version": "1"
+}

@@ -1,0 +1,37 @@
+{
+  "annotation_status": "pending_human_review",
+  "annotators": [],
+  "case_id": "13d9bd6c-6c09-5466-ad22-f41bfab86425",
+  "evidence_sufficiency": "sufficient",
+  "expected": {
+    "assertion": {
+      "decision": "failure",
+      "reason_codes": [
+        "CRITERION_REFUTED"
+      ]
+    },
+    "visual": {
+      "decision": "failure",
+      "reason_codes": [
+        "CRITERION_REFUTED"
+      ]
+    }
+  },
+  "group_id": "s03:L8",
+  "oracle_source_id": "state-machine:s03:v1",
+  "outcome_truth": "failure",
+  "pair": null,
+  "primary_family": "S03",
+  "rationale": "required field empty with a visible validation error refutes the no-error criterion",
+  "scope": [
+    "observed_state",
+    "visual"
+  ],
+  "secondary_tags": [],
+  "sign_off": null,
+  "split": "test",
+  "state": {
+    "empty_field": "region",
+    "validation_error": true
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "annotation_status": "pending_human_review",
+  "annotators": [],
+  "case_id": "d85eac08-6dab-52de-b4a9-7391eaeec38e",
+  "evidence_sufficiency": "sufficient",
+  "expected": {
+    "assertion": {
+      "decision": "success",
+      "reason_codes": [
+        "ALL_CRITERIA_SUPPORTED"
+      ]
+    },
+    "visual": {
+      "decision": "success",
+      "reason_codes": [
+        "ALL_CRITERIA_SUPPORTED"
+      ]
+    }
+  },
+  "group_id": "s11:L8",
+  "oracle_source_id": "state-machine:s11:v1",
+  "outcome_truth": "failure",
+  "pair": null,
+  "primary_family": "S11",
+  "rationale": "bound ledger confirms completion; the agent summary cannot veto it",
+  "scope": [
+    "external",
+    "observed_state",
+    "visual"
+  ],
+  "secondary_tags": [],
+  "sign_off": null,
+  "split": "test",
+  "state": {
+    "ledger": "completed"
+  }
+}

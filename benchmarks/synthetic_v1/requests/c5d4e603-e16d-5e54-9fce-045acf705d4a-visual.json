@@ -1,0 +1,59 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Database record for BV-0180 reports the sync completed",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "sync": "BV-0180"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "c5d4e603e16d-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "c5d4e603e16d-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "893cd323964760ccc2ca870fc1b7401258fd091fc88116fe90f451f2e2dce0a4",
+      "source_id": "fixture-ui",
+      "subject": {
+        "sync": "BV-0180"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "database",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "c5d4e603e16d-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "sync": "BV-0180"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the mirror task for BV-0180 in Mirror Console BV",
+  "request_id": "c5d4e603e16d-v",
+  "schema_version": "1"
+}

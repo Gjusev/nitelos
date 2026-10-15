@@ -1,0 +1,113 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The upload action for DB-0180 completed",
+      "evidence_ids": [
+        "19efd38d6e1b-act-1"
+      ],
+      "expected": "completed",
+      "id": "c-beh",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/reported_status",
+      "scope": "behavioral",
+      "subject": {
+        "upload": "DB-0180"
+      }
+    },
+    {
+      "description": "Backend record for DB-0180 reports the upload stored",
+      "evidence_ids": [
+        "19efd38d6e1b-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "upload": "DB-0180"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "19efd38d6e1b-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "19efd38d6e1b-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "ad19296ffdaf3bfb50ebc5d7d9d53c0cc64d54b8c0558cde03a04289026fce78",
+      "source_id": "fixture-ui",
+      "subject": {
+        "upload": "DB-0180"
+      },
+      "width": 1200
+    },
+    {
+      "arguments": {
+        "target": "DB-0180"
+      },
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-final",
+      "id": "19efd38d6e1b-act-1",
+      "kind": "action",
+      "name": "upload-file",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 1,
+      "sha256": "2f96414726e8fc5432a8bc0ec8ead8751880293e989e10b356292591f6e6424f",
+      "source_id": "agent-runner",
+      "subject": {
+        "upload": "DB-0180"
+      },
+      "tool_result_id": null
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "quota exceeded",
+        "job_status": "failed"
+      },
+      "id": "19efd38d6e1b-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "656fe331ed8b43a167ad99287279ac988f141ae51bebd979e08022ff0694316d",
+      "source_id": "fixture-ui",
+      "subject": {
+        "upload": "DB-0180"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "19efd38d6e1b-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "upload": "DB-0180"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the blob task for DB-0180 in Blob Console DB",
+  "request_id": "19efd38d6e1b-a",
+  "schema_version": "1"
+}

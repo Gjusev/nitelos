@@ -1,0 +1,78 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Ledger record for DE-0130 reports the transfer completed",
+      "evidence_ids": [
+        "e7c4c299ab32-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "transfer": "DE-0130"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "e7c4c299ab32-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "e7c4c299ab32-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "377d4068da16e3b56f18cf09758e116714fd83b3b7fed7d45be18bb39a1dfd03",
+      "source_id": "fixture-ui",
+      "subject": {
+        "transfer": "DE-0130"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "summary": "failed"
+      },
+      "id": "e7c4c299ab32-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "f66f83e36d5d7876f3112b577be85291d030c5914f06ef4b015154d26d2e7af0",
+      "source_id": "fixture-ui",
+      "subject": {
+        "transfer": "DE-0130"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "completed"
+      },
+      "id": "e7c4c299ab32-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "transfer": "DE-0130"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the remittance task for DE-0130 in Remittance Console DE",
+  "request_id": "e7c4c299ab32-a",
+  "schema_version": "1"
+}

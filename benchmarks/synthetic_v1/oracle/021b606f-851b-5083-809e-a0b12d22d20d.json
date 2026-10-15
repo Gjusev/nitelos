@@ -1,0 +1,36 @@
+{
+  "annotation_status": "pending_human_review",
+  "annotators": [],
+  "case_id": "021b606f-851b-5083-809e-a0b12d22d20d",
+  "evidence_sufficiency": "sufficient",
+  "expected": {
+    "assertion": {
+      "decision": "failure",
+      "reason_codes": [
+        "CRITERION_REFUTED"
+      ]
+    },
+    "visual": {
+      "decision": "failure",
+      "reason_codes": [
+        "CRITERION_REFUTED"
+      ]
+    }
+  },
+  "group_id": "s04:L1",
+  "oracle_source_id": "state-machine:s04:v1",
+  "outcome_truth": "failure",
+  "pair": null,
+  "primary_family": "S04",
+  "rationale": "",
+  "scope": [
+    "external",
+    "visual"
+  ],
+  "secondary_tags": [],
+  "sign_off": null,
+  "split": "dev",
+  "state": {
+    "ledger": "failed"
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The upload action for CV-0120 completed",
+      "evidence_ids": [
+        "c2cd0d5847cd-act-1"
+      ],
+      "expected": "completed",
+      "id": "c-beh",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/reported_status",
+      "scope": "behavioral",
+      "subject": {
+        "upload": "CV-0120"
+      }
+    },
+    {
+      "description": "Backend record for CV-0120 reports the upload stored",
+      "evidence_ids": [
+        "c2cd0d5847cd-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "upload": "CV-0120"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "c2cd0d5847cd-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "c2cd0d5847cd-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "e3e22fdc5f053d686b3dc382982f8ab29a8a648a43b522408095c7786f1a5e7d",
+      "source_id": "fixture-ui",
+      "subject": {
+        "upload": "CV-0120"
+      },
+      "width": 1200
+    },
+    {
+      "arguments": {
+        "target": "CV-0120"
+      },
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-final",
+      "id": "c2cd0d5847cd-act-1",
+      "kind": "action",
+      "name": "upload-file",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 1,
+      "sha256": "6c90f6cae38a384a86f6d8e44b7dfbbdf25d048315fa5dc424eec63f2f67a746",
+      "source_id": "agent-runner",
+      "subject": {
+        "upload": "CV-0120"
+      },
+      "tool_result_id": null
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "quota exceeded",
+        "job_status": "failed"
+      },
+      "id": "c2cd0d5847cd-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "656fe331ed8b43a167ad99287279ac988f141ae51bebd979e08022ff0694316d",
+      "source_id": "fixture-ui",
+      "subject": {
+        "upload": "CV-0120"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "c2cd0d5847cd-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "upload": "CV-0120"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the asset task for CV-0120 in Asset Console CV",
+  "request_id": "c2cd0d5847cd-v",
+  "schema_version": "1"
+}

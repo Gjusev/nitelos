@@ -1,0 +1,62 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "No validation error remains on the AR-0120 form",
+      "evidence_ids": [
+        "27538dd3ba2e-dom-1"
+      ],
+      "expected": false,
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/validation_error",
+      "scope": "observed_state",
+      "subject": {
+        "form": "AR-0120"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "27538dd3ba2e-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "27538dd3ba2e-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "3b09fb369e64ad246e6e132a79811e06251e812d2630f43bae2c7e93f0ce3117",
+      "source_id": "fixture-ui",
+      "subject": {
+        "form": "AR-0120"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "display_name": "Cai Delta",
+        "validation_error": true
+      },
+      "id": "27538dd3ba2e-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "2aff556838b66a3ee46c0c3a9b64b1e63738704b8fa08d77b0ac5d10e2b7f970",
+      "source_id": "fixture-ui",
+      "subject": {
+        "form": "AR-0120"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the account task for AR-0120 in Account Console AR",
+  "request_id": "27538dd3ba2e-a",
+  "schema_version": "1"
+}

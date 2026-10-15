@@ -1,0 +1,61 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Database record for BU-0170 reports the sync completed",
+      "evidence_ids": [
+        "587af9b80c4b-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "sync": "BU-0170"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "587af9b80c4b-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "587af9b80c4b-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "9457151c3287ef25bfaa0479f99f336f6951e50dd804f4a8ee26e3c13fa41c3f",
+      "source_id": "fixture-ui",
+      "subject": {
+        "sync": "BU-0170"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "database",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "587af9b80c4b-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "sync": "BU-0170"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the stash task for BU-0170 in Stash Console BU",
+  "request_id": "587af9b80c4b-a",
+  "schema_version": "1"
+}

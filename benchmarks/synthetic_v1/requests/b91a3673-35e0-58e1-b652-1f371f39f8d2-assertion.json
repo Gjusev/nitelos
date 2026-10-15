@@ -1,0 +1,61 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Ledger record for BD-0160 reports the payment settled",
+      "evidence_ids": [
+        "b91a367335e0-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "payment": "BD-0160"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "b91a367335e0-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "b91a367335e0-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "75ce7d2cb5bf89a377eb114b2e06b83897c54cdb68b6b12d2432e700f6b083b9",
+      "source_id": "fixture-ui",
+      "subject": {
+        "payment": "BD-0160"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "b91a367335e0-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "payment": "BD-0160"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the remit task for BD-0160 in Remit Console BD",
+  "request_id": "b91a367335e0-a",
+  "schema_version": "1"
+}

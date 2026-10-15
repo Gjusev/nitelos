@@ -1,0 +1,80 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for EI-0110 reports the import completed",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "import": "EI-0110"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "arguments": {
+        "target": "EI-0110"
+      },
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-01",
+      "id": "7d6077b688b0-act-open",
+      "kind": "action",
+      "name": "open-import",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 0,
+      "sha256": "bdc24119c93cb12dea1118b9d8a2c83bfdecb0c775c5201279bd47a39a5b587b",
+      "source_id": "agent-runner",
+      "subject": {
+        "import": "EI-0110"
+      },
+      "tool_result_id": null
+    },
+    {
+      "arguments": {
+        "target": "EI-0110"
+      },
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-02",
+      "id": "7d6077b688b0-act-map",
+      "kind": "action",
+      "name": "map-columns",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 1,
+      "sha256": "dd6204325c8e4a97997f2c9302e4a8156cca2c19c0e81651cc56a9edab298a2f",
+      "source_id": "agent-runner",
+      "subject": {
+        "import": "EI-0110"
+      },
+      "tool_result_id": null
+    },
+    {
+      "artifact_id": "7d6077b688b0-art-1",
+      "captured_at": "2026-10-20T10:00:02Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "7d6077b688b0-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "0331c488454afbb91061adff5d2804bd204f27dfb8a67c96d93b74ee42ed79d8",
+      "source_id": "fixture-ui",
+      "subject": {
+        "import": "EI-0110"
+      },
+      "width": 1200
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the import task for EI-0110 in Import Console EI",
+  "request_id": "7d6077b688b0-v",
+  "schema_version": "1"
+}

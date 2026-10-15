@@ -1,0 +1,92 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for AB-0120 reports status completed",
+      "evidence_ids": [
+        "06ec9529e343-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "job": "AB-0120"
+      }
+    },
+    {
+      "description": "The Report Console AB window shows a banner stating the report completed",
+      "evidence_ids": [
+        "06ec9529e343-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "job": "AB-0120"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "06ec9529e343-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "06ec9529e343-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "c8b07073452c1505f2e96fbfb0bff1660628b2986eca0c570c2544b4343bf87d",
+      "source_id": "fixture-ui",
+      "subject": {
+        "job": "AB-0120"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "items": 4,
+        "job_status": "completed"
+      },
+      "id": "06ec9529e343-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "c98cbdec74500e1d5ae4059690d9740672613282db98ef4a68415a066e3c5a46",
+      "source_id": "fixture-ui",
+      "subject": {
+        "job": "AB-0120"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "record_count": 4,
+        "status": "completed"
+      },
+      "id": "06ec9529e343-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "c0b65f67bf820b07d771524949ba96cb5effb7d184ee90835efd0f19cf9c2320",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "job": "AB-0120"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the report task for AB-0120 in Report Console AB",
+  "request_id": "06ec9529e343-v",
+  "schema_version": "1"
+}

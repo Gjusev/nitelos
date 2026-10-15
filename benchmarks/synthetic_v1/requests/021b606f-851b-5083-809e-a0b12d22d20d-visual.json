@@ -1,0 +1,73 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Ledger record for AY-0110 reports the payment settled",
+      "evidence_ids": [
+        "021b606f851b-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "payment": "AY-0110"
+      }
+    },
+    {
+      "description": "The Payment Console AY window shows a banner stating the payment was sent",
+      "evidence_ids": [
+        "021b606f851b-shot-1"
+      ],
+      "id": "c-vis",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "payment": "AY-0110"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "021b606f851b-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "021b606f851b-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "cf0727bb283ab34a1a31d974d0a2471a3c744ef07f1da3bf15700a5dc6de5535",
+      "source_id": "fixture-ui",
+      "subject": {
+        "payment": "AY-0110"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "021b606f851b-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "payment": "AY-0110"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the payment task for AY-0110 in Payment Console AY",
+  "request_id": "021b606f851b-v",
+  "schema_version": "1"
+}

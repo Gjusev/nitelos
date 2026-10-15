@@ -1,0 +1,62 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for BI-0130 reports the deployment completed",
+      "evidence_ids": [
+        "5e916367bcbf-dom-1"
+      ],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/deploy_state",
+      "scope": "observed_state",
+      "subject": {
+        "deployment": "BI-0130"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "5e916367bcbf-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "5e916367bcbf-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "pending",
+      "sequence": 0,
+      "sha256": "98e7eab6781476ed367357abc01d2d66f56164f3d20b7c36115b8731300cba1b",
+      "source_id": "fixture-ui",
+      "subject": {
+        "deployment": "BI-0130"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "deploy_state": "running",
+        "progress": 50
+      },
+      "id": "5e916367bcbf-dom-1",
+      "kind": "observation",
+      "phase": "pending",
+      "sequence": 1,
+      "sha256": "7c63aaea3e37989960e4cd12d853c9747a085956cf537401111caf49ffa71b9c",
+      "source_id": "fixture-ui",
+      "subject": {
+        "deployment": "BI-0130"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the rollout task for BI-0130 in Rollout Console BI",
+  "request_id": "5e916367bcbf-a",
+  "schema_version": "1"
+}

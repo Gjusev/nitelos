@@ -1,0 +1,5816 @@
+{
+  "algorithm": "aHash-8x8",
+  "hits": [
+    {
+      "a": "2da5fb7e3d2c.png",
+      "b": "b12afc99ec41.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "2da5fb7e3d2c.png",
+      "b": "7f2be8c18e91.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "2da5fb7e3d2c.png",
+      "b": "021b606f851b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "2da5fb7e3d2c.png",
+      "b": "afd2f3291c9b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "2da5fb7e3d2c.png",
+      "b": "487c3b0ea779.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "2da5fb7e3d2c.png",
+      "b": "a7a3cbec39dd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "2da5fb7e3d2c.png",
+      "b": "e0c620bf214a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "2da5fb7e3d2c.png",
+      "b": "83d46dd1599a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "2da5fb7e3d2c.png",
+      "b": "83d46dd1599a-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "2da5fb7e3d2c.png",
+      "b": "db155b0cf29f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "2da5fb7e3d2c.png",
+      "b": "77c6f22c2988.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "2da5fb7e3d2c.png",
+      "b": "4b4039caed16.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "2da5fb7e3d2c.png",
+      "b": "97efda40d692.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "2da5fb7e3d2c.png",
+      "b": "13760d4c3c2e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "2da5fb7e3d2c.png",
+      "b": "ad617572b501.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "2da5fb7e3d2c.png",
+      "b": "7d6077b688b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "06ec9529e343.png",
+      "b": "449f4e86fc28.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "06ec9529e343.png",
+      "b": "27538dd3ba2e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "06ec9529e343.png",
+      "b": "1cdd1891ff93.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "06ec9529e343.png",
+      "b": "dac6131a95b2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "06ec9529e343.png",
+      "b": "44cdb9c45f9c.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "06ec9529e343.png",
+      "b": "f9ea5a94d560.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "06ec9529e343.png",
+      "b": "5b3b0d5fab1e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "06ec9529e343.png",
+      "b": "f136675ecb75.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "06ec9529e343.png",
+      "b": "f136675ecb75-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "06ec9529e343.png",
+      "b": "c2cd0d5847cd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "06ec9529e343.png",
+      "b": "b2f26b3208b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "06ec9529e343.png",
+      "b": "9e66272ead83.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "06ec9529e343.png",
+      "b": "dd85282cd2e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "06ec9529e343.png",
+      "b": "7df9c08ff782.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6a0d90819024.png",
+      "b": "1e6d9ce18928.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6a0d90819024.png",
+      "b": "2a26e4e1a593.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "6a0d90819024.png",
+      "b": "7719a23c6b15.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6a0d90819024.png",
+      "b": "5e916367bcbf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "6a0d90819024.png",
+      "b": "6ce4035e03b7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6a0d90819024.png",
+      "b": "11363ad15b7f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6a0d90819024.png",
+      "b": "fed74ee61e42.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6a0d90819024.png",
+      "b": "1a1e5a53672f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6a0d90819024.png",
+      "b": "1a1e5a53672f-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6a0d90819024.png",
+      "b": "6808c0586690.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6a0d90819024.png",
+      "b": "e7c4c299ab32.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6a0d90819024.png",
+      "b": "100941de37a5.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6a0d90819024.png",
+      "b": "7a731d41f81f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "6a0d90819024.png",
+      "b": "5c572d17e610.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "10743039f013.png",
+      "b": "90b0cf598cd6.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "10743039f013.png",
+      "b": "111844eb6fdc.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 5
+    },
+    {
+      "a": "10743039f013.png",
+      "b": "13d9bd6c6c09.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "10743039f013.png",
+      "b": "d023413b5913.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "10743039f013.png",
+      "b": "fb7260a58407.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "10743039f013.png",
+      "b": "f1c985c56a82.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "10743039f013.png",
+      "b": "f6f69a32bceb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "10743039f013.png",
+      "b": "a2a397946a10.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "10743039f013.png",
+      "b": "631418b7a0fc.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "10743039f013.png",
+      "b": "631418b7a0fc-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "10743039f013.png",
+      "b": "4491133a9bee.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "10743039f013.png",
+      "b": "5bfd12359afd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "10743039f013.png",
+      "b": "c428b8f34a21.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "10743039f013.png",
+      "b": "7486d0a56e11.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "10743039f013.png",
+      "b": "f5aad543dfa4.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13f58a973620.png",
+      "b": "145ffa238378.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "13f58a973620.png",
+      "b": "4a9709d9f97b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "13f58a973620.png",
+      "b": "14db48587f3b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13f58a973620.png",
+      "b": "8dc5aa41b6fe.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "13f58a973620.png",
+      "b": "8771b6472d4d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13f58a973620.png",
+      "b": "f4467e8abbfb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13f58a973620.png",
+      "b": "0417742f4476.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13f58a973620.png",
+      "b": "95049a7401b3.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13f58a973620.png",
+      "b": "95049a7401b3-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "13f58a973620.png",
+      "b": "e78d7dd88f8c.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "13f58a973620.png",
+      "b": "72a39098afc7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "13f58a973620.png",
+      "b": "b8d02e3b4fca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "13f58a973620.png",
+      "b": "803337eeef56.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "13f58a973620.png",
+      "b": "9fa57b640b17.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "13f58a973620.png",
+      "b": "ccdf4fab0901.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13f58a973620.png",
+      "b": "a82e857baeb2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "ee1781b31b83.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "a5f6d478def1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "b91a367335e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "f3d1a4a5d090.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "b77b375ca9ac.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "474376a2f41b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "0e41502221ed.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "ef9d8cb25530.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "ef9d8cb25530-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "819bc6aaff5d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "551d96097ad0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "70e6d73ee2a7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "1538a7356e3e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "ec15e3602baf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "375195447ec1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "ef0a1454992b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7b182b3dfdfc.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e8f4265a8af4.png",
+      "b": "6441f4bfb485.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e8f4265a8af4.png",
+      "b": "6baeace26511.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "e8f4265a8af4.png",
+      "b": "015a1a0c269a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e8f4265a8af4.png",
+      "b": "62c7c4d9e535.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e8f4265a8af4.png",
+      "b": "587af9b80c4b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e8f4265a8af4.png",
+      "b": "de6871d7d6e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e8f4265a8af4.png",
+      "b": "3e0cccf0497f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e8f4265a8af4.png",
+      "b": "ecc867c3fdab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e8f4265a8af4.png",
+      "b": "ecc867c3fdab-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e8f4265a8af4.png",
+      "b": "729e604f8817.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e8f4265a8af4.png",
+      "b": "90db5d916abb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e8f4265a8af4.png",
+      "b": "42826cedfbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e8f4265a8af4.png",
+      "b": "fcea3a598cca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "e8f4265a8af4.png",
+      "b": "06a56bc5f77f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "9a1b04deaed0.png",
+      "b": "71dcd2ddc2b9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "9a1b04deaed0.png",
+      "b": "13d54eb15280.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "9a1b04deaed0.png",
+      "b": "cb0b4932c391.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "9a1b04deaed0.png",
+      "b": "c5d4e603e16d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "9a1b04deaed0.png",
+      "b": "6d1da7a62e70.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "9a1b04deaed0.png",
+      "b": "91a387bf687b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "9a1b04deaed0.png",
+      "b": "d0b1a28c8a19.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "9a1b04deaed0.png",
+      "b": "d0b1a28c8a19-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "9a1b04deaed0.png",
+      "b": "19efd38d6e1b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "9a1b04deaed0.png",
+      "b": "d85eac086dab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "9a1b04deaed0.png",
+      "b": "27b84d82fbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "9a1b04deaed0.png",
+      "b": "9e987754af66.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "9a1b04deaed0.png",
+      "b": "5ec9bee0de74.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b12afc99ec41.png",
+      "b": "7f2be8c18e91.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b12afc99ec41.png",
+      "b": "021b606f851b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b12afc99ec41.png",
+      "b": "afd2f3291c9b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "b12afc99ec41.png",
+      "b": "487c3b0ea779.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b12afc99ec41.png",
+      "b": "a7a3cbec39dd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "b12afc99ec41.png",
+      "b": "e0c620bf214a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b12afc99ec41.png",
+      "b": "83d46dd1599a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b12afc99ec41.png",
+      "b": "83d46dd1599a-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b12afc99ec41.png",
+      "b": "db155b0cf29f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b12afc99ec41.png",
+      "b": "77c6f22c2988.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b12afc99ec41.png",
+      "b": "4b4039caed16.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b12afc99ec41.png",
+      "b": "97efda40d692.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b12afc99ec41.png",
+      "b": "13760d4c3c2e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b12afc99ec41.png",
+      "b": "ad617572b501.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b12afc99ec41.png",
+      "b": "7d6077b688b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "449f4e86fc28.png",
+      "b": "27538dd3ba2e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "449f4e86fc28.png",
+      "b": "1cdd1891ff93.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "449f4e86fc28.png",
+      "b": "dac6131a95b2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "449f4e86fc28.png",
+      "b": "44cdb9c45f9c.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "449f4e86fc28.png",
+      "b": "f9ea5a94d560.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "449f4e86fc28.png",
+      "b": "5b3b0d5fab1e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "449f4e86fc28.png",
+      "b": "f136675ecb75.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "449f4e86fc28.png",
+      "b": "f136675ecb75-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "449f4e86fc28.png",
+      "b": "c2cd0d5847cd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "449f4e86fc28.png",
+      "b": "b2f26b3208b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "449f4e86fc28.png",
+      "b": "9e66272ead83.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "449f4e86fc28.png",
+      "b": "dd85282cd2e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "449f4e86fc28.png",
+      "b": "7df9c08ff782.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1e6d9ce18928.png",
+      "b": "2a26e4e1a593.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "1e6d9ce18928.png",
+      "b": "7719a23c6b15.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1e6d9ce18928.png",
+      "b": "5e916367bcbf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "1e6d9ce18928.png",
+      "b": "6ce4035e03b7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1e6d9ce18928.png",
+      "b": "11363ad15b7f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1e6d9ce18928.png",
+      "b": "fed74ee61e42.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1e6d9ce18928.png",
+      "b": "1a1e5a53672f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1e6d9ce18928.png",
+      "b": "1a1e5a53672f-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1e6d9ce18928.png",
+      "b": "6808c0586690.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1e6d9ce18928.png",
+      "b": "e7c4c299ab32.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1e6d9ce18928.png",
+      "b": "100941de37a5.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1e6d9ce18928.png",
+      "b": "7a731d41f81f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "1e6d9ce18928.png",
+      "b": "5c572d17e610.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "90b0cf598cd6.png",
+      "b": "111844eb6fdc.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 5
+    },
+    {
+      "a": "90b0cf598cd6.png",
+      "b": "13d9bd6c6c09.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "90b0cf598cd6.png",
+      "b": "d023413b5913.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "90b0cf598cd6.png",
+      "b": "fb7260a58407.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "90b0cf598cd6.png",
+      "b": "f1c985c56a82.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "90b0cf598cd6.png",
+      "b": "f6f69a32bceb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "90b0cf598cd6.png",
+      "b": "a2a397946a10.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "90b0cf598cd6.png",
+      "b": "631418b7a0fc.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "90b0cf598cd6.png",
+      "b": "631418b7a0fc-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "90b0cf598cd6.png",
+      "b": "4491133a9bee.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "90b0cf598cd6.png",
+      "b": "5bfd12359afd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "90b0cf598cd6.png",
+      "b": "c428b8f34a21.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "90b0cf598cd6.png",
+      "b": "7486d0a56e11.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "90b0cf598cd6.png",
+      "b": "f5aad543dfa4.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "145ffa238378.png",
+      "b": "4a9709d9f97b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "145ffa238378.png",
+      "b": "14db48587f3b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "145ffa238378.png",
+      "b": "8dc5aa41b6fe.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "145ffa238378.png",
+      "b": "8771b6472d4d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "145ffa238378.png",
+      "b": "f4467e8abbfb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "145ffa238378.png",
+      "b": "0417742f4476.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "145ffa238378.png",
+      "b": "95049a7401b3.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "145ffa238378.png",
+      "b": "95049a7401b3-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "145ffa238378.png",
+      "b": "e78d7dd88f8c.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "145ffa238378.png",
+      "b": "72a39098afc7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "145ffa238378.png",
+      "b": "b8d02e3b4fca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "145ffa238378.png",
+      "b": "803337eeef56.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "145ffa238378.png",
+      "b": "9fa57b640b17.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "145ffa238378.png",
+      "b": "ccdf4fab0901.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "145ffa238378.png",
+      "b": "a82e857baeb2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "a5f6d478def1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "b91a367335e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "f3d1a4a5d090.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "b77b375ca9ac.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "474376a2f41b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "0e41502221ed.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "ef9d8cb25530.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "ef9d8cb25530-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "819bc6aaff5d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "551d96097ad0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "70e6d73ee2a7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "1538a7356e3e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "ec15e3602baf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "375195447ec1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "ef0a1454992b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ee1781b31b83.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6441f4bfb485.png",
+      "b": "6baeace26511.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "6441f4bfb485.png",
+      "b": "015a1a0c269a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6441f4bfb485.png",
+      "b": "62c7c4d9e535.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6441f4bfb485.png",
+      "b": "587af9b80c4b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6441f4bfb485.png",
+      "b": "de6871d7d6e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6441f4bfb485.png",
+      "b": "3e0cccf0497f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6441f4bfb485.png",
+      "b": "ecc867c3fdab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6441f4bfb485.png",
+      "b": "ecc867c3fdab-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6441f4bfb485.png",
+      "b": "729e604f8817.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6441f4bfb485.png",
+      "b": "90db5d916abb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6441f4bfb485.png",
+      "b": "42826cedfbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6441f4bfb485.png",
+      "b": "fcea3a598cca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "6441f4bfb485.png",
+      "b": "06a56bc5f77f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "71dcd2ddc2b9.png",
+      "b": "13d54eb15280.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "71dcd2ddc2b9.png",
+      "b": "cb0b4932c391.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "71dcd2ddc2b9.png",
+      "b": "c5d4e603e16d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "71dcd2ddc2b9.png",
+      "b": "6d1da7a62e70.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "71dcd2ddc2b9.png",
+      "b": "91a387bf687b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "71dcd2ddc2b9.png",
+      "b": "d0b1a28c8a19.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "71dcd2ddc2b9.png",
+      "b": "d0b1a28c8a19-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "71dcd2ddc2b9.png",
+      "b": "19efd38d6e1b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "71dcd2ddc2b9.png",
+      "b": "d85eac086dab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "71dcd2ddc2b9.png",
+      "b": "27b84d82fbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "71dcd2ddc2b9.png",
+      "b": "9e987754af66.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "71dcd2ddc2b9.png",
+      "b": "5ec9bee0de74.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7f2be8c18e91.png",
+      "b": "021b606f851b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7f2be8c18e91.png",
+      "b": "afd2f3291c9b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "7f2be8c18e91.png",
+      "b": "487c3b0ea779.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7f2be8c18e91.png",
+      "b": "a7a3cbec39dd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "7f2be8c18e91.png",
+      "b": "e0c620bf214a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7f2be8c18e91.png",
+      "b": "83d46dd1599a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7f2be8c18e91.png",
+      "b": "83d46dd1599a-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7f2be8c18e91.png",
+      "b": "db155b0cf29f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7f2be8c18e91.png",
+      "b": "77c6f22c2988.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7f2be8c18e91.png",
+      "b": "4b4039caed16.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7f2be8c18e91.png",
+      "b": "97efda40d692.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7f2be8c18e91.png",
+      "b": "13760d4c3c2e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7f2be8c18e91.png",
+      "b": "ad617572b501.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7f2be8c18e91.png",
+      "b": "7d6077b688b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "27538dd3ba2e.png",
+      "b": "1cdd1891ff93.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "27538dd3ba2e.png",
+      "b": "dac6131a95b2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "27538dd3ba2e.png",
+      "b": "44cdb9c45f9c.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "27538dd3ba2e.png",
+      "b": "f9ea5a94d560.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "27538dd3ba2e.png",
+      "b": "5b3b0d5fab1e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "27538dd3ba2e.png",
+      "b": "f136675ecb75.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "27538dd3ba2e.png",
+      "b": "f136675ecb75-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "27538dd3ba2e.png",
+      "b": "c2cd0d5847cd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "27538dd3ba2e.png",
+      "b": "b2f26b3208b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "27538dd3ba2e.png",
+      "b": "9e66272ead83.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "27538dd3ba2e.png",
+      "b": "dd85282cd2e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "27538dd3ba2e.png",
+      "b": "7df9c08ff782.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "2a26e4e1a593.png",
+      "b": "7719a23c6b15.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "2a26e4e1a593.png",
+      "b": "5e916367bcbf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "2a26e4e1a593.png",
+      "b": "6ce4035e03b7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "2a26e4e1a593.png",
+      "b": "11363ad15b7f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "2a26e4e1a593.png",
+      "b": "fed74ee61e42.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "2a26e4e1a593.png",
+      "b": "1a1e5a53672f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "2a26e4e1a593.png",
+      "b": "1a1e5a53672f-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "2a26e4e1a593.png",
+      "b": "6808c0586690.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "2a26e4e1a593.png",
+      "b": "e7c4c299ab32.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "2a26e4e1a593.png",
+      "b": "100941de37a5.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "2a26e4e1a593.png",
+      "b": "7a731d41f81f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "2a26e4e1a593.png",
+      "b": "5c572d17e610.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "111844eb6fdc.png",
+      "b": "13d9bd6c6c09.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 5
+    },
+    {
+      "a": "111844eb6fdc.png",
+      "b": "d023413b5913.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 5
+    },
+    {
+      "a": "111844eb6fdc.png",
+      "b": "f1c985c56a82.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 5
+    },
+    {
+      "a": "111844eb6fdc.png",
+      "b": "f6f69a32bceb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 5
+    },
+    {
+      "a": "111844eb6fdc.png",
+      "b": "a2a397946a10.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 5
+    },
+    {
+      "a": "111844eb6fdc.png",
+      "b": "631418b7a0fc.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 5
+    },
+    {
+      "a": "111844eb6fdc.png",
+      "b": "631418b7a0fc-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 5
+    },
+    {
+      "a": "111844eb6fdc.png",
+      "b": "4491133a9bee.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 5
+    },
+    {
+      "a": "111844eb6fdc.png",
+      "b": "5bfd12359afd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 5
+    },
+    {
+      "a": "111844eb6fdc.png",
+      "b": "c428b8f34a21.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 5
+    },
+    {
+      "a": "111844eb6fdc.png",
+      "b": "ec15e3602baf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 5
+    },
+    {
+      "a": "111844eb6fdc.png",
+      "b": "7486d0a56e11.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 5
+    },
+    {
+      "a": "111844eb6fdc.png",
+      "b": "f5aad543dfa4.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 5
+    },
+    {
+      "a": "4a9709d9f97b.png",
+      "b": "14db48587f3b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "4a9709d9f97b.png",
+      "b": "8dc5aa41b6fe.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "4a9709d9f97b.png",
+      "b": "8771b6472d4d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "4a9709d9f97b.png",
+      "b": "f4467e8abbfb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "4a9709d9f97b.png",
+      "b": "0417742f4476.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "4a9709d9f97b.png",
+      "b": "95049a7401b3.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "4a9709d9f97b.png",
+      "b": "95049a7401b3-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "4a9709d9f97b.png",
+      "b": "e78d7dd88f8c.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "4a9709d9f97b.png",
+      "b": "72a39098afc7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "4a9709d9f97b.png",
+      "b": "b8d02e3b4fca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "4a9709d9f97b.png",
+      "b": "803337eeef56.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "4a9709d9f97b.png",
+      "b": "9fa57b640b17.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "4a9709d9f97b.png",
+      "b": "ccdf4fab0901.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "4a9709d9f97b.png",
+      "b": "a82e857baeb2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "a5f6d478def1.png",
+      "b": "b91a367335e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a5f6d478def1.png",
+      "b": "f3d1a4a5d090.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a5f6d478def1.png",
+      "b": "b77b375ca9ac.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a5f6d478def1.png",
+      "b": "474376a2f41b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a5f6d478def1.png",
+      "b": "0e41502221ed.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a5f6d478def1.png",
+      "b": "ef9d8cb25530.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a5f6d478def1.png",
+      "b": "ef9d8cb25530-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a5f6d478def1.png",
+      "b": "819bc6aaff5d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a5f6d478def1.png",
+      "b": "551d96097ad0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a5f6d478def1.png",
+      "b": "70e6d73ee2a7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a5f6d478def1.png",
+      "b": "1538a7356e3e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "a5f6d478def1.png",
+      "b": "ec15e3602baf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "a5f6d478def1.png",
+      "b": "375195447ec1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a5f6d478def1.png",
+      "b": "ef0a1454992b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a5f6d478def1.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a5f6d478def1.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6baeace26511.png",
+      "b": "015a1a0c269a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "6baeace26511.png",
+      "b": "62c7c4d9e535.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "6baeace26511.png",
+      "b": "587af9b80c4b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "6baeace26511.png",
+      "b": "de6871d7d6e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "6baeace26511.png",
+      "b": "3e0cccf0497f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "6baeace26511.png",
+      "b": "ecc867c3fdab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "6baeace26511.png",
+      "b": "ecc867c3fdab-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "6baeace26511.png",
+      "b": "729e604f8817.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "6baeace26511.png",
+      "b": "90db5d916abb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "6baeace26511.png",
+      "b": "42826cedfbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "6baeace26511.png",
+      "b": "fcea3a598cca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6baeace26511.png",
+      "b": "06a56bc5f77f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "13d9bd6c6c09.png",
+      "b": "d023413b5913.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d9bd6c6c09.png",
+      "b": "fb7260a58407.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "13d9bd6c6c09.png",
+      "b": "f1c985c56a82.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d9bd6c6c09.png",
+      "b": "f6f69a32bceb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d9bd6c6c09.png",
+      "b": "a2a397946a10.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d9bd6c6c09.png",
+      "b": "631418b7a0fc.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d9bd6c6c09.png",
+      "b": "631418b7a0fc-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d9bd6c6c09.png",
+      "b": "4491133a9bee.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d9bd6c6c09.png",
+      "b": "5bfd12359afd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d9bd6c6c09.png",
+      "b": "c428b8f34a21.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d9bd6c6c09.png",
+      "b": "7486d0a56e11.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d9bd6c6c09.png",
+      "b": "f5aad543dfa4.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "021b606f851b.png",
+      "b": "afd2f3291c9b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "021b606f851b.png",
+      "b": "487c3b0ea779.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "021b606f851b.png",
+      "b": "a7a3cbec39dd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "021b606f851b.png",
+      "b": "e0c620bf214a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "021b606f851b.png",
+      "b": "83d46dd1599a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "021b606f851b.png",
+      "b": "83d46dd1599a-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "021b606f851b.png",
+      "b": "db155b0cf29f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "021b606f851b.png",
+      "b": "77c6f22c2988.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "021b606f851b.png",
+      "b": "4b4039caed16.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "021b606f851b.png",
+      "b": "97efda40d692.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "021b606f851b.png",
+      "b": "13760d4c3c2e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "021b606f851b.png",
+      "b": "ad617572b501.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "021b606f851b.png",
+      "b": "7d6077b688b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1cdd1891ff93.png",
+      "b": "dac6131a95b2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "1cdd1891ff93.png",
+      "b": "44cdb9c45f9c.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1cdd1891ff93.png",
+      "b": "f9ea5a94d560.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1cdd1891ff93.png",
+      "b": "5b3b0d5fab1e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1cdd1891ff93.png",
+      "b": "f136675ecb75.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1cdd1891ff93.png",
+      "b": "f136675ecb75-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1cdd1891ff93.png",
+      "b": "c2cd0d5847cd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1cdd1891ff93.png",
+      "b": "b2f26b3208b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1cdd1891ff93.png",
+      "b": "9e66272ead83.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "1cdd1891ff93.png",
+      "b": "dd85282cd2e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "1cdd1891ff93.png",
+      "b": "7df9c08ff782.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7719a23c6b15.png",
+      "b": "5e916367bcbf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "7719a23c6b15.png",
+      "b": "6ce4035e03b7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7719a23c6b15.png",
+      "b": "11363ad15b7f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7719a23c6b15.png",
+      "b": "fed74ee61e42.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7719a23c6b15.png",
+      "b": "1a1e5a53672f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7719a23c6b15.png",
+      "b": "1a1e5a53672f-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7719a23c6b15.png",
+      "b": "6808c0586690.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7719a23c6b15.png",
+      "b": "e7c4c299ab32.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7719a23c6b15.png",
+      "b": "100941de37a5.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "7719a23c6b15.png",
+      "b": "7a731d41f81f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "7719a23c6b15.png",
+      "b": "5c572d17e610.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d023413b5913.png",
+      "b": "fb7260a58407.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "d023413b5913.png",
+      "b": "f1c985c56a82.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d023413b5913.png",
+      "b": "f6f69a32bceb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d023413b5913.png",
+      "b": "a2a397946a10.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d023413b5913.png",
+      "b": "631418b7a0fc.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d023413b5913.png",
+      "b": "631418b7a0fc-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d023413b5913.png",
+      "b": "4491133a9bee.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d023413b5913.png",
+      "b": "5bfd12359afd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d023413b5913.png",
+      "b": "c428b8f34a21.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d023413b5913.png",
+      "b": "7486d0a56e11.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d023413b5913.png",
+      "b": "f5aad543dfa4.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "14db48587f3b.png",
+      "b": "8dc5aa41b6fe.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "14db48587f3b.png",
+      "b": "8771b6472d4d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "14db48587f3b.png",
+      "b": "f4467e8abbfb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "14db48587f3b.png",
+      "b": "0417742f4476.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "14db48587f3b.png",
+      "b": "95049a7401b3.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "14db48587f3b.png",
+      "b": "95049a7401b3-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "14db48587f3b.png",
+      "b": "e78d7dd88f8c.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "14db48587f3b.png",
+      "b": "72a39098afc7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "14db48587f3b.png",
+      "b": "b8d02e3b4fca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "14db48587f3b.png",
+      "b": "803337eeef56.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "14db48587f3b.png",
+      "b": "9fa57b640b17.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "14db48587f3b.png",
+      "b": "ccdf4fab0901.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "14db48587f3b.png",
+      "b": "a82e857baeb2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b91a367335e0.png",
+      "b": "f3d1a4a5d090.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b91a367335e0.png",
+      "b": "b77b375ca9ac.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b91a367335e0.png",
+      "b": "474376a2f41b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b91a367335e0.png",
+      "b": "0e41502221ed.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b91a367335e0.png",
+      "b": "ef9d8cb25530.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b91a367335e0.png",
+      "b": "ef9d8cb25530-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b91a367335e0.png",
+      "b": "819bc6aaff5d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b91a367335e0.png",
+      "b": "551d96097ad0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b91a367335e0.png",
+      "b": "70e6d73ee2a7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b91a367335e0.png",
+      "b": "1538a7356e3e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "b91a367335e0.png",
+      "b": "ec15e3602baf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "b91a367335e0.png",
+      "b": "375195447ec1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b91a367335e0.png",
+      "b": "ef0a1454992b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b91a367335e0.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b91a367335e0.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "015a1a0c269a.png",
+      "b": "62c7c4d9e535.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "015a1a0c269a.png",
+      "b": "587af9b80c4b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "015a1a0c269a.png",
+      "b": "de6871d7d6e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "015a1a0c269a.png",
+      "b": "3e0cccf0497f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "015a1a0c269a.png",
+      "b": "ecc867c3fdab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "015a1a0c269a.png",
+      "b": "ecc867c3fdab-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "015a1a0c269a.png",
+      "b": "729e604f8817.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "015a1a0c269a.png",
+      "b": "90db5d916abb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "015a1a0c269a.png",
+      "b": "42826cedfbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "015a1a0c269a.png",
+      "b": "fcea3a598cca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "015a1a0c269a.png",
+      "b": "06a56bc5f77f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d54eb15280.png",
+      "b": "cb0b4932c391.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "13d54eb15280.png",
+      "b": "c5d4e603e16d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d54eb15280.png",
+      "b": "6d1da7a62e70.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d54eb15280.png",
+      "b": "91a387bf687b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d54eb15280.png",
+      "b": "d0b1a28c8a19.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d54eb15280.png",
+      "b": "d0b1a28c8a19-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d54eb15280.png",
+      "b": "19efd38d6e1b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d54eb15280.png",
+      "b": "d85eac086dab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d54eb15280.png",
+      "b": "27b84d82fbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13d54eb15280.png",
+      "b": "9e987754af66.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "13d54eb15280.png",
+      "b": "5ec9bee0de74.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "afd2f3291c9b.png",
+      "b": "487c3b0ea779.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "afd2f3291c9b.png",
+      "b": "a7a3cbec39dd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "afd2f3291c9b.png",
+      "b": "e0c620bf214a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "afd2f3291c9b.png",
+      "b": "83d46dd1599a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "afd2f3291c9b.png",
+      "b": "83d46dd1599a-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "afd2f3291c9b.png",
+      "b": "db155b0cf29f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "afd2f3291c9b.png",
+      "b": "77c6f22c2988.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "afd2f3291c9b.png",
+      "b": "4b4039caed16.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "afd2f3291c9b.png",
+      "b": "97efda40d692.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "afd2f3291c9b.png",
+      "b": "13760d4c3c2e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "afd2f3291c9b.png",
+      "b": "ad617572b501.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "afd2f3291c9b.png",
+      "b": "7d6077b688b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "dac6131a95b2.png",
+      "b": "44cdb9c45f9c.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "dac6131a95b2.png",
+      "b": "f9ea5a94d560.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "dac6131a95b2.png",
+      "b": "5b3b0d5fab1e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "dac6131a95b2.png",
+      "b": "f136675ecb75.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "dac6131a95b2.png",
+      "b": "f136675ecb75-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "dac6131a95b2.png",
+      "b": "c2cd0d5847cd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "dac6131a95b2.png",
+      "b": "b2f26b3208b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "dac6131a95b2.png",
+      "b": "9e66272ead83.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "dac6131a95b2.png",
+      "b": "dd85282cd2e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "dac6131a95b2.png",
+      "b": "7df9c08ff782.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "5e916367bcbf.png",
+      "b": "6ce4035e03b7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "5e916367bcbf.png",
+      "b": "11363ad15b7f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "5e916367bcbf.png",
+      "b": "fed74ee61e42.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "5e916367bcbf.png",
+      "b": "1a1e5a53672f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "5e916367bcbf.png",
+      "b": "1a1e5a53672f-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "5e916367bcbf.png",
+      "b": "6808c0586690.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "5e916367bcbf.png",
+      "b": "e7c4c299ab32.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "5e916367bcbf.png",
+      "b": "100941de37a5.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "5e916367bcbf.png",
+      "b": "7a731d41f81f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "5e916367bcbf.png",
+      "b": "5c572d17e610.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "fb7260a58407.png",
+      "b": "f1c985c56a82.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "fb7260a58407.png",
+      "b": "f6f69a32bceb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "fb7260a58407.png",
+      "b": "a2a397946a10.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "fb7260a58407.png",
+      "b": "631418b7a0fc.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "fb7260a58407.png",
+      "b": "631418b7a0fc-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "fb7260a58407.png",
+      "b": "4491133a9bee.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "fb7260a58407.png",
+      "b": "5bfd12359afd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "fb7260a58407.png",
+      "b": "c428b8f34a21.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "fb7260a58407.png",
+      "b": "7486d0a56e11.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "fb7260a58407.png",
+      "b": "f5aad543dfa4.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "8dc5aa41b6fe.png",
+      "b": "8771b6472d4d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "8dc5aa41b6fe.png",
+      "b": "f4467e8abbfb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "8dc5aa41b6fe.png",
+      "b": "0417742f4476.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "8dc5aa41b6fe.png",
+      "b": "95049a7401b3.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "8dc5aa41b6fe.png",
+      "b": "95049a7401b3-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "8dc5aa41b6fe.png",
+      "b": "e78d7dd88f8c.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "8dc5aa41b6fe.png",
+      "b": "72a39098afc7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "8dc5aa41b6fe.png",
+      "b": "b8d02e3b4fca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "8dc5aa41b6fe.png",
+      "b": "803337eeef56.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "8dc5aa41b6fe.png",
+      "b": "9fa57b640b17.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "8dc5aa41b6fe.png",
+      "b": "ccdf4fab0901.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "8dc5aa41b6fe.png",
+      "b": "a82e857baeb2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "f3d1a4a5d090.png",
+      "b": "b77b375ca9ac.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f3d1a4a5d090.png",
+      "b": "474376a2f41b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f3d1a4a5d090.png",
+      "b": "0e41502221ed.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f3d1a4a5d090.png",
+      "b": "ef9d8cb25530.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f3d1a4a5d090.png",
+      "b": "ef9d8cb25530-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f3d1a4a5d090.png",
+      "b": "819bc6aaff5d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f3d1a4a5d090.png",
+      "b": "551d96097ad0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f3d1a4a5d090.png",
+      "b": "70e6d73ee2a7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f3d1a4a5d090.png",
+      "b": "1538a7356e3e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "f3d1a4a5d090.png",
+      "b": "ec15e3602baf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "f3d1a4a5d090.png",
+      "b": "375195447ec1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f3d1a4a5d090.png",
+      "b": "ef0a1454992b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f3d1a4a5d090.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f3d1a4a5d090.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "62c7c4d9e535.png",
+      "b": "587af9b80c4b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "62c7c4d9e535.png",
+      "b": "de6871d7d6e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "62c7c4d9e535.png",
+      "b": "3e0cccf0497f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "62c7c4d9e535.png",
+      "b": "ecc867c3fdab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "62c7c4d9e535.png",
+      "b": "ecc867c3fdab-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "62c7c4d9e535.png",
+      "b": "729e604f8817.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "62c7c4d9e535.png",
+      "b": "90db5d916abb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "62c7c4d9e535.png",
+      "b": "42826cedfbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "62c7c4d9e535.png",
+      "b": "fcea3a598cca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "62c7c4d9e535.png",
+      "b": "06a56bc5f77f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "cb0b4932c391.png",
+      "b": "c5d4e603e16d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "cb0b4932c391.png",
+      "b": "6d1da7a62e70.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "cb0b4932c391.png",
+      "b": "91a387bf687b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "cb0b4932c391.png",
+      "b": "d0b1a28c8a19.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "cb0b4932c391.png",
+      "b": "d0b1a28c8a19-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "cb0b4932c391.png",
+      "b": "19efd38d6e1b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "cb0b4932c391.png",
+      "b": "d85eac086dab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "cb0b4932c391.png",
+      "b": "27b84d82fbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "cb0b4932c391.png",
+      "b": "5ec9bee0de74.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "487c3b0ea779.png",
+      "b": "a7a3cbec39dd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "487c3b0ea779.png",
+      "b": "e0c620bf214a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "487c3b0ea779.png",
+      "b": "83d46dd1599a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "487c3b0ea779.png",
+      "b": "83d46dd1599a-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "487c3b0ea779.png",
+      "b": "db155b0cf29f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "487c3b0ea779.png",
+      "b": "77c6f22c2988.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "487c3b0ea779.png",
+      "b": "4b4039caed16.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "487c3b0ea779.png",
+      "b": "97efda40d692.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "487c3b0ea779.png",
+      "b": "13760d4c3c2e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "487c3b0ea779.png",
+      "b": "ad617572b501.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "487c3b0ea779.png",
+      "b": "7d6077b688b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "44cdb9c45f9c.png",
+      "b": "f9ea5a94d560.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "44cdb9c45f9c.png",
+      "b": "5b3b0d5fab1e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "44cdb9c45f9c.png",
+      "b": "f136675ecb75.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "44cdb9c45f9c.png",
+      "b": "f136675ecb75-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "44cdb9c45f9c.png",
+      "b": "c2cd0d5847cd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "44cdb9c45f9c.png",
+      "b": "b2f26b3208b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "44cdb9c45f9c.png",
+      "b": "9e66272ead83.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "44cdb9c45f9c.png",
+      "b": "dd85282cd2e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "44cdb9c45f9c.png",
+      "b": "7df9c08ff782.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6ce4035e03b7.png",
+      "b": "11363ad15b7f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6ce4035e03b7.png",
+      "b": "fed74ee61e42.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6ce4035e03b7.png",
+      "b": "1a1e5a53672f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6ce4035e03b7.png",
+      "b": "1a1e5a53672f-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6ce4035e03b7.png",
+      "b": "6808c0586690.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6ce4035e03b7.png",
+      "b": "e7c4c299ab32.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6ce4035e03b7.png",
+      "b": "100941de37a5.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6ce4035e03b7.png",
+      "b": "7a731d41f81f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "6ce4035e03b7.png",
+      "b": "5c572d17e610.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f1c985c56a82.png",
+      "b": "f6f69a32bceb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f1c985c56a82.png",
+      "b": "a2a397946a10.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f1c985c56a82.png",
+      "b": "631418b7a0fc.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f1c985c56a82.png",
+      "b": "631418b7a0fc-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f1c985c56a82.png",
+      "b": "4491133a9bee.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f1c985c56a82.png",
+      "b": "5bfd12359afd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f1c985c56a82.png",
+      "b": "c428b8f34a21.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f1c985c56a82.png",
+      "b": "7486d0a56e11.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f1c985c56a82.png",
+      "b": "f5aad543dfa4.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "8771b6472d4d.png",
+      "b": "f4467e8abbfb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "8771b6472d4d.png",
+      "b": "0417742f4476.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "8771b6472d4d.png",
+      "b": "95049a7401b3.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "8771b6472d4d.png",
+      "b": "95049a7401b3-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "8771b6472d4d.png",
+      "b": "e78d7dd88f8c.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "8771b6472d4d.png",
+      "b": "72a39098afc7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "8771b6472d4d.png",
+      "b": "b8d02e3b4fca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "8771b6472d4d.png",
+      "b": "803337eeef56.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "8771b6472d4d.png",
+      "b": "9fa57b640b17.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "8771b6472d4d.png",
+      "b": "ccdf4fab0901.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "8771b6472d4d.png",
+      "b": "a82e857baeb2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b77b375ca9ac.png",
+      "b": "474376a2f41b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b77b375ca9ac.png",
+      "b": "0e41502221ed.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b77b375ca9ac.png",
+      "b": "ef9d8cb25530.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b77b375ca9ac.png",
+      "b": "ef9d8cb25530-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b77b375ca9ac.png",
+      "b": "819bc6aaff5d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b77b375ca9ac.png",
+      "b": "551d96097ad0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b77b375ca9ac.png",
+      "b": "70e6d73ee2a7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b77b375ca9ac.png",
+      "b": "1538a7356e3e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "b77b375ca9ac.png",
+      "b": "ec15e3602baf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "b77b375ca9ac.png",
+      "b": "375195447ec1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b77b375ca9ac.png",
+      "b": "ef0a1454992b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b77b375ca9ac.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b77b375ca9ac.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "587af9b80c4b.png",
+      "b": "de6871d7d6e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "587af9b80c4b.png",
+      "b": "3e0cccf0497f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "587af9b80c4b.png",
+      "b": "ecc867c3fdab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "587af9b80c4b.png",
+      "b": "ecc867c3fdab-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "587af9b80c4b.png",
+      "b": "729e604f8817.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "587af9b80c4b.png",
+      "b": "90db5d916abb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "587af9b80c4b.png",
+      "b": "42826cedfbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "587af9b80c4b.png",
+      "b": "fcea3a598cca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "587af9b80c4b.png",
+      "b": "06a56bc5f77f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "c5d4e603e16d.png",
+      "b": "6d1da7a62e70.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "c5d4e603e16d.png",
+      "b": "91a387bf687b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "c5d4e603e16d.png",
+      "b": "d0b1a28c8a19.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "c5d4e603e16d.png",
+      "b": "d0b1a28c8a19-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "c5d4e603e16d.png",
+      "b": "19efd38d6e1b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "c5d4e603e16d.png",
+      "b": "d85eac086dab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "c5d4e603e16d.png",
+      "b": "27b84d82fbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "c5d4e603e16d.png",
+      "b": "9e987754af66.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "c5d4e603e16d.png",
+      "b": "5ec9bee0de74.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a7a3cbec39dd.png",
+      "b": "e0c620bf214a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "a7a3cbec39dd.png",
+      "b": "83d46dd1599a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "a7a3cbec39dd.png",
+      "b": "83d46dd1599a-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "a7a3cbec39dd.png",
+      "b": "db155b0cf29f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "a7a3cbec39dd.png",
+      "b": "77c6f22c2988.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "a7a3cbec39dd.png",
+      "b": "4b4039caed16.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "a7a3cbec39dd.png",
+      "b": "97efda40d692.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "a7a3cbec39dd.png",
+      "b": "13760d4c3c2e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "a7a3cbec39dd.png",
+      "b": "ad617572b501.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "a7a3cbec39dd.png",
+      "b": "7d6077b688b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "f9ea5a94d560.png",
+      "b": "5b3b0d5fab1e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f9ea5a94d560.png",
+      "b": "f136675ecb75.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f9ea5a94d560.png",
+      "b": "f136675ecb75-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f9ea5a94d560.png",
+      "b": "c2cd0d5847cd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f9ea5a94d560.png",
+      "b": "b2f26b3208b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f9ea5a94d560.png",
+      "b": "9e66272ead83.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "f9ea5a94d560.png",
+      "b": "dd85282cd2e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "f9ea5a94d560.png",
+      "b": "7df9c08ff782.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "11363ad15b7f.png",
+      "b": "fed74ee61e42.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "11363ad15b7f.png",
+      "b": "1a1e5a53672f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "11363ad15b7f.png",
+      "b": "1a1e5a53672f-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "11363ad15b7f.png",
+      "b": "6808c0586690.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "11363ad15b7f.png",
+      "b": "e7c4c299ab32.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "11363ad15b7f.png",
+      "b": "100941de37a5.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "11363ad15b7f.png",
+      "b": "7a731d41f81f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "11363ad15b7f.png",
+      "b": "5c572d17e610.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f6f69a32bceb.png",
+      "b": "a2a397946a10.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f6f69a32bceb.png",
+      "b": "631418b7a0fc.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f6f69a32bceb.png",
+      "b": "631418b7a0fc-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f6f69a32bceb.png",
+      "b": "4491133a9bee.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f6f69a32bceb.png",
+      "b": "5bfd12359afd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f6f69a32bceb.png",
+      "b": "c428b8f34a21.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f6f69a32bceb.png",
+      "b": "7486d0a56e11.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f6f69a32bceb.png",
+      "b": "f5aad543dfa4.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f4467e8abbfb.png",
+      "b": "0417742f4476.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f4467e8abbfb.png",
+      "b": "95049a7401b3.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f4467e8abbfb.png",
+      "b": "95049a7401b3-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "f4467e8abbfb.png",
+      "b": "e78d7dd88f8c.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "f4467e8abbfb.png",
+      "b": "72a39098afc7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "f4467e8abbfb.png",
+      "b": "b8d02e3b4fca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "f4467e8abbfb.png",
+      "b": "803337eeef56.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "f4467e8abbfb.png",
+      "b": "9fa57b640b17.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "f4467e8abbfb.png",
+      "b": "ccdf4fab0901.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f4467e8abbfb.png",
+      "b": "a82e857baeb2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "474376a2f41b.png",
+      "b": "0e41502221ed.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "474376a2f41b.png",
+      "b": "ef9d8cb25530.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "474376a2f41b.png",
+      "b": "ef9d8cb25530-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "474376a2f41b.png",
+      "b": "819bc6aaff5d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "474376a2f41b.png",
+      "b": "551d96097ad0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "474376a2f41b.png",
+      "b": "70e6d73ee2a7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "474376a2f41b.png",
+      "b": "1538a7356e3e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "474376a2f41b.png",
+      "b": "ec15e3602baf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "474376a2f41b.png",
+      "b": "375195447ec1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "474376a2f41b.png",
+      "b": "ef0a1454992b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "474376a2f41b.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "474376a2f41b.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "de6871d7d6e0.png",
+      "b": "3e0cccf0497f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "de6871d7d6e0.png",
+      "b": "ecc867c3fdab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "de6871d7d6e0.png",
+      "b": "ecc867c3fdab-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "de6871d7d6e0.png",
+      "b": "729e604f8817.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "de6871d7d6e0.png",
+      "b": "90db5d916abb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "de6871d7d6e0.png",
+      "b": "42826cedfbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "de6871d7d6e0.png",
+      "b": "fcea3a598cca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "de6871d7d6e0.png",
+      "b": "06a56bc5f77f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6d1da7a62e70.png",
+      "b": "91a387bf687b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6d1da7a62e70.png",
+      "b": "d0b1a28c8a19.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6d1da7a62e70.png",
+      "b": "d0b1a28c8a19-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6d1da7a62e70.png",
+      "b": "19efd38d6e1b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6d1da7a62e70.png",
+      "b": "d85eac086dab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6d1da7a62e70.png",
+      "b": "27b84d82fbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6d1da7a62e70.png",
+      "b": "9e987754af66.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "6d1da7a62e70.png",
+      "b": "5ec9bee0de74.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e0c620bf214a.png",
+      "b": "83d46dd1599a.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e0c620bf214a.png",
+      "b": "83d46dd1599a-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e0c620bf214a.png",
+      "b": "db155b0cf29f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e0c620bf214a.png",
+      "b": "77c6f22c2988.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e0c620bf214a.png",
+      "b": "4b4039caed16.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e0c620bf214a.png",
+      "b": "97efda40d692.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e0c620bf214a.png",
+      "b": "13760d4c3c2e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e0c620bf214a.png",
+      "b": "ad617572b501.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e0c620bf214a.png",
+      "b": "7d6077b688b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "5b3b0d5fab1e.png",
+      "b": "f136675ecb75.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "5b3b0d5fab1e.png",
+      "b": "f136675ecb75-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "5b3b0d5fab1e.png",
+      "b": "c2cd0d5847cd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "5b3b0d5fab1e.png",
+      "b": "b2f26b3208b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "5b3b0d5fab1e.png",
+      "b": "9e66272ead83.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "5b3b0d5fab1e.png",
+      "b": "dd85282cd2e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "5b3b0d5fab1e.png",
+      "b": "7df9c08ff782.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "fed74ee61e42.png",
+      "b": "1a1e5a53672f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "fed74ee61e42.png",
+      "b": "1a1e5a53672f-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "fed74ee61e42.png",
+      "b": "6808c0586690.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "fed74ee61e42.png",
+      "b": "e7c4c299ab32.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "fed74ee61e42.png",
+      "b": "100941de37a5.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "fed74ee61e42.png",
+      "b": "7a731d41f81f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "fed74ee61e42.png",
+      "b": "5c572d17e610.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a2a397946a10.png",
+      "b": "631418b7a0fc.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a2a397946a10.png",
+      "b": "631418b7a0fc-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a2a397946a10.png",
+      "b": "4491133a9bee.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a2a397946a10.png",
+      "b": "5bfd12359afd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a2a397946a10.png",
+      "b": "c428b8f34a21.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a2a397946a10.png",
+      "b": "7486d0a56e11.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "a2a397946a10.png",
+      "b": "f5aad543dfa4.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "0417742f4476.png",
+      "b": "95049a7401b3.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "0417742f4476.png",
+      "b": "95049a7401b3-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "0417742f4476.png",
+      "b": "e78d7dd88f8c.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "0417742f4476.png",
+      "b": "72a39098afc7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "0417742f4476.png",
+      "b": "b8d02e3b4fca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "0417742f4476.png",
+      "b": "803337eeef56.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "0417742f4476.png",
+      "b": "9fa57b640b17.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "0417742f4476.png",
+      "b": "ccdf4fab0901.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "0417742f4476.png",
+      "b": "a82e857baeb2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "0e41502221ed.png",
+      "b": "ef9d8cb25530.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "0e41502221ed.png",
+      "b": "ef9d8cb25530-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "0e41502221ed.png",
+      "b": "819bc6aaff5d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "0e41502221ed.png",
+      "b": "551d96097ad0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "0e41502221ed.png",
+      "b": "70e6d73ee2a7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "0e41502221ed.png",
+      "b": "1538a7356e3e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "0e41502221ed.png",
+      "b": "ec15e3602baf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "0e41502221ed.png",
+      "b": "375195447ec1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "0e41502221ed.png",
+      "b": "ef0a1454992b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "0e41502221ed.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "0e41502221ed.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "3e0cccf0497f.png",
+      "b": "ecc867c3fdab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "3e0cccf0497f.png",
+      "b": "ecc867c3fdab-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "3e0cccf0497f.png",
+      "b": "729e604f8817.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "3e0cccf0497f.png",
+      "b": "90db5d916abb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "3e0cccf0497f.png",
+      "b": "42826cedfbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "3e0cccf0497f.png",
+      "b": "fcea3a598cca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "3e0cccf0497f.png",
+      "b": "06a56bc5f77f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "91a387bf687b.png",
+      "b": "d0b1a28c8a19.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "91a387bf687b.png",
+      "b": "d0b1a28c8a19-b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "91a387bf687b.png",
+      "b": "19efd38d6e1b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "91a387bf687b.png",
+      "b": "d85eac086dab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "91a387bf687b.png",
+      "b": "27b84d82fbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "91a387bf687b.png",
+      "b": "9e987754af66.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "91a387bf687b.png",
+      "b": "5ec9bee0de74.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "83d46dd1599a.png",
+      "b": "83d46dd1599a-b.png",
+      "disposition": "same_lineage_group",
+      "distance_bits": 0
+    },
+    {
+      "a": "83d46dd1599a.png",
+      "b": "db155b0cf29f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "83d46dd1599a.png",
+      "b": "77c6f22c2988.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "83d46dd1599a.png",
+      "b": "4b4039caed16.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "83d46dd1599a.png",
+      "b": "97efda40d692.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "83d46dd1599a.png",
+      "b": "13760d4c3c2e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "83d46dd1599a.png",
+      "b": "ad617572b501.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "83d46dd1599a.png",
+      "b": "7d6077b688b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "83d46dd1599a-b.png",
+      "b": "db155b0cf29f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "83d46dd1599a-b.png",
+      "b": "77c6f22c2988.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "83d46dd1599a-b.png",
+      "b": "4b4039caed16.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "83d46dd1599a-b.png",
+      "b": "97efda40d692.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "83d46dd1599a-b.png",
+      "b": "13760d4c3c2e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "83d46dd1599a-b.png",
+      "b": "ad617572b501.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "83d46dd1599a-b.png",
+      "b": "7d6077b688b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f136675ecb75.png",
+      "b": "f136675ecb75-b.png",
+      "disposition": "same_lineage_group",
+      "distance_bits": 0
+    },
+    {
+      "a": "f136675ecb75.png",
+      "b": "c2cd0d5847cd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f136675ecb75.png",
+      "b": "b2f26b3208b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f136675ecb75.png",
+      "b": "9e66272ead83.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "f136675ecb75.png",
+      "b": "dd85282cd2e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "f136675ecb75.png",
+      "b": "7df9c08ff782.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f136675ecb75-b.png",
+      "b": "c2cd0d5847cd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f136675ecb75-b.png",
+      "b": "b2f26b3208b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "f136675ecb75-b.png",
+      "b": "9e66272ead83.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "f136675ecb75-b.png",
+      "b": "dd85282cd2e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "f136675ecb75-b.png",
+      "b": "7df9c08ff782.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1a1e5a53672f.png",
+      "b": "1a1e5a53672f-b.png",
+      "disposition": "same_lineage_group",
+      "distance_bits": 0
+    },
+    {
+      "a": "1a1e5a53672f.png",
+      "b": "6808c0586690.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1a1e5a53672f.png",
+      "b": "e7c4c299ab32.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1a1e5a53672f.png",
+      "b": "100941de37a5.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1a1e5a53672f.png",
+      "b": "7a731d41f81f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "1a1e5a53672f.png",
+      "b": "5c572d17e610.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1a1e5a53672f-b.png",
+      "b": "6808c0586690.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1a1e5a53672f-b.png",
+      "b": "e7c4c299ab32.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1a1e5a53672f-b.png",
+      "b": "100941de37a5.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1a1e5a53672f-b.png",
+      "b": "7a731d41f81f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "1a1e5a53672f-b.png",
+      "b": "5c572d17e610.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "631418b7a0fc.png",
+      "b": "631418b7a0fc-b.png",
+      "disposition": "same_lineage_group",
+      "distance_bits": 0
+    },
+    {
+      "a": "631418b7a0fc.png",
+      "b": "4491133a9bee.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "631418b7a0fc.png",
+      "b": "5bfd12359afd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "631418b7a0fc.png",
+      "b": "c428b8f34a21.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "631418b7a0fc.png",
+      "b": "7486d0a56e11.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "631418b7a0fc.png",
+      "b": "f5aad543dfa4.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "631418b7a0fc-b.png",
+      "b": "4491133a9bee.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "631418b7a0fc-b.png",
+      "b": "5bfd12359afd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "631418b7a0fc-b.png",
+      "b": "c428b8f34a21.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "631418b7a0fc-b.png",
+      "b": "7486d0a56e11.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "631418b7a0fc-b.png",
+      "b": "f5aad543dfa4.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "95049a7401b3.png",
+      "b": "95049a7401b3-b.png",
+      "disposition": "same_lineage_group",
+      "distance_bits": 1
+    },
+    {
+      "a": "95049a7401b3.png",
+      "b": "e78d7dd88f8c.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "95049a7401b3.png",
+      "b": "72a39098afc7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "95049a7401b3.png",
+      "b": "b8d02e3b4fca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "95049a7401b3.png",
+      "b": "803337eeef56.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "95049a7401b3.png",
+      "b": "9fa57b640b17.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "95049a7401b3.png",
+      "b": "ccdf4fab0901.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "95049a7401b3.png",
+      "b": "a82e857baeb2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "95049a7401b3-b.png",
+      "b": "e78d7dd88f8c.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "95049a7401b3-b.png",
+      "b": "72a39098afc7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "95049a7401b3-b.png",
+      "b": "b8d02e3b4fca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "95049a7401b3-b.png",
+      "b": "803337eeef56.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "95049a7401b3-b.png",
+      "b": "9fa57b640b17.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "95049a7401b3-b.png",
+      "b": "ccdf4fab0901.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "95049a7401b3-b.png",
+      "b": "a82e857baeb2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "ef9d8cb25530.png",
+      "b": "ef9d8cb25530-b.png",
+      "disposition": "same_lineage_group",
+      "distance_bits": 0
+    },
+    {
+      "a": "ef9d8cb25530.png",
+      "b": "819bc6aaff5d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ef9d8cb25530.png",
+      "b": "551d96097ad0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ef9d8cb25530.png",
+      "b": "70e6d73ee2a7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ef9d8cb25530.png",
+      "b": "1538a7356e3e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "ef9d8cb25530.png",
+      "b": "ec15e3602baf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "ef9d8cb25530.png",
+      "b": "375195447ec1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ef9d8cb25530.png",
+      "b": "ef0a1454992b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ef9d8cb25530.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ef9d8cb25530.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ef9d8cb25530-b.png",
+      "b": "819bc6aaff5d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ef9d8cb25530-b.png",
+      "b": "551d96097ad0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ef9d8cb25530-b.png",
+      "b": "70e6d73ee2a7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ef9d8cb25530-b.png",
+      "b": "1538a7356e3e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "ef9d8cb25530-b.png",
+      "b": "ec15e3602baf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "ef9d8cb25530-b.png",
+      "b": "375195447ec1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ef9d8cb25530-b.png",
+      "b": "ef0a1454992b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ef9d8cb25530-b.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ef9d8cb25530-b.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ecc867c3fdab.png",
+      "b": "ecc867c3fdab-b.png",
+      "disposition": "same_lineage_group",
+      "distance_bits": 0
+    },
+    {
+      "a": "ecc867c3fdab.png",
+      "b": "729e604f8817.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ecc867c3fdab.png",
+      "b": "90db5d916abb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ecc867c3fdab.png",
+      "b": "42826cedfbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ecc867c3fdab.png",
+      "b": "fcea3a598cca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "ecc867c3fdab.png",
+      "b": "06a56bc5f77f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ecc867c3fdab-b.png",
+      "b": "729e604f8817.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ecc867c3fdab-b.png",
+      "b": "90db5d916abb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ecc867c3fdab-b.png",
+      "b": "42826cedfbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ecc867c3fdab-b.png",
+      "b": "fcea3a598cca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "ecc867c3fdab-b.png",
+      "b": "06a56bc5f77f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d0b1a28c8a19.png",
+      "b": "d0b1a28c8a19-b.png",
+      "disposition": "same_lineage_group",
+      "distance_bits": 0
+    },
+    {
+      "a": "d0b1a28c8a19.png",
+      "b": "19efd38d6e1b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d0b1a28c8a19.png",
+      "b": "d85eac086dab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d0b1a28c8a19.png",
+      "b": "27b84d82fbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d0b1a28c8a19.png",
+      "b": "9e987754af66.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "d0b1a28c8a19.png",
+      "b": "5ec9bee0de74.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d0b1a28c8a19-b.png",
+      "b": "19efd38d6e1b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d0b1a28c8a19-b.png",
+      "b": "d85eac086dab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d0b1a28c8a19-b.png",
+      "b": "27b84d82fbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d0b1a28c8a19-b.png",
+      "b": "9e987754af66.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "d0b1a28c8a19-b.png",
+      "b": "5ec9bee0de74.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "db155b0cf29f.png",
+      "b": "77c6f22c2988.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "db155b0cf29f.png",
+      "b": "4b4039caed16.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "db155b0cf29f.png",
+      "b": "97efda40d692.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "db155b0cf29f.png",
+      "b": "13760d4c3c2e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "db155b0cf29f.png",
+      "b": "ad617572b501.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "db155b0cf29f.png",
+      "b": "7d6077b688b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "c2cd0d5847cd.png",
+      "b": "b2f26b3208b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "c2cd0d5847cd.png",
+      "b": "9e66272ead83.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "c2cd0d5847cd.png",
+      "b": "dd85282cd2e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "c2cd0d5847cd.png",
+      "b": "7df9c08ff782.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6808c0586690.png",
+      "b": "e7c4c299ab32.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6808c0586690.png",
+      "b": "100941de37a5.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "6808c0586690.png",
+      "b": "7a731d41f81f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "6808c0586690.png",
+      "b": "5c572d17e610.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "4491133a9bee.png",
+      "b": "5bfd12359afd.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "4491133a9bee.png",
+      "b": "c428b8f34a21.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "4491133a9bee.png",
+      "b": "7486d0a56e11.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "4491133a9bee.png",
+      "b": "f5aad543dfa4.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e78d7dd88f8c.png",
+      "b": "72a39098afc7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e78d7dd88f8c.png",
+      "b": "b8d02e3b4fca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "e78d7dd88f8c.png",
+      "b": "803337eeef56.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "e78d7dd88f8c.png",
+      "b": "9fa57b640b17.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "e78d7dd88f8c.png",
+      "b": "ccdf4fab0901.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "e78d7dd88f8c.png",
+      "b": "a82e857baeb2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "819bc6aaff5d.png",
+      "b": "551d96097ad0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "819bc6aaff5d.png",
+      "b": "70e6d73ee2a7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "819bc6aaff5d.png",
+      "b": "1538a7356e3e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "819bc6aaff5d.png",
+      "b": "ec15e3602baf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "819bc6aaff5d.png",
+      "b": "375195447ec1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "819bc6aaff5d.png",
+      "b": "ef0a1454992b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "819bc6aaff5d.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "819bc6aaff5d.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "729e604f8817.png",
+      "b": "90db5d916abb.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "729e604f8817.png",
+      "b": "42826cedfbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "729e604f8817.png",
+      "b": "fcea3a598cca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "729e604f8817.png",
+      "b": "06a56bc5f77f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "19efd38d6e1b.png",
+      "b": "d85eac086dab.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "19efd38d6e1b.png",
+      "b": "27b84d82fbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "19efd38d6e1b.png",
+      "b": "9e987754af66.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "19efd38d6e1b.png",
+      "b": "5ec9bee0de74.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "77c6f22c2988.png",
+      "b": "4b4039caed16.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "77c6f22c2988.png",
+      "b": "97efda40d692.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "77c6f22c2988.png",
+      "b": "13760d4c3c2e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "77c6f22c2988.png",
+      "b": "ad617572b501.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "77c6f22c2988.png",
+      "b": "7d6077b688b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b2f26b3208b0.png",
+      "b": "9e66272ead83.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "b2f26b3208b0.png",
+      "b": "dd85282cd2e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "b2f26b3208b0.png",
+      "b": "7df9c08ff782.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e7c4c299ab32.png",
+      "b": "100941de37a5.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "e7c4c299ab32.png",
+      "b": "7a731d41f81f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "e7c4c299ab32.png",
+      "b": "5c572d17e610.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "5bfd12359afd.png",
+      "b": "c428b8f34a21.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "5bfd12359afd.png",
+      "b": "7486d0a56e11.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "5bfd12359afd.png",
+      "b": "f5aad543dfa4.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "72a39098afc7.png",
+      "b": "b8d02e3b4fca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "72a39098afc7.png",
+      "b": "803337eeef56.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "72a39098afc7.png",
+      "b": "9fa57b640b17.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "72a39098afc7.png",
+      "b": "ccdf4fab0901.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "72a39098afc7.png",
+      "b": "a82e857baeb2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "551d96097ad0.png",
+      "b": "70e6d73ee2a7.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "551d96097ad0.png",
+      "b": "1538a7356e3e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "551d96097ad0.png",
+      "b": "ec15e3602baf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "551d96097ad0.png",
+      "b": "375195447ec1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "551d96097ad0.png",
+      "b": "ef0a1454992b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "551d96097ad0.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "551d96097ad0.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "90db5d916abb.png",
+      "b": "42826cedfbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "90db5d916abb.png",
+      "b": "fcea3a598cca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "90db5d916abb.png",
+      "b": "06a56bc5f77f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d85eac086dab.png",
+      "b": "27b84d82fbe9.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "d85eac086dab.png",
+      "b": "9e987754af66.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "d85eac086dab.png",
+      "b": "5ec9bee0de74.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "4b4039caed16.png",
+      "b": "97efda40d692.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "4b4039caed16.png",
+      "b": "13760d4c3c2e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "4b4039caed16.png",
+      "b": "ad617572b501.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "4b4039caed16.png",
+      "b": "7d6077b688b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "9e66272ead83.png",
+      "b": "dd85282cd2e0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "9e66272ead83.png",
+      "b": "7df9c08ff782.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "100941de37a5.png",
+      "b": "7a731d41f81f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "100941de37a5.png",
+      "b": "5c572d17e610.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "c428b8f34a21.png",
+      "b": "7486d0a56e11.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "c428b8f34a21.png",
+      "b": "f5aad543dfa4.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "b8d02e3b4fca.png",
+      "b": "803337eeef56.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "b8d02e3b4fca.png",
+      "b": "9fa57b640b17.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "b8d02e3b4fca.png",
+      "b": "ccdf4fab0901.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "b8d02e3b4fca.png",
+      "b": "a82e857baeb2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 3
+    },
+    {
+      "a": "70e6d73ee2a7.png",
+      "b": "1538a7356e3e.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "70e6d73ee2a7.png",
+      "b": "ec15e3602baf.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "70e6d73ee2a7.png",
+      "b": "375195447ec1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "70e6d73ee2a7.png",
+      "b": "ef0a1454992b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "70e6d73ee2a7.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "70e6d73ee2a7.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "42826cedfbe9.png",
+      "b": "fcea3a598cca.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "42826cedfbe9.png",
+      "b": "06a56bc5f77f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "27b84d82fbe9.png",
+      "b": "9e987754af66.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "27b84d82fbe9.png",
+      "b": "5ec9bee0de74.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "97efda40d692.png",
+      "b": "13760d4c3c2e.png",
+      "disposition": "same_lineage_group",
+      "distance_bits": 0
+    },
+    {
+      "a": "97efda40d692.png",
+      "b": "ad617572b501.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "97efda40d692.png",
+      "b": "7d6077b688b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13760d4c3c2e.png",
+      "b": "ad617572b501.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "13760d4c3c2e.png",
+      "b": "7d6077b688b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "1538a7356e3e.png",
+      "b": "ec15e3602baf.png",
+      "disposition": "same_lineage_group",
+      "distance_bits": 5
+    },
+    {
+      "a": "1538a7356e3e.png",
+      "b": "375195447ec1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "1538a7356e3e.png",
+      "b": "ef0a1454992b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "1538a7356e3e.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "1538a7356e3e.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "ec15e3602baf.png",
+      "b": "375195447ec1.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "ec15e3602baf.png",
+      "b": "ef0a1454992b.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "ec15e3602baf.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "ec15e3602baf.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 6
+    },
+    {
+      "a": "803337eeef56.png",
+      "b": "9fa57b640b17.png",
+      "disposition": "same_lineage_group",
+      "distance_bits": 0
+    },
+    {
+      "a": "803337eeef56.png",
+      "b": "ccdf4fab0901.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "803337eeef56.png",
+      "b": "a82e857baeb2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "9fa57b640b17.png",
+      "b": "ccdf4fab0901.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "9fa57b640b17.png",
+      "b": "a82e857baeb2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 4
+    },
+    {
+      "a": "375195447ec1.png",
+      "b": "ef0a1454992b.png",
+      "disposition": "same_lineage_group",
+      "distance_bits": 0
+    },
+    {
+      "a": "375195447ec1.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "375195447ec1.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ef0a1454992b.png",
+      "b": "18aa27c0b629.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ef0a1454992b.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ad617572b501.png",
+      "b": "7d6077b688b0.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "dd85282cd2e0.png",
+      "b": "7df9c08ff782.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 2
+    },
+    {
+      "a": "7a731d41f81f.png",
+      "b": "5c572d17e610.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "7486d0a56e11.png",
+      "b": "f5aad543dfa4.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "ccdf4fab0901.png",
+      "b": "a82e857baeb2.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "18aa27c0b629.png",
+      "b": "cf0e37db891d.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 0
+    },
+    {
+      "a": "fcea3a598cca.png",
+      "b": "06a56bc5f77f.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    },
+    {
+      "a": "9e987754af66.png",
+      "b": "5ec9bee0de74.png",
+      "disposition": "pending_human_review",
+      "distance_bits": 1
+    }
+  ],
+  "note": "Same-group pairs are expected shared scenes (S13 pairing). Cross-group hits are text-level template variants (aHash cannot read text); each awaits human sign-off in this review log. Pending dispositions: 956. No hit is ever deleted automatically.",
+  "pairs_compared": 8128,
+  "threshold_bits": 6
+}

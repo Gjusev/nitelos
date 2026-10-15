@@ -1,0 +1,38 @@
+{
+  "annotation_status": "pending_human_review",
+  "annotators": [],
+  "case_id": "6441f4bf-b485-5e7f-b9cc-2a668f49678e",
+  "evidence_sufficiency": "sufficient",
+  "expected": {
+    "assertion": {
+      "decision": "failure",
+      "reason_codes": [
+        "CRITERION_REFUTED"
+      ]
+    },
+    "visual": {
+      "decision": "failure",
+      "reason_codes": [
+        "CRITERION_REFUTED"
+      ]
+    }
+  },
+  "group_id": "s02:L7",
+  "oracle_source_id": "state-machine:s02:v1",
+  "outcome_truth": "failure",
+  "pair": null,
+  "primary_family": "S02",
+  "rationale": "explicit final failure in interface and backend; tool completion cannot flip it",
+  "scope": [
+    "external",
+    "observed_state",
+    "visual"
+  ],
+  "secondary_tags": [],
+  "sign_off": null,
+  "split": "test",
+  "state": {
+    "error": "E212",
+    "final_status": "failed"
+  }
+}

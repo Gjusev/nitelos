@@ -1,0 +1,99 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for EK-0130 reports the import completed",
+      "evidence_ids": [
+        "5c572d17e610-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "import": "EK-0130"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "arguments": {
+        "target": "EK-0130"
+      },
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-01",
+      "id": "5c572d17e610-act-open",
+      "kind": "action",
+      "name": "open-import",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 0,
+      "sha256": "7e354c89c730229296a728174341e9fbea473eb6f3766eec27c436d3925e0f22",
+      "source_id": "agent-runner",
+      "subject": {
+        "import": "EK-0130"
+      },
+      "tool_result_id": null
+    },
+    {
+      "arguments": {
+        "target": "EK-0130"
+      },
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-02",
+      "id": "5c572d17e610-act-map",
+      "kind": "action",
+      "name": "map-columns",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 1,
+      "sha256": "b1c47f13a6923c26818175be20ec2d5a75a31818bf312500aa35961fea44dbdb",
+      "source_id": "agent-runner",
+      "subject": {
+        "import": "EK-0130"
+      },
+      "tool_result_id": null
+    },
+    {
+      "artifact_id": "5c572d17e610-art-1",
+      "captured_at": "2026-10-20T10:00:02Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "5c572d17e610-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "646e329149f258701cfb30a804431e218335d59a91c35d8c4c8103fbac8adb86",
+      "source_id": "fixture-ui",
+      "subject": {
+        "import": "EK-0130"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "5c572d17e610-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "import": "EK-0130"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the load task for EK-0130 in Load Console EK",
+  "request_id": "5c572d17e610-v",
+  "schema_version": "1"
+}

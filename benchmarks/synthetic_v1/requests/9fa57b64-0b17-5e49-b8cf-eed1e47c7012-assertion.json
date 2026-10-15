@@ -1,0 +1,61 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for DW-0151 reports STATUS passed",
+      "evidence_ids": [
+        "9fa57b640b17-dom-1"
+      ],
+      "expected": "passed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "observed_state",
+      "subject": {
+        "task": "DW-0151"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "9fa57b640b17-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "9fa57b640b17-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "f1c95d03df9f47fdf956749e355fd0c1160e894f0254dc72d43bce1d52a2e6a2",
+      "source_id": "fixture-ui",
+      "subject": {
+        "task": "DW-0151"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "9fa57b640b17-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-ui",
+      "subject": {
+        "task": "DW-0151"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the quest task for DW-0151 in Quest Console DW",
+  "request_id": "9fa57b640b17-a",
+  "schema_version": "1"
+}

@@ -1,0 +1,58 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Report Console EA window shows a confirmation banner for EA-0110",
+      "evidence_ids": [
+        "ad617572b501-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "report": "EA-0110"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "ad617572b501-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "ad617572b501-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "f357f0f9ec66a6f3e425018e06ef50afde0be08d0aa1494aaee64bd5b0b8cb86",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "EA-0110"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "confirm_banner_present": false
+      },
+      "id": "ad617572b501-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "23603fc7b22654aee7a14fc43a88fa1925ac4b2b85fcbe7d164b0b86ad8fef96",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "EA-0110"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the report task for EA-0110 in Report Console EA",
+  "request_id": "ad617572b501-v",
+  "schema_version": "1"
+}

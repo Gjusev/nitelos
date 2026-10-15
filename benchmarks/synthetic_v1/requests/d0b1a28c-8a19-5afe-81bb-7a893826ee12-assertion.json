@@ -1,0 +1,96 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for CT-0180 reports the sync completed",
+      "evidence_ids": [
+        "d0b1a28c8a19-dom-a",
+        "d0b1a28c8a19-dom-b"
+      ],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "observed_state",
+      "subject": {
+        "syncjob": "CT-0180"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "d0b1a28c8a19-art-a",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "d0b1a28c8a19-shot-a",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "6968942445969513a7004e33d1af56d6cb54321b5fad61e7ecc3a5b2147e02db",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CT-0180"
+      },
+      "width": 1200
+    },
+    {
+      "artifact_id": "d0b1a28c8a19-art-b",
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "d0b1a28c8a19-shot-b",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "ac0e492da122b4a6eca6628fb9429c423fc86b1cb43f2be91786ae7648546454",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CT-0180"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "completed"
+      },
+      "id": "d0b1a28c8a19-dom-a",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CT-0180"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "d0b1a28c8a19-dom-b",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CT-0180"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the mirror task for CT-0180 in Mirror Console CT",
+  "request_id": "d0b1a28c8a19-a",
+  "schema_version": "1"
+}

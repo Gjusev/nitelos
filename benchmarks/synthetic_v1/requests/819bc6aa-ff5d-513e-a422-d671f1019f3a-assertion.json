@@ -1,0 +1,113 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The upload action for CZ-0160 completed",
+      "evidence_ids": [
+        "819bc6aaff5d-act-1"
+      ],
+      "expected": "completed",
+      "id": "c-beh",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/reported_status",
+      "scope": "behavioral",
+      "subject": {
+        "upload": "CZ-0160"
+      }
+    },
+    {
+      "description": "Backend record for CZ-0160 reports the upload stored",
+      "evidence_ids": [
+        "819bc6aaff5d-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "upload": "CZ-0160"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "819bc6aaff5d-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "819bc6aaff5d-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "7fec3b12ae15c7c4a8843fdb8876ae0d0cd095bdf862af0d23a7dbc253e1a7f4",
+      "source_id": "fixture-ui",
+      "subject": {
+        "upload": "CZ-0160"
+      },
+      "width": 1200
+    },
+    {
+      "arguments": {
+        "target": "CZ-0160"
+      },
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-final",
+      "id": "819bc6aaff5d-act-1",
+      "kind": "action",
+      "name": "upload-file",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 1,
+      "sha256": "8886ed45e60f2a5c33b94bf0b07aa5968c60bf2a39ce4c02a11f7f91701dbbe0",
+      "source_id": "agent-runner",
+      "subject": {
+        "upload": "CZ-0160"
+      },
+      "tool_result_id": null
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "quota exceeded",
+        "job_status": "failed"
+      },
+      "id": "819bc6aaff5d-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "656fe331ed8b43a167ad99287279ac988f141ae51bebd979e08022ff0694316d",
+      "source_id": "fixture-ui",
+      "subject": {
+        "upload": "CZ-0160"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "819bc6aaff5d-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "upload": "CZ-0160"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the dump task for CZ-0160 in Dump Console CZ",
+  "request_id": "819bc6aaff5d-a",
+  "schema_version": "1"
+}

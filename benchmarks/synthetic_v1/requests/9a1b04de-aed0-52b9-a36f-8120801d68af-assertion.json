@@ -1,0 +1,95 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for AH-0180 reports status completed",
+      "evidence_ids": [
+        "9a1b04deaed0-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "job": "AH-0180"
+      }
+    },
+    {
+      "description": "Interface state for AH-0180 reports the index completed",
+      "evidence_ids": [
+        "9a1b04deaed0-dom-1"
+      ],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/job_status",
+      "scope": "observed_state",
+      "subject": {
+        "job": "AH-0180"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "9a1b04deaed0-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "9a1b04deaed0-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "88e053584515bc0eec3431590c5014e94d429b26be150f3040aa3f406ed19215",
+      "source_id": "fixture-ui",
+      "subject": {
+        "job": "AH-0180"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "items": 14,
+        "job_status": "completed"
+      },
+      "id": "9a1b04deaed0-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "ea5a07c3217104592c9551f804276d0fc302bcb9d8e5f5dd96311f2618c88b48",
+      "source_id": "fixture-ui",
+      "subject": {
+        "job": "AH-0180"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "record_count": 14,
+        "status": "completed"
+      },
+      "id": "9a1b04deaed0-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "ebdadb459cd74c9712951a6dfbd5e52353f124cbdf1e32fc839c21f170324e5d",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "job": "AH-0180"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the index task for AH-0180 in Index Console AH",
+  "request_id": "9a1b04deaed0-a",
+  "schema_version": "1"
+}

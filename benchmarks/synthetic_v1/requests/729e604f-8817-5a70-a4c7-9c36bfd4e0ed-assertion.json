@@ -1,0 +1,113 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The upload action for DA-0170 completed",
+      "evidence_ids": [
+        "729e604f8817-act-1"
+      ],
+      "expected": "completed",
+      "id": "c-beh",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/reported_status",
+      "scope": "behavioral",
+      "subject": {
+        "upload": "DA-0170"
+      }
+    },
+    {
+      "description": "Backend record for DA-0170 reports the upload stored",
+      "evidence_ids": [
+        "729e604f8817-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "upload": "DA-0170"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "729e604f8817-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "729e604f8817-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "568505d4adaa4fa83df5353c30f678e61a54d8bcf168edd24b7844e5afb57027",
+      "source_id": "fixture-ui",
+      "subject": {
+        "upload": "DA-0170"
+      },
+      "width": 1200
+    },
+    {
+      "arguments": {
+        "target": "DA-0170"
+      },
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-final",
+      "id": "729e604f8817-act-1",
+      "kind": "action",
+      "name": "upload-file",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 1,
+      "sha256": "fd43e06f4e9dbff44d598e1eae67411704cd8565a4f3be2e5691f41c89591d29",
+      "source_id": "agent-runner",
+      "subject": {
+        "upload": "DA-0170"
+      },
+      "tool_result_id": null
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "quota exceeded",
+        "job_status": "failed"
+      },
+      "id": "729e604f8817-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "656fe331ed8b43a167ad99287279ac988f141ae51bebd979e08022ff0694316d",
+      "source_id": "fixture-ui",
+      "subject": {
+        "upload": "DA-0170"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "729e604f8817-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "upload": "DA-0170"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the packet task for DA-0170 in Packet Console DA",
+  "request_id": "729e604f8817-a",
+  "schema_version": "1"
+}

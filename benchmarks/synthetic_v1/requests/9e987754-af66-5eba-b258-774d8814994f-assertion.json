@@ -1,0 +1,61 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for EH-0180 reports the confirmation banner present",
+      "evidence_ids": [
+        "9e987754af66-dom-1"
+      ],
+      "expected": true,
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/confirm_banner_present",
+      "scope": "observed_state",
+      "subject": {
+        "report": "EH-0180"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "9e987754af66-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "9e987754af66-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "205db1fc21c666313a7103f818666e7a4f89ed57a415cd9e7b03354394739e34",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "EH-0180"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "confirm_banner_present": false
+      },
+      "id": "9e987754af66-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "23603fc7b22654aee7a14fc43a88fa1925ac4b2b85fcbe7d164b0b86ad8fef96",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "EH-0180"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the folio task for EH-0180 in Folio Console EH",
+  "request_id": "9e987754af66-a",
+  "schema_version": "1"
+}

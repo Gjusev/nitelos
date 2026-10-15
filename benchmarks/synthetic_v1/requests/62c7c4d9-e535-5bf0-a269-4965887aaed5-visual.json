@@ -1,0 +1,59 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Promote Console BM window shows a final completion state for BM-0170",
+      "evidence_ids": [
+        "62c7c4d9e535-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "deployment": "BM-0170"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "62c7c4d9e535-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "62c7c4d9e535-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "pending",
+      "sequence": 0,
+      "sha256": "ade24c57eacfcbfcea7b99d5f51afcf15ba5a6f26e8d5229077e7635ab0d32d8",
+      "source_id": "fixture-ui",
+      "subject": {
+        "deployment": "BM-0170"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "deploy_state": "running",
+        "progress": 55
+      },
+      "id": "62c7c4d9e535-dom-1",
+      "kind": "observation",
+      "phase": "pending",
+      "sequence": 1,
+      "sha256": "26054344e76a7160d800d82cd51366be0ad12e980d9b82486702d995a184ab98",
+      "source_id": "fixture-ui",
+      "subject": {
+        "deployment": "BM-0170"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the promote task for BM-0170 in Promote Console BM",
+  "request_id": "62c7c4d9e535-v",
+  "schema_version": "1"
+}
