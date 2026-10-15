@@ -1120,3 +1120,45 @@ def test_cli_smolvlm_sixty_case_run_performs_exactly_one_load(
     assert mock.loads == 1
     assert mock.closed_count == 1
     assert len(_read_cases(tmp_path / "out")) == 60
+
+
+def test_cli_smolvlm_backend_construction_failure_exits_three(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A backend that cannot be constructed is infrastructure (exit 3), not
+    configuration — and no output directory is created for a run that never
+    started."""
+    import importlib.util
+    import types
+
+    bench = _visual_bench(tmp_path / "bench", ["c-ok"])
+    fake_module = types.ModuleType("nitelos.backends.smolvlm")
+
+    class _ExplodingBackend:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            raise RuntimeError("torch exploded")
+
+    fake_module.SmolVLMBackend = _ExplodingBackend  # type: ignore[attr-defined]
+    fake_module.DEFAULT_REVISION = "482adb537c021c86670beed01cd58990d01e72e4"
+    fake_spec = importlib.util.spec_from_file_location("nitelos.backends.smolvlm", __file__)
+    fake_module.__spec__ = fake_spec
+    monkeypatch.setitem(sys.modules, "nitelos.backends.smolvlm", fake_module)
+    from nitelos.evaluation.runner import main
+
+    code = main(
+        [
+            "run",
+            "--manifest",
+            str(bench.manifest_path),
+            "--artifacts",
+            str(bench.root),
+            "--output",
+            str(tmp_path / "out"),
+            "--backend",
+            "smolvlm",
+            "--model-dir",
+            str(tmp_path / "weights"),
+        ]
+    )
+    assert code == 3
+    assert not (tmp_path / "out").exists()

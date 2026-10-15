@@ -205,7 +205,10 @@ per backend, lazily on first visual use")
 `backend=` the caller hands over ONE Backend instance: the verifier factory
 must wire it into every per-case Verifier (verifiers stay per-case because
 trust bindings are per-case), and `evaluate()` closes it exactly once when
-the run ends — complete, per-case error or infra abort alike. The run's
+the run ends — complete, per-case error or infra abort alike. Ownership
+starts only after the output-directory check passes (a refused run never
+used the backend, so it is not closed here and stays with the caller). The
+run's
 `preprocessing_hash` is read directly from the instance's descriptor (no
 probe). With `backend=None` nothing changes: per-case verifiers, probe-based
 hash, nothing closed here. The CLI's `--backend smolvlm --model-dir` path
