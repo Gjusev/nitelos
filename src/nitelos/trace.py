@@ -156,7 +156,16 @@ class Trace(_Model):
         executed or replayed. Raises a safe :class:`RequestValidationError`.
         """
         validated_criteria = _validate_criteria(_coerce_criteria(criteria))
-        cutoff = as_of if isinstance(as_of, datetime) else _check_timestamp(as_of, "$.as_of")
+        if isinstance(as_of, datetime):
+            # review F1: naive datetimes are coded input errors (never a raw
+            # TypeError from aware-vs-naive comparison); aware values normalize to UTC
+            if as_of.tzinfo is None or as_of.tzinfo.utcoffset(as_of) is None:
+                raise RequestValidationError(
+                    [Issue(InputErrorCode.INVALID_TIMESTAMP, "$.as_of", "as_of must be timezone-aware")]
+                )
+            cutoff = as_of.astimezone(UTC)
+        else:
+            cutoff = _check_timestamp(as_of, "$.as_of")
         issue = _first_structural_issue(validated_criteria, self.evidence, cutoff)
         if issue is not None:
             raise RequestValidationError([issue])

@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta, timezone
 from typing import Any
 
 import pytest
@@ -393,9 +393,7 @@ def test_parity_direct_request_and_trace_import_agree() -> None:
     )
     assert direct.execution_status == imported.execution_status == ExecutionStatus.OK
     assert direct.decision == imported.decision
-    assert [c.model_dump(exclude={"evidence_refs"}) for c in direct.criteria] == [
-        c.model_dump(exclude={"evidence_refs"}) for c in imported.criteria
-    ]
+    assert [c.model_dump() for c in direct.criteria] == [c.model_dump() for c in imported.criteria]
     assert direct.reason_codes == imported.reason_codes
     assert direct.verification_id != imported.verification_id
 
@@ -430,3 +428,57 @@ def test_to_request_accepts_datetime_objects() -> None:
         as_of=datetime(2024, 6, 1, 12, 0, tzinfo=UTC),
     )
     assert request.as_of == datetime(2024, 6, 1, 12, 0, tzinfo=UTC)
+
+
+def test_to_request_rejects_naive_as_of_datetime() -> None:
+    # NIT-009 review F1: a naive datetime must be a coded INVALID_TIMESTAMP,
+    # not a raw TypeError from aware-vs-naive comparison
+    trace = parse_trace(_trace([_observation(id="o1", sequence=0)]))
+    with pytest.raises(RequestValidationError) as excinfo:
+        trace.to_request(
+            objective="o",
+            criteria=[_criterion(evidence_ids=["o1"], operator="equals", expected=True)],
+            request_id="r",
+            checkpoint_id="cp",
+            as_of=datetime(2024, 6, 1, 12, 0),  # naive
+        )
+    assert excinfo.value.issues[0].code == InputErrorCode.INVALID_TIMESTAMP
+    assert excinfo.value.issues[0].field_path == "$.as_of"
+
+
+def test_to_request_normalizes_aware_non_utc_as_of() -> None:
+    # NIT-009 review F1: aware non-UTC as_of normalizes to UTC (12:00+02:00 == 10:00Z)
+    trace = parse_trace(_trace([_observation(id="o1", sequence=0)]))
+    request = trace.to_request(
+        objective="o",
+        criteria=[_criterion(evidence_ids=["o1"], operator="equals", expected=True)],
+        request_id="r",
+        checkpoint_id="cp",
+        as_of=datetime(2024, 6, 1, 12, 0, tzinfo=timezone(timedelta(hours=2))),
+    )
+    assert request.as_of == datetime(2024, 6, 1, 10, 0, tzinfo=UTC)
+
+
+def test_action_cited_by_visual_criterion_is_unsupported() -> None:
+    # NIT-009 review F4: actions are context, never visual evidence
+    trace = parse_trace(_trace([_act(sequence=0)]))
+    request = trace.to_request(
+        objective="o",
+        criteria=[
+            {
+                "id": "v",
+                "description": "d",
+                "kind": "visual",
+                "scope": "visual",
+                "evidence_ids": ["act-1"],
+                "subject": dict(SUBJECT),
+            }
+        ],
+        request_id="r",
+        checkpoint_id="cp",
+        as_of="2024-06-01T10:00:00Z",
+    )
+    result = Verifier().verify(request)
+    assert result.execution_status == ExecutionStatus.INPUT_ERROR
+    assert result.error is not None
+    assert result.error.code == InputErrorCode.UNSUPPORTED_CAPABILITY
