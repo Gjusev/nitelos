@@ -15,10 +15,10 @@ No secrets or sensitive evidence are stored here.
 | NIT-004 Assertions | done (merged) | nitelos-69 | nit/004-assertions `d06767e` | 003 | 17 DET tests; Win 172 passed; Linux full-offline replay OK | reviewer nitelos-0f APPROVE-WITH-CHANGES (huge index fix) |
 | NIT-005 Policy | done (merged) | nitelos-69 | nit/005-policy `42ef33a` | 004 | Win 246 passed; Linux 245 + 1 platform skip | reviewer nitelos-0f APPROVE-WITH-CHANGES (visual refs, eligible_evidence helper, immutable map) |
 | NIT-006 SDK | done (merged) | nitelos-69 | nit/006-sdk `fc7e278` | 005 | Win 288 passed; Linux strict replay OK | AR-2 approved; ADR-011 nullable request_id; F1 race, F2 strict env, F3 limitation code |
-| NIT-007 Backend boundary | running | nitelos-69 | nit/007-backend-boundary | 006, AR-2 | | wires context.py after NIT-009 merges |
+| NIT-007 Backend boundary | running (taken over from WIP `6aebf3a`) | nitelos-08 | nit/007-backend-boundary | 006, AR-2 | | previous implementer session lost at restart; reviewer must be nitelos-3a |
 | NIT-008 Local VLM | smoke set done; adapter design spec running (nitelos-0f, nit/008-design); adapter awaits NIT-007 | nitelos-0f | nit/008-smoke-fixtures | 007 (adapter); fixtures independent | | Weights pre-provisioned outside repo, SHA-256 verified; WSL CPU probe: torch 2.14.1+cpu / transformers 5.19.0 load+generate OK; `AutoModelForVision2Seq` absent in TF5, use `AutoModelForImageTextToText`; probe output `' UNKNOWN.'` would be INVALID_OUTPUT under strict parser |
 | NIT-009 Traces | review (reviewer nitelos-69) | nitelos-0f | nit/009-traces `56e2c97` | 006, AR-2 | with eval extra 290 passed 0 skipped; merged onto integration 304 passed | implementer report misattributed 11 eval-extra skips to local-model tests (corrected by orchestrator) |
-| NIT-010 Fixtures | running (branched from nit/009 + integration) | nitelos-0f | nit/010-fixtures | 003, 009 | | human two-reviewer audit pending (user organizing) |
+| NIT-010 Fixtures | review pending (reviewer unavailable) | nitelos-08 (= resumed nitelos-0f) | nit/010-fixtures `2940b01` | 003, 009 | 120 cases/240 requests/128 PNGs; deterministic dry run 120/120 exact; Win 438 passed (eval); Linux 436 + 2 platform skips; freeze refuses (exit 1, 60 pending) | final-test audit + freeze PENDING human gate (G4) |
 | NIT-011 Metrics | done (merged) | nitelos-0f | nit/011-metrics + nit/011b-metrics `5ffd8e8` | 002, AR-1 | STAT 26 + MET 19 tests; reviews by nitelos-69 (A: approve-with-changes fixed; B: approve) | metrics numpy/scipy-free; Wilson endpoints exact |
 | NIT-012 Runner | design done (`738f439`, A1–A7 accepted); implementation pending 006/010 | nitelos-0f | — | 006, 010, 011 | | |
 | NIT-013 Evaluation | pending | | | 008, 012, AR-4 | | |
@@ -68,3 +68,4 @@ All pending.
 - 2026-10-15: AR-2 approved conditionally (F1 averify/close race, F2 strict env parsing, F3 record new limitation code, ADR-011 commit). NIT-009 started.
 - 2026-10-15: NIT-005/006 merged after ADR-011 confirmation by nitelos-0f. NIT-009 delivered; NIT-010 started.
 - 2026-10-15: all Claude Code sessions restarted. Orchestrator is now `nitelos-f3`; peers are `nitelos-08` and `nitelos-3a` (context status being confirmed). State at restart: NIT-007 WIP commit `6aebf3a` plus uncommitted deterministic.py edit; NIT-009 review not delivered; NIT-010 no commits.
+- 2026-10-15: nitelos-08 is resumed nitelos-0f. NIT-010 delivered and verified (Win+Linux). nitelos-3a unresponsive (message possibly held for user approval); NIT-009/010/007 reviews queued for it. NIT-007 handed to nitelos-08.
