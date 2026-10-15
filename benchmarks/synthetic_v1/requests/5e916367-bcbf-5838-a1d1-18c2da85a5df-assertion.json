@@ -29,7 +29,7 @@
       "media_type": "image/png",
       "phase": "pending",
       "sequence": 0,
-      "sha256": "98e7eab6781476ed367357abc01d2d66f56164f3d20b7c36115b8731300cba1b",
+      "sha256": "b7187e9426ff933c178322e915cfe31a412f2ddca68dcfb77e08369a5a9085ef",
       "source_id": "fixture-ui",
       "subject": {
         "deployment": "BI-0130"

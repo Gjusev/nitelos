@@ -3,6 +3,21 @@
   "checkpoint_id": "cp-final",
   "criteria": [
     {
+      "description": "Interface state for EL-0140 reports the import completed",
+      "evidence_ids": [
+        "f5aad543dfa4-dom-final"
+      ],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "observed_state",
+      "subject": {
+        "import": "EL-0140"
+      }
+    },
+    {
       "description": "Backend record for EL-0140 reports the import completed",
       "evidence_ids": [
         "f5aad543dfa4-ext-1"
@@ -67,7 +82,7 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 2,
-      "sha256": "361ea6d0dace52679db847897015aa9e0bdaca597242d7bf0de5c928b4da8506",
+      "sha256": "f2c2677832f94206b501c1c1e4e13dafef01a5ca8b40da76ff417be75fece4d5",
       "source_id": "fixture-ui",
       "subject": {
         "import": "EL-0140"
@@ -76,6 +91,23 @@
     },
     {
       "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "f5aad543dfa4-dom-final",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-ui",
+      "subject": {
+        "import": "EL-0140"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:04Z",
       "channel": "external_api",
       "checkpoint_id": "cp-final",
       "data": {
@@ -84,12 +116,29 @@
       "id": "f5aad543dfa4-ext-1",
       "kind": "observation",
       "phase": "final",
-      "sequence": 3,
+      "sequence": 4,
       "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
       "source_id": "fixture-collector-v1",
       "subject": {
         "import": "EL-0140"
       }
+    },
+    {
+      "artifact_id": "f5aad543dfa4-art-final",
+      "captured_at": "2026-10-20T10:00:05Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "f5aad543dfa4-shot-final",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 5,
+      "sha256": "4ce36821bfee9d31250e15daa6989f6dd665a9f9b3932f21a2e7596beae31211",
+      "source_id": "fixture-ui",
+      "subject": {
+        "import": "EL-0140"
+      },
+      "width": 1200
     }
   ],
   "metadata": {},

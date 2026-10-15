@@ -29,7 +29,7 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 0,
-      "sha256": "c2d124647dcdfcccee19a7eba87baf9d0928ee273372bd8b49b30c9a01e8122c",
+      "sha256": "e977f2ea4d386c26a719c750bf559170cedafaba4f3eb640c872466a79bc8435",
       "source_id": "fixture-ui",
       "subject": {
         "task": "DX-0160"

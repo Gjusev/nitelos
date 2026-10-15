@@ -3,16 +3,13 @@
   "checkpoint_id": "cp-final",
   "criteria": [
     {
-      "description": "Interface names record CA-0999",
+      "description": "The Booking Console CA page names record CA-0999",
       "evidence_ids": [
-        "f4467e8abbfb-dom-1"
+        "f4467e8abbfb-shot-1"
       ],
-      "expected": "CA-0999",
       "id": "c-obs",
-      "kind": "assertion",
-      "operator": "equals",
-      "pointer": "/order_id",
-      "scope": "observed_state",
+      "kind": "visual",
+      "scope": "visual",
       "subject": {
         "order": "CA-0999"
       }
@@ -29,7 +26,7 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 0,
-      "sha256": "ea72c56dd66351d267ecb4cffc859dd01d5ed263e6ebf39446a025789d087691",
+      "sha256": "a77a8e5b66a7fe7c2ebae07c14febaba51087b7e9557944162805c3395914f24",
       "source_id": "fixture-ui",
       "subject": {
         "order": "CA-0150"

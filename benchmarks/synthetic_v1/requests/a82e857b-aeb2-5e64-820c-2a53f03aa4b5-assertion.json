@@ -3,6 +3,19 @@
   "checkpoint_id": "cp-final",
   "criteria": [
     {
+      "description": "Interface state for EM-0150 reports the import completed",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "observed_state",
+      "subject": {
+        "import": "EM-0150"
+      }
+    },
+    {
       "description": "Backend record for EM-0150 reports the import completed",
       "evidence_ids": [],
       "expected": "completed",
@@ -65,7 +78,7 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 2,
-      "sha256": "7065553745bd0b30ba73559b9a5129f336effcf3656daba807663ee8f6850586",
+      "sha256": "1a7c7ba8ed5a792270700e48228c0da71b362a98a69646b7dbc97adc0c7a756f",
       "source_id": "fixture-ui",
       "subject": {
         "import": "EM-0150"

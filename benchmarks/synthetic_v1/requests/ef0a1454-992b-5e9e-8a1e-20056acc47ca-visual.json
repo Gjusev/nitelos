@@ -26,7 +26,7 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 0,
-      "sha256": "7228428795878aae6189b5c04d077da366e0e69b1ae40be7e1a7ec0a6f97c86e",
+      "sha256": "0b1590859fd2c9ada996cc21577d84cb2e5529ee7c71638ea1c4236077ca1336",
       "source_id": "fixture-ui",
       "subject": {
         "task": "DX-0161"

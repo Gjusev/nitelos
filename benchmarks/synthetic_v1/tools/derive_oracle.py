@@ -147,7 +147,11 @@ def derive_all(bench_dir: Path) -> None:
         if family in _SIMPLE:
             assertion, visual = _SIMPLE[family]
             labels = _outcome(
-                "success" if family == "S01" else "unknown" if family in ("S05", "S09") else "failure",
+                "success"
+                if family in ("S01", "S11")
+                else "unknown"
+                if family in ("S05", "S09")
+                else "failure",
                 "contradictory" if family == "S09" else "sufficient",
                 assertion,
                 visual,

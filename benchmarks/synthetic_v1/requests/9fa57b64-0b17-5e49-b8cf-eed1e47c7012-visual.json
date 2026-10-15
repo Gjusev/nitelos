@@ -26,7 +26,7 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 0,
-      "sha256": "f1c95d03df9f47fdf956749e355fd0c1160e894f0254dc72d43bce1d52a2e6a2",
+      "sha256": "0d03f8cfc12693c69b72bb877cf2dce092ef855bfaf9db6e770fdd203f9c88e5",
       "source_id": "fixture-ui",
       "subject": {
         "task": "DW-0151"

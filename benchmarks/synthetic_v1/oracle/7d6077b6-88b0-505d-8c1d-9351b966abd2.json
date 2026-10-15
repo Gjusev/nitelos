@@ -28,7 +28,8 @@
   "scope": [
     "observed_state",
     "external",
-    "behavioral"
+    "behavioral",
+    "visual"
   ],
   "secondary_tags": [],
   "sign_off": null,

@@ -29,7 +29,7 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 0,
-      "sha256": "b5db8ae0882633f5153f682453fc55b5fbb6d54f3036cf02d69e3775a74e98c2",
+      "sha256": "e9bd72e547b450c84ef226f71ce14f2b2266841627b7dea053c0d39ce8215824",
       "source_id": "fixture-ui",
       "subject": {
         "build": "DK-0110"

@@ -3,6 +3,19 @@
   "checkpoint_id": "cp-final",
   "criteria": [
     {
+      "description": "Interface state for EN-0160 reports the import completed",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "observed_state",
+      "subject": {
+        "import": "EN-0160"
+      }
+    },
+    {
       "description": "Backend record for EN-0160 reports the import completed",
       "evidence_ids": [],
       "expected": "completed",
@@ -65,7 +78,7 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 2,
-      "sha256": "e44749879b8f1b13f4f4808c886a87f0fbd08ac68428c40b3636d0d859dca313",
+      "sha256": "91269b33c03e0a441a6d27924304cd17cb89fe24395b04c02f6aef219558c23f",
       "source_id": "fixture-ui",
       "subject": {
         "import": "EN-0160"

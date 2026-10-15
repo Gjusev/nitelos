@@ -27,29 +27,12 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 0,
-      "sha256": "acbc7a03bdd341c52d55b64ce22ba0be5ef908dccdf1ffa2da1672080bbd778b",
+      "sha256": "f1f988161be30234f94e73cc56446918d8d11bc6cf02d18dd9bc50224faa146f",
       "source_id": "fixture-ui",
       "subject": {
         "sync": "BS-0150"
       },
       "width": 1200
-    },
-    {
-      "captured_at": "2026-10-20T10:00:01Z",
-      "channel": "database",
-      "checkpoint_id": "cp-final",
-      "data": {
-        "status": "failed"
-      },
-      "id": "8771b6472d4d-ext-1",
-      "kind": "observation",
-      "phase": "final",
-      "sequence": 1,
-      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
-      "source_id": "fixture-collector-v1",
-      "subject": {
-        "sync": "BS-0150"
-      }
     }
   ],
   "metadata": {},
