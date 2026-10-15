@@ -202,3 +202,11 @@ Preflight ruling (finding 1, orchestrator): doc 02 lifecycle step 5 — "Run ass
 
 The runner's smolvlm path constructed one backend PER CASE (per-case lazy load ≈59 s + ~10 GB). Fixed by nit/shared-backend: evaluate(backend=...) shares ONE instance across per-case verifiers (bindings stay per-case), closed exactly once on every exit path; the CLI uses it; the temporary dev-visual driver is removed.
 Latent defect found during wiring: the preprocessing-hash probe read a nonexistent public Verifier.backend attribute, so EVERY prior run.json recorded preprocessing_hash=null and compare_reports matched vacuously. Fixed with a read-only backend property. NOTE: the delivered dev-split records stand as run with preprocessing_hash=null (the hash is constant for the pinned checkpoint+prompt era, so no comparison was actually misled); the final runs record the real hash.
+
+## AR-4 — APPROVED for protocol and inputs; final-oracle seal pending the human gate (2026-10-15)
+
+Orchestrator approval of docs/implementation/ar-4-freeze.md (d357037). Independently recomputed and matched: prompt v1 hash (from the code constant), test.json / test-visual.json manifest digests, uv.lock digest; suite 590 passed.
+Frozen now: prompt v1, strict parser + generation protocol, SmolVLM2-2.2B @ 482adb5 pin (per-file digests orchestrator-held outside the repo at C:\Code Main
+itelos-models\*.sha256; WSL copies verified — no redistribution), preprocessing, both policy hashes, metric definitions, view definitions, runner/validator SHAs, deterministic grammar, lock 83a01dc0…, dev-split data as-used, and final-split INPUTS (label-independent). The preflight contract ruling is part of the frozen protocol.
+Pending the G4 human gate: the 60 final-test oracle audits → adjudication → sign-off → final freeze hash; then the final runs per the dossier's plan. Any change to frozen items after this point is a new experiment (synthetic-v2).
+Record fixes accepted: the stale dev-run lock hash corrected in the methodology; the final-run commands now reference the CLI shared-backend path only.

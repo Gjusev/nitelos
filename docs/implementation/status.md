@@ -32,7 +32,7 @@ No secrets or sensitive evidence are stored here.
 | AR-1 contracts | done (approved with changes; fixes `2671d5f` verified) | nitelos-0f | see decisions.md; constructor-path RecursionError fix + snapshot caveat requested from nitelos-69 |
 | AR-2 deterministic flow | done (approved; conditions verified 2026-10-15) | nitelos-0f | decisions.md AR-2 |
 | AR-3 local integration | done (approved; NIT-008 merged) | nitelos-f2 (independent) | brief sent 2026-10-15 |
-| AR-4 protocol freeze | pending | | |
+| AR-4 protocol freeze | done (protocol+inputs frozen; oracle seal pending G4 human gate) | orchestrator (dossier by nitelos-f2) | ar-4-freeze.md `d357037` |
 | AR-5 release candidate | pending | | |
 
 ## Open orchestrator items
@@ -86,3 +86,4 @@ All pending.
 - 2026-10-15: NIT-014 merged (integration 580 passed + 1 skip + 1 deselected; Linux replay OK). Remaining live: NIT-013B dev runs (nitelos-14), NIT-015 finalization.
 - 2026-10-15: preflight fix reviewed APPROVE and merged with dev-split records (582 passed). Shared-backend runner mode assigned to nitelos-f2.
 - 2026-10-15: shared-backend merged (589 passed Win; Linux replay OK). AR-4 dossier assembly assigned to nitelos-f2.
+- 2026-10-15: AR-4 dossier approved (digests independently recomputed) and merged. Project now waits on: G4 human annotation → final freeze → final runs → NIT-015 final → AR-5.
