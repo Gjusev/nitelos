@@ -128,3 +128,8 @@ Lesson recorded: the deterministic dry run validates decisions, not oracle truth
 - Rationale export (an unsafe-content option) is deferred to NIT-012/014 reporting; v0.1 results carry no rationale field.
 - Finding validation raises `BackendOutputError` (backend codes); the verifier converts it to backend_error. `validate_backend_finding` is public as the conformance helper for custom backends.
 - `InferenceContext.deadline` is None until the NIT-008 adapter-level 120 s cooperative deadline.
+
+## NIT-007 review — 2026-10-15
+
+Reviewer: nitelos-f2 (independent of implementer). Verdict: APPROVE-WITH-CHANGES; no smuggling path found under adversarial probing of finding validation, preflight, isolation and lifecycle. All four implementer decisions accepted (see the NIT-007 implementer decisions section above; the reviewer read a worktree predating it).
+F1 ruling (orchestrator): the `already_emitted` duplicate-criterion guard is kept as defense-in-depth for NIT-008 batch paths, and an explanatory test documenting why a duplicate is structurally impossible in the sequential verifier is required before merge.
