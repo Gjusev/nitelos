@@ -445,3 +445,99 @@ def test_sec04_verify_completes_offline() -> None:
     result = Verifier().verify(request)
     assert result.execution_status == ExecutionStatus.OK
     assert result.decision is not None
+
+
+# ==========================================================================
+# SEC-07 (NIT-012): evaluation loader path defenses
+# ==========================================================================
+
+
+def test_sec07_safe_relative_path_rejects_hostile_paths(tmp_path: Any) -> None:
+    import pytest
+
+    from nitelos.evaluation.runner import ConfigError, safe_relative_path
+
+    hostile = [
+        "../escape.png",
+        "a/../../b",
+        "/absolute.png",
+        r"C:\x.png",
+        r"\\server\\share\\x",
+        r"\\?\C:\x",
+        "a:b",
+        "CON",
+        "NUL.bin",
+        "com1.log",
+        "x.",
+        "x ",
+        "a<b",
+        "..",
+        "a\x00b",
+    ]
+    for bad in hostile:
+        with pytest.raises(ConfigError, match="path not allowed"):
+            safe_relative_path(tmp_path, bad)
+
+
+def test_sec07_clean_relative_paths_and_subdirs_accepted(tmp_path: Any) -> None:
+    from nitelos.evaluation.runner import safe_relative_path
+
+    sub = tmp_path / "sub"
+    sub.mkdir()
+    (sub / "f.txt").write_text("x", encoding="utf-8")
+    resolved = safe_relative_path(tmp_path, "sub/f.txt")
+    assert resolved.name == "f.txt"
+    (tmp_path / "deep.png").write_bytes(b"png")
+    assert safe_relative_path(tmp_path, "deep.png").name == "deep.png"
+
+
+def test_sec07_escaping_symlink_rejected(tmp_path: Any) -> None:
+    import os as _os
+    import sys as _sys
+
+    import pytest
+
+    from nitelos.evaluation.runner import ConfigError, safe_relative_path
+
+    if _sys.platform == "win32" and not hasattr(_os, "symlink"):
+        pytest.skip("symlinks unavailable on this platform build")
+    outside = tmp_path.parent / "sec07-outside.txt"
+    outside.write_text("secret", encoding="utf-8")
+    link = tmp_path / "link.txt"
+    try:
+        _os.symlink(outside, link)
+    except (OSError, NotImplementedError):
+        pytest.skip("symlink creation refused by the platform")
+    with pytest.raises(ConfigError, match="path not allowed"):
+        safe_relative_path(tmp_path, "link.txt")
+    inside_target = tmp_path / "real.txt"
+    inside_target.write_text("ok", encoding="utf-8")
+    inside_link = tmp_path / "inside.txt"
+    try:
+        _os.symlink(inside_target, inside_link)
+    except (OSError, NotImplementedError):
+        pytest.skip("symlink creation refused by the platform")
+    resolved_inside = safe_relative_path(tmp_path, "inside.txt")
+    assert resolved_inside.name in {"inside.txt", "real.txt"}  # resolves to the target
+
+
+def test_sec07_windows_junction_rejected(tmp_path: Any) -> None:
+    import subprocess as _sp
+    import sys as _sys
+
+    import pytest
+
+    from nitelos.evaluation.runner import ConfigError, safe_relative_path
+
+    if _sys.platform != "win32":
+        pytest.skip("junction test is Windows-only")
+    outside = tmp_path.parent / "sec07-junction-outside"
+    outside.mkdir(exist_ok=True)
+    junction = tmp_path / "junction"
+    result = _sp.run(
+        ["cmd", "/c", "mklink", "/J", str(junction), str(outside)], check=False, capture_output=True
+    )
+    if result.returncode != 0:
+        pytest.skip("junction creation refused")
+    with pytest.raises(ConfigError, match="path not allowed"):
+        safe_relative_path(tmp_path, "junction/anything.txt")
