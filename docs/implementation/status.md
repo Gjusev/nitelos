@@ -21,7 +21,7 @@ No secrets or sensitive evidence are stored here.
 | NIT-010 Fixtures | done (merged; human gate pending for final-test audit/freeze) | nitelos-f2 impl, nitelos-14 review | nit/010-fixtures `f93e4d8` | 003, 009 | full truth table re-verified independently; compositions structural; numerals removed | G4 human reviewers scheduled by user at the end |
 | NIT-011 Metrics | done (merged) | nitelos-0f | nit/011-metrics + nit/011b-metrics `5ffd8e8` | 002, AR-1 | STAT 26 + MET 19 tests; reviews by nitelos-69 (A: approve-with-changes fixed; B: approve) | metrics numpy/scipy-free; Wilson endpoints exact |
 | NIT-012 Runner | done (merged with review fixes `82021a2`: smolvlm wiring, collector exit-2, preprocessing fingerprint) | nitelos-f2 impl, nitelos-14 review | nit/012-runner → nit/012-review-fix | 006, 010, 011 | Win 569+1 skip+1 desel; Linux 567+3 skips+1 desel | |
-| NIT-013 Evaluation | part A merged; part B (dev-split runs) running (nitelos-14); final runs pending AR-4 + G4 | nitelos-14 | nit/013b-runs | 008, 012, AR-4 | | |
+| NIT-013 Evaluation | dev-split done+merged (deterministic 60/60 exact; visual 60/60, agreement 41/60, over-support recorded); FINAL runs pending AR-4 + G4 human gate | nitelos-14 impl, nitelos-f2 review | nit/013b-runs `94baa2e` | 008, 012 | preflight ruling applied; both dev-visual records kept | shared-backend runner mode assigned (nitelos-f2) before final runs |
 | NIT-014 Docs/demo | done (merged `8f19a3e` after merge-time update) | nitelos-f2 impl, nitelos-14 review | nit/014-docs | 006, 009, 012 | Win 575+1+1desel; Linux 573+3+1desel; visual demo wired and gated | |
 | NIT-015 Release audit | prep delivered+verified (`41bce6d`, Win 506+1 skip, Linux 504+3 skips); gates/final audit pending | nitelos-f2 | nit/015-release | 013, 014 | | gates table/NOTICE/license inventory/workflow sketch |
 
@@ -84,3 +84,4 @@ All pending.
 - 2026-10-15: NIT-010 re-verification APPROVE; merged (511+1 deselected Win; Linux replay OK).
 - 2026-10-15: NIT-012+NIT-013A chain merged (integration 569 passed +1 skip +1 deselected; Linux replay OK).
 - 2026-10-15: NIT-014 merged (integration 580 passed + 1 skip + 1 deselected; Linux replay OK). Remaining live: NIT-013B dev runs (nitelos-14), NIT-015 finalization.
+- 2026-10-15: preflight fix reviewed APPROVE and merged with dev-split records (582 passed). Shared-backend runner mode assigned to nitelos-f2.
