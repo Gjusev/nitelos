@@ -444,7 +444,6 @@ def test_review_visual_composition_per_family() -> None:
     for case in _all_cases():
         assertion = _request(case, "assertion")
         visual = _request(case, "visual")
-        assertion_kinds = sorted(c["kind"] for c in assertion["criteria"])
         visual_kinds = sorted(c["kind"] for c in visual["criteria"])
         # external and behavioral criteria are carried into the visual view; S06
         # additionally empties the external citation (the withheld observation)
