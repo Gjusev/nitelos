@@ -186,7 +186,12 @@ def test_doc04_readme_and_docs_field_names_match_public_api() -> None:
     assert "Nitelos" in readme.splitlines()[0]
     first_screen = readme[:2000]
     assert "SmolVLM" not in readme.splitlines()[0]
-    assert "%" not in first_screen.split("quickstart")[0].split("```")[0] or True
+    # no benchmark-number patterns (NN% / 0.NN accuracy-style) before the docs index
+    import re
+
+    headline = first_screen.split("## Documentation")[0]
+    assert not re.search(r"\d+(?:\.\d+)?\s*%", headline), headline[:400]
+    assert not re.search(r"accuracy[:\s]+\d", headline, re.IGNORECASE)
 
 
 def test_doc04_docs_pages_exist_and_link_the_recipe() -> None:
@@ -220,6 +225,15 @@ def test_doc04_visual_example_is_local_model_gated() -> None:
         code = visual.read_text(encoding="utf-8")
         assert "local_model" in code or "NITELOS_RUN_LOCAL" in code
         assert "model_inferred" in code
+        assert "SmolVLMBackend" in code  # wired for real, not a stub
+
+
+def test_doc04_visual_demo_reports_gate_and_pins(monkeypatch: Any) -> None:
+    """Un-gated, no-extra run: honest exits; the gate record is stated."""
+
+    example = _load_example("demo_visual_optional")
+    monkeypatch.delenv("NITELOS_RUN_LOCAL", raising=False)
+    assert example.run() == 0  # skip is an honest exit, prints the gate requirements
 
 
 def test_doc04_contributing_and_security_exist() -> None:

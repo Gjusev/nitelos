@@ -33,13 +33,15 @@ importing `nitelos` never pulls them in.
 pip install 'nitelos[local]'
 ```
 
-CPU-only Torch and Transformers for the pinned SmolVLM-500M-Instruct checkpoint
-(`HuggingFaceTB/SmolVLM-500M-Instruct` @ revision
-`a7da5b986cb59b408707209984f360a5f4ad7e47`). Status: **Linux CPU on Python 3.12
-is the validated path** (doc 08); Windows is declared unsupported until a recorded
-smoke run exists. The adapter itself arrives with NIT-008 — installing the extra
-today provisions dependencies only. Weights are never bundled: provision the model
-directory yourself (per-file SHA-256 manifest required; see
+CPU-only Torch/Transformers (plus torchvision and num2words, which the processor
+chain requires) for the pinned checkpoint
+`HuggingFaceTB/SmolVLM2-2.2B-Instruct` @ revision
+`482adb537c021c86670beed01cd58990d01e72e4` (ADR-012; the earlier
+SmolVLM-500M pin failed the executability gate and is retained as history —
+see [backends.md](backends.md)). Status: **Linux CPU on Python 3.12 is the
+validated path** (doc 08); Windows is declared unsupported until a recorded
+smoke run exists. Weights are never bundled: provision the model directory
+yourself (per-file SHA-256 manifest required; see
 [backends.md](backends.md)) and point `NITELOS_MODEL_DIR` at it.
 
 There is no `all` extra by design: it would pull GPU stacks into core users.
