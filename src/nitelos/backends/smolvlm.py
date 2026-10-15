@@ -360,7 +360,10 @@ class SmolVLMBackend:
                     max_new_tokens=MAX_NEW_TOKENS,
                     stopping_criteria=[_DeadlineStoppingCriteria(deadline)],
                 )
-            new_tokens = outputs.sequences[:, inputs["input_ids"].shape[-1] :]
+            # transformers 5 returns a bare sequences tensor by default; older
+            # call shapes returned GenerateOutput.sequences — support both
+            sequences = getattr(outputs, "sequences", outputs)
+            new_tokens = sequences[:, inputs["input_ids"].shape[-1] :]
             decoded = self._processor.batch_decode(new_tokens, skip_special_tokens=True)[0]
             self._last_raw_output = decoded
             self._record_preprocessing(prepared, inputs)
