@@ -1548,8 +1548,9 @@ def _write_dedup_review(out_dir: Path) -> None:
     for case in cases:
         stem = file_stem(case["case_id"])
         for artifact_id, png in case["artifacts"].items():
-            suffix = ("-b" if artifact_id.endswith("-b")
-                      else "-final" if artifact_id.endswith("-final") else "")
+            suffix = (
+                "-b" if artifact_id.endswith("-b") else "-final" if artifact_id.endswith("-final") else ""
+            )
             entries.append((f"{stem}{suffix}.png", case["group_id"], _ahash_bits(png)))
     hits = []
     compared = 0
@@ -1620,8 +1621,9 @@ reported. Estimated effort: three to four minutes per case.
         stem = file_stem(case["case_id"])
         image_lines = []
         for artifact_id in sorted(case["artifacts"]):
-            suffix = ("-b" if artifact_id.endswith("-b")
-                      else "-final" if artifact_id.endswith("-final") else "")
+            suffix = (
+                "-b" if artifact_id.endswith("-b") else "-final" if artifact_id.endswith("-final") else ""
+            )
             image_lines.append(f"![image](../artifacts/{stem}{suffix}.png)")
         criteria_lines = []
         for view in ("assertion", "visual"):
