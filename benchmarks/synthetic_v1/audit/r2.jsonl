@@ -1,0 +1,60 @@
+{"case_id": "015a1a0c-269a-5e35-85e0-6c69fb4c30e2", "verdict": "agree", "fields": [], "comment": "Ledger missing; image shows only a 'Payment sent' banner. Abstain both views + insufficient evidence consistent with conjunction semantics."}
+{"case_id": "0417742f-4476-5262-8d53-5b6809672a26", "verdict": "disagree", "fields": ["expected_visual", "evidence_sufficiency", "rationale"], "comment": "Green 'Record saved' banner for CI-0150 contradicts 'empty evidence view' rationale; banner arguably supports the visual criterion (success). Wording ambiguous - would label expected_visual unknown."}
+{"case_id": "06a56bc5-f77f-5479-bfae-e1b3211d1247", "verdict": "agree", "fields": [], "comment": "Final image shows 'Import failed', refuting the visual criterion; failure/sufficient correct. Rationale field is blank."}
+{"case_id": "0e415022-21ed-5d53-a38d-ebc47cead311", "verdict": "disagree", "fields": ["expected_visual", "evidence_sufficiency", "rationale"], "comment": "Same as 0417742f: green 'Record saved' banner for CJ-0160 contradicts 'empty evidence view'; visual abstain dubious - banner wording ambiguous, would label unknown."}
+{"case_id": "13d54eb1-5280-55ec-ba16-30e3bff1f43e", "verdict": "agree", "fields": [], "comment": "Same pattern as 015a1a0c: ledger missing, banner-only evidence; abstain correct."}
+{"case_id": "13d9bd6c-6c09-5466-ad22-f41bfab86425", "verdict": "agree", "fields": [], "comment": "Image matches state: Region field empty, red 'Region is required' error; no-error criterion refuted."}
+{"case_id": "13f58a97-3620-5035-8972-7d10f92ea05e", "verdict": "disagree", "fields": ["expected_visual"], "comment": "Image shows the completion banner but no backend record; in the image-only visual view c-ext is undecidable, so abstain not success (cf. S06 packets that abstain)."}
+{"case_id": "145ffa23-8378-54f0-a1ed-bc00214e2a44", "verdict": "agree", "fields": [], "comment": "'Submission rejected' banner + E210 refute the accepted-banner criterion; failure/sufficient correct."}
+{"case_id": "14db4858-7f3b-57f4-9b8d-ad97f72204bc", "verdict": "disagree", "fields": ["expected_visual"], "comment": "Image shows a success 'Payment sent' banner; ledger not visible to the image-only view, so nothing is refuted there - visual should abstain as in the ledger=missing cases."}
+{"case_id": "18aa27c0-b629-5139-8e81-a69bc02e61f9", "verdict": "agree", "fields": [], "comment": "No confirmation banner in image, matches state; criterion refuted."}
+{"case_id": "19efd38d-6e1b-5eda-ae61-c14e3482727d", "verdict": "agree", "fields": [], "comment": "'Upload failed' image refutes the behavior criterion; action-completed/ final-failed split handled correctly."}
+{"case_id": "27b84d82-fbe9-5fed-a8e2-7098deeeba46", "verdict": "agree", "fields": [], "comment": "Final-result text rendered illegible; abstain with MISSING_VALUE/MODEL_UNCERTAIN matches the image."}
+{"case_id": "37519544-7ec1-583c-af34-0b957f51ae57", "verdict": "agree", "fields": [], "comment": "STATUS passed visible for DX-0160; success/sufficient correct. Rationale field is blank."}
+{"case_id": "3e0cccf0-497f-5fd8-85ce-112e101c14c6", "verdict": "disagree", "fields": ["expected_visual", "evidence_sufficiency", "rationale"], "comment": "Red 'Record rejected' banner plainly refutes the completion-banner criterion; visual should be failure and evidence sufficient, not abstain/insufficient. 'Empty evidence view' is false."}
+{"case_id": "42826ced-fbe9-5dd6-a812-eaf715021b76", "verdict": "agree", "fields": [], "comment": "Decisive result illegible; abstain correct."}
+{"case_id": "474376a2-f41b-530b-b36d-806ed9657823", "verdict": "agree", "fields": [], "comment": "Page names CB-0160, refuting the CB-0999 criterion. Note: subject_mismatch twins in this family are labeled oppositely (abstain) - family inconsistency to adjudicate. Rationale blank."}
+{"case_id": "4a9709d9-f97b-5379-b12f-9e2db3401c85", "verdict": "agree", "fields": [], "comment": "Email empty with red 'Email is required'; refuted correct."}
+{"case_id": "551d9609-7ad0-539e-b3e0-03ffbf4ba8dc", "verdict": "disagree", "fields": ["expected_visual"], "comment": "Ledger record not visible in the image; banner supported but c-ext undecidable in image-only view -> abstain. Image also contains contradictory banner vs agent summary text."}
+{"case_id": "587af9b8-0c4b-5989-a195-e56ade8d872c", "verdict": "agree", "fields": [], "comment": "Image-only visual abstains on the db criterion despite the success banner; correct, and it establishes the image-only visual semantics."}
+{"case_id": "5ec9bee0-de74-51a7-bc69-d2b23e07a1d2", "verdict": "agree", "fields": [], "comment": "Final image 'Import failed' refutes the visual criterion; correct. Rationale field is blank."}
+{"case_id": "62c7c4d9-e535-5bf0-a269-4965887aaed5", "verdict": "agree", "fields": [], "comment": "'Deploying' auto-update snapshot is explicitly nonfinal; unknown/abstain correct."}
+{"case_id": "6441f4bf-b485-5e7f-b9cc-2a668f49678e", "verdict": "agree", "fields": [], "comment": "'Submission rejected' + E212; refuted correct."}
+{"case_id": "6baeace2-6511-54ad-8e12-7f53dfce1857", "verdict": "agree", "fields": [], "comment": "Workspace tag empty with red error; refuted correct."}
+{"case_id": "6d1da7a6-2e70-5afd-b15b-0cfa6b1c70fa", "verdict": "agree", "fields": [], "comment": "Page names CD-0180, refuting CD-0999 criterion. Same family-inconsistency note as 474376a2. Rationale blank."}
+{"case_id": "70e6d73e-e2a7-597e-b2bd-a38857ec752f", "verdict": "agree", "fields": [], "comment": "Final result illegible; abstain correct."}
+{"case_id": "71dcd2dd-c2b9-5871-b750-0742373bd4a4", "verdict": "agree", "fields": [], "comment": "'Submission rejected' + E213; refuted correct."}
+{"case_id": "729e604f-8817-5a70-a4c7-9c36bfd4e0ed", "verdict": "agree", "fields": [], "comment": "'Upload failed' banner; refuted correct."}
+{"case_id": "72a39098-afc7-59fd-a561-e76fea7723a3", "verdict": "disagree", "fields": ["expected_visual"], "comment": "Ledger not visible in image and banner contradicts agent summary; visual success is not derivable from image-only evidence -> abstain."}
+{"case_id": "7b182b3d-fdfc-517a-849b-ad93eeb7a39c", "verdict": "disagree", "fields": ["expected_visual"], "comment": "Banner supported but the backend-record criterion is undecidable from the image; visual should abstain (cf. S06 abstains)."}
+{"case_id": "803337ee-ef56-5968-b496-3ad8c66bd373", "verdict": "agree", "fields": [], "comment": "STATUS passed visible for DW-0150; correct. Rationale field is blank."}
+{"case_id": "819bc6aa-ff5d-513e-a422-d671f1019f3a", "verdict": "agree", "fields": [], "comment": "'Upload failed' + quota exceeded; refuted correct."}
+{"case_id": "8771b647-2d4d-5b01-8055-490c22b9aa7a", "verdict": "agree", "fields": [], "comment": "Visual abstain on db criterion correct despite the misleading success banner."}
+{"case_id": "8dc5aa41-b6fe-5cbe-aa92-2766c2c0a67d", "verdict": "agree", "fields": [], "comment": "'Deploying' snapshot; unknown/abstain correct."}
+{"case_id": "90db5d91-6abb-5d45-bcd5-e70105f8178a", "verdict": "disagree", "fields": ["expected_visual"], "comment": "Same S11 flaw as 551d9609: ledger undecidable in image; abstain expected for the visual view."}
+{"case_id": "91a387bf-687b-5a9a-90ca-a9797b88a8fe", "verdict": "disagree", "fields": ["expected_visual", "evidence_sufficiency", "rationale"], "comment": "'Record rejected' banner refutes the completion-banner criterion; visual should be failure, evidence sufficient. 'Empty evidence view' rationale contradicts the image."}
+{"case_id": "95049a74-01b3-5d79-9abb-f372a83a139f", "verdict": "agree", "fields": [], "comment": "Two snapshots: 'Sync completed' vs 'Sync failed'; contradictory/unknown/abstain correct."}
+{"case_id": "9a1b04de-aed0-52b9-a36f-8120801d68af", "verdict": "disagree", "fields": ["expected_visual"], "comment": "Backend-record criterion not visible in the image ('Index complete' banner only); visual should abstain."}
+{"case_id": "9e987754-af66-5eba-b258-774d8814994f", "verdict": "agree", "fields": [], "comment": "No confirmation banner in image; refuted correct."}
+{"case_id": "9fa57b64-0b17-5e49-b8cf-eed1e47c7012", "verdict": "agree", "fields": [], "comment": "STATUS failed shown for DW-0151; 'passed' criterion refuted. Rationale field is blank."}
+{"case_id": "a5f6d478-def1-54a3-bd5d-449a102fa69a", "verdict": "agree", "fields": [], "comment": "Display name empty with red error; refuted correct."}
+{"case_id": "a82e857b-aeb2-5e64-820c-2a53f03aa4b5", "verdict": "agree", "fields": [], "comment": "Wizard at step 2 of 3, no final state; abstain/unknown correct."}
+{"case_id": "b77b375c-a9ac-5960-878c-b0b62576f76b", "verdict": "agree", "fields": [], "comment": "Visual abstain on db criterion correct."}
+{"case_id": "b8d02e3b-4fca-5e4d-8d23-a212004cc519", "verdict": "agree", "fields": [], "comment": "Decisive result illegible; abstain correct."}
+{"case_id": "b91a3673-35e0-58e1-b652-1f371f39f8d2", "verdict": "disagree", "fields": ["expected_visual"], "comment": "Image shows only a success 'Payment sent' banner; ledger invisible to the image-only view, so nothing is refuted - abstain, not failure/refuted."}
+{"case_id": "c5d4e603-e16d-5e54-9fce-045acf705d4a", "verdict": "agree", "fields": [], "comment": "Visual abstain on db criterion correct."}
+{"case_id": "cb0b4932-c391-5b7e-8953-c4cc08d099cd", "verdict": "agree", "fields": [], "comment": "'Deploying' snapshot; unknown/abstain correct."}
+{"case_id": "ccdf4fab-0901-5b76-95b4-5f8ce05ec708", "verdict": "agree", "fields": [], "comment": "No confirmation banner in image; refuted correct."}
+{"case_id": "cf0e37db-891d-51e5-84f1-fa7ebaace986", "verdict": "agree", "fields": [], "comment": "Wizard mid-step, no final state; abstain/unknown correct."}
+{"case_id": "d0b1a28c-8a19-5afe-81bb-7a893826ee12", "verdict": "agree", "fields": [], "comment": "Contradictory snapshots ('Sync completed' vs 'Sync failed'); contradictory/unknown correct."}
+{"case_id": "d85eac08-6dab-52de-b4a9-7391eaeec38e", "verdict": "disagree", "fields": ["expected_visual"], "comment": "Same S11 flaw: ledger undecidable from image; abstain expected for the visual view."}
+{"case_id": "de6871d7-d6e0-5c13-bb31-7081cd4e1892", "verdict": "disagree", "fields": ["expected_assertion", "expected_visual", "outcome_truth", "evidence_sufficiency"], "comment": "Page plainly names CC-0170, so the CC-0999 criterion is refuted exactly as in the wrong_id packets (labeled failure/refuted); opposite treatment here is inconsistent - adjudicate family-wide."}
+{"case_id": "e78d7dd8-8f8c-5848-99bb-237e3edec73a", "verdict": "agree", "fields": [], "comment": "'Upload failed' banner; refuted correct."}
+{"case_id": "e8f4265a-8af4-5d42-8ade-81894cf6bccc", "verdict": "disagree", "fields": ["expected_visual"], "comment": "Backend record not shown in the image ('Render complete' banner only); visual should abstain."}
+{"case_id": "ecc867c3-fdab-5ccb-94d1-883d1fbc714e", "verdict": "agree", "fields": [], "comment": "Contradictory snapshots; contradictory/unknown correct."}
+{"case_id": "ee1781b3-1b83-54c4-9150-df583f620fd7", "verdict": "agree", "fields": [], "comment": "'Submission rejected' + E211; refuted correct."}
+{"case_id": "ef0a1454-992b-5e9e-8a1e-20056acc47ca", "verdict": "agree", "fields": [], "comment": "STATUS passed visible for DX 0161; success correct (ID spacing differs trivially). Rationale blank."}
+{"case_id": "ef9d8cb2-5530-51c4-b448-03f47585cd58", "verdict": "agree", "fields": [], "comment": "Contradictory snapshots; contradictory/unknown correct."}
+{"case_id": "f3d1a4a5-d090-56fc-80bb-528457d58b8b", "verdict": "agree", "fields": [], "comment": "'Deploying' snapshot; unknown/abstain correct."}
+{"case_id": "f4467e8a-bbfb-5917-9fdb-4692f577d399", "verdict": "disagree", "fields": ["outcome_truth"], "comment": "outcome_truth=failure contradicts its own rationale ('unknown, not failure') and the twin subject_mismatch packet de6871d7 (unknown). Should be unknown."}
+{"case_id": "fcea3a59-8cca-550b-9eb6-9ee24d0ad824", "verdict": "agree", "fields": [], "comment": "No confirmation banner in image; refuted correct."}
