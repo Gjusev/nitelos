@@ -1,0 +1,344 @@
+{
+  "run": "NIT-008 approved iteration round (one bounded round per decisions.md)",
+  "prompt_hashes": {
+    "v1": "08fde1e3776018111c0a1de8796b0660c7df2c5b2ac9623357fda1d6087d706d",
+    "v2": "90c637430e83ec253971c9e0e32d9ab0de886cfc9ec7d11556f891009c034b77",
+    "v3": "f5633dc679964094f97d4f4df8519ce759db5a1bfde2d2cfb14fde3e1b58f432"
+  },
+  "platform": {
+    "os": "Linux",
+    "python": "3.12.15"
+  },
+  "diagnostics": {
+    "v2": {
+      "D1_trivially_supported": {
+        "case_id": "SMK-001",
+        "status": "backend_error",
+        "decision": null,
+        "error_code": "INVALID_OUTPUT",
+        "elapsed_ms": 12745.6,
+        "model_invoked": true,
+        "raw_output": " UNKNOWN.",
+        "parsed_label": null,
+        "basis": null
+      },
+      "D2_trivially_refuted": {
+        "case_id": "SMK-001",
+        "status": "backend_error",
+        "decision": null,
+        "error_code": "INVALID_OUTPUT",
+        "elapsed_ms": 4521.33,
+        "model_invoked": true,
+        "raw_output": " UNKNOWN.",
+        "parsed_label": null,
+        "basis": null
+      }
+    },
+    "v3": {
+      "D1_trivially_supported": {
+        "case_id": "SMK-001",
+        "status": "backend_error",
+        "decision": null,
+        "error_code": "INVALID_OUTPUT",
+        "elapsed_ms": 6199.04,
+        "model_invoked": true,
+        "raw_output": " UNKNOWN.",
+        "parsed_label": null,
+        "basis": null
+      },
+      "D2_trivially_refuted": {
+        "case_id": "SMK-001",
+        "status": "backend_error",
+        "decision": null,
+        "error_code": "INVALID_OUTPUT",
+        "elapsed_ms": 4684.33,
+        "model_invoked": true,
+        "raw_output": " UNKNOWN.",
+        "parsed_label": null,
+        "basis": null
+      }
+    }
+  },
+  "full_runs": {
+    "v2": {
+      "cases": [
+        {
+          "case_id": "SMK-001",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 5861.73,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-002",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 4048.19,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-003",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 4351.88,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-004",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 4519.94,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-005",
+          "status": "ok",
+          "decision": "abstained",
+          "error_code": null,
+          "elapsed_ms": 87.12,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": "none"
+        },
+        {
+          "case_id": "SMK-006",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 7515.75,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-007",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 4198.67,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-008",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 4451.53,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-009",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 4275.63,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-010",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 4368.79,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-011",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 7490.99,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-012",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 4098.26,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        }
+      ],
+      "model_calls": 11,
+      "valid_labels": 0,
+      "decisive_labels": 0
+    },
+    "v3": {
+      "cases": [
+        {
+          "case_id": "SMK-001",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 5784.47,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-002",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 4430.54,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-003",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 4137.38,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-004",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 4291.26,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-005",
+          "status": "ok",
+          "decision": "abstained",
+          "error_code": null,
+          "elapsed_ms": 66.4,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": "none"
+        },
+        {
+          "case_id": "SMK-006",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 7559.98,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-007",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 4162.03,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-008",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 4290.71,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-009",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 4096.85,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-010",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 4363.84,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-011",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 7620.73,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        },
+        {
+          "case_id": "SMK-012",
+          "status": "backend_error",
+          "decision": null,
+          "error_code": "INVALID_OUTPUT",
+          "elapsed_ms": 4131.59,
+          "model_invoked": true,
+          "raw_output": " UNKNOWN.",
+          "parsed_label": null,
+          "basis": null
+        }
+      ],
+      "model_calls": 11,
+      "valid_labels": 0,
+      "decisive_labels": 0
+    }
+  },
+  "peak_rss_kb": 4214876,
+  "peak_rss_method": "resource.getrusage ru_maxrss (Linux, KiB)"
+}

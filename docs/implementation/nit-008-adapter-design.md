@@ -348,3 +348,22 @@ output, not a native head), `supports_probabilities=False`,
 `supports_calibrated_probabilities=False`, `supports_native_abstention=False` (prompted
 UNKNOWN), `supports_evidence_references=True`, `local_execution=True`,
 `supports_native_batch=False`, text-token maximum 2 048, criterion kinds: visual only.
+
+## Addendum — ADR-012 checkpoint swap (2026-10-15, user-approved)
+
+ADR-012 (decisions.md) replaces the pinned checkpoint with
+`HuggingFaceTB/SmolVLM2-2.2B-Instruct @ 482adb537c021c86670beed01cd58990d01e72e4`
+(Apache-2.0; same Idefics3 architecture and processor pipeline as the 500M).
+Code impact: the `MODEL_ID`/`DEFAULT_REVISION` constants change, and the model
+manifest format gains the sharded-safetensors layout — `model.safetensors.index.json`
+plus `model-00001/00002-of-00002.safetensors` — with the unchanged verification
+rule (missing == digest mismatch == `MODEL_UNAVAILABLE`); the pre-ADR-012
+single-shard layout remains verifiable so the 500M attempt-1 history stays
+reproducible. Everything else is unchanged: prompt protocol (v1 first for the
+new model, then the same bounded-iteration rules), strict parser, preprocessing
+(`longest_edge=1024`), CPU float32, greedy 8-token generation, error mapping,
+and all contract tests. The 500M failure records (attempt 1, iteration round,
+D3) stay in the repository as honest history. If the 2.2B also fails G3
+(≥1 valid non-abstained label on the 12-case smoke), the release falls back
+automatically to the release-candidate-with-G3-failed path; no further swaps
+without new user approval.

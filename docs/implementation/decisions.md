@@ -98,7 +98,10 @@ Author: nitelos-0f. The orchestrator accepted readings A1–A7:
 
 ## G4 human annotation
 
-User decision 2026-10-15: the user will organize the two independent reviewers and the adjudicator later. G4 stays pending until reviewer IDs are supplied. Review packets will be prepared at NIT-010.
+User decision 2026-10-15, updated 2026-10-15: the two independent reviewers and the adjudicator will be organized by the user AT THE END of all implementation work. Consequences, accepted by the user:
+- G4, the final-test oracle audit, the final freeze hash and the final-test benchmark runs (NIT-013) wait for that human gate at the end; v0.1 cannot be declared ready before it.
+- All work that does not depend on the frozen final split proceeds now: dev-split runs, the 12-case smoke set, prompt protocol on dev data only, docs, packaging.
+- Review packets are prepared (benchmarks/synthetic_v1/review-packets/) and stay ready; the freeze tool refuses until sign-off is complete.
 
 ## AR-2 (deterministic slice NIT-002..006) — 2026-10-15
 
@@ -109,3 +112,80 @@ Accepted:
 - A `NITELOS_DEV_RERAISE` env fallback is acceptable, provided its value parsing is strict.
 Additive public name: limitation code `PARTIAL_RESULTS_NONAUTHORITATIVE`, placed in `diagnostics.limitations` on backend_error results that carry partial criteria.
 Model integration (NIT-007/008) is authorized once the conditions are met.
+
+## NIT-009 review — 2026-10-15
+
+Reviewer: nitelos-3a. Verdict: APPROVE-WITH-CHANGES. Required: `Trace.to_request` must reject a naive `as_of` and normalize aware non-UTC values (it raised a raw TypeError).
+Accepted: the parse-time `as_of` stand-in is `datetime.max` (only the captured_at ≤ as_of check consumes it, and the real check runs at `to_request`); model criteria are revalidated through the mapping validators; the recipe's code blocks are illustrative fragments.
+
+## NIT-010 review — 2026-10-15
+
+Reviewer: nitelos-3a. Verdict: APPROVE-WITH-CHANGES. Required before any human audit or freeze:
+1. S11 outcome_truth must be `success` (it was hardcoded `failure`). A state→truth consistency test is added.
+2. The visual-view compositions are corrected to the accepted design: S06 withholds the database observation; S07 v1 uses a visual criterion; S15 replaces its observed criterion with a visual one. A per-family composition test is added.
+3. The group-index numeral is removed from renders. The orchestrator made this required as leakage hygiene, because in S04/S12/S15 the group determines the variant or truth.
+Lesson recorded: the deterministic dry run validates decisions, not oracle truth labels and not visual-view composition; both now need their own tests.
+
+## NIT-007 implementer decisions (pending review) — 2026-10-15
+
+- Rationale export (an unsafe-content option) is deferred to NIT-012/014 reporting; v0.1 results carry no rationale field.
+- Finding validation raises `BackendOutputError` (backend codes); the verifier converts it to backend_error. `validate_backend_finding` is public as the conformance helper for custom backends.
+- `InferenceContext.deadline` is None until the NIT-008 adapter-level 120 s cooperative deadline.
+
+## NIT-007 review — 2026-10-15
+
+Reviewer: nitelos-f2 (independent of implementer). Verdict: APPROVE-WITH-CHANGES; no smuggling path found under adversarial probing of finding validation, preflight, isolation and lifecycle. All four implementer decisions accepted (see the NIT-007 implementer decisions section above; the reviewer read a worktree predating it).
+F1 ruling (orchestrator): the `already_emitted` duplicate-criterion guard is kept as defense-in-depth for NIT-008 batch paths, and an explanatory test documenting why a duplicate is structurally impossible in the sequential verifier is required before merge.
+
+## NIT-008 G3 attempt 1 — prompt v1 result and iteration ruling (2026-10-15)
+
+Result (implementer nitelos-14, WSL Ubuntu CPU, torch 2.14.1+cpu/transformers 5.19.0, manifest-verified checkpoint a7da5b9, prompt_hash 08fde1e3…, lock 60381e31…): 0/11 valid labels. Every generation decoded to exactly ' UNKNOWN.' (leading space, trailing period) — byte-identical across all 11 diverse inputs. SMK-005 resolved by policy alone (ok/abstained, 69.8 ms, no model call) exactly as designed. Timings: load 1,754.8 ms; cold case 10,428.6 ms; warm mean 5,070.8 ms; wall 66.2 s; peak RSS ~3.2 GiB (ru_maxrss). Raw JSON: benchmarks/smoke-run-local-smoke-run.json on the NIT-008 branch. The strict parser correctly produced INVALID_OUTPUT for all 11 (design A5 holds; parser is normative and unchanged).
+
+Orchestrator ruling — one pre-declared diagnostic/iteration round, dev smoke images only, candidates fixed BEFORE any run:
+- v2: instruction-last format — the answer instruction appears as the final lines, verbatim: "Answer with the single word SUPPORTED, REFUTED or UNKNOWN. No other characters." (template text and hash logged before running).
+- v3: completion suffix — prompt ends with "Answer:" after the labels list.
+- D1/D2 diagnostics on smoke-01 with each template: a trivially-SUPPORTED criterion ("the screenshot contains any text at all") and a trivially-REFUTED one ("the screenshot shows a purple dinosaur"), to establish whether the checkpoint can emit any decisive label at all under the strict parser.
+Decision rule, fixed in advance: if no candidate yields at least one valid decisive label (parser untouched), G3 is declared unreachable for this checkpoint; Nitelos escalates the doc-10 viability review to the user with options (delay v0.1, or release candidate with G3 recorded as a failed mandatory gate). No parser weakening, no model/preprocessing/max_new_tokens change, no mocks, ever.
+
+## NIT-008 iteration round result — G3 declared unreachable (2026-10-15)
+
+Executed exactly as ruled (candidates committed at acf9535 before any run; v2 hash 90c63743…, v3 hash f5633dc6…): all 44 generations — both templates, both trivially-answerable diagnostics D1/D2, and both full 11-case runs — decoded to exactly ' UNKNOWN.'. The checkpoint cannot emit ANY decisive label under the normative strict parser, invariant to prompt wording and criterion content. Per the fixed decision rule, G3 is unreachable for HuggingFaceTB/SmolVLM-500M-Instruct @ a7da5b9 on the declared CPU path. Mean ~4.6 s/case; peak RSS ~4.0 GiB; raw records: benchmarks/smoke-run-local-smoke-run.json and benchmarks/iteration-round.json on the NIT-008 branch. No parser weakening, no model or generation-parameter change, no mocks — the adapter implementation is complete; the gate is failed.
+Follow-up diagnostic D3 (open captions, outside the verifier path) commissioned to distinguish choice-format instruction-following failure from a multimodal wiring defect before the user escalation.
+
+## NIT-008 D3 diagnostic — wiring intact; choice-format compliance absent (2026-10-15)
+
+D3 (open captions on smoke-01, outside the verifier path; records at benchmarks/d3-diagnostic.json, branch commit 98dd2a1): "Describe this image briefly." -> an accurate scene-specific description of the Export-complete fixture; "What is shown…" -> " Page showing export details." The image pipeline and scene comprehension work; the collapse is exclusively single-word three-label format compliance. Corollary recorded: even with the trailing period accepted, ' UNKNOWN.' is an abstention, and G3 requires a decisive label — no parser reading can reach G3 with this checkpoint. NIT-007 F1 explanatory test landed (2294091) and NIT-007 merged.
+
+## ADR-012 — Replace the pinned visual checkpoint with SmolVLM2-2.2B-Instruct (user-approved 2026-10-15)
+
+**Context:** G3 is unreachable with HuggingFaceTB/SmolVLM-500M-Instruct @ a7da5b9: 0/44 generations ever produced a decisive label (all ' UNKNOWN.'), while D3 open captions prove the pipeline and scene comprehension work. The collapse is single-word choice-format compliance, and even with the trailing period accepted the output would remain an abstention — no parser reading reaches G3. The doc-10 viability review was escalated to the user.
+**Decision (user option "Probar SmolVLM-2.2B"):** one swap attempt to **HuggingFaceTB/SmolVLM2-2.2B-Instruct @ 482adb537c021c86670beed01cd58990d01e72e4** (Apache-2.0; same Idefics3 architecture and processor pipeline; the 2.2B exists in the SmolVLM2 series — the original series shipped no 2.2B-Instruct). The 500M failure records stay in the repository as honest history. The smoke procedure, prompt protocol (v1 first), strict parser, preprocessing and all contract rules are unchanged; only the checkpoint and its manifest change. If the 2.2B also fails to produce ≥1 valid decisive label on the 12-case smoke set, Nitelos falls back automatically to the release-candidate-with-G3-failed path (no further model swaps without new user approval).
+**Impact:** weights ~9 GB in two shards (orchestrator pre-provisions and verifies per-file SHA-256 against upstream LFS oids outside the repo); CPU float32 peak RSS projected ~12 GiB on the declared 32 GiB machine; per-case latency expected to rise several-fold — acceptable for dev smoke; benchmark runtimes are re-estimated at AR-3.
+
+## NIT-008 phase B — G3 PASSED with the ADR-012 checkpoint (2026-10-15)
+
+SmolVLM2-2.2B-Instruct @ 482adb5, UNCHANGED prompt v1 (hash 08fde1e3…), WSL Ubuntu CPU float32 (torch 2.14.1+cpu / transformers 5.19.0): 11/11 generations valid under the strict parser; 10 decisive SUPPORTED + 1 UNKNOWN abstention (SMK-002); SMK-005 policy-only (74 ms, no model call). Load 3,303.7 ms; cold case 52,490.4 ms; warm mean 28,294.9 ms; wall 363.7 s; peak RSS ≈ 9.9 GiB (ru_maxrss). Records: benchmarks/smoke-run-2.2B.json, d3-2.2B-sanity.json, compatibility report, all on nit/008-smolvlm @ f1140e3.
+Orchestrator independent verification: mocked suite 374 passed + 1 deselected (Windows, local extra); the gated real-model integration test re-run by the orchestrator on WSL PASSED (63.7 s).
+Honest accuracy observation (dev labels only, no tuning): smoke agreement 4/12; the 2.2B is format-compliant but over-supports (SUPPORTED on REFUTED-authored 004/007/009). Recorded as a model-judgment limitation for AR-3, the benchmark interpretation and all reporting; the executability gate is unaffected.
+Dependency additions under the pre-authorization (both required by the processor chain, justified in-branch): torchvision 0.29.1+cpu (unguarded import in transformers 5.19 smolvlm image processor) and num2words 0.5.14 (SmolVLM2 processor requirement), plus their transitives; core/eval closures unchanged; core import stays torch-free.
+
+## NIT-012 review — 2026-10-15
+
+Reviewer: nitelos-14. Verdict: APPROVE-WITH-CHANGES. Adversarial probes (Linux): path-escape table extended, symlink chains, kill-mid-run semantics, collector-shape attacks, trust-fingerprint tampering — all held.
+Required: wire the `--backend smolvlm` CLI factory to SmolVLMBackend now that NIT-008 has landed.
+Orchestrator rulings on the info findings: (2) collector-shape errors are reclassified as configuration → exit 2 (doc 06 treats the fixture collector as trusted runner configuration); (4) capture the backend descriptor's preprocessing_hash in run.json and compare it in compare_reports together with the finding-1 wiring — required before any visual comparison is reported as matched; (3) the realpath→open TOCTOU window is recorded as a residual (host-local tampering out of doc-07 scope); future hardening via dir_fd-relative opens.
+
+## AR-3 — APPROVED (2026-10-15)
+
+Reviewer: nitelos-f2 (independent). Evidence authenticity confirmed from raw records (hashes recomputed live; the 12-case aggregates reproduce by counting rows; 500M-era history intact); prompt v1 byte-stable across all branch revisions; parser byte-identical across history; v2/v3 candidates match the pre-declared hashes committed before the round; torchvision confirmed as an unguarded module-level import in the installed transformers 5.19 smolvlm image processor (wheel source read); num2words confirmed as a construction-time requirement; dependency/licenses rows added by the reviewer on nit/015-release (548ac96); over-support observation reported, not tuned. NIT-008 merged into integration/v0.1 (375 passed + 1 deselected core/eval; Linux strict replay OK).
+Recording notes: (N1) at the AR-4 docs pass, confirm installation.md's weight-provisioning wording names the manifest layout the adapter actually requires; (N2) release-checklist G3 row to be updated to DONE(PASSED) with the over-support observation attached by its owner.
+
+## NIT-010 re-verification — APPROVED and merged (2026-10-15)
+
+Reviewer: nitelos-14. The full 120-oracle state→truth table was rebuilt independently from design 4.1–4.15 with zero mismatches; S11 fixed systemically and pinned by a mechanical test; visual compositions verified structurally over every case; numeral removal spot-checked on regenerated renders (only labeled data values carry digits). Merged into integration/v0.1 (511 passed + 1 deselected; Linux strict replay OK). Final-test annotation and freeze remain PENDING the user-scheduled human gate (G4).
+
+## NIT-014 review — 2026-10-15
+
+Reviewer: nitelos-14 (ran the demos live; DOC-01..04 verified). Verdict: APPROVE-WITH-CHANGES.
+Required at merge (docs were written pre-ADR-012 and must not suppress the pass): (a) "executability gate under review" → passed on the dev smoke set, with the honest accuracy observation attached and benchmark numbers still pending NIT-013; (b) pinned model id/revision updated everywhere to SmolVLM2-2.2B-Instruct @ 482adb5; (c) the visual demo actually wired (the stub's "wiring arrives with NIT-008" is now false) — finding 2 folded into the required update; (d) the tautological `or True` assert replaced by a real benchmark-number ban.
+Windows-unsupported status for `local` stays (A4).

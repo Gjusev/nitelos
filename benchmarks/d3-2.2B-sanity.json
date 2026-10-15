@@ -1,0 +1,18 @@
+{
+  "run": "D3-style sanity caption, ADR-012 SmolVLM2-2.2B checkpoint, BEFORE smoke",
+  "settings": {
+    "greedy": true,
+    "sampling_params": null,
+    "max_new_tokens": 40,
+    "image": "smoke-01.png",
+    "image_sha256": "2cf65d9bd17128a28d5b301363e86b337b56b264ad08ab10e5b14885df72874a"
+  },
+  "outputs": {
+    "D3_caption": " The image is a screenshot of a web page, specifically the dashboard of a software application named Orbit Export. The page is divided into three main sections: the top section, the middle section, and the",
+    "D3_qa": " A computer screen showing the dashboard of a job export."
+  },
+  "platform": {
+    "os": "Linux",
+    "python": "3.12.15"
+  }
+}

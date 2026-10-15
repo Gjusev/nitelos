@@ -38,11 +38,13 @@ from __future__ import annotations
 
 import sys
 from collections.abc import Mapping, Sequence
+from typing import Any
 
 from pydantic import TypeAdapter, ValidationError
 
 from nitelos import __version__
-from nitelos.errors import EvidenceValidationError, InputErrorCode, Issue
+from nitelos.backends.base import BackendCapabilities, BackendOutputError, InferenceContext
+from nitelos.errors import BackendErrorCode, EvidenceValidationError, InputErrorCode, Issue
 from nitelos.schemas import (
     ActionEvidence,
     AssertionCriterion,
@@ -226,10 +228,29 @@ class DeterministicBackend:
 
     def __init__(self) -> None:
         self._descriptor = BackendDescriptor(id="deterministic", version=__version__)
+        self._capabilities = BackendCapabilities(
+            criterion_kinds=("assertion",),
+            supports_structured_decisions=True,
+        )
 
     @property
     def descriptor(self) -> BackendDescriptor:
         return self._descriptor
+
+    @property
+    def capabilities(self) -> BackendCapabilities:
+        """Assertion criteria only; no images, no text context, no scores."""
+        return self._capabilities
+
+    def infer(self, prepared: Any, context: InferenceContext) -> Any:
+        # unreachable through the verifier: preflight rejects visual criteria
+        # via capabilities before any inference is considered
+        raise BackendOutputError(
+            BackendErrorCode.INVALID_OUTPUT, "the deterministic backend does not perform inference"
+        )
+
+    def close(self) -> None:
+        """No resources; idempotent by design."""
 
     def evaluate_assertion(
         self, criterion: AssertionCriterion, evidence: Sequence[AnyEvidenceItem]
