@@ -30,7 +30,7 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 0,
-      "sha256": "0d3b728fb50f401e4fd094460e9c2a4d09ffc81eb32831cf97a05d143fdef6c9",
+      "sha256": "83ed57a7e99578e275e3890a2128e7602f56b9dc14efb43bd8c4e3b0ebf650b2",
       "source_id": "fixture-ui",
       "subject": {
         "syncjob": "CO-0130"
@@ -47,7 +47,7 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 1,
-      "sha256": "22c811dab0a45162c154052a1a0716aa4d65def7d19ccc67052bc26f8b12c51d",
+      "sha256": "c8a916c739173de121a024c9a57d0b3cd3cdd240b25c0bddcc50594b64ed0dcf",
       "source_id": "fixture-ui",
       "subject": {
         "syncjob": "CO-0130"

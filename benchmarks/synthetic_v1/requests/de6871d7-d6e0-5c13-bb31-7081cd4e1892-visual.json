@@ -3,16 +3,13 @@
   "checkpoint_id": "cp-final",
   "criteria": [
     {
-      "description": "Interface names record CC-0999",
+      "description": "The Parcel Console CC page names record CC-0999",
       "evidence_ids": [
-        "de6871d7d6e0-dom-1"
+        "de6871d7d6e0-shot-1"
       ],
-      "expected": "CC-0999",
       "id": "c-obs",
-      "kind": "assertion",
-      "operator": "equals",
-      "pointer": "/order_id",
-      "scope": "observed_state",
+      "kind": "visual",
+      "scope": "visual",
       "subject": {
         "order": "CC-0999"
       }
@@ -29,7 +26,7 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 0,
-      "sha256": "0310fb6d0bc10d537d78cb3b5d81917f7793104b78004e81db70af9653510205",
+      "sha256": "3963be37085586322c42dd7de93ddd6eb838639dd7f8b7cfe157005acc7ddf62",
       "source_id": "fixture-ui",
       "subject": {
         "order": "CC-0170"

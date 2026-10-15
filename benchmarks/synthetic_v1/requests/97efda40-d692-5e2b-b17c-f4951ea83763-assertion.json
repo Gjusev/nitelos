@@ -29,7 +29,7 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 0,
-      "sha256": "af1ef1aaad523f19fbfc75178abb5989c5da01d3a7a96bc80774bb4dd2be5358",
+      "sha256": "bd36ed96b6060d06362f2ea8eceee201e080e4293c143d4c17eef199c44c0836",
       "source_id": "fixture-ui",
       "subject": {
         "task": "DS-0110"

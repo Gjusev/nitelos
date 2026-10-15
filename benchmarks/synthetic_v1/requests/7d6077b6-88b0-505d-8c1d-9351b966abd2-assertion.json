@@ -3,6 +3,19 @@
   "checkpoint_id": "cp-final",
   "criteria": [
     {
+      "description": "Interface state for EI-0110 reports the import completed",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "observed_state",
+      "subject": {
+        "import": "EI-0110"
+      }
+    },
+    {
       "description": "Backend record for EI-0110 reports the import completed",
       "evidence_ids": [],
       "expected": "completed",
@@ -65,7 +78,7 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 2,
-      "sha256": "0331c488454afbb91061adff5d2804bd204f27dfb8a67c96d93b74ee42ed79d8",
+      "sha256": "8f0aa3ad0070cb5b04204e4224d5db10d429f0af830a44bb044b19b9d8a35d0e",
       "source_id": "fixture-ui",
       "subject": {
         "import": "EI-0110"

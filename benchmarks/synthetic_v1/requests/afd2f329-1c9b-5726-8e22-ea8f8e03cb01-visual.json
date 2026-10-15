@@ -26,7 +26,7 @@
       "media_type": "image/png",
       "phase": "pending",
       "sequence": 0,
-      "sha256": "da204547b3ff3d09159644d919cb582a994cdcea28490a44aa0896fb6593430e",
+      "sha256": "5fb8c883d6d5e901b78f76d444751f1fcf68b6881feb557bb05a07da5b3362d0",
       "source_id": "fixture-ui",
       "subject": {
         "deployment": "BG-0110"

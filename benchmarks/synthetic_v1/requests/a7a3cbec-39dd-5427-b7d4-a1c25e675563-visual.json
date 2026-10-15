@@ -3,16 +3,13 @@
   "checkpoint_id": "cp-final",
   "criteria": [
     {
-      "description": "Interface names record BW-0999",
+      "description": "The Order Console BW page names record BW-0999",
       "evidence_ids": [
-        "a7a3cbec39dd-dom-1"
+        "a7a3cbec39dd-shot-1"
       ],
-      "expected": "BW-0999",
       "id": "c-obs",
-      "kind": "assertion",
-      "operator": "equals",
-      "pointer": "/order_id",
-      "scope": "observed_state",
+      "kind": "visual",
+      "scope": "visual",
       "subject": {
         "order": "BW-0999"
       }
@@ -29,7 +26,7 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 0,
-      "sha256": "c34ddc0b6a039c374b085ce93a35c37eeef3814412a7e2115f77a7be13e0ccc7",
+      "sha256": "28c0e06d293061f8dd1a3e944d2e0f520ceb987ab81025d74d3ba35089721a08",
       "source_id": "fixture-ui",
       "subject": {
         "order": "BW-0110"

@@ -194,8 +194,6 @@ def _frame(draw: ImageDraw.ImageDraw, title: str, group_number: int) -> None:
     draw.rectangle((0, 0, W, header_h), fill=ink)
     draw.rectangle((24, 18, 56, 50), fill=accent)
     draw.text((72, 26), title, font=_font(26), fill=(245, 247, 250))
-    for i in range(group_number):  # per-group marker strip in the header
-        draw.rectangle((W - 40 - i * 26, 24, W - 22 - i * 26, 48), fill=accent)
     if group_number % 2 == 1:  # layout variant: left rail vs top tabs
         draw.rectangle((0, header_h, 200, H), fill=ink)
         for i in range(6):
@@ -214,17 +212,23 @@ def _frame(draw: ImageDraw.ImageDraw, title: str, group_number: int) -> None:
     band_y = 340 + (group_number % 4) * 92
     band_h = 26 + group_number * 5
     draw.rectangle((0, band_y, W, band_y + band_h), fill=accent)
-    # per-group watermark digit, large and DARK: strongly separates the 8x8
-    # grayscale structure (and therefore aHash) between lineage groups
-    draw.text((W - 240, H - 300), str(group_number), font=_font(200), fill=ink)
-    # bottom identity strip: the group number's 4-bit pattern as ink stripes —
-    # deterministic, neutral (no words), and bit-level distinct per group
-    strip_top = H - 120
-    draw.rectangle((0, strip_top, W, H), fill=(tint, tint + 2, tint + 5))
-    for bit in range(4):
-        if group_number & (1 << bit):
-            draw.rectangle((0, strip_top + bit * 30, W, strip_top + bit * 30 + 22), fill=ink)
-    draw.text((24, strip_top + 6), f"{title} - synthetic fixture", font=_font(14), fill=(120, 128, 140))
+    # per-group corner inlay: a fixed-size hollow square placed from a fixed
+    # shuffle table - separates aHash without encoding the group number in any
+    # human-legible or binary form
+    inlay_positions = (
+        (1120, 120),
+        (1120, 260),
+        (1120, 640),
+        (300, 120),
+        (620, 120),
+        (920, 640),
+        (300, 640),
+        (620, 640),
+    )
+    ix, iy = inlay_positions[(group_number - 1) % 8]
+    draw.rectangle((ix, iy, ix + 56, iy + 56), outline=ink, width=10)
+    draw.rectangle((ix + 18, iy + 18, ix + 38, iy + 38), fill=accent)
+    draw.text((24, H - 44), f"{title} - synthetic fixture", font=_font(14), fill=(120, 128, 140))
 
 
 def _banner(
@@ -374,6 +378,7 @@ def _uniquify_ids(case: dict[str, Any]) -> None:
     if case.get("visual_extra") is not None:
         evidence_ids, description = case["visual_extra"]
         case["visual_extra"] = ([ev_map[e] for e in evidence_ids], description)
+    case["visual_drop_evidence"] = [ev_map[e] for e in case.get("visual_drop_evidence", [])]
 
 
 def _obs_item(case: dict[str, Any], eid: str, seq: int, data: dict[str, Any], **over: Any) -> dict[str, Any]:
@@ -813,7 +818,7 @@ def _s07(case: dict[str, Any]) -> None:
     case["artifacts"] = {"art-1": png}
     desc = f"The {case['app']} page names record {other}"
     case["criteria"] = criteria
-    case["visual_replace"] = {"c-obs": (["shot-1"], desc)} if variant == "wrong_id" else {}
+    case["visual_replace"] = {"c-obs": (["shot-1"], desc)}
     case["visual_subject_override"] = {"c-obs": criteria_subject} if variant == "subject_mismatch" else {}
     case["visual_drop_evidence"] = []
     case["scope"] = ["observed_state", "external", "visual"]
@@ -1141,10 +1146,35 @@ def _s15(case: dict[str, Any]) -> None:
     for item in evidence[:2]:
         item["checkpoint_id"] = "cp-0" + str(item["sequence"] + 1)
     if variant == "failed":
-        evidence.append(_ext_item(case, "ext-1", 3, {"status": "failed"}))
+        evidence.append(_obs_item(case, "dom-final", 3, {"status": "failed"}))
+        evidence.append(_ext_item(case, "ext-1", 4, {"status": "failed"}))
+        final_png = render_scene(
+            {
+                "title": case["app"],
+                "group_number": case["group"],
+                "widgets": [
+                    ("banner", "Import failed", -1, BANNER_BOX),
+                    ("status", 260, 380, "Import set", case["entity"], 28),
+                    ("status", 260, 430, "Rows", "0 of 812", 28),
+                ],
+            }
+        )
+        evidence.append(_shot_item(case, "shot-final", 5, "art-final", final_png))
     case["evidence"] = evidence
     case["artifacts"] = {"art-1": png}
+    if variant == "failed":
+        case["artifacts"]["art-final"] = final_png
     case["criteria"] = [
+        _crit(
+            "c-obs",
+            "observed_state",
+            "/status",
+            "equals",
+            "completed",
+            ["dom-final"] if variant == "failed" else [],
+            case["subject"],
+            f"Interface state for {case['entity']} reports the import completed",
+        ),
         _crit(
             "c-ext",
             "external",
@@ -1156,9 +1186,14 @@ def _s15(case: dict[str, Any]) -> None:
             f"Backend record for {case['entity']} reports the import completed",
         ),
     ]
-    case["visual_replace"] = {}
+    case["visual_replace"] = {
+        "c-obs": (
+            ["shot-final"] if variant == "failed" else [],
+            f"The {case['app']} window shows the import completed for {case['entity']}",
+        )
+    }
     case["visual_drop_evidence"] = []
-    case["scope"] = ["observed_state", "external", "behavioral"]
+    case["scope"] = ["observed_state", "external", "behavioral", "visual"]
 
 
 _FAMILY_BUILDERS: dict[str, Any] = {
@@ -1256,9 +1291,9 @@ def _thaw(value: Any) -> Any:
 
 def _write_json(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(
-        json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8"
-    )
+    # bytes with LF newlines: byte-identity must not depend on platform newline translation
+    text = json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+    path.write_bytes(text.encode("utf-8"))
 
 
 def build_cases() -> list[dict[str, Any]]:
@@ -1285,7 +1320,9 @@ def render_all(out_dir: Path) -> None:
         stem = file_stem(case["case_id"])
         stem_to_case[stem] = case
         for artifact_id, png in case["artifacts"].items():
-            suffix = "-b" if artifact_id.endswith("-b") else ""
+            suffix = (
+                "-b" if artifact_id.endswith("-b") else "-final" if artifact_id.endswith("-final") else ""
+            )
             (out_dir / "artifacts" / f"{stem}{suffix}.png").write_bytes(png)
         _write_json(out_dir / "requests" / f"{case['case_id']}-assertion.json", assertion_request(case))
         _write_json(out_dir / "requests" / f"{case['case_id']}-visual.json", visual_request(case))
@@ -1325,7 +1362,13 @@ def render_all(out_dir: Path) -> None:
                 stem = file_stem(case["case_id"])
                 artifacts = []
                 for artifact_id in sorted(case["artifacts"]):
-                    suffix = "-b" if artifact_id.endswith("-b") else ""
+                    suffix = (
+                        "-b"
+                        if artifact_id.endswith("-b")
+                        else "-final"
+                        if artifact_id.endswith("-final")
+                        else ""
+                    )
                     path = f"artifacts/{stem}{suffix}.png"
                     artifacts.append(
                         {
@@ -1505,7 +1548,8 @@ def _write_dedup_review(out_dir: Path) -> None:
     for case in cases:
         stem = file_stem(case["case_id"])
         for artifact_id, png in case["artifacts"].items():
-            suffix = "-b" if artifact_id.endswith("-b") else ""
+            suffix = ("-b" if artifact_id.endswith("-b")
+                      else "-final" if artifact_id.endswith("-final") else "")
             entries.append((f"{stem}{suffix}.png", case["group_id"], _ahash_bits(png)))
     hits = []
     compared = 0
@@ -1576,7 +1620,8 @@ reported. Estimated effort: three to four minutes per case.
         stem = file_stem(case["case_id"])
         image_lines = []
         for artifact_id in sorted(case["artifacts"]):
-            suffix = "-b" if artifact_id.endswith("-b") else ""
+            suffix = ("-b" if artifact_id.endswith("-b")
+                      else "-final" if artifact_id.endswith("-final") else "")
             image_lines.append(f"![image](../artifacts/{stem}{suffix}.png)")
         criteria_lines = []
         for view in ("assertion", "visual"):

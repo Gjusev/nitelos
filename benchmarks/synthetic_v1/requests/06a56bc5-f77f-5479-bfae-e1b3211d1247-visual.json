@@ -3,6 +3,18 @@
   "checkpoint_id": "cp-final",
   "criteria": [
     {
+      "description": "The Migrate Console EO window shows the import completed for EO-0170",
+      "evidence_ids": [
+        "06a56bc5f77f-shot-final"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "import": "EO-0170"
+      }
+    },
+    {
       "description": "Backend record for EO-0170 reports the import completed",
       "evidence_ids": [
         "06a56bc5f77f-ext-1"
@@ -67,7 +79,7 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 2,
-      "sha256": "ba93b1750dcd0e2eb74cd5e7455219cdced68f72dcfeaf2ce0c717c5c3aa2ac8",
+      "sha256": "aff91e48f784a4b9cfd618e764aa6aa2eae03b6a931fc228ce10528dba852886",
       "source_id": "fixture-ui",
       "subject": {
         "import": "EO-0170"
@@ -76,6 +88,23 @@
     },
     {
       "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "06a56bc5f77f-dom-final",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-ui",
+      "subject": {
+        "import": "EO-0170"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:04Z",
       "channel": "external_api",
       "checkpoint_id": "cp-final",
       "data": {
@@ -84,12 +113,29 @@
       "id": "06a56bc5f77f-ext-1",
       "kind": "observation",
       "phase": "final",
-      "sequence": 3,
+      "sequence": 4,
       "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
       "source_id": "fixture-collector-v1",
       "subject": {
         "import": "EO-0170"
       }
+    },
+    {
+      "artifact_id": "06a56bc5f77f-art-final",
+      "captured_at": "2026-10-20T10:00:05Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "06a56bc5f77f-shot-final",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 5,
+      "sha256": "ce098f5012a3532792e56fdd30b2253426e8639385ccf679b1a821f24f9768ce",
+      "source_id": "fixture-ui",
+      "subject": {
+        "import": "EO-0170"
+      },
+      "width": 1200
     }
   ],
   "metadata": {},

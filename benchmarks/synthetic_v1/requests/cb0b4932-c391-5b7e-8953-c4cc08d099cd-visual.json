@@ -26,7 +26,7 @@
       "media_type": "image/png",
       "phase": "pending",
       "sequence": 0,
-      "sha256": "05c57d4dd70176bff9b135922b081e98042c28c6f0e2adc6ece3ad51eeb00808",
+      "sha256": "50050a28758ce5810fd758b8a692a474530c214b575b089600777c762b50b185",
       "source_id": "fixture-ui",
       "subject": {
         "deployment": "BN-0180"

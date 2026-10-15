@@ -19,7 +19,7 @@
   },
   "group_id": "s11:L8",
   "oracle_source_id": "state-machine:s11:v1",
-  "outcome_truth": "failure",
+  "outcome_truth": "success",
   "pair": null,
   "primary_family": "S11",
   "rationale": "bound ledger confirms completion; the agent summary cannot veto it",

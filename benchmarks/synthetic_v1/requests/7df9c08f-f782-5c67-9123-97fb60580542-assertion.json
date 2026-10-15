@@ -3,6 +3,19 @@
   "checkpoint_id": "cp-final",
   "criteria": [
     {
+      "description": "Interface state for EJ-0120 reports the import completed",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "observed_state",
+      "subject": {
+        "import": "EJ-0120"
+      }
+    },
+    {
       "description": "Backend record for EJ-0120 reports the import completed",
       "evidence_ids": [],
       "expected": "completed",
@@ -65,7 +78,7 @@
       "media_type": "image/png",
       "phase": "final",
       "sequence": 2,
-      "sha256": "bc7fbe34fefadd86a8120cb64bed1a1fce7c1f5e2a1e7d93292338d7fc34775f",
+      "sha256": "5b835289e9e9600fa91014a4e9c27f208e058fa4a5473097234e20578d0c2b6e",
       "source_id": "fixture-ui",
       "subject": {
         "import": "EJ-0120"

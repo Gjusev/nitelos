@@ -29,7 +29,7 @@
       "media_type": "image/png",
       "phase": "pending",
       "sequence": 0,
-      "sha256": "690055d6ee5c49f914343f9c6326300c44687a8d5e87dd730c77ad1aa7127a94",
+      "sha256": "c3468441663009bb156a5bfe839aff547c38b613d5f73fca1e6dc0331e9e1222",
       "source_id": "fixture-ui",
       "subject": {
         "deployment": "BH-0120"

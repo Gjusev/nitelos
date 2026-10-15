@@ -193,7 +193,7 @@ def test_data03_neutral_filenames_and_clean_pngs() -> None:
     pngs = sorted(ARTIFACTS.glob("*.png"))
     assert pngs, "no artifacts generated"
     for path in pngs:
-        assert re.fullmatch(r"[0-9a-f]{12}(-b)?\.png", path.name), path.name
+        assert re.fullmatch(r"[0-9a-f]{12}(-b|-final)?\.png", path.name), path.name
         lowered = path.name.lower()
         assert not [word for word in LABEL_WORDS if word in lowered]
         assert not (FORBIDDEN_CHUNKS & set(_png_chunks(path)))
@@ -399,3 +399,85 @@ def test_review_packets_prepared_for_final_test() -> None:
         assert "objective" in text.lower()
         oracle = _oracle(case["case_id"])
         assert oracle["outcome_truth"] in text
+
+
+# --------------------------------------------------------------------------
+# review additions: per-family state->truth consistency and visual composition
+# --------------------------------------------------------------------------
+
+
+def _state_to_truth(family: str, state: dict[str, Any]) -> str:
+    """Truth mapping from the accepted design's per-family tables (section 4)."""
+    if family in ("S01", "S11"):
+        return "success"
+    if family in ("S05", "S09"):
+        return "unknown"
+    if family == "S08":
+        return state["underlying"]
+    if family == "S12":
+        return state["underlying"]
+    if family == "S13":
+        return "success" if state["status_line"] == "passed" else "failure"
+    if family == "S15":
+        return "unknown" if state["final_predicate"] == "absent" else "failure"
+    return "failure"
+
+
+def test_review_state_to_truth_consistency_per_family() -> None:
+    for case in _all_cases():
+        oracle = _oracle(case["case_id"])
+        expected_truth = _state_to_truth(case["primary_scenario"], oracle["state"])
+        assert oracle["outcome_truth"] == expected_truth, (
+            case["case_id"],
+            case["primary_scenario"],
+            oracle["state"],
+            oracle["outcome_truth"],
+            expected_truth,
+        )
+
+
+def _request(case: dict[str, Any], view: str) -> dict[str, Any]:
+    return json.loads(_request_path(case["case_id"], view).read_text(encoding="utf-8"))
+
+
+def test_review_visual_composition_per_family() -> None:
+    for case in _all_cases():
+        assertion = _request(case, "assertion")
+        visual = _request(case, "visual")
+        assertion_kinds = sorted(c["kind"] for c in assertion["criteria"])
+        visual_kinds = sorted(c["kind"] for c in visual["criteria"])
+        # external and behavioral criteria are carried into the visual view; S06
+        # additionally empties the external citation (the withheld observation)
+        for criterion in assertion["criteria"]:
+            if criterion["scope"] in ("external", "behavioral"):
+                carried = [c for c in visual["criteria"] if c["id"] == criterion["id"]]
+                assert len(carried) == 1, (case["case_id"], criterion["id"])
+                (carried_criterion,) = carried
+                if case["primary_scenario"] == "S06":
+                    assert carried_criterion["evidence_ids"] == []
+                else:
+                    assert carried_criterion == criterion, (case["case_id"], criterion["id"])
+        family = case["primary_scenario"]
+        if family == "S06":
+            # A6/4.6: the database observation is withheld from the visual view
+            ids = {item["id"] for item in visual["evidence"]}
+            db_items = [i for i in assertion["evidence"] if i.get("channel") == "database"]
+            for item in db_items:
+                assert item["id"] not in ids, case["case_id"]
+        if family == "S15":
+            # design 4.15: the observed final criterion is replaced by a visual one
+            assert "visual" in visual_kinds, case["case_id"]
+        if family == "S07":
+            # design 4.7 variant 1: the visual criterion carries the mismatched subject
+            v1 = case["group_id"].endswith(("L1", "L3", "L5", "L7"))
+            if v1:
+                (visual_criterion,) = [c for c in visual["criteria"] if c["kind"] == "visual"]
+                assertion_criterion = next(c for c in assertion["criteria"] if c["id"] == "c-obs")
+                assert visual_criterion["subject"] == assertion_criterion["subject"]
+        # visual criteria never cite non-screenshot evidence
+        for criterion in visual["criteria"]:
+            if criterion["kind"] != "visual":
+                continue
+            for item in visual["evidence"]:
+                if item["id"] in criterion["evidence_ids"]:
+                    assert item["kind"] == "screenshot", (case["case_id"], item["id"])

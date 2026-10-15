@@ -26,7 +26,7 @@ Complete the refund task for DJ-0180 in Refund Console DJ
 
 ## Derived labels under review
 
-- outcome_truth: failure
+- outcome_truth: success
 - evidence_sufficiency: sufficient
 - expected assertion: success / ['ALL_CRITERIA_SUPPORTED']
 - expected visual: success / ['ALL_CRITERIA_SUPPORTED']
