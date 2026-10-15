@@ -104,6 +104,7 @@ def main() -> int:
     valid_labels = 0
     decisive_labels = 0
     matches_expected = 0
+    backend_errors = 0
     warm_times: list[float] = []
     cold_ms: float | None = None
     started = time.monotonic()
@@ -112,7 +113,7 @@ def main() -> int:
         request = parse_request(build_request(case, images))
         result = verifier.verify(request, artifacts=ArtifactStore(images))
         elapsed_ms = (time.monotonic() - case_started) * 1000.0
-        criterion = result.criteria[0]
+        criterion = result.criteria[0] if result.criteria else None
         invoked = bool(result.diagnostics.preprocessing)
         raw = backend.last_raw_output if invoked else None
         label = raw.strip() if raw is not None else None
@@ -127,8 +128,9 @@ def main() -> int:
             "expected_label": case["expected_label"],
             "status": result.execution_status.value,
             "decision": result.decision.value if result.decision else None,
-            "basis": criterion.basis.value,
+            "basis": criterion.basis.value if criterion else None,
             "reason_codes": list(result.reason_codes),
+            "error_code": result.error.code.value if result.error else None,
             "elapsed_ms": round(elapsed_ms, 2),
             "model_invoked": invoked,
             "raw_output": raw,
@@ -136,6 +138,8 @@ def main() -> int:
         }
         if invoked:
             model_calls += 1
+        if record["status"] == "backend_error":
+            backend_errors += 1
         if record["parsed_label"] is not None:
             valid_labels += 1
             if record["parsed_label"] in ("SUPPORTED", "REFUTED"):
@@ -171,6 +175,7 @@ def main() -> int:
         "aggregate": {
             "cases": len(per_case),
             "model_calls": model_calls,
+            "backend_errors": backend_errors,
             "policy_only_case": "SMK-005",
             "valid_labels": valid_labels,
             "decisive_labels": decisive_labels,
