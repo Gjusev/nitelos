@@ -57,6 +57,8 @@ lock and reconcile (REL-04 assertion), then capture each wheel's metadata verbat
 | pyyaml | 6.0.3 | MIT | github.com/yaml/pyyaml | compiled wheel (libyaml bundling varies) |
 | packaging | 26.3 | Apache-2.0 OR BSD-2-Clause | github.com/pypa/packaging | |
 | typing-extensions | 4.16.0 | PSF-2.0 | (see core) | shared with core |
+| torchvision | 0.29.1+cpu | BSD-3-Clause | download.pytorch.org/whl/cpu | AR-3 addition (nit/008-smolvlm @ 37e4b8a/d945626): module-level unguarded `from torchvision.transforms.v2 import functional as tvF` in transformers 5.19's smolvlm image processor — verified in the installed wheel source; **Release action**: same PyTorch legal-notice review as torch |
+| num2words | 0.5.14 | MIT (verify at release) | github.com/savoirfairelinux/num2words | AR-3 addition: SmolVLM2 processor raises ImportError without it (guarded import, hard requirement at construction); pure-Python |
 
 ## Development group (not shipped; distributed in-repo via the lock)
 
