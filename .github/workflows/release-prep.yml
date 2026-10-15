@@ -1,0 +1,116 @@
+# Release preparation workflow (NIT-015; design record: docs/implementation/release-workflow.md).
+#
+# workflow_dispatch only — nothing here runs on push. Every action is pinned by
+# full SHA (pins recorded in release-workflow.md). Least privilege throughout:
+# contents:read globally; id-token:write only in attest and publish. The audit
+# job is the ONLY networked job (advisory DBs) and is labeled as such per doc 12.
+# The publish job exists but cannot fire unless a maintainer flips the manual
+# `publish` input AND approves the protected `pypi` environment; no secrets live
+# in this repository (PyPI trusted publishing via OIDC).
+
+name: release-prep
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Also publish the built distributions to PyPI (protected environment, maintainer approval)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-prep-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1 (same pin as ci.yml)
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0 (same pin as ci.yml)
+        with:
+          python-version: "3.12"
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - run: uv sync --frozen --group dev --extra eval
+      - name: Full offline suite
+        run: uv run --extra eval pytest -q
+      - name: Lint, format, types
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
+          uv run mypy
+      - name: Build distributions
+        run: uv build
+      - name: Record digests
+        run: |
+          sha256sum dist/* > dist/dists.sha256
+          cat dist/dists.sha256 >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: dist
+          path: dist/
+          retention-days: 14 # doc 12 default; only reviewed synthetic data may be uploaded
+
+  attest:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # artifact attestation via OIDC; scoped to this job only
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: dist
+          path: dist
+      - uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: "dist/nitelos-*.whl dist/nitelos-*.tar.gz"
+
+  audit: # G6 supply-chain row — NETWORKED (advisory DB access), disclosed per doc 12
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        with:
+          python-version: "3.12"
+      - run: uv sync --frozen --group dev --extra eval --extra local
+      - name: Vulnerability audit over the full lock (network: advisory DBs)
+        run: |
+          uv export --frozen --all-extras --format requirements-txt -o req.txt
+          uvx pip-audit@2.10.1 -r req.txt --strict || echo "::warning::pip-audit findings — triage before publish"
+      - name: License inventory completeness (REL-04) and local-extra import lightness (REL-03)
+        env:
+          NITELOS_LOCAL_EXTRA_VENV: ${{ github.workspace }}/.venv
+        run: uv run --extra eval --extra local pytest -q tests/test_license_inventory.py tests/test_release_conformance.py
+
+  release-notes: # G8 honesty gate — the report pack is authored from reports/, never by CI
+    needs: [build, attest, audit]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Release notes are authored from reports/ + release-checklist.md; CI never generates result claims."
+
+  publish:
+    needs: [build, attest, audit, release-notes]
+    if: inputs.publish == true # AND the protected `pypi` environment approval below
+    runs-on: ubuntu-latest
+    environment: pypi # protected environment; maintainer approval required
+    permissions:
+      contents: read
+      id-token: write # the trusted-publishing grant, scoped to this job
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: dist
+          path: dist
+      - uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2 (annotated tag dereferenced)

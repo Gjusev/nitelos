@@ -122,3 +122,36 @@ Trusted publishing via PyPI OIDC (no long-lived token in the repo):
 5. Publish is manual + protected-environment gated; a failing or failed-recorded G3
    does not block the build, but the release notes must carry the record (ADR-012
    ship rule).
+
+## Landed workflow — pin record and deltas from the sketch (NIT-015)
+
+`.github/workflows/release-prep.yml` lands with these pins (resolved 2026-10-15;
+reused ones copied verbatim from `ci.yml`):
+
+| Action | Pin | Resolved via |
+|---|---|---|
+| actions/checkout | `3d3c42e5aac5ba805825da76410c181273ba90b1` (v7.0.1) | reused from ci.yml |
+| astral-sh/setup-uv | `1c37ad07a6a961277cf70c0d37d6f313000f5884` (v10.3.0) | reused from ci.yml |
+| actions/upload-artifact | `cf430e030ddbb5b0abf93d22962f4752f3646cd9` (v7.0.2) | `git/ref/tags/v7.0.2` |
+| actions/download-artifact | `9000827ccba6bdab643e8b6fd33ac0654aef8333` (v8.0.2) | `git/ref/tags/v8.0.2` |
+| actions/attest-build-provenance | `4d101475d8b20a2381f78447822ac1eab6504dd8` (v4.2.2) | `git/ref/tags/v4.2.2` |
+| pypa/gh-action-pypi-publish | `dc37677b2e1c63e2034f94d8a5b11f265b73ba33` (v1.14.2) | annotated tag `a892a5a6…` dereferenced to its commit |
+
+Deltas from the sketch, all within the authorized envelope (manual dispatch
+only; no publish execution; no secrets in repo):
+
+1. Trigger is `workflow_dispatch` ONLY (the sketch's tag-push trigger was
+   dropped): nothing runs without a maintainer dispatch.
+2. Publish gating moved from a tag condition to the manual boolean input
+   `publish` (default false) PLUS the protected `pypi` environment — both must
+   be satisfied for any publish step to run.
+3. `uv build --frozen` was invalid in current uv — plain `uv build` (the lock
+   is still enforced by the earlier `uv sync --frozen`).
+4. pip-audit is version-pinned via `uvx pip-audit@2.10.1` (the current PyPI
+   release at pin time).
+5. The sketch's inline REL-04 placeholder became the real
+   `tests/test_license_inventory.py`; the audit job also runs the gated
+   REL-03 local-extra lightness test by pointing
+   `NITELOS_LOCAL_EXTRA_VENV` at the synced project venv.
+6. YAML and every `run:` block were validated locally (parse + `bash -n`);
+   no workflow execution was performed.

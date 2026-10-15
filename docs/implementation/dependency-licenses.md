@@ -26,7 +26,7 @@ decision or a notice, not just recording.
 | Distribution | Version | License | Source | Notes |
 |---|---|---|---|---|
 | numpy | 2.5.4 | BSD-3-Clause | github.com/numpy/numpy | **Release action**: BSD-3 requires the notice be retained; wheels bundle compiled math libraries (OpenBLAS or similar) whose notices ship inside the wheel — review once per platform at release. |
-| scipy | 1.18.1 | BSD-3-Clause | github.com/scipy/scipy | same bundled-math-library review |
+| scipy | 1.18.1 | BSD-3-Clause | github.com/scipy/scipy | **Release action**: same as numpy — BSD-3 notice retention and the bundled-math-library review once per platform at release. |
 
 No further transitives (both wheels are self-contained beyond numpy).
 
@@ -85,8 +85,11 @@ lock and reconcile (REL-04 assertion), then capture each wheel's metadata verbat
 | ast-serialize | 0.13.0 | MIT |
 | click | 8.5.0 | BSD-3-Clause |
 | typer | 0.27.3 | MIT |
-| rich | 15.0.0 | MIT (+ markdown-it-py MIT, mdurl MIT, pygments BSD-2) |
+| rich | 15.0.0 | MIT |
+| markdown-it-py | 4.2.0 | MIT |
+| mdurl | 0.1.2 | MIT |
 | anyio / httpcore2 / httpx2 / h11 / idna / truststore / shellingham / httpx2-jsfetch / setuptools | per lock | MIT / BSD-3-Clause |
+| docopt | 0.6.2 | MIT | orphaned lock entry — no locked package depends on it (dev-tool resolution leftover); not in any shipped closure |
 | filelock, fsspec, tqdm, pyyaml, networkx, packaging (shared with groups above) | per lock | as above |
 
 **pathspec (MPL-2.0) release action**: MPL-2.0 is a weak copyleft license. It appears
