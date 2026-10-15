@@ -198,6 +198,22 @@ Exit code semantics (requirement 9): 0 complete run **regardless of model accura
 2 invalid manifest/config (load failures, §1/§2 violations, missing `--model-dir` for
 smolvlm, unknown backend); 3 infrastructure failure or incomplete run.
 
+### 5a. Shared-backend mode (added at nit/shared-backend; doc 02 "loaded once
+per backend, lazily on first visual use")
+
+`evaluate(manifest, verifier_factory, output_dir, *, backend=None)`. With
+`backend=` the caller hands over ONE Backend instance: the verifier factory
+must wire it into every per-case Verifier (verifiers stay per-case because
+trust bindings are per-case), and `evaluate()` closes it exactly once when
+the run ends — complete, per-case error or infra abort alike. The run's
+`preprocessing_hash` is read directly from the instance's descriptor (no
+probe). With `backend=None` nothing changes: per-case verifiers, probe-based
+hash, nothing closed here. The CLI's `--backend smolvlm --model-dir` path
+constructs the backend once up front (failures keep the infra classification,
+exit 3) and passes it through; the deterministic path still builds per case
+and passes None. A backend error on one case is a per-case result and never
+prevents the final close.
+
 ## 6. Run configuration fingerprint (requirement 6)
 
 `run.json.configuration` records, each null-with-reason when unmeasured (doc 03

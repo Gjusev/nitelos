@@ -21,20 +21,19 @@ torchvision 0.29.1+cpu / num2words 0.5.14 (the frozen `local` extra); lock hash
 | Run | Manifest | View | Backend | Output |
 |---|---|---|---|---|
 | dev-deterministic | `benchmarks/synthetic_v1/dev.json` | assertion | `DeterministicBackend` via the evaluation CLI | `reports/dev-split/dev-deterministic/` |
-| dev-visual-smolvlm | `benchmarks/synthetic_v1/dev-visual.json` | visual | `SmolVLMBackend` (2.2B) via the labeled driver `benchmarks/run_dev_visual_013b.py`, pre-preflight-fix pipeline | `reports/dev-split/dev-visual-smolvlm/` |
+| dev-visual-smolvlm | `benchmarks/synthetic_v1/dev-visual.json` | visual | `SmolVLMBackend` (2.2B) via the temporary driver `benchmarks/run_dev_visual_013b.py` (git history; pre-preflight-fix pipeline) | `reports/dev-split/dev-visual-smolvlm/` |
 | dev-visual-smolvlm-fixed | `benchmarks/synthetic_v1/dev-visual.json` | visual | same driver, pipeline with the preflight fix (assertion criteria core-evaluated on any backend) | `reports/dev-split/dev-visual-smolvlm-fixed/` |
 
-The visual driver is TEMPORARY and clearly labeled in its docstring: it reuses
-the runner's own `evaluate()` pipeline with one shared, lazily loaded backend
-(the model is NOT reloaded per case), and produces the runner's exact report
-shapes so the RUN-01/02 validator applies unchanged. The NIT-012 CLI wiring
-(`--backend smolvlm --model-dir`) has merged, but it is NOT equivalent: its
-factory constructs one `SmolVLMBackend` per case (`_build_verifier_factory`,
-runner), and each instance lazily loads the model on first infer — a per-case
-cold load (~59 s and ~10 GB each) instead of the driver's single shared load.
-The driver is therefore retained until the CLI grows a shared-backend mode;
-the first dev-visual record documents the pre-fix interaction and is
-superseded (for conclusions) by the fixed re-run below.
+Both dev-visual records were produced with a TEMPORARY labeled driver that
+reused the runner's own `evaluate()` pipeline with one shared, lazily loaded
+backend and the runner's exact report shapes, so the RUN-01/02 validator
+applied unchanged. At delivery time the CLI was not yet equivalent (its
+factory constructed one `SmolVLMBackend` per case — a per-case cold load of
+~59 s and ~10 GB); the shared-backend change (nit/shared-backend) closed that
+gap — the CLI now constructs the backend once per run and closes it once —
+and the driver was removed in favor of the CLI. The two dev-visual records
+above stand as run: the first documents the pre-fix preflight interaction and
+is superseded (for conclusions) by the fixed re-run below.
 
 Both runs are validated by `nitelos.evaluation.report_validation.validate_run_report`
 (RUN-01 structure/coherence/leak scan; RUN-02 counts and per-family
