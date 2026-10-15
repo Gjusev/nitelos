@@ -16,7 +16,7 @@ import time
 from pathlib import Path
 from typing import Any
 
-from nitelos import ArtifactStore, Evidence, VerificationPolicy, Verifier, parse_request
+from nitelos import Evidence, VerificationPolicy, Verifier, parse_request
 
 BENCH = Path(__file__).resolve().parent
 REPO = BENCH.parent
