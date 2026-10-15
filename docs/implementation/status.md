@@ -85,3 +85,4 @@ All pending.
 - 2026-10-15: NIT-012+NIT-013A chain merged (integration 569 passed +1 skip +1 deselected; Linux replay OK).
 - 2026-10-15: NIT-014 merged (integration 580 passed + 1 skip + 1 deselected; Linux replay OK). Remaining live: NIT-013B dev runs (nitelos-14), NIT-015 finalization.
 - 2026-10-15: preflight fix reviewed APPROVE and merged with dev-split records (582 passed). Shared-backend runner mode assigned to nitelos-f2.
+- 2026-10-15: shared-backend merged (589 passed Win; Linux replay OK). AR-4 dossier assembly assigned to nitelos-f2.
