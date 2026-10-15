@@ -20,7 +20,7 @@ No secrets or sensitive evidence are stored here.
 | NIT-009 Traces | done (merged) | nitelos-0f/08 | nit/009-traces `2d5d3be` | 006, AR-2 | Win 307 passed after merge; Linux strict replay OK | reviewer nitelos-3a APPROVE-WITH-CHANGES (naive as_of fix) |
 | NIT-010 Fixtures | re-verification pending (fixes `5d5f35e..756968d` verified by orchestrator) | nitelos-08 (= resumed nitelos-0f) | nit/010-fixtures `2940b01` | 003, 009 | 120 cases/240 requests/128 PNGs; deterministic dry run 120/120 exact; Win 438 passed (eval); Linux 436 + 2 platform skips; freeze refuses (exit 1, 60 pending) | final-test audit + freeze PENDING human gate (G4) |
 | NIT-011 Metrics | done (merged) | nitelos-0f | nit/011-metrics + nit/011b-metrics `5ffd8e8` | 002, AR-1 | STAT 26 + MET 19 tests; reviews by nitelos-69 (A: approve-with-changes fixed; B: approve) | metrics numpy/scipy-free; Wilson endpoints exact |
-| NIT-012 Runner | running (branched from nit/010) | nitelos-08 | nit/012-runner | 006, 010, 011 | | |
+| NIT-012 Runner | delivered+verified; review queued (nitelos-3a) | nitelos-08 | nit/012-runner `3631943` | 006, 010, 011 | Win 478+1 skip; Linux fresh clone 476+3 skips; real CLI dev.json exit 0 (60/60/0, conformance 1.0) | smolvlm CLI path exits 2 until NIT-008; no faked runs |
 | NIT-013 Evaluation | pending | | | 008, 012, AR-4 | | |
 | NIT-014 Docs/demo | pending | | | 006, 009, 012 | | |
 | NIT-015 Release audit | pending | | | 013, 014 | | |
@@ -72,4 +72,5 @@ All pending.
 - 2026-10-15: nitelos-3a is resumed nitelos-69. To preserve independence: 3a reviews NIT-009/010 then finishes its own NIT-007 WIP; nitelos-08 implements NIT-012 and later reviews NIT-007.
 - 2026-10-15: NIT-009 merged. Incident: a peer ran WSL `uv` inside the main checkout (11:32), creating a root-owned Linux `.venv`; orchestrator rebuilt it; both peers told never to run in the main checkout.
 - 2026-10-15: NIT-007 delivered+verified; NIT-008 adapter assigned to nitelos-3a.
-- 2026-10-15: orchestrator session renamed again (now `nitelos-6b`); peers notified. NIT-010 review fixes verified by orchestrator: S11 truth=success 8/8; S06 visual evidence has no database observation; S07v1/S15 carry visual criteria; family truth table consistent; Win 443 passed, Linux 441 + 2 platform skips. Re-verification queued for nitelos-3a.
+- 2026-10-15: orchestrator session renamed again (now `nitelos-6b`); peers notified. NIT-010 review fixes verified by orchestrator: S11 truth=success 8/8; S06 visual evidence has no database observation; S07v1/S15 carry visual criteria; family truth table consistent; Win 443 passed, Linux 441 + 2 platform skips. Re-verification queued for nitelos-3a at new head `f93e4d8` (eol pinning).
+- 2026-10-15: NIT-012 delivered and verified by orchestrator (Win+Linux+real CLI). NIT-010 eol follow-up f93e4d8 verified via fresh LF Linux checkout. Reviews queued for nitelos-3a.
