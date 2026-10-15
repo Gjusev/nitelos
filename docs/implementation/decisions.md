@@ -98,7 +98,10 @@ Author: nitelos-0f. The orchestrator accepted readings A1–A7:
 
 ## G4 human annotation
 
-User decision 2026-10-15: the user will organize the two independent reviewers and the adjudicator later. G4 stays pending until reviewer IDs are supplied. Review packets will be prepared at NIT-010.
+User decision 2026-10-15, updated 2026-10-15: the two independent reviewers and the adjudicator will be organized by the user AT THE END of all implementation work. Consequences, accepted by the user:
+- G4, the final-test oracle audit, the final freeze hash and the final-test benchmark runs (NIT-013) wait for that human gate at the end; v0.1 cannot be declared ready before it.
+- All work that does not depend on the frozen final split proceeds now: dev-split runs, the 12-case smoke set, prompt protocol on dev data only, docs, packaging.
+- Review packets are prepared (benchmarks/synthetic_v1/review-packets/) and stay ready; the freeze tool refuses until sign-off is complete.
 
 ## AR-2 (deterministic slice NIT-002..006) — 2026-10-15
 
