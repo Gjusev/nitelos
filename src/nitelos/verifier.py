@@ -156,21 +156,23 @@ def _check_typed_ceilings(request: VerificationRequest) -> None:
 
 
 def _preflight(criterion: Any, capabilities: Any, request: VerificationRequest, index: int) -> None:
-    """Doc 04 preflight for every criterion, before any infer call.
+    """Doc 02 step 5 / doc 04 preflight, before any infer call.
 
-    Criterion-kind support is checked for all criteria regardless of policy
-    gating; evidence-kind and image-count limits apply to the visual criteria
-    the backend would be asked to infer on. Violations are input errors
-    (UNSUPPORTED_CAPABILITY) and no inference happens.
+    Backend capabilities are consulted only for visual criteria — the only
+    kind the backend is asked to infer on. Assertion criteria are admissible
+    with ANY backend and are evaluated by the core deterministic evaluator
+    (doc 02 step 5, decisions.md preflight ruling); the NIT-005 policy layer
+    continues to govern their evidence admissibility. Violations are input
+    errors (UNSUPPORTED_CAPABILITY) and no inference happens.
     """
+    if criterion.kind != "visual":
+        return
     if criterion.kind not in capabilities.criterion_kinds:
         raise _ev(
             InputErrorCode.UNSUPPORTED_CAPABILITY,
             f"$.criteria[{index}]",
             "the backend does not support this criterion kind",
         )
-    if criterion.kind != "visual":
-        return
     by_id = {item.id: item for item in request.evidence}
     cited = [by_id[evidence_id] for evidence_id in criterion.evidence_ids]
     for item in cited:
