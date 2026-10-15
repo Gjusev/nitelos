@@ -114,3 +114,11 @@ Model integration (NIT-007/008) is authorized once the conditions are met.
 
 Reviewer: nitelos-3a. Verdict: APPROVE-WITH-CHANGES. Required: `Trace.to_request` must reject a naive `as_of` and normalize aware non-UTC values (it raised a raw TypeError).
 Accepted: the parse-time `as_of` stand-in is `datetime.max` (only the captured_at ≤ as_of check consumes it, and the real check runs at `to_request`); model criteria are revalidated through the mapping validators; the recipe's code blocks are illustrative fragments.
+
+## NIT-010 review — 2026-10-15
+
+Reviewer: nitelos-3a. Verdict: APPROVE-WITH-CHANGES. Required before any human audit or freeze:
+1. S11 outcome_truth must be `success` (it was hardcoded `failure`). A state→truth consistency test is added.
+2. The visual-view compositions are corrected to the accepted design: S06 withholds the database observation; S07 v1 uses a visual criterion; S15 replaces its observed criterion with a visual one. A per-family composition test is added.
+3. The group-index numeral is removed from renders. The orchestrator made this required as leakage hygiene, because in S04/S12/S15 the group determines the variant or truth.
+Lesson recorded: the deterministic dry run validates decisions, not oracle truth labels and not visual-view composition; both now need their own tests.
