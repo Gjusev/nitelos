@@ -85,7 +85,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: uv sync --frozen --group dev --extra eval --extra local
-      - name: Vulnerability audit over the full lock (network: advisory DBs)
+      - name: "Vulnerability audit over the full lock (network: advisory DBs)"
         run: |
           uv export --frozen --all-extras --format requirements-txt -o req.txt
           uvx pip-audit@2.10.1 -r req.txt --strict || echo "::warning::pip-audit findings — triage before publish"
