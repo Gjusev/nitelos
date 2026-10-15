@@ -48,6 +48,13 @@ from typing import Any
 from pydantic import TypeAdapter, ValidationError
 
 from nitelos.backends import DeterministicBackend
+from nitelos.backends.base import (
+    BackendOutputError,
+    InferenceContext,
+    PreparedVisualCriterion,
+    validate_backend_finding,
+)
+from nitelos.context import select_action_context
 from nitelos.diagnostics import build_diagnostics
 from nitelos.errors import (
     BackendErrorCode,
@@ -62,6 +69,7 @@ from nitelos.policy import (
     TrustBinding,
     VerificationPolicy,
     aggregate_decision,
+    eligible_evidence,
     evaluate_criterion,
     to_criterion_result,
 )
@@ -74,6 +82,7 @@ from nitelos.schemas import (
     ErrorInfo,
     ExecutionStatus,
     IDType,
+    Score,
     VerificationRequest,
     VerificationResult,
     canonical_json,
@@ -146,6 +155,40 @@ def _check_typed_ceilings(request: VerificationRequest) -> None:
     _check_depth(dump, 1)
 
 
+def _preflight(criterion: Any, capabilities: Any, request: VerificationRequest, index: int) -> None:
+    """Doc 04 preflight for every criterion, before any infer call.
+
+    Criterion-kind support is checked for all criteria regardless of policy
+    gating; evidence-kind and image-count limits apply to the visual criteria
+    the backend would be asked to infer on. Violations are input errors
+    (UNSUPPORTED_CAPABILITY) and no inference happens.
+    """
+    if criterion.kind not in capabilities.criterion_kinds:
+        raise _ev(
+            InputErrorCode.UNSUPPORTED_CAPABILITY,
+            f"$.criteria[{index}]",
+            "the backend does not support this criterion kind",
+        )
+    if criterion.kind != "visual":
+        return
+    by_id = {item.id: item for item in request.evidence}
+    cited = [by_id[evidence_id] for evidence_id in criterion.evidence_ids]
+    for item in cited:
+        if item.kind not in capabilities.evidence_kinds:
+            raise _ev(
+                InputErrorCode.UNSUPPORTED_CAPABILITY,
+                f"$.criteria[{index}]",
+                "the backend does not support a cited evidence kind",
+            )
+    image_count = sum(1 for item in cited if item.kind == "screenshot")
+    if image_count > capabilities.max_images_per_criterion:
+        raise _ev(
+            InputErrorCode.UNSUPPORTED_CAPABILITY,
+            f"$.criteria[{index}]",
+            "criterion cites more images than the backend allows",
+        )
+
+
 def _salvage_request_id(data: object) -> str | None:
     if isinstance(data, Mapping):
         candidate = data.get("request_id")
@@ -176,10 +219,12 @@ class Verifier:
         dev_reraise: bool | None = None,
     ) -> None:
         effective_backend = backend if backend is not None else DeterministicBackend()
-        if not isinstance(effective_backend, DeterministicBackend):
-            raise ConfigurationError(
-                "v0.1 accepts only the built-in DeterministicBackend; the Backend protocol arrives in NIT-007"
-            )
+        for protocol_member in ("descriptor", "capabilities", "infer", "close"):
+            if not hasattr(effective_backend, protocol_member):
+                raise ConfigurationError(
+                    "backend must implement the Backend protocol (descriptor, capabilities, infer, close); "
+                    "registration is instance injection only"
+                )
         effective_policy = policy if policy is not None else VerificationPolicy()
         if not isinstance(effective_policy, VerificationPolicy):
             raise ConfigurationError("policy must be a VerificationPolicy instance")
@@ -200,6 +245,7 @@ class Verifier:
         self._state_lock = threading.Lock()
         self._busy = False
         self._closed = False
+        self._backend_closed = False
         self._executor: ThreadPoolExecutor | None = None
         logger.debug(
             "verifier.constructed policy_id=%s backend_id=%s bindings=%d",
@@ -217,13 +263,17 @@ class Verifier:
     # ------------------------------------------------------------------
 
     def close(self) -> None:
-        """Idempotently close; waits for any in-flight call to finish."""
+        """Idempotently close; waits for in-flight work and closes the backend once."""
         with self._state_lock:
             self._closed = True
             executor = self._executor
             self._executor = None
+            close_backend = not self._backend_closed
+            self._backend_closed = True
         if executor is not None:
             executor.shutdown(wait=True)
+        if close_backend:
+            self._backend.close()
         logger.debug("verifier.closed")
 
     def __enter__(self) -> Verifier:
@@ -323,25 +373,35 @@ class Verifier:
                     ]
                 )
             store = ArtifactStore(artifacts) if artifacts is not None else ArtifactStore()
-            prepare_evidence(request, store)  # validates every artifact, used or not
+            prepared = prepare_evidence(request, store)  # validates every artifact, used or not
+            capabilities = self._backend.capabilities
             for index, criterion in enumerate(request.criteria):
-                if criterion.kind == "visual":
-                    raise _ev(
-                        InputErrorCode.UNSUPPORTED_CAPABILITY,
-                        f"$.criteria[{index}]",
-                        "the deterministic backend does not support visual criteria",
-                    )
+                _preflight(criterion, capabilities, request, index)
             durations: dict[str, float] = {}
             outcomes = []
+            emitted_findings: frozenset[str] = frozenset()
+            finding_scores: dict[str, Score | None] = {}
+            omitted_context: list[str] = []
             for index, criterion in enumerate(request.criteria):
                 criterion_start = perf_counter()
                 try:
-                    outcome = evaluate_criterion(criterion, request, self._policy, self._bindings)
+                    if criterion.kind == "visual":
+                        outcome, emitted_findings, finding_scores[criterion.id] = self._evaluate_visual(
+                            criterion,
+                            request,
+                            prepared.images,
+                            emitted_findings,
+                            omitted_context,
+                        )
+                    else:
+                        outcome = evaluate_criterion(criterion, request, self._policy, self._bindings)
                 except EvidenceValidationError as error:
                     raise EvidenceValidationError(_repath_issue(error.issue, index)) from None
                 durations[criterion.id] = (perf_counter() - criterion_start) * 1000.0
                 outcomes.append(outcome)
-                completed.append(to_criterion_result(criterion, outcome))
+                completed.append(
+                    to_criterion_result(criterion, outcome, score=finding_scores.get(criterion.id))
+                )
             aggregate = aggregate_decision(outcomes)
             elapsed_ms = (perf_counter() - start) * 1000.0
             result = VerificationResult(
@@ -359,6 +419,7 @@ class Verifier:
                     elapsed_ms=elapsed_ms,
                     criterion_durations=durations,
                     request=request,
+                    omitted_context_ids=tuple(omitted_context),
                 ),
             )
             logger.info(
@@ -389,34 +450,73 @@ class Verifier:
             )
         except (KeyboardInterrupt, SystemExit, asyncio.CancelledError):
             raise
+        except BackendOutputError as error:
+            logger.error("verify.error code=%s criteria_completed=%d", error.code, len(completed))
+            return self._backend_failure(
+                error.code,
+                error.safe_message,
+                request,
+                completed,
+                start,
+                request_id=(request.request_id if request is not None else _salvage_request_id(data)),
+            )
         except Exception:  # backend boundary: any evaluation failure becomes a coded
             # BACKEND_EXCEPTION without echoing exception text; cancellation and
             # process-control exceptions were re-raised above and never reach here
             if self._dev_reraise:
                 raise
             logger.error("verify.error code=BACKEND_EXCEPTION criteria_completed=%d", len(completed))
-            elapsed_ms = (perf_counter() - start) * 1000.0
-            return VerificationResult(
-                schema_version="1",
+            return self._backend_failure(
+                BackendErrorCode.BACKEND_EXCEPTION,
+                "the backend failed while evaluating the request",
+                request,
+                completed,
+                start,
                 request_id=(request.request_id if request is not None else _salvage_request_id(data)),
-                verification_id=str(uuid.uuid4()),
-                execution_status=ExecutionStatus.BACKEND_ERROR,
-                decision=None,
-                criteria=tuple(completed),
-                reason_codes=(BackendErrorCode.BACKEND_EXCEPTION,),
-                error=ErrorInfo(
-                    code=BackendErrorCode.BACKEND_EXCEPTION,
-                    safe_message="the backend failed while evaluating the request",
-                ),
-                diagnostics=build_diagnostics(
-                    policy=self._policy,
-                    backend_descriptor=self._backend.descriptor,
-                    elapsed_ms=elapsed_ms,
-                    criterion_durations={},
-                    request=request,
-                    partial_results=bool(completed),
-                ),
             )
+
+    # ------------------------------------------------------------------
+    # visual backend path
+    # ------------------------------------------------------------------
+
+    def _evaluate_visual(
+        self,
+        criterion: Any,
+        request: VerificationRequest,
+        images: Mapping[str, Any],
+        emitted: frozenset[str],
+        omitted_context: list[str],
+    ) -> tuple[Any, frozenset[str], Score | None]:
+        """Preflighted visual evaluation: eligibility, optional inference, policy."""
+        eligible, _ineligible = eligible_evidence(criterion, request, self._bindings)
+        if not self._policy.allow_model_inference or not eligible:
+            # no invocation: policy gate, or no admissible referenced evidence
+            outcome = evaluate_criterion(criterion, request, self._policy, self._bindings)
+            return outcome, emitted, None
+        eligible_ids = {item.id for item in eligible}
+        prepared_images = tuple(
+            images[evidence_id] for evidence_id in criterion.evidence_ids if evidence_id in eligible_ids
+        )
+        prepared_criterion = PreparedVisualCriterion(
+            criterion_id=criterion.id,
+            description=criterion.description,
+            images=prepared_images,
+        )
+        # bounded action context: the last eight actions at or before the newest
+        # cited image; older qualifying actions are recorded as omitted (the
+        # helper is only called when a cited image exists, per its contract)
+        actions, omitted = select_action_context(
+            request.evidence, max_image_sequence=max(image.sequence for image in prepared_images)
+        )
+        omitted_context.extend(omitted)
+        context = InferenceContext(objective=request.objective, actions=actions, deadline=None)
+        finding = self._backend.infer(prepared_criterion, context)
+        image_map = {image.evidence_id: image for image in prepared_images}
+        validate_backend_finding(
+            finding, criterion_id=criterion.id, images=image_map, already_emitted=emitted
+        )
+        outcome = evaluate_criterion(criterion, request, self._policy, self._bindings, visual_finding=finding)
+        return outcome, emitted | {criterion.id}, finding.score
 
     # ------------------------------------------------------------------
     # error result assembly
@@ -454,6 +554,36 @@ class Verifier:
                 elapsed_ms=elapsed_ms,
                 criterion_durations={},
                 request=None,
+            ),
+        )
+
+    def _backend_failure(
+        self,
+        code: BackendErrorCode,
+        message: str,
+        request: VerificationRequest | None,
+        completed: list[CriterionResult],
+        start: float,
+        *,
+        request_id: str | None,
+    ) -> VerificationResult:
+        elapsed_ms = (perf_counter() - start) * 1000.0
+        return VerificationResult(
+            schema_version="1",
+            request_id=request_id,
+            verification_id=str(uuid.uuid4()),
+            execution_status=ExecutionStatus.BACKEND_ERROR,
+            decision=None,
+            criteria=tuple(completed),
+            reason_codes=(code,),
+            error=ErrorInfo(code=code, safe_message=message),
+            diagnostics=build_diagnostics(
+                policy=self._policy,
+                backend_descriptor=self._backend.descriptor,
+                elapsed_ms=elapsed_ms,
+                criterion_durations={},
+                request=request,
+                partial_results=bool(completed),
             ),
         )
 
