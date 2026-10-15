@@ -27,6 +27,7 @@ eval = [
 ]
 local = [
     "torch==2.14.1+cpu",
+    "torchvision==0.29.1+cpu",
     "transformers==5.19.0",
 ]
 
@@ -51,6 +52,7 @@ explicit = true
 
 [tool.uv.sources]
 torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/nitelos"]
