@@ -23,6 +23,7 @@ from collections.abc import Mapping
 from dataclasses import dataclass
 from typing import Any, Protocol, runtime_checkable
 
+from nitelos.context import ActionContextItem
 from nitelos.errors import BackendErrorCode, EvidenceValidationError
 from nitelos.evidence import PreparedImage, validate_evidence_ref
 from nitelos.schemas import (
@@ -100,7 +101,7 @@ class InferenceContext:
     """
 
     objective: str
-    actions: tuple[Any, ...] = ()
+    actions: tuple[ActionContextItem, ...] = ()
     deadline: float | None = None
 
 

@@ -54,6 +54,7 @@ from nitelos.backends.base import (
     PreparedVisualCriterion,
     validate_backend_finding,
 )
+from nitelos.context import select_action_context
 from nitelos.diagnostics import build_diagnostics
 from nitelos.errors import (
     BackendErrorCode,
@@ -380,6 +381,7 @@ class Verifier:
             outcomes = []
             emitted_findings: frozenset[str] = frozenset()
             finding_scores: dict[str, Score | None] = {}
+            omitted_context: list[str] = []
             for index, criterion in enumerate(request.criteria):
                 criterion_start = perf_counter()
                 try:
@@ -389,6 +391,7 @@ class Verifier:
                             request,
                             prepared.images,
                             emitted_findings,
+                            omitted_context,
                         )
                     else:
                         outcome = evaluate_criterion(criterion, request, self._policy, self._bindings)
@@ -416,6 +419,7 @@ class Verifier:
                     elapsed_ms=elapsed_ms,
                     criterion_durations=durations,
                     request=request,
+                    omitted_context_ids=tuple(omitted_context),
                 ),
             )
             logger.info(
@@ -481,6 +485,7 @@ class Verifier:
         request: VerificationRequest,
         images: Mapping[str, Any],
         emitted: frozenset[str],
+        omitted_context: list[str],
     ) -> tuple[Any, frozenset[str], Score | None]:
         """Preflighted visual evaluation: eligibility, optional inference, policy."""
         eligible, _ineligible = eligible_evidence(criterion, request, self._bindings)
@@ -497,7 +502,14 @@ class Verifier:
             description=criterion.description,
             images=prepared_images,
         )
-        context = InferenceContext(objective=request.objective, actions=(), deadline=None)
+        # bounded action context: the last eight actions at or before the newest
+        # cited image; older qualifying actions are recorded as omitted (the
+        # helper is only called when a cited image exists, per its contract)
+        actions, omitted = select_action_context(
+            request.evidence, max_image_sequence=max(image.sequence for image in prepared_images)
+        )
+        omitted_context.extend(omitted)
+        context = InferenceContext(objective=request.objective, actions=actions, deadline=None)
         finding = self._backend.infer(prepared_criterion, context)
         image_map = {image.evidence_id: image for image in prepared_images}
         validate_backend_finding(

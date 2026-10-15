@@ -426,9 +426,8 @@ def test_backend_closed_exactly_once_by_verifier_close() -> None:
     verifier.close()
     verifier.close()  # idempotent: the backend sees exactly one close
     assert fake.closed == 1
-    with Verifier(backend=FakeVisualBackend()) as managed:
-        pass
-    # context manager closes its own backend once
+    with Verifier(backend=FakeVisualBackend()):
+        pass  # context manager closes its verifier (and its backend) on exit
 
 
 def test_non_backend_object_is_a_configuration_error() -> None:
@@ -482,3 +481,58 @@ def test_validate_backend_finding_is_reusable_by_backend_authors() -> None:
             images=images,
         )
     assert forged.value.code == "INVALID_EVIDENCE_REFERENCE"
+
+
+# --------------------------------------------------------------------------
+# bounded action context wiring (NIT-009 select_action_context via NIT-007)
+# --------------------------------------------------------------------------
+
+
+def _act_item(sequence: int) -> dict[str, Any]:
+    from test_trace import _act
+
+    return _act(id=f"act-{sequence}", sequence=sequence, name=f"step-{sequence}")
+
+
+def test_context_carries_bounded_actions_without_arguments() -> None:
+    fake = FakeVisualBackend()
+    from test_contract import _request
+
+    # actions 0..9 (image at sequence 5), then five more actions AFTER the image
+    evidence = [_act_item(i) for i in range(10)]
+    evidence.append(_shot_doc("s0", 10))
+    evidence += [_act_item(i) for i in range(11, 16)]
+    doc = _request(criteria=[_visual_criterion(evidence_ids=["s0"])], evidence=evidence)
+    result = Verifier(backend=fake, policy=ALLOW_MODEL).verify(parse_request(doc), artifacts=_store(1))
+    assert result.execution_status == ExecutionStatus.OK
+    (_prepared, context) = fake.calls[0]
+    assert len(context.actions) == 8  # window over the 10 qualifying actions (0..9)
+    sequences = [item.sequence for item in context.actions]
+    assert sequences == sorted(sequences)
+    assert all(item.sequence <= 10 for item in context.actions)  # nothing after the newest cited image
+    assert sequences == list(range(2, 10))
+    for item in context.actions:
+        assert item.name.startswith("step-")
+        assert item.reported_status.value == "completed"
+        assert not hasattr(item, "arguments")
+
+
+def test_omitted_context_ids_recorded_in_diagnostics() -> None:
+    fake = FakeVisualBackend()
+    from test_contract import _request
+
+    # 10 actions at or before the image (sequence 10): the window keeps the last 8
+    evidence = [_act_item(i) for i in range(10)]
+    evidence.append(_shot_doc("s0", 10))
+    doc = _request(criteria=[_visual_criterion(evidence_ids=["s0"])], evidence=evidence)
+    result = Verifier(backend=fake, policy=ALLOW_MODEL).verify(parse_request(doc), artifacts=_store(1))
+    assert result.execution_status == ExecutionStatus.OK
+    assert result.diagnostics.omitted_context_ids == ("act-0", "act-1")
+
+
+def test_no_image_criterion_gets_no_action_context() -> None:
+    fake = FakeVisualBackend()
+    result = Verifier(backend=fake).verify(_visual_request(1), artifacts=_store(1))  # policy disallows
+    assert result.criteria[0].reason_codes == ("MODEL_INFERENCE_DISALLOWED",)
+    assert fake.calls == []
+    assert result.diagnostics.omitted_context_ids == ()
