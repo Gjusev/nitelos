@@ -110,14 +110,18 @@ def main() -> int:
     started = time.monotonic()
     for case in cases:
         case_started = time.monotonic()
+        attempts_before = backend.infer_attempts
         request = parse_request(build_request(case, images))
         result = verifier.verify(request, artifacts=images)
         elapsed_ms = (time.monotonic() - case_started) * 1000.0
         criterion = result.criteria[0] if result.criteria else None
-        invoked = bool(result.diagnostics.preprocessing)
-        # record the raw generation even when the strict parser rejected it:
-        # the run report must show what the model actually produced
-        raw = backend.last_raw_output
+        # an invocation happened iff the backend was called for this case: derived
+        # from the per-case attempt delta, not from diagnostics fields the
+        # verifier does not populate from the adapter
+        invoked = backend.infer_attempts > attempts_before
+        # record the raw generation even when the strict parser rejected it;
+        # policy-only rows carry no generation of their own
+        raw = backend.last_raw_output if invoked else None
         label = raw.strip() if raw is not None else None
         if cold_ms is None:
             cold_ms = elapsed_ms
