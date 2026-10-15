@@ -24,10 +24,14 @@ annotation review remains a precondition for any publication.
 Zero input errors and zero backend errors in all four runs (e=0, b=0; every
 scheduled case produced exactly one result row, RUN-01/02 validated). The
 deterministic engine is exact at 120/120 cases across both splits. The visual
-results are IDENTICAL across the dev and test splits (same counts, same
-metrics to four decimals) — the split-holdout found no generalization gap on
-this synthetic benchmark, which is itself a property of the fixture design,
-not a claim about the model.
+headline metrics are IDENTICAL across the dev and test splits (the four-run
+table above: same counts and same values to four decimals); the one rate that
+differs between the splits is `false_acceptance_rate` (dev 12/34 = 0.3529,
+test 12/32 = 0.375, over ALL outcome_truth=failure cases) — a direct
+consequence of the S07 subject_mismatch label state below, not a behavioral
+difference. The split-holdout found no generalization gap on this synthetic
+benchmark, which is itself a property of the fixture design, not a claim
+about the model.
 
 Label agreement vs the per-split oracles (from the family tables):
 deterministic 60/60 both splits; visual 41/60 in EACH split, with the same
@@ -38,14 +42,22 @@ counts and directions coincide.
 
 ## Model-judgment limitations (headline)
 
-- **The visual backend over-supports, quantified.** Of the 38 cases where the
-  oracle expects a decisive answer, the visual pipeline answered wrongly on
-  12 (decisive accuracy 26/38 = 0.6842) — and every decisive error is an
-  over-acceptance: decisive false-acceptance rate 0.5, false-rejection rate
-  0.0 (no case the evidence supported was rejected; cases the evidence
-  refuted or withheld were affirmed). Where evidence is insufficient (18
-  cases), the unsafe acceptance rate is 7/18 = 0.3889 — the model asserts
-  outcomes the evidence does not establish. These are the same failure shapes recorded since the
+- **The visual backend over-supports, quantified.** Of the 38 cases the
+  pipeline answered decisively on known-outcome cases (outcome_truth known;
+  the oracle expects a decisive answer on 34 — the run additionally answered
+  decisively on 4 unknown-truth cases), 12 were wrong (decisive accuracy
+  26/38 = 0.6842) — and every decisive error is an over-acceptance: the
+  decisive false-acceptance rate is 12/24 = 0.5 over the truth-failure cases
+  that were answered decisively, with false-rejection 0.0 (no case the
+  evidence supported was rejected; cases the evidence refuted or withheld
+  were affirmed). This is distinct from metrics.json's
+  `false_acceptance_rate` (12/32 = 0.375 test, 12/34 = 0.3529 dev), whose
+  denominator is ALL outcome_truth=failure cases including those answered
+  abstained — the two published rates answer different questions and are
+  reported side by side, not interchangeably. Where evidence is
+  insufficient or contradictory (14 + 4 = 18 cases), the unsafe acceptance
+  rate is 7/18 = 0.3889 — the model asserts outcomes the evidence does not
+  establish. These are the same failure shapes recorded since the
   NIT-008 smoke set (4/12 agreement) and the dev-split runs (41/60); they are
   properties of the pinned checkpoint under the frozen prompt and parser,
   reported, not tuned.
@@ -60,6 +72,12 @@ counts and directions coincide.
   on any other distribution.
 - Final-test labels are agent-audited (ADR-013, above); AI reviewers may
   share biases a human audit was designed to catch.
+- **Known label asymmetry (S07 subject_mismatch).** The test split carries
+  the adjudicated outcome_truth=unknown for this variant; the dev split
+  keeps failure (frozen as-used before the adjudication). Expected decisions
+  are identical in both splits and no headline metric moves — the only
+  visible effect is the `false_acceptance_rate` denominator difference noted
+  above (32 vs 34 truth-failure cases).
 
 ## Cold/warm latency and memory (from the run records)
 
