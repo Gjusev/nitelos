@@ -39,9 +39,9 @@ to its current evidence and its release-time proof.
 | Item | Status | Evidence today | Release-time proof |
 |---|---|---|---|
 | 120-case manifest, frozen 60-case split | DONE (data) | NIT-010: 4 manifests × 60, disjoint lineage groups, per-case oracles, review packets; freeze tool refuses while annotation is pending (verified exit 1, 60 pending) | manifests unchanged since the review-fix commit; `freeze.py` refusal still exits 1 |
-| Human annotation (G4 gate) | **PENDING** (user-scheduled) | decisions.md "G4 human annotation": the user organizes two independent reviewers + adjudicator; packets prepared at NIT-010 | reviewer IDs + signed-off packets; then `freeze.py` final freeze (records `freeze.sha256`) |
-| Complete reports, deterministic configuration | READY | NIT-012 runner + NIT-013 validator: deterministic dev.json run exits 0 (60/60 ok) on Windows and Linux; RUN-01/02 validate shape, identities, no oracle leakage | the release run (NIT-13 proper) into `reports/`: deterministic view over dev AND test splits, validated by `validate_run_report` |
-| Local visual configuration reports | READY (pending G4 only) | dev-visual re-run on the fixed pipeline: 60/60 ok, 40 model invocations, RUN-01/02 validated (`reports/dev-split/dev-visual-smolvlm-fixed/`); the CLI now runs it directly (shared-backend mode, merged `d8c491a`) | visual-view final runs on the test split after the G4 sign-off, via the CLI commands in the AR-4 freeze dossier §4 |
+| Human annotation (G4 gate) | **DONE — agent-audited (ADR-013)** | two independent AI reviewers (nitelos-14; fresh no-context agent) + orchestrator adjudication; audit records `benchmarks/synthetic_v1/audit/`; 2 adjudicated label changes applied (S07 subject_mismatch → unknown); sign-off fields in all 60 final-test oracles (`agent_audited_2026-10-15`); binding no-human-audit label on the data card and every downstream artifact. **Human annotation review remains a precondition for any publication.** | final freeze sealed: `accf8f46de2fa9be99aa31c0fe367593bbb5697cb1dd1f28fe64e38a89d7f185` (delta vs provisional = the adjudication edits, expected) |
+| Complete reports, deterministic configuration | **DONE** | four final runs on the sealed tree (2026-10-15, WSL CPU): deterministic dev+test 60/60 ok each, RUN-01/02 validated, artifacts in `reports/v0.1/` | reports stand as the sealed-tree record; nitelos-14 independent verification pending |
+| Local visual configuration reports | **DONE** | visual dev+test final runs on the sealed tree: 60/60 ok each, 40 invocations per run, preprocessing hash recorded (probe fix confirmed live), RUN-01/02 validated (`reports/v0.1/*-visual-smolvlm/`) | same as above |
 | Evidence differences labeled; fingerprints valid | DONE (mechanism) | `compare_reports` fingerprint matching; per-run configuration fingerprints | the release report pack includes the fingerprints; the deterministic-vs-visual difference is labeled per doc 09 G4 note (no matched-model leaderboard claim) |
 
 ## G5 — Quality
@@ -73,9 +73,9 @@ to its current evidence and its release-time proof.
 
 | Item | Status | Evidence | Release-time proof |
 |---|---|---|---|
-| Per-family results, errors/abstentions/coverage | READY (mechanism) | NIT-011 metrics + NIT-012 reports + NIT-013 validation | the release report pack includes aggregate AND per-family tables, error/abstention counts |
-| Actual hardware/versions | READY | run.json configuration block (package/lock/policy fingerprints; OS; device/dtype null for deterministic) | visual runs (if any) record CPU model, memory method, model/prompt/lock hashes |
-| No unsupported accuracy/calibration/real-world claims | DONE (docs side) | evaluation.md/performance.md state no-run-yet and no-calibration; no benchmark numbers anywhere in docs | release notes reviewed against the G3/G4 outcome; negative results published per doc 06 |
+| Per-family results, errors/abstentions/coverage | **DONE** | `reports/v0.1/SUMMARY.md` + four `*-families.json` tables: aggregate and per-family results with denominators always shown; zero input/backend errors in all four runs | nitelos-14 verification, then AR-5 |
+| Actual hardware/versions | **DONE** | run.json records in `reports/v0.1/` (package 0.1.0, lock `83a01dc0…`, policy hashes, prompt/preprocessing hashes `08fde1e3…`/`c7b4c1d1…`, ru_maxrss method; WSL Ubuntu CPU, torch 2.14.1+cpu / transformers 5.19.0 per the run environment) | same |
+| No unsupported accuracy/calibration/real-world claims | **DONE** | docs carry only the pointer to `reports/v0.1/SUMMARY.md`; SUMMARY states the synthetic/no-real-world-generalization boundary explicitly and carries the ADR-013 label; negative results (over-support) published as headline limitations | release notes cite SUMMARY only |
 | No MK-SH-V claim | DONE | no MK-SH-V code/assets (PKG + benchmark provenance) | checklist assertion at release review |
 
 ## REL — release mechanics
@@ -89,15 +89,14 @@ to its current evidence and its release-time proof.
 
 ## Open items blocking release (summary)
 
-1. **G4**: human annotation (user-scheduled) — two reviewers + adjudicator sign
-   the 60 final-test oracles → `freeze.py` final freeze → final runs (both
-   views, test split) → G8 report pack.
-2. **Release dispatch**: maintainer runs `release-prep` (manual dispatch; the
-   audit job performs the networked pip-audit disclosed per doc 12).
-3. Package name availability + publish authority recheck (maintainer action;
-   doc 13 §1); publish stays behind the manual input + protected environment.
+1. Maintainer publication authority: package name availability + publish
+   decision (doc 13 §1). The publish path itself is landed and gated
+   (release-prep manual dispatch + protected environment; no secrets in repo).
+   Per ADR-013, human annotation review remains a precondition for any
+   publication — the agent-audited labels are a release-CANDIDATE basis.
 
-Resolved since the last revision: G3 (ADR-012 swap, smoke PASSED with the
-over-support observation attached), the NIT-008 merge, and REL-01..04 (now
-test-linked above). Version stays 0.1.0; no doc freeze changes needed beyond
-the record corrections landed with the AR-4 dossier.
+Resolved: G3 (ADR-012, smoke PASSED, over-support attached), G4 (agent-audited
+per ADR-013, freeze sealed `accf8f46…`), the four final runs + RUN-01/02
+validation (`reports/v0.1/`), G8 reporting (SUMMARY + family tables), REL-01..04
+(test-linked). Version stays 0.1.0. Next: nitelos-14's independent report
+verification, then AR-5.

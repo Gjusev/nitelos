@@ -3,7 +3,7 @@
 | Backend | Status | Criteria | Notes |
 |---|---|---|---|
 | Deterministic | Shipped, default | Assertions | JSON pointer equals/in/exists; no model, no network |
-| SmolVLM2 (local) | Experimental; executability gate PASSED on the development smoke set | Visual | CPU float32 Linux py3.12 validated path; 11/11 valid labels, 10 decisive (dev-only record) |
+| SmolVLM2 (local) | Experimental; executability gate PASSED on the development smoke set | Visual | CPU float32 Linux py3.12 validated path; 11/11 valid labels, 10 decisive (dev-only record). Final benchmark record: reports/v0.1/SUMMARY.md (synthetic, development-labeled claims only) |
 
 The visual backend pins `HuggingFaceTB/SmolVLM2-2.2B-Instruct` @
 `482adb537c021c86670beed01cd58990d01e72e4` (ADR-012; sharded safetensors)

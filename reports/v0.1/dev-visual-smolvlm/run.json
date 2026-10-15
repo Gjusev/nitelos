@@ -1,0 +1,20 @@
+{
+  "benchmark_id": "nitelos-synthetic-v1",
+  "benchmark_version": 1,
+  "completed": 60,
+  "configuration_fingerprint": "1530875164a77b759d032436ee25ee73f9771b9bb71cbf8a81634b592bf55258",
+  "elapsed_ms": 917787.802,
+  "evidence_view": "visual",
+  "finished_at": "2026-10-15T22:23:02.204281+00:00",
+  "manifest_path": "dev-visual.json",
+  "manifest_sha256": "247426149d859bcfbba64d3202b9330982582279679c23bcf95208389309a632",
+  "package_version": "0.1.0",
+  "peak_rss_bytes": 10340937728,
+  "policy_hash": "5160a8cbe0450933fcc0ba68f4983ad3b23e28110453e9c084fda5b99dc21ddb",
+  "preprocessing_hash": "c7b4c1d1cdd44a0b19e491ae1e1f994cd03aecf7d49319dae97f9b6788046fd6",
+  "run_id": "e7b4fec1-8da4-4488-91f7-e0ad9a2dff81",
+  "scheduled": 60,
+  "split": "dev",
+  "started_at": "2026-10-15T22:07:44.416513+00:00",
+  "status": "complete"
+}

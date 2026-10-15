@@ -1,0 +1,167 @@
+{
+  "run_dir": "dev-visual-smolvlm",
+  "run_id": "e7b4fec1-8da4-4488-91f7-e0ad9a2dff81",
+  "evidence_view": "visual",
+  "backend_policy": "5160a8cbe0450933fcc0ba68f4983ad3b23e28110453e9c084fda5b99dc21ddb",
+  "families": {
+    "S01": {
+      "cases": 4,
+      "ok": 4,
+      "errors": 0,
+      "decisions": {
+        "success": 4
+      },
+      "model_invoked": 4,
+      "mean_duration_ms": 23742.0
+    },
+    "S02": {
+      "cases": 4,
+      "ok": 4,
+      "errors": 0,
+      "decisions": {
+        "failure": 4
+      },
+      "model_invoked": 4,
+      "mean_duration_ms": 20762.2
+    },
+    "S03": {
+      "cases": 4,
+      "ok": 4,
+      "errors": 0,
+      "decisions": {
+        "success": 4
+      },
+      "model_invoked": 4,
+      "mean_duration_ms": 19567.5
+    },
+    "S04": {
+      "cases": 4,
+      "ok": 4,
+      "errors": 0,
+      "decisions": {
+        "failure": 2,
+        "abstained": 2
+      },
+      "model_invoked": 4,
+      "mean_duration_ms": 20896.4
+    },
+    "S05": {
+      "cases": 4,
+      "ok": 4,
+      "errors": 0,
+      "decisions": {
+        "abstained": 4
+      },
+      "model_invoked": 0,
+      "mean_duration_ms": 7.1
+    },
+    "S06": {
+      "cases": 4,
+      "ok": 4,
+      "errors": 0,
+      "decisions": {
+        "abstained": 4
+      },
+      "model_invoked": 0,
+      "mean_duration_ms": 6.7
+    },
+    "S07": {
+      "cases": 4,
+      "ok": 4,
+      "errors": 0,
+      "decisions": {
+        "abstained": 2,
+        "success": 2
+      },
+      "model_invoked": 2,
+      "mean_duration_ms": 10570.9
+    },
+    "S08": {
+      "cases": 4,
+      "ok": 4,
+      "errors": 0,
+      "decisions": {
+        "abstained": 4
+      },
+      "model_invoked": 0,
+      "mean_duration_ms": 7.2
+    },
+    "S09": {
+      "cases": 4,
+      "ok": 4,
+      "errors": 0,
+      "decisions": {
+        "success": 3,
+        "failure": 1
+      },
+      "model_invoked": 4,
+      "mean_duration_ms": 40445.1
+    },
+    "S10": {
+      "cases": 4,
+      "ok": 4,
+      "errors": 0,
+      "decisions": {
+        "failure": 4
+      },
+      "model_invoked": 0,
+      "mean_duration_ms": 7.5
+    },
+    "S11": {
+      "cases": 4,
+      "ok": 4,
+      "errors": 0,
+      "decisions": {
+        "success": 4
+      },
+      "model_invoked": 4,
+      "mean_duration_ms": 21394.1
+    },
+    "S12": {
+      "cases": 4,
+      "ok": 4,
+      "errors": 0,
+      "decisions": {
+        "success": 4
+      },
+      "model_invoked": 4,
+      "mean_duration_ms": 20768.3
+    },
+    "S13": {
+      "cases": 4,
+      "ok": 4,
+      "errors": 0,
+      "decisions": {
+        "success": 4
+      },
+      "model_invoked": 4,
+      "mean_duration_ms": 20099.5
+    },
+    "S14": {
+      "cases": 4,
+      "ok": 4,
+      "errors": 0,
+      "decisions": {
+        "success": 4
+      },
+      "model_invoked": 4,
+      "mean_duration_ms": 20715.6
+    },
+    "S15": {
+      "cases": 4,
+      "ok": 4,
+      "errors": 0,
+      "decisions": {
+        "abstained": 2,
+        "failure": 2
+      },
+      "model_invoked": 2,
+      "mean_duration_ms": 10328.4
+    }
+  },
+  "label_agreement_vs_dev_oracles": {
+    "match": 41,
+    "mismatch": 19,
+    "no_oracle": 0
+  }
+}

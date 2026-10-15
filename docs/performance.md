@@ -10,10 +10,12 @@ What we measure, how, and what is honestly unknown:
   warm separated. Peak RSS is read via `ru_maxrss` on Linux and is null with
   a reason where not measurable per-process (Windows). Throughput counts the
   runner wall clock including model load, labeled end-to-end.
-- **No published numbers yet.** The frozen benchmark has not run; nothing in
-  these docs cites an accuracy, latency or memory figure. When NIT-013
-  executes, its reports will name CPU/GPU, memory method, model/prompt
-  revisions, the dependency lock and input sizes.
+- **Measured numbers live in the benchmark report only.** The sealed-tree
+  runs are complete: see [`reports/v0.1/SUMMARY.md`](../reports/v0.1/SUMMARY.md)
+  for the four-run record (synthetic benchmark, development-labeled claims
+  only — including the headline model-judgment limitations and the ADR-013
+  agent-audit labeling). Nothing else in these docs cites an accuracy,
+  latency or memory figure.
 - **Known failure modes** (documented, not hidden): a local model may decode
   a label the strict parser rejects (`INVALID_OUTPUT` — reported, never
   repaired); pending or unreadable evidence abstains rather than guessing;
