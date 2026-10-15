@@ -66,3 +66,19 @@ Oracle records carry `annotation_status: pending_human_review` and empty annotat
 lists. The freeze tool refuses a final freeze while any final-test record is pending;
 `freeze.sha256.provisional` is a clearly labelled provisional digest only. The freeze
 happens at AR-4 after the human audit.
+
+## Final-test label audit (ADR-013, 2026-10-15)
+
+**Binding label:** final-test labels audited by two independent AI reviewers
+plus adjudication; NO human annotation audit was performed. Human annotation
+review remains a precondition for any publication. The audit records
+(`audit/r1-summary.md`, `audit/r1.jsonl`, `audit/r2-summary.md`,
+`audit/r2.jsonl`) and the adjudication (decisions.md, 2026-10-15) are part of
+this dataset; the two adjudicated label changes (S07 subject_mismatch ->
+unknown) are noted in the affected review packets. Scientific caveat carried
+into all reporting: AI reviewers may share biases a human audit was designed
+to catch.
+
+v2 improvement recorded by the adjudication: review packets should state the
+per-view evidence composition, so a packet-only reviewer can derive
+refuted-vs-subject-mismatch distinctions (the audited packets stand as issued).

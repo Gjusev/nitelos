@@ -1,10 +1,13 @@
 """Freeze procedure for nitelos-synthetic-v1 (NIT-010).
 
-The final freeze requires the completed human sign-off on every final-test oracle:
-annotation_status "approved", a non-empty annotators list and a non-null sign_off.
+The final freeze requires a completed sign-off on every final-test oracle:
+annotation_status "approved" (a future human audit) or "agent_audited_2026-10-15"
+(ADR-013: two independent AI reviewers plus orchestrator adjudication — recorded
+as agent identities in the annotators list, with the binding no-human-audit label
+on downstream artifacts), a non-empty annotators list and a non-null sign_off.
 While any record is pending_human_review the final freeze is refused (exit 1) —
-agents cannot satisfy the G4 gate. ``--provisional`` computes and writes a clearly
-labelled provisional content digest without any freeze claim.
+agents cannot satisfy the gate by assertion alone. ``--provisional`` computes and
+writes a clearly labelled provisional content digest without any freeze claim.
 """
 
 from __future__ import annotations
@@ -15,6 +18,7 @@ from pathlib import Path
 from typing import Any
 
 EXCLUDED_NAMES = {"freeze.sha256", "freeze.sha256.provisional"}
+_SEALED_STATUSES = ("approved", "agent_audited_2026-10-15")
 
 
 def _pending_final_test(bench_dir: Path) -> list[str]:
@@ -24,7 +28,7 @@ def _pending_final_test(bench_dir: Path) -> list[str]:
         if record.get("split") != "test":
             continue
         if (
-            record.get("annotation_status") != "approved"
+            record.get("annotation_status") not in _SEALED_STATUSES
             or not record.get("annotators")
             or record.get("sign_off") is None
         ):

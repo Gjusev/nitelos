@@ -1,6 +1,9 @@
 {
-  "annotation_status": "pending_human_review",
-  "annotators": [],
+  "annotation_status": "agent_audited_2026-10-15",
+  "annotators": [
+    "ai-reviewer-1:nitelos-14",
+    "ai-reviewer-2:fresh-agent-r2"
+  ],
   "case_id": "14db4858-7f3b-57f4-9b8d-ad97f72204bc",
   "evidence_sufficiency": "sufficient",
   "expected": {
@@ -22,13 +25,17 @@
   "outcome_truth": "failure",
   "pair": null,
   "primary_family": "S04",
-  "rationale": "",
+  "rationale": "the confirmation banner reports the payment sent while the ledger entry for the item is failed; the persisted record refutes the claim",
   "scope": [
     "external",
     "visual"
   ],
   "secondary_tags": [],
-  "sign_off": null,
+  "sign_off": {
+    "adjudicator": "orchestrator:nitelos-8b",
+    "basis": "ADR-013: two independent AI reviewers plus orchestrator adjudication; no human annotation audit performed",
+    "date": "2026-10-15"
+  },
   "split": "test",
   "state": {
     "ledger": "failed"

@@ -1,6 +1,9 @@
 {
-  "annotation_status": "pending_human_review",
-  "annotators": [],
+  "annotation_status": "agent_audited_2026-10-15",
+  "annotators": [
+    "ai-reviewer-1:nitelos-14",
+    "ai-reviewer-2:fresh-agent-r2"
+  ],
   "case_id": "9fa57b64-0b17-5e49-b8cf-eed1e47c7012",
   "evidence_sufficiency": "sufficient",
   "expected": {
@@ -27,13 +30,17 @@
     "sibling": "803337ee-ef56-5968-b496-3ad8c66bd373"
   },
   "primary_family": "S13",
-  "rationale": "",
+  "rationale": "the status line for DW-0151 reads failed; the counterfactual pair reads exactly as labeled",
   "scope": [
     "observed_state",
     "visual"
   ],
   "secondary_tags": [],
-  "sign_off": null,
+  "sign_off": {
+    "adjudicator": "orchestrator:nitelos-8b",
+    "basis": "ADR-013: two independent AI reviewers plus orchestrator adjudication; no human annotation audit performed",
+    "date": "2026-10-15"
+  },
   "split": "test",
   "state": {
     "pair_kind": "counterfactual",

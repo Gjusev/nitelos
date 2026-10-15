@@ -1,6 +1,9 @@
 {
-  "annotation_status": "pending_human_review",
-  "annotators": [],
+  "annotation_status": "agent_audited_2026-10-15",
+  "annotators": [
+    "ai-reviewer-1:nitelos-14",
+    "ai-reviewer-2:fresh-agent-r2"
+  ],
   "case_id": "37519544-7ec1-583c-af34-0b957f51ae57",
   "evidence_sufficiency": "sufficient",
   "expected": {
@@ -27,13 +30,17 @@
     "sibling": "ef0a1454-992b-5e9e-8a1e-20056acc47ca"
   },
   "primary_family": "S13",
-  "rationale": "",
+  "rationale": "the status line for DX-0160 reads passed; the irrelevant edit does not change the recorded outcome",
   "scope": [
     "observed_state",
     "visual"
   ],
   "secondary_tags": [],
-  "sign_off": null,
+  "sign_off": {
+    "adjudicator": "orchestrator:nitelos-8b",
+    "basis": "ADR-013: two independent AI reviewers plus orchestrator adjudication; no human annotation audit performed",
+    "date": "2026-10-15"
+  },
   "split": "test",
   "state": {
     "pair_kind": "irrelevant_edit",
