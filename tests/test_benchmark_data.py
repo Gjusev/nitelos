@@ -444,8 +444,14 @@ def test_freeze_gate_accepts_agent_audited_signoff(tmp_path: Path) -> None:
     assert refused.returncode == 1, refused.stdout + refused.stderr
     assert "REFUSED" in refused.stdout
 
-    oracle_write({**pending, "annotation_status": "agent_audited_2026-10-15",
-                  "annotators": ["ai-reviewer-1:nitelos-14"], "sign_off": sign_off})
+    oracle_write(
+        {
+            **pending,
+            "annotation_status": "agent_audited_2026-10-15",
+            "annotators": ["ai-reviewer-1:nitelos-14"],
+            "sign_off": sign_off,
+        }
+    )
     sealed = run_freeze()
     assert sealed.returncode == 0, sealed.stdout + sealed.stderr
     recorded = (tree / "freeze.sha256").read_text(encoding="utf-8")
