@@ -81,6 +81,7 @@ from nitelos.schemas import (
     ErrorInfo,
     ExecutionStatus,
     IDType,
+    Score,
     VerificationRequest,
     VerificationResult,
     canonical_json,

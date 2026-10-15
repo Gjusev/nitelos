@@ -38,6 +38,7 @@ from __future__ import annotations
 
 import sys
 from collections.abc import Mapping, Sequence
+from typing import Any
 
 from pydantic import TypeAdapter, ValidationError
 
