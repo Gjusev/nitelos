@@ -260,6 +260,11 @@ class Verifier:
     def policy(self) -> VerificationPolicy:
         return self._policy
 
+    @property
+    def backend(self) -> DeterministicBackend:
+        """The injected backend (any Backend-protocol object; see __init__)."""
+        return self._backend
+
     # ------------------------------------------------------------------
     # lifecycle
     # ------------------------------------------------------------------

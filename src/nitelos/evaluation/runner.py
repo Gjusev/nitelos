@@ -406,6 +406,8 @@ def evaluate(
     manifest: LoadedManifest,
     verifier_factory: VerifierFactory,
     output_dir: Path,
+    *,
+    backend: Any = None,
 ) -> RunSummary:
     """Run every scheduled case sequentially into a NEW OUTPUT_DIR.
 
@@ -414,13 +416,38 @@ def evaluate(
     marker. Refuses an existing output directory (no overwrite, no resume).
     Per-case input/backend errors become result rows; infrastructure failures
     write an incomplete report and raise InfraError.
+
+    BACKEND is the shared-backend mode (doc 02: loaded once per backend, lazily
+    on first visual use): one Backend instance the verifier_factory must wire
+    into every per-case Verifier (verifiers stay per-case for per-case trust
+    bindings). evaluate() closes it exactly once when the run ends - complete,
+    per-case error or infra abort alike. With backend=None each verifier builds
+    its own backend, exactly as before, and nothing is closed here. The run's
+    preprocessing hash is read directly from BACKEND's descriptor (no probe).
     """
     output_dir = Path(output_dir)
     if output_dir.exists():
         raise ConfigError(f"output directory already exists: {output_dir.name}")
     output_dir.mkdir(parents=True)
     run_id = str(uuid.uuid4())
-    backend_preprocessing_hash = _probe_preprocessing_hash(manifest, verifier_factory)
+    if backend is not None:
+        backend_preprocessing_hash = _descriptor_preprocessing_hash(backend)
+    else:
+        backend_preprocessing_hash = _probe_preprocessing_hash(manifest, verifier_factory)
+    try:
+        return _run_manifest(manifest, verifier_factory, output_dir, run_id, backend_preprocessing_hash)
+    finally:
+        if backend is not None:
+            backend.close()
+
+
+def _run_manifest(
+    manifest: LoadedManifest,
+    verifier_factory: VerifierFactory,
+    output_dir: Path,
+    run_id: str,
+    backend_preprocessing_hash: str | None,
+) -> RunSummary:
     started = time.perf_counter()
     run_meta = {
         "run_id": run_id,
@@ -823,6 +850,11 @@ def compare_reports(run_a: Path, run_b: Path) -> dict[str, Any]:
 # ---------------------------------------------------------------------------
 
 
+def _descriptor_preprocessing_hash(backend: Any) -> str | None:
+    descriptor = getattr(backend, "descriptor", None)
+    return getattr(descriptor, "preprocessing_hash", None)
+
+
 def _probe_preprocessing_hash(manifest: LoadedManifest, verifier_factory: VerifierFactory) -> str | None:
     """The run's backend preprocessing fingerprint (review F4).
 
@@ -832,16 +864,17 @@ def _probe_preprocessing_hash(manifest: LoadedManifest, verifier_factory: Verifi
     """
     try:
         probe = verifier_factory("#preprocessing-probe", None, {}, ())
-        backend = getattr(probe, "backend", None)
-        descriptor = getattr(backend, "descriptor", None)
-        return getattr(descriptor, "preprocessing_hash", None)
+        return _descriptor_preprocessing_hash(getattr(probe, "backend", None))
     except Exception:  # noqa: BLE001 - probe only; a null hash is the honest fallback
         return None
 
 
 def _build_verifier_factory(
     backend: str, model_dir: str | None, policy: VerificationPolicy
-) -> VerifierFactory:
+) -> tuple[VerifierFactory, Any]:
+    """Per-case verifier factory plus the run's shared backend (None when each
+    verifier builds its own). The smolvlm backend is constructed ONCE here -
+    the model loads lazily on first inference and the CLI run closes it once."""
     if backend == "deterministic":
         if model_dir is not None:
             raise ConfigError("--model-dir is only valid with --backend smolvlm")
@@ -850,7 +883,7 @@ def _build_verifier_factory(
         def factory(case_id: str, request: Any, artifacts: Any, bindings: Any) -> Any:
             return Verifier(backend=DeterministicBackend(), policy=policy, trust_bindings=bindings)
 
-        return factory
+        return factory, None
     if backend == "smolvlm":
         import importlib.util  # noqa: PLC0415 - probe of the optional NIT-008 module
 
@@ -861,18 +894,24 @@ def _build_verifier_factory(
             )
         if model_dir is None:
             raise ConfigError("--model-dir is required with --backend smolvlm")
-
-        def factory(case_id: str, request: Any, artifacts: Any, bindings: Any) -> Any:
+        shared: Any
+        try:
             from nitelos import Verifier  # noqa: PLC0415 - lazy backend wiring
             from nitelos.backends.smolvlm import (  # noqa: PLC0415 - lazy NIT-008 module
                 DEFAULT_REVISION,
                 SmolVLMBackend,
             )
 
-            backend_instance: Any = SmolVLMBackend(model_dir, DEFAULT_REVISION, device="cpu", dtype="float32")
-            return Verifier(backend=backend_instance, policy=policy, trust_bindings=bindings)
+            shared = SmolVLMBackend(model_dir, DEFAULT_REVISION, device="cpu", dtype="float32")
+        except (KeyboardInterrupt, SystemExit):
+            raise
+        except Exception as error:
+            raise InfraError("the smolvlm backend could not be constructed") from error
 
-        return factory
+        def factory(case_id: str, request: Any, artifacts: Any, bindings: Any) -> Any:
+            return Verifier(backend=shared, policy=policy, trust_bindings=bindings)
+
+        return factory, shared
     raise ConfigError(f"unknown backend: {backend}")
 
 
@@ -888,8 +927,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         manifest = load_evaluation_manifest(Path(args.manifest), Path(args.artifacts))
-        factory = _build_verifier_factory(args.backend, args.model_dir, manifest.policy)
-        summary = evaluate(manifest, factory, Path(args.output))
+        factory, shared_backend = _build_verifier_factory(args.backend, args.model_dir, manifest.policy)
+        summary = evaluate(manifest, factory, Path(args.output), backend=shared_backend)
     except ConfigError as error:
         print(f"configuration error: {error}", file=sys.stderr)
         return 2
