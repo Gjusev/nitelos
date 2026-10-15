@@ -366,8 +366,13 @@ def test_vlm03_constructor_validates_combinations_and_deadline(tmp_path: Path) -
     _backend(tmp_path)  # (cpu, float32) is the shipped combination
 
 
-def test_vlm03_missing_dependency_names_the_local_extra(tmp_path: Path) -> None:
-    assert "torch" not in sys.modules  # genuinely absent in the core-only test env
+def test_vlm03_missing_dependency_names_the_local_extra(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    # deterministic in every environment: a None in sys.modules makes
+    # `import torch` raise ImportError even where torch is installed
+    monkeypatch.setitem(sys.modules, "torch", None)
+    monkeypatch.setitem(sys.modules, "transformers", None)
     backend = _backend(tmp_path)
     with pytest.raises(BackendOutputError) as excinfo:
         backend.infer(_prepared([_image()]), _context())
@@ -694,12 +699,19 @@ def test_close_is_idempotent_and_allows_no_further_inference(loaded_backend: tup
 
 
 def test_module_imports_without_torch_or_transformers() -> None:
-    import importlib
+    """Importing the module must not pull torch/transformers in ANY environment."""
+    import subprocess
 
-    module = importlib.import_module("nitelos.backends.smolvlm")
-    assert module.PROMPT_TEMPLATE_V1
-    assert "torch" not in sys.modules
-    assert "transformers" not in sys.modules
+    code = (
+        "import sys\n"
+        "for heavy in ('torch', 'transformers'):\n"
+        "    sys.modules[heavy] = None  # any later `import` raises ImportError\n"
+        "from nitelos.backends import smolvlm\n"
+        "assert smolvlm.PROMPT_TEMPLATE_V1\n"
+    )
+    proc = subprocess.run([sys.executable, "-c", code], check=False, capture_output=True, text=True)
+    assert proc.returncode == 0, proc.stderr
+    assert proc.stdout == ""
 
 
 # ---------------------------------------------------------------------------
