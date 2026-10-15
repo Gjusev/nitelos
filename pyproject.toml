@@ -25,6 +25,10 @@ eval = [
     "numpy>=2.5.4",
     "scipy>=1.18.1",
 ]
+local = [
+    "torch==2.14.1+cpu",
+    "transformers==5.19.0",
+]
 
 [dependency-groups]
 dev = [
@@ -39,6 +43,14 @@ dev = [
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/nitelos"]
@@ -76,3 +88,9 @@ python_version = "3.12"
 mypy_path = "src"
 packages = ["nitelos"]
 warn_unreachable = true
+
+[[tool.mypy.overrides]]
+# optional local-model dependencies (NIT-008 local extra): absent in core-only
+# environments, imported lazily inside nitelos.backends.smolvlm functions
+module = ["torch", "transformers"]
+ignore_missing_imports = true
