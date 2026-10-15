@@ -160,9 +160,8 @@ def derive_all(bench_dir: Path) -> None:
         else:
             labels = _FAMILY[family](record["state"])
         record.update(labels)
-        path.write_text(
-            json.dumps(record, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8"
-        )
+        text = json.dumps(record, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+        path.write_bytes(text.encode("utf-8"))
 
 
 _FAMILY = {"S04": _s04, "S06": _s06, "S07": _s07, "S08": _s08, "S12": _s12, "S13": _s13, "S15": _s15}
