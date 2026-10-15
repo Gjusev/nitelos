@@ -1,0 +1,92 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for AO-0170 reports status completed",
+      "evidence_ids": [
+        "6441f4bfb485-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "submission": "AO-0170"
+      }
+    },
+    {
+      "description": "The Render Console AO window shows a banner stating the submission was accepted",
+      "evidence_ids": [
+        "6441f4bfb485-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "submission": "AO-0170"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "6441f4bfb485-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "6441f4bfb485-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "0f6fe5fe40c97cd67d779eddd955e653d99961ddb9da507597cd7f82c33f6d9e",
+      "source_id": "fixture-ui",
+      "subject": {
+        "submission": "AO-0170"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "E212",
+        "job_status": "failed"
+      },
+      "id": "6441f4bfb485-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "e7a330d64da2dabdf241cb4ea0f65d98015eeac69f416e308bfd9b9020ac8193",
+      "source_id": "fixture-ui",
+      "subject": {
+        "submission": "AO-0170"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "E212",
+        "status": "failed"
+      },
+      "id": "6441f4bfb485-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "338add80b90c9061fb5fb323fc5891bf1f0435bcdd9b56367ab75bd1b48d4020",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "submission": "AO-0170"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the render task for AO-0170 in Render Console AO",
+  "request_id": "6441f4bfb485-v",
+  "schema_version": "1"
+}

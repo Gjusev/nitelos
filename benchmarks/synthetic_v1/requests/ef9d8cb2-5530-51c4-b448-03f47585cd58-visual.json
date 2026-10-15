@@ -1,0 +1,93 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Vault Console CR window shows a completion banner for CR-0160",
+      "evidence_ids": [
+        "ef9d8cb25530-shot-a",
+        "ef9d8cb25530-shot-b"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "syncjob": "CR-0160"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "ef9d8cb25530-art-a",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "ef9d8cb25530-shot-a",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "b8fc19e045e085b6609e487292a9422cfb372f4cec1b4c06f02f32a0e1f8e5db",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CR-0160"
+      },
+      "width": 1200
+    },
+    {
+      "artifact_id": "ef9d8cb25530-art-b",
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "ef9d8cb25530-shot-b",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "cb222bb8c491c8d09dce4a641e2b0c0350629797f0699c27c4a1195dfead4ee9",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CR-0160"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "completed"
+      },
+      "id": "ef9d8cb25530-dom-a",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CR-0160"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "ef9d8cb25530-dom-b",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CR-0160"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the vault task for CR-0160 in Vault Console CR",
+  "request_id": "ef9d8cb25530-v",
+  "schema_version": "1"
+}

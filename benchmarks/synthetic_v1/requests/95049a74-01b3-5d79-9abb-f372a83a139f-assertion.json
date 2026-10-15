@@ -1,0 +1,96 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for CQ-0150 reports the sync completed",
+      "evidence_ids": [
+        "95049a7401b3-dom-a",
+        "95049a7401b3-dom-b"
+      ],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "observed_state",
+      "subject": {
+        "syncjob": "CQ-0150"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "95049a7401b3-art-a",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "95049a7401b3-shot-a",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "a3b97f98f40547dcff03209716d85aebea6eca9af2c08d58a74ed4d1b018faaf",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CQ-0150"
+      },
+      "width": 1200
+    },
+    {
+      "artifact_id": "95049a7401b3-art-b",
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "95049a7401b3-shot-b",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "0f2ae0c56338aa0579fba19f9ac924b7c8ac2c64e7b9ab240f03cfa94c4ad126",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CQ-0150"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "completed"
+      },
+      "id": "95049a7401b3-dom-a",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CQ-0150"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "95049a7401b3-dom-b",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CQ-0150"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the share task for CQ-0150 in Share Console CQ",
+  "request_id": "95049a7401b3-a",
+  "schema_version": "1"
+}

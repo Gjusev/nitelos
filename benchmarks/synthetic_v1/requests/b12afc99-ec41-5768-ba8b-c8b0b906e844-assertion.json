@@ -1,0 +1,95 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for AI-0110 reports status completed",
+      "evidence_ids": [
+        "b12afc99ec41-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "submission": "AI-0110"
+      }
+    },
+    {
+      "description": "Interface state for AI-0110 reports the submission completed",
+      "evidence_ids": [
+        "b12afc99ec41-dom-1"
+      ],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/job_status",
+      "scope": "observed_state",
+      "subject": {
+        "submission": "AI-0110"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "b12afc99ec41-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "b12afc99ec41-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "d3a38fa213062746bb590fffd7dfd888a5dbaa8df70dcf25a3f6d2cc0e15d9fd",
+      "source_id": "fixture-ui",
+      "subject": {
+        "submission": "AI-0110"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "E201",
+        "job_status": "failed"
+      },
+      "id": "b12afc99ec41-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "81faa25d4131e757f14c73cf279bcb7bd55226aa757f26302aa78e5f8111013b",
+      "source_id": "fixture-ui",
+      "subject": {
+        "submission": "AI-0110"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "E201",
+        "status": "failed"
+      },
+      "id": "b12afc99ec41-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "9fb440e367891aa1b289810c7cbea02cbe2a0b931799e2d80ab56c2a32f150a6",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "submission": "AI-0110"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the export task for AI-0110 in Export Console AI",
+  "request_id": "b12afc99ec41-a",
+  "schema_version": "1"
+}

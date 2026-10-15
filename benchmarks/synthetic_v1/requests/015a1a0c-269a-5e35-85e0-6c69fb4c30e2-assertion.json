@@ -1,0 +1,42 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Ledger record for BE-0170 reports the payment settled",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "payment": "BE-0170"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "015a1a0c269a-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "015a1a0c269a-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "466b40220a4ac485f97e421d7e961e93f2ffd7127247a9dd312f5a71e740b051",
+      "source_id": "fixture-ui",
+      "subject": {
+        "payment": "BE-0170"
+      },
+      "width": 1200
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the charge task for BE-0170 in Charge Console BE",
+  "request_id": "015a1a0c269a-a",
+  "schema_version": "1"
+}

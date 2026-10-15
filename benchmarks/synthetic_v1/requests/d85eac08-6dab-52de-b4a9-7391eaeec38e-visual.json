@@ -1,0 +1,90 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Ledger record for DJ-0180 reports the transfer completed",
+      "evidence_ids": [
+        "d85eac086dab-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "transfer": "DJ-0180"
+      }
+    },
+    {
+      "description": "The Refund Console DJ window shows a completion banner for DJ-0180",
+      "evidence_ids": [
+        "d85eac086dab-shot-1"
+      ],
+      "id": "c-vis",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "transfer": "DJ-0180"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "d85eac086dab-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "d85eac086dab-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "a8e90d42c35b7d74ad4ae2ab92b5e7e310e21d05abde2fcda8250908ef7142c2",
+      "source_id": "fixture-ui",
+      "subject": {
+        "transfer": "DJ-0180"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "summary": "failed"
+      },
+      "id": "d85eac086dab-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "f66f83e36d5d7876f3112b577be85291d030c5914f06ef4b015154d26d2e7af0",
+      "source_id": "fixture-ui",
+      "subject": {
+        "transfer": "DJ-0180"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "completed"
+      },
+      "id": "d85eac086dab-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "transfer": "DJ-0180"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the refund task for DJ-0180 in Refund Console DJ",
+  "request_id": "d85eac086dab-v",
+  "schema_version": "1"
+}

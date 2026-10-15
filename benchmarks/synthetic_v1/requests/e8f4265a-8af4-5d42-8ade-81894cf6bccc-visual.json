@@ -1,0 +1,92 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for AG-0170 reports status completed",
+      "evidence_ids": [
+        "e8f4265a8af4-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "job": "AG-0170"
+      }
+    },
+    {
+      "description": "The Render Console AG window shows a banner stating the render completed",
+      "evidence_ids": [
+        "e8f4265a8af4-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "job": "AG-0170"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "e8f4265a8af4-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "e8f4265a8af4-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "43b4f924878fa873f52d0d0aa5f453a4b80e9a94d7d6d00a265605a7410d379c",
+      "source_id": "fixture-ui",
+      "subject": {
+        "job": "AG-0170"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "items": 9,
+        "job_status": "completed"
+      },
+      "id": "e8f4265a8af4-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "60de39f50a8a75dd13729f9dd315c8c4d0b59fbbac905a953d58536dc295df97",
+      "source_id": "fixture-ui",
+      "subject": {
+        "job": "AG-0170"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "record_count": 9,
+        "status": "completed"
+      },
+      "id": "e8f4265a8af4-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "183bdf1e907d63b19315e49b5d4ff8c37904d98d1b7df7b361cbc213680051e2",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "job": "AG-0170"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the render task for AG-0170 in Render Console AG",
+  "request_id": "e8f4265a8af4-v",
+  "schema_version": "1"
+}

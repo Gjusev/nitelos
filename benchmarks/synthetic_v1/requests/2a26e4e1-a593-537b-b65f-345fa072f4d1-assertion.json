@@ -1,0 +1,63 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "No validation error remains on the AS-0130 form",
+      "evidence_ids": [
+        "2a26e4e1a593-dom-1"
+      ],
+      "expected": false,
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/validation_error",
+      "scope": "observed_state",
+      "subject": {
+        "form": "AS-0130"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "2a26e4e1a593-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "2a26e4e1a593-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "04ea1ea9b3c19a081533558652aa1f0e372431edc393c610938a91ac7c3c3140",
+      "source_id": "fixture-ui",
+      "subject": {
+        "form": "AS-0130"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "display_name": "Cai Gale",
+        "validation_error": true,
+        "workspace_tag": ""
+      },
+      "id": "2a26e4e1a593-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "f933584bece689b5b4d701e0a5c6af5ce4872f78bb3c5d1728fc7e4203398c99",
+      "source_id": "fixture-ui",
+      "subject": {
+        "form": "AS-0130"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the signup task for AS-0130 in Signup Console AS",
+  "request_id": "2a26e4e1a593-a",
+  "schema_version": "1"
+}

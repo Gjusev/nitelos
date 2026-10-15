@@ -1,0 +1,42 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Ledger record for BB-0140 reports the payment settled",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "payment": "BB-0140"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "d023413b5913-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "d023413b5913-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "93ac0f8d97cad46f03bc6489e6445b53de3431052e607073ef8ceb3d2ed73eca",
+      "source_id": "fixture-ui",
+      "subject": {
+        "payment": "BB-0140"
+      },
+      "width": 1200
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the invoice task for BB-0140 in Invoice Console BB",
+  "request_id": "d023413b5913-a",
+  "schema_version": "1"
+}

@@ -1,0 +1,62 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for DK-0110 reports the final result passed",
+      "evidence_ids": [
+        "4b4039caed16-dom-1"
+      ],
+      "expected": "passed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/final_result",
+      "scope": "observed_state",
+      "subject": {
+        "build": "DK-0110"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "4b4039caed16-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "4b4039caed16-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "e9bd72e547b450c84ef226f71ce14f2b2266841627b7dea053c0d39ce8215824",
+      "source_id": "fixture-ui",
+      "subject": {
+        "build": "DK-0110"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "progress": 100,
+        "steps": 14
+      },
+      "id": "4b4039caed16-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "bc8f97216858a546c22ba5d0e6042dd3afd7a1e95bbd5485c762a24b708eda5e",
+      "source_id": "fixture-ui",
+      "subject": {
+        "build": "DK-0110"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the build task for DK-0110 in Build Console DK",
+  "request_id": "4b4039caed16-a",
+  "schema_version": "1"
+}

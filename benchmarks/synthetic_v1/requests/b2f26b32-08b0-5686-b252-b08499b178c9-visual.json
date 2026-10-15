@@ -1,0 +1,90 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Ledger record for DD-0120 reports the transfer completed",
+      "evidence_ids": [
+        "b2f26b3208b0-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "transfer": "DD-0120"
+      }
+    },
+    {
+      "description": "The Payout Console DD window shows a completion banner for DD-0120",
+      "evidence_ids": [
+        "b2f26b3208b0-shot-1"
+      ],
+      "id": "c-vis",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "transfer": "DD-0120"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "b2f26b3208b0-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "b2f26b3208b0-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "9aa178348dc7919e04e228f7118324a0a94da7e3c3c0e861747544ed9d0c254c",
+      "source_id": "fixture-ui",
+      "subject": {
+        "transfer": "DD-0120"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "summary": "failed"
+      },
+      "id": "b2f26b3208b0-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "f66f83e36d5d7876f3112b577be85291d030c5914f06ef4b015154d26d2e7af0",
+      "source_id": "fixture-ui",
+      "subject": {
+        "transfer": "DD-0120"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "completed"
+      },
+      "id": "b2f26b3208b0-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "transfer": "DD-0120"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the payout task for DD-0120 in Payout Console DD",
+  "request_id": "b2f26b3208b0-v",
+  "schema_version": "1"
+}

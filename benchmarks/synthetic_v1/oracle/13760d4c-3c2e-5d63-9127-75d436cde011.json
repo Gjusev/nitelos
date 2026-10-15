@@ -1,0 +1,42 @@
+{
+  "annotation_status": "pending_human_review",
+  "annotators": [],
+  "case_id": "13760d4c-3c2e-5d63-9127-75d436cde011",
+  "evidence_sufficiency": "sufficient",
+  "expected": {
+    "assertion": {
+      "decision": "failure",
+      "reason_codes": [
+        "CRITERION_REFUTED"
+      ]
+    },
+    "visual": {
+      "decision": "failure",
+      "reason_codes": [
+        "CRITERION_REFUTED"
+      ]
+    }
+  },
+  "group_id": "s13:L1",
+  "oracle_source_id": "state-machine:s13:v1",
+  "outcome_truth": "failure",
+  "pair": {
+    "kind": "counterfactual",
+    "pair_id": "s13-cf-L1",
+    "role": "variant",
+    "sibling": "97efda40-d692-5e2b-b17c-f4951ea83763"
+  },
+  "primary_family": "S13",
+  "rationale": "",
+  "scope": [
+    "observed_state",
+    "visual"
+  ],
+  "secondary_tags": [],
+  "sign_off": null,
+  "split": "dev",
+  "state": {
+    "pair_kind": "counterfactual",
+    "status_line": "failed"
+  }
+}

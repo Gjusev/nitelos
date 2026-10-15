@@ -1,0 +1,42 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Database record for BS-0150 reports the sync completed",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "sync": "BS-0150"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "8771b6472d4d-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "8771b6472d4d-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "f1f988161be30234f94e73cc56446918d8d11bc6cf02d18dd9bc50224faa146f",
+      "source_id": "fixture-ui",
+      "subject": {
+        "sync": "BS-0150"
+      },
+      "width": 1200
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the share task for BS-0150 in Share Console BS",
+  "request_id": "8771b6472d4d-v",
+  "schema_version": "1"
+}

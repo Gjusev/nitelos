@@ -1,0 +1,5 @@
+*.json text eol=lf
+*.md text eol=lf
+*.provisional text eol=lf
+*.sha256 text eol=lf
+*.png binary

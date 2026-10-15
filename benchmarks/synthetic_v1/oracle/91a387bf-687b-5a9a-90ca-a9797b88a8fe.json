@@ -1,0 +1,38 @@
+{
+  "annotation_status": "pending_human_review",
+  "annotators": [],
+  "case_id": "91a387bf-687b-5a9a-90ca-a9797b88a8fe",
+  "evidence_sufficiency": "insufficient",
+  "expected": {
+    "assertion": {
+      "decision": "abstained",
+      "reason_codes": [
+        "INSUFFICIENT_EVIDENCE",
+        "MISSING_EVIDENCE"
+      ]
+    },
+    "visual": {
+      "decision": "abstained",
+      "reason_codes": [
+        "INSUFFICIENT_EVIDENCE",
+        "MISSING_EVIDENCE"
+      ]
+    }
+  },
+  "group_id": "s08:L8",
+  "oracle_source_id": "state-machine:s08:v1",
+  "outcome_truth": "failure",
+  "pair": null,
+  "primary_family": "S08",
+  "rationale": "empty evidence view; truth is known to the fixture but not established by evidence",
+  "scope": [
+    "observed_state",
+    "visual"
+  ],
+  "secondary_tags": [],
+  "sign_off": null,
+  "split": "test",
+  "state": {
+    "underlying": "failure"
+  }
+}

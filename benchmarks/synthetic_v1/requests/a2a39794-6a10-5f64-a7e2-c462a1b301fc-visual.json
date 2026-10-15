@@ -1,0 +1,21 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Asset Console CH window shows a completion banner for CH-0140",
+      "evidence_ids": [],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "record": "CH-0140"
+      }
+    }
+  ],
+  "evidence": [],
+  "metadata": {},
+  "objective": "Complete the asset task for CH-0140 in Asset Console CH",
+  "request_id": "a2a397946a10-v",
+  "schema_version": "1"
+}

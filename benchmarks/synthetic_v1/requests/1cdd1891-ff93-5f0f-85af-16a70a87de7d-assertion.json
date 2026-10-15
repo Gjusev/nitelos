@@ -1,0 +1,61 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Ledger record for AZ-0120 reports the payment settled",
+      "evidence_ids": [
+        "1cdd1891ff93-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "payment": "AZ-0120"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "1cdd1891ff93-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "1cdd1891ff93-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "ff88c6b2d40df7443eca03147eb2a715943d54fb892840b12c2185ef6724d7e8",
+      "source_id": "fixture-ui",
+      "subject": {
+        "payment": "AZ-0120"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "1cdd1891ff93-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "payment": "AZ-0120"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the transfer task for AZ-0120 in Transfer Console AZ",
+  "request_id": "1cdd1891ff93-a",
+  "schema_version": "1"
+}

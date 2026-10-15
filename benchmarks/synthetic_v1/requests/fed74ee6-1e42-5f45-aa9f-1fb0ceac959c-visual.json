@@ -1,0 +1,21 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Item Console CG window shows a completion banner for CG-0130",
+      "evidence_ids": [],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "record": "CG-0130"
+      }
+    }
+  ],
+  "evidence": [],
+  "metadata": {},
+  "objective": "Complete the item task for CG-0130 in Item Console CG",
+  "request_id": "fed74ee61e42-v",
+  "schema_version": "1"
+}

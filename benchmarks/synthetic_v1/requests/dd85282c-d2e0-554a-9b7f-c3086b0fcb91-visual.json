@@ -1,0 +1,58 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Digest Console EB window shows a confirmation banner for EB-0120",
+      "evidence_ids": [
+        "dd85282cd2e0-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "report": "EB-0120"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "dd85282cd2e0-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "dd85282cd2e0-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "ee79de037e0c61ff624fdfa918ea207dbd783c84431e1d02348a1f2d788312e3",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "EB-0120"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "confirm_banner_present": false
+      },
+      "id": "dd85282cd2e0-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "23603fc7b22654aee7a14fc43a88fa1925ac4b2b85fcbe7d164b0b86ad8fef96",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "EB-0120"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the digest task for EB-0120 in Digest Console EB",
+  "request_id": "dd85282cd2e0-v",
+  "schema_version": "1"
+}

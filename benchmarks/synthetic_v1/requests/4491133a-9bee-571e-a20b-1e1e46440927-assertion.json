@@ -1,0 +1,113 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The upload action for CX-0140 completed",
+      "evidence_ids": [
+        "4491133a9bee-act-1"
+      ],
+      "expected": "completed",
+      "id": "c-beh",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/reported_status",
+      "scope": "behavioral",
+      "subject": {
+        "upload": "CX-0140"
+      }
+    },
+    {
+      "description": "Backend record for CX-0140 reports the upload stored",
+      "evidence_ids": [
+        "4491133a9bee-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "upload": "CX-0140"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "4491133a9bee-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "4491133a9bee-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "3c362bdffa12d3322e154b609480c990ff464a2944884c5058ad3f6e2b4add81",
+      "source_id": "fixture-ui",
+      "subject": {
+        "upload": "CX-0140"
+      },
+      "width": 1200
+    },
+    {
+      "arguments": {
+        "target": "CX-0140"
+      },
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-final",
+      "id": "4491133a9bee-act-1",
+      "kind": "action",
+      "name": "upload-file",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 1,
+      "sha256": "5ffc6fb3a3c2d3490dc5456f5fe1719bd1d88550e73f1ce91f85f5c941f88c54",
+      "source_id": "agent-runner",
+      "subject": {
+        "upload": "CX-0140"
+      },
+      "tool_result_id": null
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "quota exceeded",
+        "job_status": "failed"
+      },
+      "id": "4491133a9bee-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "656fe331ed8b43a167ad99287279ac988f141ae51bebd979e08022ff0694316d",
+      "source_id": "fixture-ui",
+      "subject": {
+        "upload": "CX-0140"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "4491133a9bee-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "upload": "CX-0140"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the patch task for CX-0140 in Patch Console CX",
+  "request_id": "4491133a9bee-a",
+  "schema_version": "1"
+}

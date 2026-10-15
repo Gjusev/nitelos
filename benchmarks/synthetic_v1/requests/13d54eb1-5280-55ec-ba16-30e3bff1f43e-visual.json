@@ -1,0 +1,54 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Ledger record for BF-0180 reports the payment settled",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "payment": "BF-0180"
+      }
+    },
+    {
+      "description": "The Billing Console BF window shows a banner stating the payment was sent",
+      "evidence_ids": [
+        "13d54eb15280-shot-1"
+      ],
+      "id": "c-vis",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "payment": "BF-0180"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "13d54eb15280-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "13d54eb15280-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "6984220ff8b66c99a1fc6b5f108db3c062932a54a436701247d3a97440a0802f",
+      "source_id": "fixture-ui",
+      "subject": {
+        "payment": "BF-0180"
+      },
+      "width": 1200
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the billing task for BF-0180 in Billing Console BF",
+  "request_id": "13d54eb15280-v",
+  "schema_version": "1"
+}

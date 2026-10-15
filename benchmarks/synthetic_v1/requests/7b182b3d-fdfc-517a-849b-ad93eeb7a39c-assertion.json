@@ -1,0 +1,95 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for AF-0160 reports status completed",
+      "evidence_ids": [
+        "7b182b3dfdfc-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "job": "AF-0160"
+      }
+    },
+    {
+      "description": "Interface state for AF-0160 reports the upload completed",
+      "evidence_ids": [
+        "7b182b3dfdfc-dom-1"
+      ],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/job_status",
+      "scope": "observed_state",
+      "subject": {
+        "job": "AF-0160"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "7b182b3dfdfc-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "7b182b3dfdfc-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "7f8678b96ee005d4f02a2e172d0e5e3503e8182b8f8a65040bbf945969f9ec31",
+      "source_id": "fixture-ui",
+      "subject": {
+        "job": "AF-0160"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "items": 5,
+        "job_status": "completed"
+      },
+      "id": "7b182b3dfdfc-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "babea8f7c72fbb2a17a5787e3dce080781ea4791464f33bdee6bb4e4c35aa1b2",
+      "source_id": "fixture-ui",
+      "subject": {
+        "job": "AF-0160"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "record_count": 5,
+        "status": "completed"
+      },
+      "id": "7b182b3dfdfc-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "9e681f9286713381cb5ea8c788b4898d5ab4d1c1935d9c9679f8ca76d560cf31",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "job": "AF-0160"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the upload task for AF-0160 in Upload Console AF",
+  "request_id": "7b182b3dfdfc-a",
+  "schema_version": "1"
+}

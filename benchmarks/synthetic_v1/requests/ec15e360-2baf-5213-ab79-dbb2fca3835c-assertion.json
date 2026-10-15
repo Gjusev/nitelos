@@ -1,0 +1,61 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for DT-0121 reports STATUS passed",
+      "evidence_ids": [
+        "ec15e3602baf-dom-1"
+      ],
+      "expected": "passed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "observed_state",
+      "subject": {
+        "task": "DT-0121"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "ec15e3602baf-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "ec15e3602baf-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "a51eab104f39104087d52375d82a33a8d703219132c70f36e216d11778b7d031",
+      "source_id": "fixture-ui",
+      "subject": {
+        "task": "DT-0121"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "passed"
+      },
+      "id": "ec15e3602baf-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "76f1805001bc4f155c8efa5651c57c4f1858af1f6786cbe4596214a4b64375a6",
+      "source_id": "fixture-ui",
+      "subject": {
+        "task": "DT-0121"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the job task for DT-0121 in Job Console DT",
+  "request_id": "ec15e3602baf-a",
+  "schema_version": "1"
+}

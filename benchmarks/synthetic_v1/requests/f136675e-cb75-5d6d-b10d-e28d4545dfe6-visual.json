@@ -1,0 +1,93 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Repo Console CN window shows a completion banner for CN-0120",
+      "evidence_ids": [
+        "f136675ecb75-shot-a",
+        "f136675ecb75-shot-b"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "syncjob": "CN-0120"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "f136675ecb75-art-a",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "f136675ecb75-shot-a",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "7c52f12e30e22423bc41015fcd3a4fb90afacb989f944d3fef7a7d039a66fc6b",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CN-0120"
+      },
+      "width": 1200
+    },
+    {
+      "artifact_id": "f136675ecb75-art-b",
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "f136675ecb75-shot-b",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "b6b884c7a550f5a9b9c9579180164ea5680a64085770bf2a3a3209b9ae7fc660",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CN-0120"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "completed"
+      },
+      "id": "f136675ecb75-dom-a",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CN-0120"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "f136675ecb75-dom-b",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CN-0120"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the repo task for CN-0120 in Repo Console CN",
+  "request_id": "f136675ecb75-v",
+  "schema_version": "1"
+}

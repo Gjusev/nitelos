@@ -1,0 +1,41 @@
+{
+  "annotation_status": "pending_human_review",
+  "annotators": [],
+  "case_id": "a7a3cbec-39dd-5427-b7d4-a1c25e675563",
+  "evidence_sufficiency": "insufficient",
+  "expected": {
+    "assertion": {
+      "decision": "abstained",
+      "reason_codes": [
+        "INSUFFICIENT_EVIDENCE",
+        "SUBJECT_MISMATCH"
+      ]
+    },
+    "visual": {
+      "decision": "abstained",
+      "reason_codes": [
+        "INSUFFICIENT_EVIDENCE",
+        "SUBJECT_MISMATCH"
+      ]
+    }
+  },
+  "group_id": "s07:L1",
+  "oracle_source_id": "state-machine:s07:v1",
+  "outcome_truth": "failure",
+  "pair": null,
+  "primary_family": "S07",
+  "rationale": "evidence names a different record than the criterion subject; unknown, not failure",
+  "scope": [
+    "observed_state",
+    "external",
+    "visual"
+  ],
+  "secondary_tags": [],
+  "sign_off": null,
+  "split": "dev",
+  "state": {
+    "criterion_id": "BW-0999",
+    "variant": "subject_mismatch",
+    "visible_id": "BW-0110"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Storage record for CL-0180 reports status completed",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "observed_state",
+      "subject": {
+        "record": "CL-0180"
+      }
+    }
+  ],
+  "evidence": [],
+  "metadata": {},
+  "objective": "Complete the card task for CL-0180 in Card Console CL",
+  "request_id": "91a387bf687b-a",
+  "schema_version": "1"
+}

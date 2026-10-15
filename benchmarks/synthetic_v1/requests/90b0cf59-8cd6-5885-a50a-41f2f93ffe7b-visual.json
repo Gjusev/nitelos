@@ -1,0 +1,92 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for AL-0140 reports status completed",
+      "evidence_ids": [
+        "90b0cf598cd6-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "submission": "AL-0140"
+      }
+    },
+    {
+      "description": "The Archive Console AL window shows a banner stating the submission was accepted",
+      "evidence_ids": [
+        "90b0cf598cd6-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "submission": "AL-0140"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "90b0cf598cd6-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "90b0cf598cd6-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "295087c2e9627c2d135480c80260da57e02ac95364d9e4eb24acff1c426a1c7d",
+      "source_id": "fixture-ui",
+      "subject": {
+        "submission": "AL-0140"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "E204",
+        "job_status": "failed"
+      },
+      "id": "90b0cf598cd6-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "953855fe3d2bfc74a2dec15dfcaa30e80f1f948269dfa1c8d08793252938a14c",
+      "source_id": "fixture-ui",
+      "subject": {
+        "submission": "AL-0140"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "E204",
+        "status": "failed"
+      },
+      "id": "90b0cf598cd6-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "e8b4c6ff8edc6ca48bf0d473175102d5a9042916fdd961d01a2f02f72612464f",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "submission": "AL-0140"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the archive task for AL-0140 in Archive Console AL",
+  "request_id": "90b0cf598cd6-v",
+  "schema_version": "1"
+}

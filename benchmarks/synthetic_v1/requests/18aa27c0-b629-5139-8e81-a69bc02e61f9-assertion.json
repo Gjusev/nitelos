@@ -1,0 +1,61 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for EF-0160 reports the confirmation banner present",
+      "evidence_ids": [
+        "18aa27c0b629-dom-1"
+      ],
+      "expected": true,
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/confirm_banner_present",
+      "scope": "observed_state",
+      "subject": {
+        "report": "EF-0160"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "18aa27c0b629-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "18aa27c0b629-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "b6cb1ef3244ef613aae1f215d761bdc3424ffb2010d2f1f9e4ad6239064cf647",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "EF-0160"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "confirm_banner_present": false
+      },
+      "id": "18aa27c0b629-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "23603fc7b22654aee7a14fc43a88fa1925ac4b2b85fcbe7d164b0b86ad8fef96",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "EF-0160"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the digest task for EF-0160 in Digest Console EF",
+  "request_id": "18aa27c0b629-a",
+  "schema_version": "1"
+}

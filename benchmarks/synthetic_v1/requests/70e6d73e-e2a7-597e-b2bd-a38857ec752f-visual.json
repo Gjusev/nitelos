@@ -1,0 +1,59 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Verify Console DP window shows the final result for DP-0160",
+      "evidence_ids": [
+        "70e6d73ee2a7-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "build": "DP-0160"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "70e6d73ee2a7-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "70e6d73ee2a7-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "16cfb0fd6e5b8e15a09436ac281e11093c0a1f56eda18cde6693ea579c3e3b8a",
+      "source_id": "fixture-ui",
+      "subject": {
+        "build": "DP-0160"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "progress": 100,
+        "steps": 14
+      },
+      "id": "70e6d73ee2a7-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "bc8f97216858a546c22ba5d0e6042dd3afd7a1e95bbd5485c762a24b708eda5e",
+      "source_id": "fixture-ui",
+      "subject": {
+        "build": "DP-0160"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the verify task for DP-0160 in Verify Console DP",
+  "request_id": "70e6d73ee2a7-v",
+  "schema_version": "1"
+}

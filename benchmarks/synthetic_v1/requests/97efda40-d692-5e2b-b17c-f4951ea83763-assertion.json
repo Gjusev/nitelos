@@ -1,0 +1,61 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for DS-0110 reports STATUS passed",
+      "evidence_ids": [
+        "97efda40d692-dom-1"
+      ],
+      "expected": "passed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "observed_state",
+      "subject": {
+        "task": "DS-0110"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "97efda40d692-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "97efda40d692-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "bd36ed96b6060d06362f2ea8eceee201e080e4293c143d4c17eef199c44c0836",
+      "source_id": "fixture-ui",
+      "subject": {
+        "task": "DS-0110"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "passed"
+      },
+      "id": "97efda40d692-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "76f1805001bc4f155c8efa5651c57c4f1858af1f6786cbe4596214a4b64375a6",
+      "source_id": "fixture-ui",
+      "subject": {
+        "task": "DS-0110"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the task task for DS-0110 in Task Console DS",
+  "request_id": "97efda40d692-a",
+  "schema_version": "1"
+}

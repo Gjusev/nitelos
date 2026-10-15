@@ -1,0 +1,63 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "No validation error remains on the AX-0180 form",
+      "evidence_ids": [
+        "13d9bd6c6c09-dom-1"
+      ],
+      "expected": false,
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/validation_error",
+      "scope": "observed_state",
+      "subject": {
+        "form": "AX-0180"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "13d9bd6c6c09-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "13d9bd6c6c09-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "bec04a9865307f2d9ae4b5005f6c9cf39f96d25a89fbdd9dae48a6a144a44551",
+      "source_id": "fixture-ui",
+      "subject": {
+        "form": "AX-0180"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "display_name": "Cai Vale",
+        "region": "",
+        "validation_error": true
+      },
+      "id": "13d9bd6c6c09-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "2de309b7821ae3f72af3b0d2ea6429093bfb76ad9803e40c58195abb04d9fd3b",
+      "source_id": "fixture-ui",
+      "subject": {
+        "form": "AX-0180"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the workspace task for AX-0180 in Workspace Console AX",
+  "request_id": "13d9bd6c6c09-a",
+  "schema_version": "1"
+}

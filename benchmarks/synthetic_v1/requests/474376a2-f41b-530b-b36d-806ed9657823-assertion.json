@@ -1,0 +1,94 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface names record CB-0999",
+      "evidence_ids": [
+        "474376a2f41b-dom-1"
+      ],
+      "expected": "CB-0999",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/order_id",
+      "scope": "observed_state",
+      "subject": {
+        "order": "CB-0160"
+      }
+    },
+    {
+      "description": "Backend names record CB-0160",
+      "evidence_ids": [
+        "474376a2f41b-ext-1"
+      ],
+      "expected": "CB-0160",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/record_id",
+      "scope": "external",
+      "subject": {
+        "order": "CB-0160"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "474376a2f41b-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "474376a2f41b-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "316ff0174d3913b1cdd1c3b37116d091add3432f95280d4982c4b382e6b66418",
+      "source_id": "fixture-ui",
+      "subject": {
+        "order": "CB-0160"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "order_id": "CB-0160",
+        "status": "updated"
+      },
+      "id": "474376a2f41b-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "f56a627261626f608f45430c1cf8a4ad66af6d17d75734516576cf93ee08dfb0",
+      "source_id": "fixture-ui",
+      "subject": {
+        "order": "CB-0160"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "record_id": "CB-0160"
+      },
+      "id": "474376a2f41b-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "25c89a513fd080ad5dd83cf33f5819db6ad7d07db26af0036e16d8242fb43402",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "order": "CB-0160"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the claim task for CB-0160 in Claim Console CB",
+  "request_id": "474376a2f41b-a",
+  "schema_version": "1"
+}

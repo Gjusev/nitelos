@@ -1,0 +1,38 @@
+{
+  "annotation_status": "pending_human_review",
+  "annotators": [],
+  "case_id": "7719a23c-6b15-5227-bed8-48f0ed129bf9",
+  "evidence_sufficiency": "insufficient",
+  "expected": {
+    "assertion": {
+      "decision": "abstained",
+      "reason_codes": [
+        "INSUFFICIENT_EVIDENCE",
+        "MISSING_EVIDENCE"
+      ]
+    },
+    "visual": {
+      "decision": "abstained",
+      "reason_codes": [
+        "INSUFFICIENT_EVIDENCE",
+        "MISSING_EVIDENCE"
+      ]
+    }
+  },
+  "group_id": "s04:L3",
+  "oracle_source_id": "state-machine:s04:v1",
+  "outcome_truth": "failure",
+  "pair": null,
+  "primary_family": "S04",
+  "rationale": "ledger absent from the evidence view; a known failure with insufficient evidence abstains",
+  "scope": [
+    "external",
+    "visual"
+  ],
+  "secondary_tags": [],
+  "sign_off": null,
+  "split": "dev",
+  "state": {
+    "ledger": "missing"
+  }
+}

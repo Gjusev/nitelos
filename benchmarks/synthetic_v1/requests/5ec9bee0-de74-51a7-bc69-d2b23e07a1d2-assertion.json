@@ -1,0 +1,148 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for EP-0180 reports the import completed",
+      "evidence_ids": [
+        "5ec9bee0de74-dom-final"
+      ],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "observed_state",
+      "subject": {
+        "import": "EP-0180"
+      }
+    },
+    {
+      "description": "Backend record for EP-0180 reports the import completed",
+      "evidence_ids": [
+        "5ec9bee0de74-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "import": "EP-0180"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "arguments": {
+        "target": "EP-0180"
+      },
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-01",
+      "id": "5ec9bee0de74-act-open",
+      "kind": "action",
+      "name": "open-import",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 0,
+      "sha256": "6f127e072e7b76d5949b00d758aae71c424e4539d7ff65ac0128a3745f0281b0",
+      "source_id": "agent-runner",
+      "subject": {
+        "import": "EP-0180"
+      },
+      "tool_result_id": null
+    },
+    {
+      "arguments": {
+        "target": "EP-0180"
+      },
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-02",
+      "id": "5ec9bee0de74-act-map",
+      "kind": "action",
+      "name": "map-columns",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 1,
+      "sha256": "8a49105f82a26951c0356ac1c5f3b6f9fa1b7e2272ef1d6ee0688dcefc5a6955",
+      "source_id": "agent-runner",
+      "subject": {
+        "import": "EP-0180"
+      },
+      "tool_result_id": null
+    },
+    {
+      "artifact_id": "5ec9bee0de74-art-1",
+      "captured_at": "2026-10-20T10:00:02Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "5ec9bee0de74-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "285a60a26bc24796a4b1a19da6e68c07646ee57956cf524bc44db43541360a7e",
+      "source_id": "fixture-ui",
+      "subject": {
+        "import": "EP-0180"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "5ec9bee0de74-dom-final",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-ui",
+      "subject": {
+        "import": "EP-0180"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:04Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "5ec9bee0de74-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 4,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "import": "EP-0180"
+      }
+    },
+    {
+      "artifact_id": "5ec9bee0de74-art-final",
+      "captured_at": "2026-10-20T10:00:05Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "5ec9bee0de74-shot-final",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 5,
+      "sha256": "aa284fafeeb9bb067206a9dfe6f0da9742535ff0cd4f8cbb0486e940b5a62f18",
+      "source_id": "fixture-ui",
+      "subject": {
+        "import": "EP-0180"
+      },
+      "width": 1200
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the intake task for EP-0180 in Intake Console EP",
+  "request_id": "5ec9bee0de74-a",
+  "schema_version": "1"
+}

@@ -1,0 +1,93 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Stash Console CS window shows a completion banner for CS-0170",
+      "evidence_ids": [
+        "ecc867c3fdab-shot-a",
+        "ecc867c3fdab-shot-b"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "syncjob": "CS-0170"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "ecc867c3fdab-art-a",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "ecc867c3fdab-shot-a",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "40398debf516dd94f3fb0c48cd9c46bbd19d2ff6dbd21cbdd43a89e4270c0be6",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CS-0170"
+      },
+      "width": 1200
+    },
+    {
+      "artifact_id": "ecc867c3fdab-art-b",
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "ecc867c3fdab-shot-b",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "4547708895bd71dbbaf0b3e6b12903caf473fa875f7bcaf8aa370f1bec88869f",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CS-0170"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "completed"
+      },
+      "id": "ecc867c3fdab-dom-a",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CS-0170"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "ecc867c3fdab-dom-b",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CS-0170"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the stash task for CS-0170 in Stash Console CS",
+  "request_id": "ecc867c3fdab-v",
+  "schema_version": "1"
+}

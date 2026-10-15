@@ -1,0 +1,90 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Sync Console EN window shows the import completed for EN-0160",
+      "evidence_ids": [],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "import": "EN-0160"
+      }
+    },
+    {
+      "description": "Backend record for EN-0160 reports the import completed",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "import": "EN-0160"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "arguments": {
+        "target": "EN-0160"
+      },
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-01",
+      "id": "cf0e37db891d-act-open",
+      "kind": "action",
+      "name": "open-import",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 0,
+      "sha256": "68c12630b29a5c27b32489d2ae0049084fb31d997d79fd0d8ade085572c960b9",
+      "source_id": "agent-runner",
+      "subject": {
+        "import": "EN-0160"
+      },
+      "tool_result_id": null
+    },
+    {
+      "arguments": {
+        "target": "EN-0160"
+      },
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-02",
+      "id": "cf0e37db891d-act-map",
+      "kind": "action",
+      "name": "map-columns",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 1,
+      "sha256": "859caf5a7b35c79b250113a434d49b0410d56eeb9cbcc0a843bebfe7cc230f01",
+      "source_id": "agent-runner",
+      "subject": {
+        "import": "EN-0160"
+      },
+      "tool_result_id": null
+    },
+    {
+      "artifact_id": "cf0e37db891d-art-1",
+      "captured_at": "2026-10-20T10:00:02Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "cf0e37db891d-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "91269b33c03e0a441a6d27924304cd17cb89fe24395b04c02f6aef219558c23f",
+      "source_id": "fixture-ui",
+      "subject": {
+        "import": "EN-0160"
+      },
+      "width": 1200
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the sync task for EN-0160 in Sync Console EN",
+  "request_id": "cf0e37db891d-v",
+  "schema_version": "1"
+}

@@ -1,0 +1,38 @@
+{
+  "annotation_status": "pending_human_review",
+  "annotators": [],
+  "case_id": "f136675e-cb75-5d6d-b10d-e28d4545dfe6",
+  "evidence_sufficiency": "contradictory",
+  "expected": {
+    "assertion": {
+      "decision": "abstained",
+      "reason_codes": [
+        "INSUFFICIENT_EVIDENCE",
+        "CONTRADICTORY_EVIDENCE"
+      ]
+    },
+    "visual": {
+      "decision": "abstained",
+      "reason_codes": [
+        "INSUFFICIENT_EVIDENCE",
+        "CONTRADICTORY_EVIDENCE"
+      ]
+    }
+  },
+  "group_id": "s09:L2",
+  "oracle_source_id": "state-machine:s09:v1",
+  "outcome_truth": "unknown",
+  "pair": null,
+  "primary_family": "S09",
+  "rationale": "two final snapshots contradict on one criterion; unknown, never source-count",
+  "scope": [
+    "observed_state",
+    "visual"
+  ],
+  "secondary_tags": [],
+  "sign_off": null,
+  "split": "dev",
+  "state": {
+    "contradiction": true
+  }
+}

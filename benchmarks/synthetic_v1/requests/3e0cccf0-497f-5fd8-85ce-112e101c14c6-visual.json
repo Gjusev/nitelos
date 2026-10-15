@@ -1,0 +1,21 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Row Console CK window shows a completion banner for CK-0170",
+      "evidence_ids": [],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "record": "CK-0170"
+      }
+    }
+  ],
+  "evidence": [],
+  "metadata": {},
+  "objective": "Complete the row task for CK-0170 in Row Console CK",
+  "request_id": "3e0cccf0497f-v",
+  "schema_version": "1"
+}

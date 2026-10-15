@@ -1,0 +1,59 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Tenant Console AV form for AV-0160 shows no validation error",
+      "evidence_ids": [
+        "a5f6d478def1-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "form": "AV-0160"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "a5f6d478def1-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "a5f6d478def1-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "a6a9ad239c456f0454174f53148f6c6f5cf54733d9a5c595e92d70ea268549bd",
+      "source_id": "fixture-ui",
+      "subject": {
+        "form": "AV-0160"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "display_name": "Cai Pine",
+        "validation_error": true
+      },
+      "id": "a5f6d478def1-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "d4131e24e54623170dc1e294d096f9d3a4b39e5401cf5de9fe287b08a406005d",
+      "source_id": "fixture-ui",
+      "subject": {
+        "form": "AV-0160"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the tenant task for AV-0160 in Tenant Console AV",
+  "request_id": "a5f6d478def1-v",
+  "schema_version": "1"
+}

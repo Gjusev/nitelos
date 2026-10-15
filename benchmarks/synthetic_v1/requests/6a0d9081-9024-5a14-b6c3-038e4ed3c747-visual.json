@@ -1,0 +1,92 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for AC-0130 reports status completed",
+      "evidence_ids": [
+        "6a0d90819024-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "job": "AC-0130"
+      }
+    },
+    {
+      "description": "The Sync Console AC window shows a banner stating the sync completed",
+      "evidence_ids": [
+        "6a0d90819024-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "job": "AC-0130"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "6a0d90819024-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "6a0d90819024-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "1d10f82bdfafe37ef8b17ad3406a2f76b040182da1d87c01e713b4a24fc7768d",
+      "source_id": "fixture-ui",
+      "subject": {
+        "job": "AC-0130"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "items": 7,
+        "job_status": "completed"
+      },
+      "id": "6a0d90819024-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "922a22f60ed53dd2c0f75519280773eb4d1850a80954dae0aa91d7562e30f38b",
+      "source_id": "fixture-ui",
+      "subject": {
+        "job": "AC-0130"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "record_count": 7,
+        "status": "completed"
+      },
+      "id": "6a0d90819024-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "c2b15226518c86b0a52be87ca36516baeacf6f45a88e23ca296f707a3f7c22c3",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "job": "AC-0130"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the sync task for AC-0130 in Sync Console AC",
+  "request_id": "6a0d90819024-v",
+  "schema_version": "1"
+}

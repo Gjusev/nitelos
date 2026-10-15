@@ -1,0 +1,92 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for AJ-0120 reports status completed",
+      "evidence_ids": [
+        "449f4e86fc28-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "submission": "AJ-0120"
+      }
+    },
+    {
+      "description": "The Report Console AJ window shows a banner stating the submission was accepted",
+      "evidence_ids": [
+        "449f4e86fc28-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "submission": "AJ-0120"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "449f4e86fc28-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "449f4e86fc28-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "343a0221cb7dfcf6a36fb9af626a18316f3070fce646a97dc4771f9a64d3c900",
+      "source_id": "fixture-ui",
+      "subject": {
+        "submission": "AJ-0120"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "E202",
+        "job_status": "failed"
+      },
+      "id": "449f4e86fc28-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "d07a7cd55bf614dffcf26df22ec9f3bb885e992368b6996037e9eb10518e8b22",
+      "source_id": "fixture-ui",
+      "subject": {
+        "submission": "AJ-0120"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "error": "E202",
+        "status": "failed"
+      },
+      "id": "449f4e86fc28-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "fe86ff3852e3f04cedf4638070eeb6958f755eb20496b78850f1c005112cc234",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "submission": "AJ-0120"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the report task for AJ-0120 in Report Console AJ",
+  "request_id": "449f4e86fc28-v",
+  "schema_version": "1"
+}

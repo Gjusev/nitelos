@@ -1,0 +1,58 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Summary Console EC window shows a confirmation banner for EC-0130",
+      "evidence_ids": [
+        "7a731d41f81f-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "report": "EC-0130"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "7a731d41f81f-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "7a731d41f81f-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "97578a160a47cf5060535a49791f497c481292888372a781b8efe7fcb283d277",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "EC-0130"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "confirm_banner_present": false
+      },
+      "id": "7a731d41f81f-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "23603fc7b22654aee7a14fc43a88fa1925ac4b2b85fcbe7d164b0b86ad8fef96",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "EC-0130"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the summary task for EC-0130 in Summary Console EC",
+  "request_id": "7a731d41f81f-v",
+  "schema_version": "1"
+}

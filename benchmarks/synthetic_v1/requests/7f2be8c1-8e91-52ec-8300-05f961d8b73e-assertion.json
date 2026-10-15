@@ -1,0 +1,63 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "No validation error remains on the AQ-0110 form",
+      "evidence_ids": [
+        "7f2be8c18e91-dom-1"
+      ],
+      "expected": false,
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/validation_error",
+      "scope": "observed_state",
+      "subject": {
+        "form": "AQ-0110"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "7f2be8c18e91-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "7f2be8c18e91-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "97ebab3c4fe750a8c131bb9b60a9ba3fa1f3bef98a19fdb459662633c287af15",
+      "source_id": "fixture-ui",
+      "subject": {
+        "form": "AQ-0110"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "display_name": "Cai Adder",
+        "email": "",
+        "validation_error": true
+      },
+      "id": "7f2be8c18e91-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "8d81b22deda2b7ee723752868dbda1b684d4ba250f841d18f6018e66c6bafa8d",
+      "source_id": "fixture-ui",
+      "subject": {
+        "form": "AQ-0110"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the profile task for AQ-0110 in Profile Console AQ",
+  "request_id": "7f2be8c18e91-a",
+  "schema_version": "1"
+}

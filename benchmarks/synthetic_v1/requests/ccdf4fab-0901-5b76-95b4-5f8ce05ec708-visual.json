@@ -1,0 +1,58 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Ledger Console EE window shows a confirmation banner for EE-0150",
+      "evidence_ids": [
+        "ccdf4fab0901-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "report": "EE-0150"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "ccdf4fab0901-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "ccdf4fab0901-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "eca266a183727ac3c0c40ff47e5d8330b4b702c1a591e3990425918c1ac430c4",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "EE-0150"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "confirm_banner_present": false
+      },
+      "id": "ccdf4fab0901-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "23603fc7b22654aee7a14fc43a88fa1925ac4b2b85fcbe7d164b0b86ad8fef96",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "EE-0150"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the ledger task for EE-0150 in Ledger Console EE",
+  "request_id": "ccdf4fab0901-v",
+  "schema_version": "1"
+}

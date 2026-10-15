@@ -1,0 +1,78 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Ledger record for DH-0160 reports the transfer completed",
+      "evidence_ids": [
+        "551d96097ad0-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "transfer": "DH-0160"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "551d96097ad0-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "551d96097ad0-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "a22caea135583d35b5e3a8934c01b9e4ba1fec0f7f8111ab2723573d04642bdb",
+      "source_id": "fixture-ui",
+      "subject": {
+        "transfer": "DH-0160"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "summary": "failed"
+      },
+      "id": "551d96097ad0-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "f66f83e36d5d7876f3112b577be85291d030c5914f06ef4b015154d26d2e7af0",
+      "source_id": "fixture-ui",
+      "subject": {
+        "transfer": "DH-0160"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "completed"
+      },
+      "id": "551d96097ad0-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "transfer": "DH-0160"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the clear task for DH-0160 in Clear Console DH",
+  "request_id": "551d96097ad0-a",
+  "schema_version": "1"
+}

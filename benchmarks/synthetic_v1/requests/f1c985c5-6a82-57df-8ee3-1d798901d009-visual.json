@@ -1,0 +1,42 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Database record for BR-0140 reports the sync completed",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "sync": "BR-0140"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "f1c985c56a82-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "f1c985c56a82-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "07ca36ad4fb89e3fd0b2ad4e06b86fc2a8d1affb326089d01cc6170aa851cc3c",
+      "source_id": "fixture-ui",
+      "subject": {
+        "sync": "BR-0140"
+      },
+      "width": 1200
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the bucket task for BR-0140 in Bucket Console BR",
+  "request_id": "f1c985c56a82-v",
+  "schema_version": "1"
+}

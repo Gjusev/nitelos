@@ -1,0 +1,95 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Backend record for AD-0140 reports status completed",
+      "evidence_ids": [
+        "10743039f013-ext-1"
+      ],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "job": "AD-0140"
+      }
+    },
+    {
+      "description": "Interface state for AD-0140 reports the archive completed",
+      "evidence_ids": [
+        "10743039f013-dom-1"
+      ],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/job_status",
+      "scope": "observed_state",
+      "subject": {
+        "job": "AD-0140"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "10743039f013-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "10743039f013-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "2a79f8f9c09144b6ae40e4b0d9fea577dc29b44c340fb1dba601091ee9d23b37",
+      "source_id": "fixture-ui",
+      "subject": {
+        "job": "AD-0140"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "items": 12,
+        "job_status": "completed"
+      },
+      "id": "10743039f013-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "d63985479dd0ee8f539fae5096bfa5ab11283fbf659d3613e6fc403779b1d0bb",
+      "source_id": "fixture-ui",
+      "subject": {
+        "job": "AD-0140"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "record_count": 12,
+        "status": "completed"
+      },
+      "id": "10743039f013-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "622ffe3d3b4f30de34a20539037a93189f8cd2077dba9ab458c513409484f827",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "job": "AD-0140"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the archive task for AD-0140 in Archive Console AD",
+  "request_id": "10743039f013-a",
+  "schema_version": "1"
+}

@@ -1,0 +1,91 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Record Console BX page names record BX-0999",
+      "evidence_ids": [
+        "f9ea5a94d560-shot-1"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "order": "BX-0120"
+      }
+    },
+    {
+      "description": "Backend names record BX-0120",
+      "evidence_ids": [
+        "f9ea5a94d560-ext-1"
+      ],
+      "expected": "BX-0120",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/record_id",
+      "scope": "external",
+      "subject": {
+        "order": "BX-0120"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "f9ea5a94d560-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "f9ea5a94d560-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "de5121e4cfcba9e5a03143e1573f1865492455e379425ff54418b9b58671ba61",
+      "source_id": "fixture-ui",
+      "subject": {
+        "order": "BX-0120"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "order_id": "BX-0120",
+        "status": "updated"
+      },
+      "id": "f9ea5a94d560-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "e7854ba5956f0da31903d2c01517e4ff7ebbe7f2d9a4b0833ff863d7fe22a554",
+      "source_id": "fixture-ui",
+      "subject": {
+        "order": "BX-0120"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "external_api",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "record_id": "BX-0120"
+      },
+      "id": "f9ea5a94d560-ext-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "0483739964f84e124e24ea345bd0ef2290731af45aa84f84d78c7c4822517d79",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "order": "BX-0120"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the record task for BX-0120 in Record Console BX",
+  "request_id": "f9ea5a94d560-v",
+  "schema_version": "1"
+}

@@ -1,0 +1,93 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for EJ-0120 reports the import completed",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "observed_state",
+      "subject": {
+        "import": "EJ-0120"
+      }
+    },
+    {
+      "description": "Backend record for EJ-0120 reports the import completed",
+      "evidence_ids": [],
+      "expected": "completed",
+      "id": "c-ext",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "external",
+      "subject": {
+        "import": "EJ-0120"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "arguments": {
+        "target": "EJ-0120"
+      },
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-01",
+      "id": "7df9c08ff782-act-open",
+      "kind": "action",
+      "name": "open-import",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 0,
+      "sha256": "c23b154625a6adf61961ae7e78007f0deb5920d968f138a9f9fefce1cd68ffe7",
+      "source_id": "agent-runner",
+      "subject": {
+        "import": "EJ-0120"
+      },
+      "tool_result_id": null
+    },
+    {
+      "arguments": {
+        "target": "EJ-0120"
+      },
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-02",
+      "id": "7df9c08ff782-act-map",
+      "kind": "action",
+      "name": "map-columns",
+      "phase": "final",
+      "reported_status": "completed",
+      "sequence": 1,
+      "sha256": "7b06f3fccd8a1887a9964a1007ad503c76f30be829da926e759c16cc085a3521",
+      "source_id": "agent-runner",
+      "subject": {
+        "import": "EJ-0120"
+      },
+      "tool_result_id": null
+    },
+    {
+      "artifact_id": "7df9c08ff782-art-1",
+      "captured_at": "2026-10-20T10:00:02Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "7df9c08ff782-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "5b835289e9e9600fa91014a4e9c27f208e058fa4a5473097234e20578d0c2b6e",
+      "source_id": "fixture-ui",
+      "subject": {
+        "import": "EJ-0120"
+      },
+      "width": 1200
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the ingest task for EJ-0120 in Ingest Console EJ",
+  "request_id": "7df9c08ff782-a",
+  "schema_version": "1"
+}

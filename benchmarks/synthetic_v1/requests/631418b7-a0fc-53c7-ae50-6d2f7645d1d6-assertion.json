@@ -1,0 +1,96 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for CP-0140 reports the sync completed",
+      "evidence_ids": [
+        "631418b7a0fc-dom-a",
+        "631418b7a0fc-dom-b"
+      ],
+      "expected": "completed",
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/status",
+      "scope": "observed_state",
+      "subject": {
+        "syncjob": "CP-0140"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "631418b7a0fc-art-a",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "631418b7a0fc-shot-a",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "b35eb57923ec269fad0310a69a5af53a72a2123f25003ed483798b1b78ef0197",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CP-0140"
+      },
+      "width": 1200
+    },
+    {
+      "artifact_id": "631418b7a0fc-art-b",
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "631418b7a0fc-shot-b",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "f2e59361543ca0832caa8dfa57ff1cdf359a014e1c7a0fc678d88d76eaf05f41",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CP-0140"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "completed"
+      },
+      "id": "631418b7a0fc-dom-a",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CP-0140"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "631418b7a0fc-dom-b",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CP-0140"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the bucket task for CP-0140 in Bucket Console CP",
+  "request_id": "631418b7a0fc-a",
+  "schema_version": "1"
+}

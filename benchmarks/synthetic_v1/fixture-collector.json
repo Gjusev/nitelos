@@ -1,0 +1,473 @@
+{
+  "bindings": [
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "2da5fb7e3d2c-ext-1",
+      "sha256": "812dd875178e93e28246784d59578b925e8742fa260f4bd94f30df99bbc9872f",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "job": "AA-0110"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "06ec9529e343-ext-1",
+      "sha256": "c0b65f67bf820b07d771524949ba96cb5effb7d184ee90835efd0f19cf9c2320",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "job": "AB-0120"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "6a0d90819024-ext-1",
+      "sha256": "c2b15226518c86b0a52be87ca36516baeacf6f45a88e23ca296f707a3f7c22c3",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "job": "AC-0130"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "10743039f013-ext-1",
+      "sha256": "622ffe3d3b4f30de34a20539037a93189f8cd2077dba9ab458c513409484f827",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "job": "AD-0140"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "13f58a973620-ext-1",
+      "sha256": "14593f00f90600b71ac91ef2ebb39a1dbce2e69124767b2fb1eefdb3bfd75648",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "job": "AE-0150"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "7b182b3dfdfc-ext-1",
+      "sha256": "9e681f9286713381cb5ea8c788b4898d5ab4d1c1935d9c9679f8ca76d560cf31",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "job": "AF-0160"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "e8f4265a8af4-ext-1",
+      "sha256": "183bdf1e907d63b19315e49b5d4ff8c37904d98d1b7df7b361cbc213680051e2",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "job": "AG-0170"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "9a1b04deaed0-ext-1",
+      "sha256": "ebdadb459cd74c9712951a6dfbd5e52353f124cbdf1e32fc839c21f170324e5d",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "job": "AH-0180"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "b12afc99ec41-ext-1",
+      "sha256": "9fb440e367891aa1b289810c7cbea02cbe2a0b931799e2d80ab56c2a32f150a6",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "submission": "AI-0110"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "449f4e86fc28-ext-1",
+      "sha256": "fe86ff3852e3f04cedf4638070eeb6958f755eb20496b78850f1c005112cc234",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "submission": "AJ-0120"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "1e6d9ce18928-ext-1",
+      "sha256": "7502672337e585a8cbb6de5008b9d2af4372866ef08e6d045dd751d7de39682c",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "submission": "AK-0130"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "90b0cf598cd6-ext-1",
+      "sha256": "e8b4c6ff8edc6ca48bf0d473175102d5a9042916fdd961d01a2f02f72612464f",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "submission": "AL-0140"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "145ffa238378-ext-1",
+      "sha256": "9aa4aa3d778d577150ae737d20e6ad9ed8879df499c04101466d30b290724889",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "submission": "AM-0150"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "ee1781b31b83-ext-1",
+      "sha256": "3b3490092f631bbb51fd2cf8a0cd2979bc97129346c9bb48d5be5cff62f7bc0e",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "submission": "AN-0160"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "6441f4bfb485-ext-1",
+      "sha256": "338add80b90c9061fb5fb323fc5891bf1f0435bcdd9b56367ab75bd1b48d4020",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "submission": "AO-0170"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "71dcd2ddc2b9-ext-1",
+      "sha256": "aaa275bc0382e12cf9d470e99e0801605e72b941984a7814ed12c1f6c58f0536",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "submission": "AP-0180"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "021b606f851b-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "payment": "AY-0110"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "1cdd1891ff93-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "payment": "AZ-0120"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "14db48587f3b-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "payment": "BC-0150"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "b91a367335e0-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "payment": "BD-0160"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "487c3b0ea779-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "sync": "BO-0110"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "44cdb9c45f9c-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "sync": "BP-0120"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "6ce4035e03b7-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "sync": "BQ-0130"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "f1c985c56a82-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "sync": "BR-0140"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "8771b6472d4d-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "sync": "BS-0150"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "b77b375ca9ac-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "sync": "BT-0160"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "587af9b80c4b-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "sync": "BU-0170"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "c5d4e603e16d-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "sync": "BV-0180"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "f9ea5a94d560-ext-1",
+      "sha256": "0483739964f84e124e24ea345bd0ef2290731af45aa84f84d78c7c4822517d79",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "order": "BX-0120"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "f6f69a32bceb-ext-1",
+      "sha256": "9d4c38196ceea03d84c74e1876fa3a77215e8dcc7736eaa31ea0f234e8df9159",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "order": "BZ-0140"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "474376a2f41b-ext-1",
+      "sha256": "25c89a513fd080ad5dd83cf33f5819db6ad7d07db26af0036e16d8242fb43402",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "order": "CB-0160"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "6d1da7a62e70-ext-1",
+      "sha256": "6428ec5eb1247e85d696c7c33fe22ea2da090a3a9d52edcc340d98b0799ddc64",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "order": "CD-0180"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "db155b0cf29f-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "upload": "CU-0110"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "c2cd0d5847cd-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "upload": "CV-0120"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "6808c0586690-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "upload": "CW-0130"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "4491133a9bee-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "upload": "CX-0140"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "e78d7dd88f8c-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "upload": "CY-0150"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "819bc6aaff5d-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "upload": "CZ-0160"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "729e604f8817-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "upload": "DA-0170"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "19efd38d6e1b-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "upload": "DB-0180"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "77c6f22c2988-ext-1",
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "transfer": "DC-0110"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "b2f26b3208b0-ext-1",
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "transfer": "DD-0120"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "e7c4c299ab32-ext-1",
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "transfer": "DE-0130"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "5bfd12359afd-ext-1",
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "transfer": "DF-0140"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "72a39098afc7-ext-1",
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "transfer": "DG-0150"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "551d96097ad0-ext-1",
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "transfer": "DH-0160"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "90db5d916abb-ext-1",
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "transfer": "DI-0170"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "d85eac086dab-ext-1",
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "transfer": "DJ-0180"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "5c572d17e610-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "import": "EK-0130"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "f5aad543dfa4-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "import": "EL-0140"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "06a56bc5f77f-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "import": "EO-0170"
+      }
+    },
+    {
+      "checkpoint_id": "cp-final",
+      "evidence_id": "5ec9bee0de74-ext-1",
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-collector-v1",
+      "subject": {
+        "import": "EP-0180"
+      }
+    }
+  ],
+  "collector_id": "fixture-collector-v1"
+}

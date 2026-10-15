@@ -1,0 +1,93 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "The Mirror Console CT window shows a completion banner for CT-0180",
+      "evidence_ids": [
+        "d0b1a28c8a19-shot-a",
+        "d0b1a28c8a19-shot-b"
+      ],
+      "id": "c-obs",
+      "kind": "visual",
+      "scope": "visual",
+      "subject": {
+        "syncjob": "CT-0180"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "d0b1a28c8a19-art-a",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "d0b1a28c8a19-shot-a",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "df07a1c7af0509f50713dfda507f6f2e77a0bb624862e83a2b8dae71d7e18581",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CT-0180"
+      },
+      "width": 1200
+    },
+    {
+      "artifact_id": "d0b1a28c8a19-art-b",
+      "captured_at": "2026-10-20T10:00:01Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "d0b1a28c8a19-shot-b",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "c5abf6255d8917f797d8df50fd222ae3f31c7c5ce00386fba3f2462e4a6c13a5",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CT-0180"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:02Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "completed"
+      },
+      "id": "d0b1a28c8a19-dom-a",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 2,
+      "sha256": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CT-0180"
+      }
+    },
+    {
+      "captured_at": "2026-10-20T10:00:03Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "status": "failed"
+      },
+      "id": "d0b1a28c8a19-dom-b",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 3,
+      "sha256": "759315d5ae8c31136d2a7bc803e591554894987559325cdf7e0b5965bec0eaca",
+      "source_id": "fixture-ui",
+      "subject": {
+        "syncjob": "CT-0180"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the mirror task for CT-0180 in Mirror Console CT",
+  "request_id": "d0b1a28c8a19-v",
+  "schema_version": "1"
+}

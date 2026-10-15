@@ -1,0 +1,37 @@
+{
+  "annotation_status": "pending_human_review",
+  "annotators": [],
+  "case_id": "c5d4e603-e16d-5e54-9fce-045acf705d4a",
+  "evidence_sufficiency": "sufficient",
+  "expected": {
+    "assertion": {
+      "decision": "failure",
+      "reason_codes": [
+        "CRITERION_REFUTED"
+      ]
+    },
+    "visual": {
+      "decision": "abstained",
+      "reason_codes": [
+        "INSUFFICIENT_EVIDENCE",
+        "MISSING_EVIDENCE"
+      ]
+    }
+  },
+  "group_id": "s06:L8",
+  "oracle_source_id": "state-machine:s06:v1",
+  "outcome_truth": "failure",
+  "pair": null,
+  "primary_family": "S06",
+  "rationale": "database observation refutes completion; the image-only view withholds it and abstains",
+  "scope": [
+    "external",
+    "visual"
+  ],
+  "secondary_tags": [],
+  "sign_off": null,
+  "split": "test",
+  "state": {
+    "database_status": "failed"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "Interface state for EG-0170 reports the confirmation banner present",
+      "evidence_ids": [
+        "fcea3a598cca-dom-1"
+      ],
+      "expected": true,
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/confirm_banner_present",
+      "scope": "observed_state",
+      "subject": {
+        "report": "EG-0170"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "fcea3a598cca-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "fcea3a598cca-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "6292ae2ce5ecfafa0c78bda369815050b5084ce69f47a6f19a56c956aa5c1204",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "EG-0170"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "confirm_banner_present": false
+      },
+      "id": "fcea3a598cca-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "23603fc7b22654aee7a14fc43a88fa1925ac4b2b85fcbe7d164b0b86ad8fef96",
+      "source_id": "fixture-ui",
+      "subject": {
+        "report": "EG-0170"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the recap task for EG-0170 in Recap Console EG",
+  "request_id": "fcea3a598cca-a",
+  "schema_version": "1"
+}

@@ -1,0 +1,63 @@
+{
+  "as_of": "2026-10-20T10:01:00Z",
+  "checkpoint_id": "cp-final",
+  "criteria": [
+    {
+      "description": "No validation error remains on the AT-0140 form",
+      "evidence_ids": [
+        "111844eb6fdc-dom-1"
+      ],
+      "expected": false,
+      "id": "c-obs",
+      "kind": "assertion",
+      "operator": "equals",
+      "pointer": "/validation_error",
+      "scope": "observed_state",
+      "subject": {
+        "form": "AT-0140"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "artifact_id": "111844eb6fdc-art-1",
+      "captured_at": "2026-10-20T10:00:00Z",
+      "checkpoint_id": "cp-final",
+      "height": 800,
+      "id": "111844eb6fdc-shot-1",
+      "kind": "screenshot",
+      "media_type": "image/png",
+      "phase": "final",
+      "sequence": 0,
+      "sha256": "6454ff771e703dec7cb00f3f89caafaa8e9c79d75803d2ea13589c66830619fb",
+      "source_id": "fixture-ui",
+      "subject": {
+        "form": "AT-0140"
+      },
+      "width": 1200
+    },
+    {
+      "captured_at": "2026-10-20T10:00:01Z",
+      "channel": "dom",
+      "checkpoint_id": "cp-final",
+      "data": {
+        "display_name": "Cai Junction",
+        "region": "",
+        "validation_error": true
+      },
+      "id": "111844eb6fdc-dom-1",
+      "kind": "observation",
+      "phase": "final",
+      "sequence": 1,
+      "sha256": "685dd38599d154ec8c94eb3ad87dde197fed649e0e53d251e9f67ea90a702ce5",
+      "source_id": "fixture-ui",
+      "subject": {
+        "form": "AT-0140"
+      }
+    }
+  ],
+  "metadata": {},
+  "objective": "Complete the workspace task for AT-0140 in Workspace Console AT",
+  "request_id": "111844eb6fdc-a",
+  "schema_version": "1"
+}
