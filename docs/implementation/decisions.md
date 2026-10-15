@@ -98,7 +98,10 @@ Author: nitelos-0f. The orchestrator accepted readings A1–A7:
 
 ## G4 human annotation
 
-User decision 2026-10-15: the user will organize the two independent reviewers and the adjudicator later. G4 stays pending until reviewer IDs are supplied. Review packets will be prepared at NIT-010.
+User decision 2026-10-15, updated 2026-10-15: the two independent reviewers and the adjudicator will be organized by the user AT THE END of all implementation work. Consequences, accepted by the user:
+- G4, the final-test oracle audit, the final freeze hash and the final-test benchmark runs (NIT-013) wait for that human gate at the end; v0.1 cannot be declared ready before it.
+- All work that does not depend on the frozen final split proceeds now: dev-split runs, the 12-case smoke set, prompt protocol on dev data only, docs, packaging.
+- Review packets are prepared (benchmarks/synthetic_v1/review-packets/) and stay ready; the freeze tool refuses until sign-off is complete.
 
 ## AR-2 (deterministic slice NIT-002..006) — 2026-10-15
 
@@ -122,3 +125,24 @@ Reviewer: nitelos-3a. Verdict: APPROVE-WITH-CHANGES. Required before any human a
 2. The visual-view compositions are corrected to the accepted design: S06 withholds the database observation; S07 v1 uses a visual criterion; S15 replaces its observed criterion with a visual one. A per-family composition test is added.
 3. The group-index numeral is removed from renders. The orchestrator made this required as leakage hygiene, because in S04/S12/S15 the group determines the variant or truth.
 Lesson recorded: the deterministic dry run validates decisions, not oracle truth labels and not visual-view composition; both now need their own tests.
+
+## NIT-007 implementer decisions (pending review) — 2026-10-15
+
+- Rationale export (an unsafe-content option) is deferred to NIT-012/014 reporting; v0.1 results carry no rationale field.
+- Finding validation raises `BackendOutputError` (backend codes); the verifier converts it to backend_error. `validate_backend_finding` is public as the conformance helper for custom backends.
+- `InferenceContext.deadline` is None until the NIT-008 adapter-level 120 s cooperative deadline.
+
+## NIT-007 review — 2026-10-15
+
+Reviewer: nitelos-f2 (independent of implementer). Verdict: APPROVE-WITH-CHANGES; no smuggling path found under adversarial probing of finding validation, preflight, isolation and lifecycle. All four implementer decisions accepted (see the NIT-007 implementer decisions section above; the reviewer read a worktree predating it).
+F1 ruling (orchestrator): the `already_emitted` duplicate-criterion guard is kept as defense-in-depth for NIT-008 batch paths, and an explanatory test documenting why a duplicate is structurally impossible in the sequential verifier is required before merge.
+
+## NIT-008 G3 attempt 1 — prompt v1 result and iteration ruling (2026-10-15)
+
+Result (implementer nitelos-14, WSL Ubuntu CPU, torch 2.14.1+cpu/transformers 5.19.0, manifest-verified checkpoint a7da5b9, prompt_hash 08fde1e3…, lock 60381e31…): 0/11 valid labels. Every generation decoded to exactly ' UNKNOWN.' (leading space, trailing period) — byte-identical across all 11 diverse inputs. SMK-005 resolved by policy alone (ok/abstained, 69.8 ms, no model call) exactly as designed. Timings: load 1,754.8 ms; cold case 10,428.6 ms; warm mean 5,070.8 ms; wall 66.2 s; peak RSS ~3.2 GiB (ru_maxrss). Raw JSON: benchmarks/smoke-run-local-smoke-run.json on the NIT-008 branch. The strict parser correctly produced INVALID_OUTPUT for all 11 (design A5 holds; parser is normative and unchanged).
+
+Orchestrator ruling — one pre-declared diagnostic/iteration round, dev smoke images only, candidates fixed BEFORE any run:
+- v2: instruction-last format — the answer instruction appears as the final lines, verbatim: "Answer with the single word SUPPORTED, REFUTED or UNKNOWN. No other characters." (template text and hash logged before running).
+- v3: completion suffix — prompt ends with "Answer:" after the labels list.
+- D1/D2 diagnostics on smoke-01 with each template: a trivially-SUPPORTED criterion ("the screenshot contains any text at all") and a trivially-REFUTED one ("the screenshot shows a purple dinosaur"), to establish whether the checkpoint can emit any decisive label at all under the strict parser.
+Decision rule, fixed in advance: if no candidate yields at least one valid decisive label (parser untouched), G3 is declared unreachable for this checkpoint; Nitelos escalates the doc-10 viability review to the user with options (delay v0.1, or release candidate with G3 recorded as a failed mandatory gate). No parser weakening, no model/preprocessing/max_new_tokens change, no mocks, ever.
