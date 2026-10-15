@@ -536,3 +536,58 @@ def test_no_image_criterion_gets_no_action_context() -> None:
     assert result.criteria[0].reason_codes == ("MODEL_INFERENCE_DISALLOWED",)
     assert fake.calls == []
     assert result.diagnostics.omitted_context_ids == ()
+
+
+def test_f1_duplicate_criterion_guard_is_defense_in_depth() -> None:
+    """NIT-007 review F1: the already_emitted guard documented and covered.
+
+    (a) A duplicate criterion finding is structurally impossible in the
+    sequential verifier: it calls backend.infer exactly once per criterion,
+    in request order, and only for visual criteria whose preflight passed —
+    so no code path can present two findings for the same criterion_id.
+    (b) The guard in validate_backend_finding still rejects a duplicate
+    outright, so a future batch path (e.g. a backend that runs several
+    criteria per infer call) cannot smuggle two findings under one id.
+    """
+    from nitelos.backends import validate_backend_finding
+    from nitelos.backends.base import BackendOutputError
+
+    # (a) structural impossibility: one infer call per visual criterion, in order
+    def finding_for(prepared: Any, context: Any) -> BackendFinding:
+        del context
+        return _supported_finding(prepared.criterion_id, prepared.images[0].evidence_id)
+
+    fake = FakeVisualBackend(findings=finding_for)
+    shots = [_shot_doc("s0", 0), _shot_doc("s1", 1)]
+    criteria = [
+        _visual_criterion(id="v1", evidence_ids=["s0"]),
+        _visual_criterion(id="v2", evidence_ids=["s1"]),
+    ]
+    request = parse_request(_visual_doc(shots, criteria=criteria))
+    result = Verifier(backend=fake, policy=ALLOW_MODEL).verify(request, artifacts=_store(2))
+    assert result.execution_status == ExecutionStatus.OK
+    assert [call[0].criterion_id for call in fake.calls] == ["v1", "v2"]  # once each, in order
+    emitted = [call[0].criterion_id for call in fake.calls]
+    assert len(emitted) == len(set(emitted))  # no criterion seen twice
+
+    # (b) the guard rejects a duplicate if a batch path ever produces one
+    images = {evidence_id: _prepared_image(evidence_id) for evidence_id in ("s0",)}
+    finding = _supported_finding("v1", "s0")
+    validate_backend_finding(finding, criterion_id="v1", images=images)  # first emission passes
+    with pytest.raises(BackendOutputError) as excinfo:
+        validate_backend_finding(finding, criterion_id="v1", images=images, already_emitted=frozenset({"v1"}))
+    assert excinfo.value.code.value == "INVALID_OUTPUT"
+
+
+def _prepared_image(evidence_id: str) -> Any:
+    from nitelos.evidence import PreparedImage
+
+    return PreparedImage(
+        evidence_id=evidence_id,
+        sequence=0,
+        width=4,
+        height=4,
+        rgb=bytes(4 * 4 * 3),
+        source_digest="0" * 64,
+        color_conversion="none",
+    )
