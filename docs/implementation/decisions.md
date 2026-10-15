@@ -109,3 +109,8 @@ Accepted:
 - A `NITELOS_DEV_RERAISE` env fallback is acceptable, provided its value parsing is strict.
 Additive public name: limitation code `PARTIAL_RESULTS_NONAUTHORITATIVE`, placed in `diagnostics.limitations` on backend_error results that carry partial criteria.
 Model integration (NIT-007/008) is authorized once the conditions are met.
+
+## NIT-009 review — 2026-10-15
+
+Reviewer: nitelos-3a. Verdict: APPROVE-WITH-CHANGES. Required: `Trace.to_request` must reject a naive `as_of` and normalize aware non-UTC values (it raised a raw TypeError).
+Accepted: the parse-time `as_of` stand-in is `datetime.max` (only the captured_at ≤ as_of check consumes it, and the real check runs at `to_request`); model criteria are revalidated through the mapping validators; the recipe's code blocks are illustrative fragments.
