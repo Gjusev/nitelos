@@ -660,6 +660,16 @@ def test_more_than_two_images_asserted(loaded_backend: tuple[Any, ...]) -> None:
     assert excinfo.value.issue.code == InputErrorCode.LIMIT_EXCEEDED
 
 
+def test_last_raw_output_exposed(loaded_backend: tuple[Any, ...]) -> None:
+    backend, processor, _unused = loaded_backend
+    del _unused
+    assert backend.last_raw_output is None  # nothing inferred yet
+    processor.decoded = "  REFUTED  "
+    finding = backend.infer(_prepared([_image()]), _context())
+    assert finding.state == CriterionState.REFUTED
+    assert backend.last_raw_output == "  REFUTED  "
+
+
 def test_preprocessing_records_exposed(loaded_backend: tuple[Any, ...]) -> None:
     backend, processor, _model = loaded_backend
     processor.patch_count = 5

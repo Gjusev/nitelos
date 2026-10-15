@@ -251,6 +251,7 @@ class SmolVLMBackend:
         self._model_load_ms: float | None = None
         self._closed = False
         self._last_preprocessing: tuple[PreprocessingRecord, ...] = ()
+        self._last_raw_output: str | None = None
         self._capabilities = BackendCapabilities(
             evidence_kinds=("screenshot",),
             criterion_kinds=("visual",),
@@ -292,6 +293,12 @@ class SmolVLMBackend:
     def last_preprocessing(self) -> tuple[PreprocessingRecord, ...]:
         """Preprocessing records of the most recent inference, image order."""
         return self._last_preprocessing
+
+    @property
+    def last_raw_output(self) -> str | None:
+        """Raw decoded generation of the most recent inference (dev diagnostics
+        only; a smoke label, never an accuracy claim)."""
+        return self._last_raw_output
 
     def close(self) -> None:
         """Release model references; idempotent; inference after close fails."""
@@ -355,6 +362,7 @@ class SmolVLMBackend:
                 )
             new_tokens = outputs.sequences[:, inputs["input_ids"].shape[-1] :]
             decoded = self._processor.batch_decode(new_tokens, skip_special_tokens=True)[0]
+            self._last_raw_output = decoded
             self._record_preprocessing(prepared, inputs)
             state = self._parse_label(decoded)
             if state is None:
