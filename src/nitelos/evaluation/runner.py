@@ -445,7 +445,7 @@ def evaluate(
     with cases_lines.open("w", encoding="utf-8") as sink:
         for case in manifest.cases:
             try:
-                row, result = _run_case(manifest, case, collector, verifier_factory)
+                row, result = _run_case(manifest, case, collector, verifier_factory, run_id)
             except InfraError as error:
                 sink.flush()
                 os.fsync(sink.fileno())
@@ -495,6 +495,7 @@ def _run_case(
     case: dict[str, Any],
     collector: list[dict[str, Any]],
     verifier_factory: VerifierFactory,
+    run_id: str = "",
 ) -> tuple[dict[str, Any], Any]:
     case_id = case["case_id"]
     request_path = safe_relative_path(manifest.root, case["request"])
@@ -503,7 +504,7 @@ def _run_case(
     except OSError as error:
         raise InfraError(f"infrastructure failure: request for {case_id} could not be read") from error
     row_base = {
-        "run_id": "",
+        "run_id": run_id,
         "case_id": case_id,
         "group_id": case.get("group_id", ""),
         "primary_scenario": case.get("primary_scenario", ""),
