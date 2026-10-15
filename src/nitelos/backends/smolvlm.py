@@ -11,6 +11,7 @@ imports happen lazily inside functions, so importing this module stays light
 and works in core-only environments; a missing dependency surfaces as
 backend_error/DEPENDENCY_MISSING naming the ``local`` extra.
 
+Checkpoint per ADR-012: HuggingFaceTB/SmolVLM2-2.2B-Instruct (sharded safetensors).
 Safety model: the pinned checkpoint is verified against a per-file SHA-256
 manifest before the single lazy load (missing files and digest mismatches are
 both MODEL_UNAVAILABLE, reading A2); loading is offline-only with
@@ -71,8 +72,12 @@ __all__ = [
     "SmolVLMBackend",
 ]
 
-MODEL_ID = "HuggingFaceTB/SmolVLM-500M-Instruct"
-DEFAULT_REVISION = "a7da5b986cb59b408707209984f360a5f4ad7e47"
+# ADR-012 (user-approved): the pinned checkpoint is SmolVLM2-2.2B-Instruct —
+# same Idefics3 architecture and processor pipeline; the 500M records stay in
+# the repository as honest history (see docs/implementation ADR-012 and the
+# attempt-1/iteration-round/D3 benchmark records)
+MODEL_ID = "HuggingFaceTB/SmolVLM2-2.2B-Instruct"
+DEFAULT_REVISION = "482adb537c021c86670beed01cd58990d01e72e4"
 
 # prompt smolvlm-criterion-v1 — FIXED before any smoke result (design A5);
 # any wording change creates v2 with a new hash and a decisions.md entry
@@ -129,7 +134,24 @@ _TEMPLATES = {
 }
 PREPROCESSING_HASH = hashlib.sha256(b"resize-longest-edge-1024;patches").hexdigest()
 
+# the checkpoint ships sharded safetensors (ADR-012): two shards plus the
+# index; the manifest format covers either single-file or sharded layouts
 REQUIRED_MANIFEST_FILES = frozenset(
+    {
+        "config.json",
+        "preprocessor_config.json",
+        "generation_config.json",
+        "tokenizer_config.json",
+        "tokenizer.json",
+        "special_tokens_map.json",
+        "model.safetensors.index.json",
+        "model-00001-of-00002.safetensors",
+        "model-00002-of-00002.safetensors",
+    }
+)
+# the pre-ADR-012 single-shard layout, kept so the 500M attempt-1 records
+# remain verifiable if a manifest of that shape is presented
+LEGACY_REQUIRED_MANIFEST_FILES = frozenset(
     {
         "config.json",
         "preprocessor_config.json",
@@ -240,7 +262,12 @@ def _verify_manifest(model_dir: Path, revision: str) -> dict[str, str]:
         raise BackendOutputError(
             BackendErrorCode.MODEL_UNAVAILABLE, "the model manifest is absent or malformed"
         ) from None
-    missing = [name for name in REQUIRED_MANIFEST_FILES if name not in files]
+    required = (
+        REQUIRED_MANIFEST_FILES
+        if "model.safetensors.index.json" in files or "model-00001-of-00002.safetensors" in files
+        else LEGACY_REQUIRED_MANIFEST_FILES
+    )
+    missing = [name for name in required if name not in files]
     if missing:
         raise BackendOutputError(
             BackendErrorCode.MODEL_UNAVAILABLE, f"manifest is missing required file {missing[0]}"

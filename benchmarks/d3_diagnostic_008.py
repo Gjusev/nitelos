@@ -9,6 +9,7 @@ library limit), decode only new tokens. Two prompts, verbatim raw output.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import platform
@@ -28,9 +29,12 @@ D3_PROMPTS = {
 
 
 def main() -> int:
-    import hashlib
+    from nitelos.backends import smolvlm  # noqa: PLC0415 - heavy, run-scoped
 
-    from nitelos.backends.smolvlm import _load_model, _load_processor, _import_torch, _import_transformers
+    _load_model = smolvlm._load_model
+    _load_processor = smolvlm._load_processor
+    _import_torch = smolvlm._import_torch
+    _import_transformers = smolvlm._import_transformers
 
     model_dir = Path(os.environ["NITELOS_MODEL_DIR"])
     torch = _import_torch()
@@ -38,7 +42,7 @@ def main() -> int:
     processor = _load_processor(model_dir, transformers)
     model = _load_model(model_dir, transformers, torch, "float32")
 
-    from PIL import Image
+    from PIL import Image  # noqa: PLC0415 - run-scoped heavy import
 
     image = Image.open(IMAGE).convert("RGB")
     results: dict[str, str] = {}

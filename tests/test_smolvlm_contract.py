@@ -37,7 +37,7 @@ from nitelos.errors import ConfigurationError, EvidenceValidationError, InputErr
 from nitelos.evidence import PreparedImage
 from nitelos.schemas import BackendFinding, CriterionState, Grounding
 
-REVISION = "a7da5b986cb59b408707209984f360a5f4ad7e47"
+REVISION = "482adb537c021c86670beed01cd58990d01e72e4"
 DIGEST = "0" * 64
 
 
@@ -90,7 +90,8 @@ def returning(value: Any) -> Any:
 
 
 def _manifest(tmp_path: Path, files: dict[str, str] | None = None) -> None:
-    payloads = files or {name: f"content-of-{name}" for name in REQUIRED_MANIFEST_FILES}
+    default = {name: f"content-of-{name}" for name in REQUIRED_MANIFEST_FILES}
+    payloads = files or default
     digests = {}
     for name, payload in payloads.items():
         data = payload.encode("utf-8")
@@ -98,7 +99,7 @@ def _manifest(tmp_path: Path, files: dict[str, str] | None = None) -> None:
         digests[name] = hashlib.sha256(data).hexdigest()
     (tmp_path / "nitelos-manifest.json").write_text(
         json.dumps(
-            {"model_id": "HuggingFaceTB/SmolVLM-500M-Instruct", "revision": REVISION, "files": digests}
+            {"model_id": "HuggingFaceTB/SmolVLM2-2.2B-Instruct", "revision": REVISION, "files": digests}
         ),
         encoding="utf-8",
     )
@@ -427,7 +428,7 @@ def test_vlm03_loader_arguments_and_env(
     loaded_backend: tuple[Any, ...], monkeypatch: pytest.MonkeyPatch
 ) -> None:
     backend, _processor, _model = loaded_backend
-    assert backend.descriptor.model_id == "HuggingFaceTB/SmolVLM-500M-Instruct"
+    assert backend.descriptor.model_id == "HuggingFaceTB/SmolVLM2-2.2B-Instruct"
     assert backend.descriptor.model_revision == REVISION
     assert backend.descriptor.prompt_hash == PROMPT_HASH_V1
     assert backend.descriptor.runtime_lock_hash is None  # not loaded yet
@@ -663,7 +664,7 @@ def test_capabilities_and_descriptor_shape(tmp_path: Path) -> None:
     assert capabilities.supports_native_batch is False
     descriptor = backend.descriptor
     assert descriptor.id == "smolvlm"
-    assert descriptor.model_id == "HuggingFaceTB/SmolVLM-500M-Instruct"
+    assert descriptor.model_id == "HuggingFaceTB/SmolVLM2-2.2B-Instruct"
     assert descriptor.prompt_hash == PROMPT_HASH_V1
 
 
@@ -834,3 +835,24 @@ def test_infer_attempts_and_raw_reset_bookkeeping(loaded_backend: tuple[Any, ...
         backend.infer(_prepared([_image()]), _context())
     assert backend.infer_attempts == 2  # errored attempts still count
     assert backend.last_raw_output == "BOGUS"  # the attempt's own generation
+
+
+def test_sharded_and_legacy_manifest_layouts(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """ADR-012: sharded layout required by default; legacy single-shard accepted."""
+    monkeypatch.setattr(smolvlm, "_import_torch", returning(FakeTorch()))
+    monkeypatch.setattr(smolvlm, "_import_transformers", returning(FakeTransformers()))
+    monkeypatch.setattr(smolvlm, "_load_processor", returning(FakeProcessor()))
+    monkeypatch.setattr(smolvlm, "_load_model", returning_model(FakeModel(FakeProcessor())))
+    # sharded layout (the REQUIRED set) loads
+    sharded = tmp_path / "sharded"
+    sharded.mkdir()
+    _manifest(sharded)
+    finding = _backend(sharded).infer(_prepared([_image()]), _context())
+    assert finding.state == CriterionState.SUPPORTED
+    # legacy single-shard layout also verifies and loads
+    legacy = tmp_path / "legacy"
+    legacy.mkdir()
+    payloads = {name: f"content-of-{name}" for name in smolvlm.LEGACY_REQUIRED_MANIFEST_FILES}
+    _manifest(legacy, files=payloads)
+    finding = _backend(legacy).infer(_prepared([_image()]), _context())
+    assert finding.state == CriterionState.SUPPORTED
