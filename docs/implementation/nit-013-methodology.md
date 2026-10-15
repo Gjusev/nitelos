@@ -77,9 +77,39 @@ uv run python -m nitelos.evaluation run \
   --backend smolvlm --model-dir "$NITELOS_MODEL_DIR"   # or the labeled driver until the wiring merges
 ```
 
-Expected durations from the dev runs: the deterministic view ≈ tens of seconds;
-the visual view ≈ 30–35 min wall on the reference CPU (dev run measured;
-~28–30 s mean per one-image case, ~50 s per two-image case, one ~3 s model
-load). Both runs are then validated with `validate_run_report` and the family
-tables regenerated. Any result is reported as found — a poor accuracy number is
+Expected durations from the dev runs: the deterministic view completed in
+seconds; the visual dev run measured 491.4 s wall (~8.2 min) for 60 cases —
+20 model invocations at 48.4 s cold / 18.6 s warm median (37.6 s p95), peak
+RSS 10.27 GB (ru_maxrss). The final visual run's wall time depends on how many
+cases invoke the model after the preflight finding below is resolved.
+Both runs are then validated with `validate_run_report` and the family tables
+regenerated. Any result is reported as found — a poor accuracy number is
 a finding, never a tuning input.
+
+## Dev-run findings (reported, not tuned)
+
+1. **Preflight rejects carried external/behavioral criteria on a visual-only
+   backend (30/60 dev-visual cases, all UNSUPPORTED_CAPABILITY).** The
+   visual-view requests of 7 families (S01/S02/S04/S06/S07-v2/S10/S11/S15)
+   legitimately carry external or behavioral criteria alongside their visual
+   criterion (doc 06: external criteria remain external in both views). The
+   NIT-007 preflight validates every criterion kind against the backend's
+   declared `criterion_kinds`, and the SmolVLM backend declares
+   `("visual",)` per the NIT-008 design §10 — so those requests are rejected
+   before any inference. Doc 04's capability table, however, assigns
+   assertion criteria to the core evaluator for every backend. Resolution is
+   a contract decision (declare assertion handling in the backend's
+   capabilities vs special-case core-evaluated kinds in the preflight); per
+   the task rules this is reported, not adjusted.
+2. **Dev-label agreement on the 30 executed cases: 13/30.** The mismatch
+   patterns confirm and extend the smoke-set over-support observation: every
+   S03/S14 case answered success where the dev oracle expects failure
+   (refuted-by-state scenes over-claimed), S12 ambiguous scenes answered
+   success where abstain was expected, S09 contradictory scenes split
+   3 success / 1 failure where abstain was expected, and one S13
+   counterfactual member flipped. Model-invoked cases only (20); the 10
+   abstentions without model invocation (S05 pending, S08 empty-evidence and
+   2 S07-v1 subject-mismatch cases resolved by policy, correctly) are not
+   model behavior. Consistent with the honest NIT-008 record (format
+   compliant, over-claiming); no tuning was performed or is proposed on dev
+   labels.
