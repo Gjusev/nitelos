@@ -61,6 +61,7 @@ from nitelos.schemas import (
     canonical_json,
     parse_request,
 )
+from nitelos.trace import Trace, parse_trace
 from nitelos.verifier import Verifier
 
 __all__ = [
@@ -105,6 +106,7 @@ __all__ = [
     "Score",
     "ScoreKind",
     "ScreenshotEvidence",
+    "Trace",
     "TrustBinding",
     "VerificationPolicy",
     "VerificationRequest",
@@ -114,6 +116,7 @@ __all__ = [
     "__version__",
     "canonical_json",
     "parse_request",
+    "parse_trace",
     "prepare_evidence",
     "validate_evidence_ref",
 ]
