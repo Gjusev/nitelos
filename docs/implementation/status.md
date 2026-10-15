@@ -67,3 +67,4 @@ All pending.
 - 2026-10-15: NIT-006 delivered+verified; AR-2 started. User approved ADR-011 (nullable request_id on input_error). G4 human reviewers: user will organize later (G4 pending).
 - 2026-10-15: AR-2 approved conditionally (F1 averify/close race, F2 strict env parsing, F3 record new limitation code, ADR-011 commit). NIT-009 started.
 - 2026-10-15: NIT-005/006 merged after ADR-011 confirmation by nitelos-0f. NIT-009 delivered; NIT-010 started.
+- 2026-10-15: all Claude Code sessions restarted. Orchestrator is now `nitelos-f3`; peers are `nitelos-08` and `nitelos-3a` (context status being confirmed). State at restart: NIT-007 WIP commit `6aebf3a` plus uncommitted deterministic.py edit; NIT-009 review not delivered; NIT-010 no commits.
