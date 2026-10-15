@@ -10,7 +10,6 @@ changes, this fails until the inventory is reconciled (the release rule).
 
 from __future__ import annotations
 
-import re
 import tomllib
 from pathlib import Path
 
@@ -115,9 +114,9 @@ def test_direct_dependencies_land_in_the_right_sections() -> None:
     assert set(direct["eval"]) <= eval_rows
     assert set(direct["local"]) <= local_rows
     # and the recorded closures are fully covered by their sections
-    assert CORE_CLOSURE <= core_rows
-    assert EVAL_CLOSURE <= eval_rows
-    assert LOCAL_CLOSURE <= local_rows
+    assert core_rows >= CORE_CLOSURE
+    assert eval_rows >= EVAL_CLOSURE
+    assert local_rows >= LOCAL_CLOSURE
     # closures are disjoint outside typing-extensions (shared core/local)
     assert not ((CORE_CLOSURE - {"typing-extensions"}) & (LOCAL_CLOSURE - {"typing-extensions"}))
     assert not (EVAL_CLOSURE & (CORE_CLOSURE | LOCAL_CLOSURE))
