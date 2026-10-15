@@ -14,25 +14,25 @@ No secrets or sensitive evidence are stored here.
 | NIT-003 Evidence | done (merged) | nitelos-69 | nit/003-evidence `cf25f7b` | 002, AR-1 | 31+2 tests (EVD-01..04, SEC-05/06); Win 132 passed; Linux py3.12/3.13 131 passed + 1 platform skip | reviewer nitelos-0f APPROVE-WITH-CHANGES; F2 decoded-vs-header dims made required |
 | NIT-004 Assertions | done (merged) | nitelos-69 | nit/004-assertions `d06767e` | 003 | 17 DET tests; Win 172 passed; Linux full-offline replay OK | reviewer nitelos-0f APPROVE-WITH-CHANGES (huge index fix) |
 | NIT-005 Policy | done (merged) | nitelos-69 | nit/005-policy `42ef33a` | 004 | Win 246 passed; Linux 245 + 1 platform skip | reviewer nitelos-0f APPROVE-WITH-CHANGES (visual refs, eligible_evidence helper, immutable map) |
-| NIT-006 SDK | review (AR-2, reviewer nitelos-0f) + ADR-011 commit pending | nitelos-69 | nit/006-sdk `2c4609c` | 005 | 48 tests (SDK-01/02, LIFE-01/02, SEC-03/04); Win 274 passed; Linux py3.12/3.13 273 + 1 platform skip | async lifecycle tests run in subprocess (Windows asyncio self-pipe vs socket-deny conftest) |
-| NIT-007 Backend boundary | pending | | | 006, AR-2 | | |
-| NIT-008 Local VLM | smoke set done; adapter design spec running (nitelos-0f, nit/008-design); adapter awaits NIT-007 | nitelos-0f | nit/008-smoke-fixtures | 007 (adapter); fixtures independent | | Weights pre-provisioned outside repo, SHA-256 verified; WSL CPU probe: torch 2.14.1+cpu / transformers 5.19.0 load+generate OK; `AutoModelForVision2Seq` absent in TF5, use `AutoModelForImageTextToText`; probe output `' UNKNOWN.'` would be INVALID_OUTPUT under strict parser |
-| NIT-009 Traces | running (branched from nit/006) | nitelos-0f | nit/009-traces | 006, AR-2 | | |
-| NIT-010 Fixtures | design done (`3c888e2`, A1–A6 accepted); implementation pending 009 | nitelos-0f | — | 003, 009 | | human two-reviewer audit of 60 final cases = user staffing decision |
+| NIT-006 SDK | done (merged) | nitelos-69 | nit/006-sdk `fc7e278` | 005 | Win 288 passed; Linux strict replay OK | AR-2 approved; ADR-011 nullable request_id; F1 race, F2 strict env, F3 limitation code |
+| NIT-007 Backend boundary | review (reviewer nitelos-08, queued after NIT-010 fixes) | nitelos-3a | nit/007-backend-boundary `4e24012` | 006, AR-2, 009 | 26 BAK/contract tests; Win 333 passed; Linux 332 + 1 platform skip | rationale export deferred; deadline None until NIT-008 |
+| NIT-008 Local VLM | delivered; G3 PASSED (2.2B); AR-3 review running | nitelos-14 | nit/008-smolvlm `f1140e3` | 007 | 11/11 valid, 10 decisive, strict parser, prompt v1; orchestrator re-ran real-model integration test (pass) | dev agreement 4/12, over-support bias recorded; torchvision+num2words added to local extra |
+| NIT-009 Traces | done (merged) | nitelos-0f/08 | nit/009-traces `2d5d3be` | 006, AR-2 | Win 307 passed after merge; Linux strict replay OK | reviewer nitelos-3a APPROVE-WITH-CHANGES (naive as_of fix) |
+| NIT-010 Fixtures | done (merged; human gate pending for final-test audit/freeze) | nitelos-f2 impl, nitelos-14 review | nit/010-fixtures `f93e4d8` | 003, 009 | full truth table re-verified independently; compositions structural; numerals removed | G4 human reviewers scheduled by user at the end |
 | NIT-011 Metrics | done (merged) | nitelos-0f | nit/011-metrics + nit/011b-metrics `5ffd8e8` | 002, AR-1 | STAT 26 + MET 19 tests; reviews by nitelos-69 (A: approve-with-changes fixed; B: approve) | metrics numpy/scipy-free; Wilson endpoints exact |
-| NIT-012 Runner | design done (`738f439`, A1–A7 accepted); implementation pending 006/010 | nitelos-0f | — | 006, 010, 011 | | |
-| NIT-013 Evaluation | pending | | | 008, 012, AR-4 | | |
-| NIT-014 Docs/demo | pending | | | 006, 009, 012 | | |
-| NIT-015 Release audit | pending | | | 013, 014 | | |
+| NIT-012 Runner | done (merged with review fixes `82021a2`: smolvlm wiring, collector exit-2, preprocessing fingerprint) | nitelos-f2 impl, nitelos-14 review | nit/012-runner → nit/012-review-fix | 006, 010, 011 | Win 569+1 skip+1 desel; Linux 567+3 skips+1 desel | |
+| NIT-013 Evaluation | dev-split done+merged (deterministic 60/60 exact; visual 60/60, agreement 41/60, over-support recorded); FINAL runs pending AR-4 + G4 human gate | nitelos-14 impl, nitelos-f2 review | nit/013b-runs `94baa2e` | 008, 012 | preflight ruling applied; both dev-visual records kept | shared-backend runner mode assigned (nitelos-f2) before final runs |
+| NIT-014 Docs/demo | done (merged `8f19a3e` after merge-time update) | nitelos-f2 impl, nitelos-14 review | nit/014-docs | 006, 009, 012 | Win 575+1+1desel; Linux 573+3+1desel; visual demo wired and gated | |
+| NIT-015 Release audit | prep delivered+verified (`41bce6d`, Win 506+1 skip, Linux 504+3 skips); gates/final audit pending | nitelos-f2 | nit/015-release | 013, 014 | | gates table/NOTICE/license inventory/workflow sketch |
 
 ## Architectural reviews
 
 | Review | State | Reviewer | Evidence |
 |---|---|---|---|
 | AR-1 contracts | done (approved with changes; fixes `2671d5f` verified) | nitelos-0f | see decisions.md; constructor-path RecursionError fix + snapshot caveat requested from nitelos-69 |
-| AR-2 deterministic flow | approved (conditional on NIT-006 F1–F3 + ADR-011 commit) | nitelos-0f | decisions.md AR-2 |
-| AR-3 local integration | pending | | |
-| AR-4 protocol freeze | pending | | |
+| AR-2 deterministic flow | done (approved; conditions verified 2026-10-15) | nitelos-0f | decisions.md AR-2 |
+| AR-3 local integration | done (approved; NIT-008 merged) | nitelos-f2 (independent) | brief sent 2026-10-15 |
+| AR-4 protocol freeze | done (protocol+inputs frozen; oracle seal pending G4 human gate) | orchestrator (dossier by nitelos-f2) | ar-4-freeze.md `d357037` |
 | AR-5 release candidate | pending | | |
 
 ## Open orchestrator items
@@ -66,3 +66,24 @@ All pending.
 - 2026-10-15: format fix merged with NIT-012 design (`18e16d0`); integration fully green on Win and Linux (strict replay script).
 - 2026-10-15: NIT-006 delivered+verified; AR-2 started. User approved ADR-011 (nullable request_id on input_error). G4 human reviewers: user will organize later (G4 pending).
 - 2026-10-15: AR-2 approved conditionally (F1 averify/close race, F2 strict env parsing, F3 record new limitation code, ADR-011 commit). NIT-009 started.
+- 2026-10-15: NIT-005/006 merged after ADR-011 confirmation by nitelos-0f. NIT-009 delivered; NIT-010 started.
+- 2026-10-15: all Claude Code sessions restarted. Orchestrator is now `nitelos-f3`; peers are `nitelos-08` and `nitelos-3a` (context status being confirmed). State at restart: NIT-007 WIP commit `6aebf3a` plus uncommitted deterministic.py edit; NIT-009 review not delivered; NIT-010 no commits.
+- 2026-10-15: nitelos-08 is resumed nitelos-0f. NIT-010 delivered and verified (Win+Linux). nitelos-3a unresponsive (message possibly held for user approval); NIT-009/010/007 reviews queued for it. NIT-007 handed to nitelos-08.
+- 2026-10-15: nitelos-3a is resumed nitelos-69. To preserve independence: 3a reviews NIT-009/010 then finishes its own NIT-007 WIP; nitelos-08 implements NIT-012 and later reviews NIT-007.
+- 2026-10-15: NIT-009 merged. Incident: a peer ran WSL `uv` inside the main checkout (11:32), creating a root-owned Linux `.venv`; orchestrator rebuilt it; both peers told never to run in the main checkout.
+- 2026-10-15: NIT-007 delivered+verified; NIT-008 adapter assigned to nitelos-3a.
+- 2026-10-15: orchestrator session renamed again (now `nitelos-6b`); peers notified. NIT-010 review fixes verified by orchestrator: S11 truth=success 8/8; S06 visual evidence has no database observation; S07v1/S15 carry visual criteria; family truth table consistent; Win 443 passed, Linux 441 + 2 platform skips. Re-verification queued for nitelos-3a at new head `f93e4d8` (eol pinning).
+- 2026-10-15: NIT-012 delivered and verified by orchestrator (Win+Linux+real CLI). NIT-010 eol follow-up f93e4d8 verified via fresh LF Linux checkout. Reviews queued for nitelos-3a.
+- 2026-10-15: peers identified after rename: `nitelos-f2` = nitelos-08 (ex 0f), full context, all work committed; `nitelos-14` = nitelos-3a (ex 69), full context, mid-NIT-008 (mocked tests green, WSL local env synced, CPU smoke imminent). Assignments: 14 continues NIT-008 (NIT-012 review + NIT-010 re-verify queued after smoke report); f2 reviews NIT-007 then implements the RUN-01/02 report validator (NIT-013 part A).
+- 2026-10-15: user decision — the G4 human reviewers come at the very end of all work. Final-test audit, freeze and final benchmark runs wait for them; everything else proceeds.
+- 2026-10-15: NIT-013A verified. NIT-008 G3 attempt 1 failed (0/11 valid, all ' UNKNOWN.'); ruling: one pre-declared prompt iteration round (v2/v3 + D1/D2 diagnostics), then viability review if still 0.
+- 2026-10-15: ADR-012 user-approved: checkpoint swap to SmolVLM2-2.2B-Instruct @482adb5. Weights provisioned by orchestrator; shard 2 corrupt on first download (hash mismatch caught by upstream-oid cross-check; sidecar regenerated after clean re-download). NIT-007 merged; NIT-014 verified; NIT-015 prep assigned.
+- 2026-10-15: SmolVLM2-2.2B weights fully provisioned and digest-verified on Windows and WSL (shard-2 corruption caught and fixed via upstream-oid cross-check). 2.2B smoke green-lit for nitelos-14. NIT-015 prep verified.
+- 2026-10-15: G3 PASSED with SmolVLM2-2.2B (11/11 valid, 10 decisive). Orchestrator re-ran the real-model integration test independently (pass). AR-3 review assigned to nitelos-f2; NIT-012 review brief sent to nitelos-14.
+- 2026-10-15: AR-3 APPROVED; NIT-008 merged (integration 375 passed + 1 deselected; Linux replay OK). Next: NIT-012 fix chain 010→012→013 merges.
+- 2026-10-15: NIT-010 re-verification APPROVE; merged (511+1 deselected Win; Linux replay OK).
+- 2026-10-15: NIT-012+NIT-013A chain merged (integration 569 passed +1 skip +1 deselected; Linux replay OK).
+- 2026-10-15: NIT-014 merged (integration 580 passed + 1 skip + 1 deselected; Linux replay OK). Remaining live: NIT-013B dev runs (nitelos-14), NIT-015 finalization.
+- 2026-10-15: preflight fix reviewed APPROVE and merged with dev-split records (582 passed). Shared-backend runner mode assigned to nitelos-f2.
+- 2026-10-15: shared-backend merged (589 passed Win; Linux replay OK). AR-4 dossier assembly assigned to nitelos-f2.
+- 2026-10-15: AR-4 dossier approved (digests independently recomputed) and merged. Project now waits on: G4 human annotation → final freeze → final runs → NIT-015 final → AR-5.

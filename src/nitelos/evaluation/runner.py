@@ -306,12 +306,16 @@ def _load_collector(root: Path) -> list[dict[str, Any]]:
 
 
 class VerifierFactory(Protocol):
-    """Builds one verifier per case from backend case data (never oracle data)."""
+    """Builds one verifier per case from backend case data (never oracle data).
+
+    ``request`` is None only for the run's preprocessing probe (case id
+    ``#preprocessing-probe``); real calls always receive the parsed request.
+    """
 
     def __call__(
         self,
         case_id: str,
-        request: VerificationRequest,
+        request: VerificationRequest | None,
         artifacts: dict[str, bytes],
         bindings: tuple[TrustBinding, ...],
     ) -> Any: ...
@@ -402,6 +406,8 @@ def evaluate(
     manifest: LoadedManifest,
     verifier_factory: VerifierFactory,
     output_dir: Path,
+    *,
+    backend: Any = None,
 ) -> RunSummary:
     """Run every scheduled case sequentially into a NEW OUTPUT_DIR.
 
@@ -410,12 +416,38 @@ def evaluate(
     marker. Refuses an existing output directory (no overwrite, no resume).
     Per-case input/backend errors become result rows; infrastructure failures
     write an incomplete report and raise InfraError.
+
+    BACKEND is the shared-backend mode (doc 02: loaded once per backend, lazily
+    on first visual use): one Backend instance the verifier_factory must wire
+    into every per-case Verifier (verifiers stay per-case for per-case trust
+    bindings). evaluate() closes it exactly once when the run ends - complete,
+    per-case error or infra abort alike. With backend=None each verifier builds
+    its own backend, exactly as before, and nothing is closed here. The run's
+    preprocessing hash is read directly from BACKEND's descriptor (no probe).
     """
     output_dir = Path(output_dir)
     if output_dir.exists():
         raise ConfigError(f"output directory already exists: {output_dir.name}")
     output_dir.mkdir(parents=True)
     run_id = str(uuid.uuid4())
+    if backend is not None:
+        backend_preprocessing_hash = _descriptor_preprocessing_hash(backend)
+    else:
+        backend_preprocessing_hash = _probe_preprocessing_hash(manifest, verifier_factory)
+    try:
+        return _run_manifest(manifest, verifier_factory, output_dir, run_id, backend_preprocessing_hash)
+    finally:
+        if backend is not None:
+            backend.close()
+
+
+def _run_manifest(
+    manifest: LoadedManifest,
+    verifier_factory: VerifierFactory,
+    output_dir: Path,
+    run_id: str,
+    backend_preprocessing_hash: str | None,
+) -> RunSummary:
     started = time.perf_counter()
     run_meta = {
         "run_id": run_id,
@@ -431,17 +463,20 @@ def evaluate(
         "started_at": _now_utc(),
         "package_version": __version__,
         "policy_hash": policy_hash(manifest.policy),
+        "preprocessing_hash": backend_preprocessing_hash,
         "configuration_fingerprint": manifest.raw["configuration_fingerprint"],
     }
     _write_json(output_dir / "run.json", run_meta)
     rows: list[dict[str, Any]] = []
     results: list[Any] = []
     cases_lines = output_dir / "cases.jsonl"
+    # the fixture collector is trusted runner configuration (doc 06): a missing
+    # or unreadable collector is a configuration failure (exit 2), not
+    # infrastructure (review F2)
     try:
         collector = _load_collector(manifest.root)
-    except ConfigError as error:
-        _fail_incomplete(output_dir, run_id, manifest, rows, started, str(error))
-        raise InfraError(f"infrastructure failure: {error}") from error
+    except InfraError as error:
+        raise ConfigError(f"fixture collector is not readable: {error}") from error
     with cases_lines.open("w", encoding="utf-8") as sink:
         for case in manifest.cases:
             try:
@@ -794,12 +829,19 @@ def compare_reports(run_a: Path, run_b: Path) -> dict[str, Any]:
             raise ConfigError("comparison refused: evidence manifests differ between runs")
         if counterpart.get("trust_fingerprint") != row.get("trust_fingerprint"):
             raise ConfigError("comparison refused: trust eligibility differs between runs")
+    preprocessing_a = meta_a.get("preprocessing_hash")
+    preprocessing_b = meta_b.get("preprocessing_hash")
+    preprocessing_matched = preprocessing_a == preprocessing_b
     return {
         "compatible": True,
         "case_count": len(rows_a),
         "case_ids": ids_a,
-        "preprocessing": {"matched": True, "delta": []},
-        "note": "model/backend versions and timings may differ by design",
+        "preprocessing": {
+            "matched": preprocessing_matched,
+            "delta": [] if preprocessing_matched else [preprocessing_a, preprocessing_b],
+        },
+        "note": "model/backend versions and timings may differ by design; "
+        "preprocessing differences are disclosed, never silently compared",
     }
 
 
@@ -808,9 +850,31 @@ def compare_reports(run_a: Path, run_b: Path) -> dict[str, Any]:
 # ---------------------------------------------------------------------------
 
 
+def _descriptor_preprocessing_hash(backend: Any) -> str | None:
+    descriptor = getattr(backend, "descriptor", None)
+    return getattr(descriptor, "preprocessing_hash", None)
+
+
+def _probe_preprocessing_hash(manifest: LoadedManifest, verifier_factory: VerifierFactory) -> str | None:
+    """The run's backend preprocessing fingerprint (review F4).
+
+    Builds one throwaway verifier from the factory and reads its backend
+    descriptor's preprocessing_hash; deterministic backends yield None. Never
+    invokes inference - construction only.
+    """
+    try:
+        probe = verifier_factory("#preprocessing-probe", None, {}, ())
+        return _descriptor_preprocessing_hash(getattr(probe, "backend", None))
+    except Exception:  # noqa: BLE001 - probe only; a null hash is the honest fallback
+        return None
+
+
 def _build_verifier_factory(
     backend: str, model_dir: str | None, policy: VerificationPolicy
-) -> VerifierFactory:
+) -> tuple[VerifierFactory, Any]:
+    """Per-case verifier factory plus the run's shared backend (None when each
+    verifier builds its own). The smolvlm backend is constructed ONCE here -
+    the model loads lazily on first inference and the CLI run closes it once."""
     if backend == "deterministic":
         if model_dir is not None:
             raise ConfigError("--model-dir is only valid with --backend smolvlm")
@@ -819,7 +883,7 @@ def _build_verifier_factory(
         def factory(case_id: str, request: Any, artifacts: Any, bindings: Any) -> Any:
             return Verifier(backend=DeterministicBackend(), policy=policy, trust_bindings=bindings)
 
-        return factory
+        return factory, None
     if backend == "smolvlm":
         import importlib.util  # noqa: PLC0415 - probe of the optional NIT-008 module
 
@@ -830,16 +894,24 @@ def _build_verifier_factory(
             )
         if model_dir is None:
             raise ConfigError("--model-dir is required with --backend smolvlm")
+        shared: Any
+        try:
+            from nitelos import Verifier  # noqa: PLC0415 - lazy backend wiring
+            from nitelos.backends.smolvlm import (  # noqa: PLC0415 - lazy NIT-008 module
+                DEFAULT_REVISION,
+                SmolVLMBackend,
+            )
 
-        def factory(  # pragma: no cover - wired when NIT-008 lands
-            case_id: str,
-            request: Any,
-            artifacts: Any,
-            bindings: Any,
-        ) -> Any:
-            raise NotImplementedError("wired when NIT-008 lands")
+            shared = SmolVLMBackend(model_dir, DEFAULT_REVISION, device="cpu", dtype="float32")
+        except (KeyboardInterrupt, SystemExit):
+            raise
+        except Exception as error:
+            raise InfraError("the smolvlm backend could not be constructed") from error
 
-        return factory
+        def factory(case_id: str, request: Any, artifacts: Any, bindings: Any) -> Any:
+            return Verifier(backend=shared, policy=policy, trust_bindings=bindings)
+
+        return factory, shared
     raise ConfigError(f"unknown backend: {backend}")
 
 
@@ -855,8 +927,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         manifest = load_evaluation_manifest(Path(args.manifest), Path(args.artifacts))
-        factory = _build_verifier_factory(args.backend, args.model_dir, manifest.policy)
-        summary = evaluate(manifest, factory, Path(args.output))
+        factory, shared_backend = _build_verifier_factory(args.backend, args.model_dir, manifest.policy)
+        summary = evaluate(manifest, factory, Path(args.output), backend=shared_backend)
     except ConfigError as error:
         print(f"configuration error: {error}", file=sys.stderr)
         return 2

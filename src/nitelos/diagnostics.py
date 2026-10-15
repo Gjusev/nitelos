@@ -47,6 +47,7 @@ def build_diagnostics(
     criterion_durations: Mapping[str, float],
     request: VerificationRequest | None = None,
     partial_results: bool = False,
+    omitted_context_ids: tuple[str, ...] = (),
 ) -> Diagnostics:
     """Assemble the exact doc-03 diagnostics record.
 
@@ -69,7 +70,7 @@ def build_diagnostics(
         elapsed_ms=elapsed_ms,
         model_load_ms=None,
         criterion_durations_ms=dict(criterion_durations),
-        omitted_context_ids=(),
+        omitted_context_ids=omitted_context_ids,
         preprocessing=(),
         measurements=Measurements(unavailable_reasons=_UNAVAILABLE_REASONS),
         limitations=limitations,

@@ -1,0 +1,258 @@
+{
+  "run": "NIT-008 CPU smoke run (dev-only labels; not an accuracy benchmark)",
+  "prompt_version": "smolvlm-criterion-v1",
+  "prompt_hash": "08fde1e3776018111c0a1de8796b0660c7df2c5b2ac9623357fda1d6087d706d",
+  "backend": {
+    "id": "smolvlm",
+    "model_id": "HuggingFaceTB/SmolVLM-500M-Instruct",
+    "model_revision": "a7da5b986cb59b408707209984f360a5f4ad7e47",
+    "runtime_lock_hash": "63e450b1464bd9fad4952cfddd1cec51097658d3687db9556d39f9b8887e7d7c"
+  },
+  "model_load_ms": 1754.7774089999848,
+  "platform": {
+    "os": "Linux",
+    "python": "3.12.15",
+    "cpu": "AMD Ryzen 5 7600X 6-Core Processor"
+  },
+  "peak_rss_kb": 3402508,
+  "peak_rss_method": "resource.getrusage ru_maxrss (Linux, KiB)",
+  "model_manifest": {
+    "files": {
+      "README.md": "8465c1a46b0db5d5d0d0945df04032d1b405bb2fa12cdab3da1652bd75fca4b9",
+      "added_tokens.json": "74135b8664b56088c0006f1c8e848d79a8eba003411f72ebf1dc2ee96227be3a",
+      "chat_template.json": "a68ad1a42681ae44eacd109ff8dd56a840f761c03d72f4ff4c515d092f882168",
+      "config.json": "daacbbca6af3c34e50466c72aed2df4553a08084f6a0551d4ae420a241cb66c6",
+      "generation_config.json": "067a2a54e5f87162ecac6e0e911cc4665fc8f7f3324794ecbac0f76badb56636",
+      "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+      "model.safetensors": "d05b567eeaf534e83d375551f068ed57b5f52d37c657197f644af5ef9db091a2",
+      "preprocessor_config.json": "6cb6e36d6fcb88ca1502c4a26750715dc3e7dedddc9a8f17b27d8d167d1457e7",
+      "processor_config.json": "e7bff42da73ae9eec9042ef20e066e11f1ee20f025358ff79131e3c0fb549b46",
+      "special_tokens_map.json": "aa0ff906077086dfa9734a7f97f68c825877a48f9468807be65504495cdeef09",
+      "tokenizer.json": "5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a",
+      "tokenizer_config.json": "36c6fd44d07d10fd8180ee6b46dcccf69fb7c06753968ff0d7e17b8bfe17b777",
+      "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+    },
+    "model_id": "HuggingFaceTB/SmolVLM-500M-Instruct",
+    "revision": "a7da5b986cb59b408707209984f360a5f4ad7e47"
+  },
+  "cases": [
+    {
+      "case_id": "SMK-001",
+      "doc04_index": 1,
+      "phase": "final",
+      "expected_label": "SUPPORTED",
+      "status": "backend_error",
+      "decision": null,
+      "basis": null,
+      "reason_codes": [
+        "INVALID_OUTPUT"
+      ],
+      "error_code": "INVALID_OUTPUT",
+      "elapsed_ms": 10428.6,
+      "model_invoked": false,
+      "raw_output": " UNKNOWN.",
+      "parsed_label": null
+    },
+    {
+      "case_id": "SMK-002",
+      "doc04_index": 2,
+      "phase": "final",
+      "expected_label": "REFUTED",
+      "status": "backend_error",
+      "decision": null,
+      "basis": null,
+      "reason_codes": [
+        "INVALID_OUTPUT"
+      ],
+      "error_code": "INVALID_OUTPUT",
+      "elapsed_ms": 4662.62,
+      "model_invoked": false,
+      "raw_output": " UNKNOWN.",
+      "parsed_label": null
+    },
+    {
+      "case_id": "SMK-003",
+      "doc04_index": 3,
+      "phase": "final",
+      "expected_label": "SUPPORTED",
+      "status": "backend_error",
+      "decision": null,
+      "basis": null,
+      "reason_codes": [
+        "INVALID_OUTPUT"
+      ],
+      "error_code": "INVALID_OUTPUT",
+      "elapsed_ms": 5271.44,
+      "model_invoked": false,
+      "raw_output": " UNKNOWN.",
+      "parsed_label": null
+    },
+    {
+      "case_id": "SMK-004",
+      "doc04_index": 4,
+      "phase": "final",
+      "expected_label": "REFUTED",
+      "status": "backend_error",
+      "decision": null,
+      "basis": null,
+      "reason_codes": [
+        "INVALID_OUTPUT"
+      ],
+      "error_code": "INVALID_OUTPUT",
+      "elapsed_ms": 4447.93,
+      "model_invoked": false,
+      "raw_output": " UNKNOWN.",
+      "parsed_label": null
+    },
+    {
+      "case_id": "SMK-005",
+      "doc04_index": 5,
+      "phase": "pending",
+      "expected_label": "UNKNOWN",
+      "status": "ok",
+      "decision": "abstained",
+      "basis": "none",
+      "reason_codes": [
+        "INSUFFICIENT_EVIDENCE",
+        "PENDING_STATE"
+      ],
+      "error_code": null,
+      "elapsed_ms": 69.76,
+      "model_invoked": false,
+      "raw_output": " UNKNOWN.",
+      "parsed_label": null
+    },
+    {
+      "case_id": "SMK-006",
+      "doc04_index": 6,
+      "phase": "final",
+      "expected_label": "UNKNOWN",
+      "status": "backend_error",
+      "decision": null,
+      "basis": null,
+      "reason_codes": [
+        "INVALID_OUTPUT"
+      ],
+      "error_code": "INVALID_OUTPUT",
+      "elapsed_ms": 8403.69,
+      "model_invoked": false,
+      "raw_output": " UNKNOWN.",
+      "parsed_label": null
+    },
+    {
+      "case_id": "SMK-007",
+      "doc04_index": 7,
+      "phase": "final",
+      "expected_label": "REFUTED",
+      "status": "backend_error",
+      "decision": null,
+      "basis": null,
+      "reason_codes": [
+        "INVALID_OUTPUT"
+      ],
+      "error_code": "INVALID_OUTPUT",
+      "elapsed_ms": 4388.98,
+      "model_invoked": false,
+      "raw_output": " UNKNOWN.",
+      "parsed_label": null
+    },
+    {
+      "case_id": "SMK-008",
+      "doc04_index": 8,
+      "phase": "final",
+      "expected_label": "UNKNOWN",
+      "status": "backend_error",
+      "decision": null,
+      "basis": null,
+      "reason_codes": [
+        "INVALID_OUTPUT"
+      ],
+      "error_code": "INVALID_OUTPUT",
+      "elapsed_ms": 4275.09,
+      "model_invoked": false,
+      "raw_output": " UNKNOWN.",
+      "parsed_label": null
+    },
+    {
+      "case_id": "SMK-009",
+      "doc04_index": 9,
+      "phase": "final",
+      "expected_label": "REFUTED",
+      "status": "backend_error",
+      "decision": null,
+      "basis": null,
+      "reason_codes": [
+        "INVALID_OUTPUT"
+      ],
+      "error_code": "INVALID_OUTPUT",
+      "elapsed_ms": 4779.71,
+      "model_invoked": false,
+      "raw_output": " UNKNOWN.",
+      "parsed_label": null
+    },
+    {
+      "case_id": "SMK-010",
+      "doc04_index": 10,
+      "phase": "final",
+      "expected_label": "SUPPORTED",
+      "status": "backend_error",
+      "decision": null,
+      "basis": null,
+      "reason_codes": [
+        "INVALID_OUTPUT"
+      ],
+      "error_code": "INVALID_OUTPUT",
+      "elapsed_ms": 4307.58,
+      "model_invoked": false,
+      "raw_output": " UNKNOWN.",
+      "parsed_label": null
+    },
+    {
+      "case_id": "SMK-011",
+      "doc04_index": 11,
+      "phase": "final",
+      "expected_label": "SUPPORTED",
+      "status": "backend_error",
+      "decision": null,
+      "basis": null,
+      "reason_codes": [
+        "INVALID_OUTPUT"
+      ],
+      "error_code": "INVALID_OUTPUT",
+      "elapsed_ms": 8476.73,
+      "model_invoked": false,
+      "raw_output": " UNKNOWN.",
+      "parsed_label": null
+    },
+    {
+      "case_id": "SMK-012",
+      "doc04_index": 12,
+      "phase": "final",
+      "expected_label": "UNKNOWN",
+      "status": "backend_error",
+      "decision": null,
+      "basis": null,
+      "reason_codes": [
+        "INVALID_OUTPUT"
+      ],
+      "error_code": "INVALID_OUTPUT",
+      "elapsed_ms": 6695.03,
+      "model_invoked": false,
+      "raw_output": " UNKNOWN.",
+      "parsed_label": null
+    }
+  ],
+  "aggregate": {
+    "cases": 12,
+    "model_calls": 0,
+    "backend_errors": 11,
+    "policy_only_case": "SMK-005",
+    "valid_labels": 0,
+    "decisive_labels": 0,
+    "matches_expected_label": 0,
+    "valid_label_rate": 0.0,
+    "wall_ms": 66207.36,
+    "cold_ms": 10428.6,
+    "warm_mean_ms": 5070.78
+  }
+}

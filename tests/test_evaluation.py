@@ -15,10 +15,11 @@ import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, ClassVar
 
 import pytest
 
+from _imagekit import png_bytes
 from nitelos import VerificationPolicy, Verifier, canonical_json
 from nitelos.evaluation.runner import (
     RunnerError,
@@ -31,6 +32,9 @@ from nitelos.evaluation.runner import (
 SUBJECT = {"form": "registration-1"}
 SENTINEL = "ORACLE-SENTINEL-4c1f"
 AS_OF = "2026-10-20T10:01:00Z"
+
+SHOT_PNG = png_bytes(4, 4, "RGB", (10, 20, 30))
+SHOT_SHA = hashlib.sha256(SHOT_PNG).hexdigest()
 
 
 def _digest(payload: Any) -> str:
@@ -161,6 +165,7 @@ def build_mini_benchmark(
     entries = []
     collector = []
     for case_id in cases or ["c-ok"]:
+        case_artifacts: list[dict[str, Any]] = []
         if case_id.endswith("-in"):
             (root / "requests" / f"{case_id}-assertion.json").write_text("{ not json", encoding="utf-8")
             _write_json(root / "oracle" / f"{case_id}.json", _oracle_doc(case_id))
@@ -183,16 +188,49 @@ def build_mini_benchmark(
         else:
             doc = _ok_request_doc(case_id, f"{case_id}-obs")
             if view == "visual":
+                # visual view cites a screenshot with real artifact bytes, trusted
+                # through the fixture collector (the honest shrunk-benchmark shape)
+                shot_eid = f"{case_id}-shot"
                 doc["criteria"] = [
                     {
                         "id": "appearance",
                         "description": "The synthetic window shows a completion banner",
                         "kind": "visual",
                         "scope": "visual",
-                        "evidence_ids": [f"{case_id}-obs"],
+                        "evidence_ids": [shot_eid],
                         "subject": dict(SUBJECT),
                     }
                 ]
+                doc["evidence"] = [
+                    {
+                        "id": shot_eid,
+                        "kind": "screenshot",
+                        "sequence": 0,
+                        "captured_at": "2026-10-20T10:00:00Z",
+                        "checkpoint_id": "cp-final",
+                        "source_id": "fixture-ui",
+                        "subject": dict(SUBJECT),
+                        "phase": "final",
+                        "sha256": SHOT_SHA,
+                        "artifact_id": f"art-{shot_eid}",
+                        "media_type": "image/png",
+                        "width": 4,
+                        "height": 4,
+                    }
+                ]
+                (root / "artifacts" / f"art-{shot_eid}.png").write_bytes(SHOT_PNG)
+                case_artifacts.append(
+                    {"id": f"art-{shot_eid}", "path": f"artifacts/art-{shot_eid}.png", "sha256": SHOT_SHA}
+                )
+                collector.append(
+                    {
+                        "evidence_id": shot_eid,
+                        "sha256": SHOT_SHA,
+                        "source_id": "fixture-ui",
+                        "subject": dict(SUBJECT),
+                        "checkpoint_id": "cp-final",
+                    }
+                )
             _write_json(root / "requests" / f"{case_id}-assertion.json", doc)
             _write_json(root / "oracle" / f"{case_id}.json", _oracle_doc(case_id))
         entries.append(
@@ -201,7 +239,7 @@ def build_mini_benchmark(
                 "group_id": "s99:L1",
                 "primary_scenario": "S99",
                 "request": f"requests/{case_id}-assertion.json",
-                "artifacts": [],
+                "artifacts": case_artifacts,
                 "oracle": f"oracle/{case_id}.json",
             }
         )
@@ -389,7 +427,15 @@ def test_eval04_oracle_never_reaches_verifier_or_reports(tmp_path: Path) -> None
     _write_json(oracle_path, oracle)
     manifest = load_evaluation_manifest(mini.manifest_path, mini.root)
     recorded: list[Any] = []
-    summary = evaluate(manifest, _factory(recorder=recorded), tmp_path / "out")
+
+    class RecordingFactory:
+        def __call__(self, case_id: str, request: Any, artifacts: Any, bindings: Any) -> Any:
+            if case_id.startswith("#preprocessing-probe"):
+                return Verifier(policy=VerificationPolicy(), trust_bindings=())
+            recorded.append((case_id, request, artifacts, bindings))
+            return Verifier(policy=VerificationPolicy(), trust_bindings=bindings)
+
+    summary = evaluate(manifest, RecordingFactory(), tmp_path / "out")
     assert summary.status == "complete"
     for _case_id, request, _artifacts, _bindings in recorded:
         assert SENTINEL not in canonical_json({"id": request.request_id, "objective": request.objective})
@@ -702,3 +748,417 @@ def test_safe_relative_path_accepts_clean_relative(tmp_path: Path) -> None:
     (target / "f.txt").write_text("x", encoding="utf-8")
     resolved = safe_relative_path(tmp_path, "sub/f.txt")
     assert resolved.name == "f.txt"
+
+
+# --------------------------------------------------------------------------
+# NIT-012 review fix: smolvlm wiring (mocked), collector reclassification,
+# preprocessing-hash fingerprint
+# --------------------------------------------------------------------------
+
+
+def _visual_manifest(tmp_path: Path) -> MiniBenchmark:
+    bench = build_mini_benchmark(tmp_path / "bench", cases=["c-ok"], view="visual")
+    # visual manifests must declare the model opt-in for the factory path
+    doc = json.loads(bench.manifest_path.read_text(encoding="utf-8"))
+    policy = {"id": "visual-strict", "version": "1", "allow_model_inference": True}
+    policy["hash"] = _digest(policy)
+    doc["policy"] = policy
+    _write_json(bench.manifest_path, doc)
+    # the visual request cites an observation; a visual criterion on it reaches
+    # the backend regardless of eligibility content in the mocked wiring test
+    return bench
+
+
+class _MockSmolVLMBackend:
+    """Mocked backend: records construction args; a deterministic verifier wrapper."""
+
+    instances: ClassVar[list[Any]] = []
+
+    def __init__(self, model_dir: object, revision: object, **kwargs: object) -> None:
+        self.model_dir = model_dir
+        self.revision = revision
+        self.kwargs = kwargs
+        _MockSmolVLMBackend.instances.append(self)
+
+    @property
+    def descriptor(self) -> Any:
+        from nitelos.schemas import BackendDescriptor
+
+        return BackendDescriptor(
+            id="smolvlm",
+            version="1.0",
+            preprocessing_hash="e" * 64,
+        )
+
+    @property
+    def capabilities(self) -> Any:
+        from nitelos.backends import BackendCapabilities
+
+        return BackendCapabilities(
+            evidence_kinds=("screenshot",),
+            criterion_kinds=("visual",),
+            supports_images=True,
+            supports_evidence_references=True,
+            max_images_per_criterion=2,
+        )
+
+    def infer(self, prepared: object, context: object) -> object:
+        raise AssertionError("no inference in the wiring test")
+
+    def close(self) -> None:
+        return None
+
+
+def test_smolvlm_factory_constructs_backend_and_verifier(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    import types
+
+    bench = _visual_manifest(tmp_path)
+    manifest = load_evaluation_manifest(bench.manifest_path, bench.root)
+    _MockSmolVLMBackend.instances.clear()
+    import importlib.util
+
+    fake_module = types.ModuleType("nitelos.backends.smolvlm")
+    fake_module.SmolVLMBackend = _MockSmolVLMBackend  # type: ignore[attr-defined]
+    fake_module.DEFAULT_REVISION = "482adb537c021c86670beed01cd58990d01e72e4"
+    fake_spec = importlib.util.spec_from_file_location("nitelos.backends.smolvlm", __file__)
+    fake_module.__spec__ = fake_spec
+    monkeypatch.setitem(sys.modules, "nitelos.backends.smolvlm", fake_module)
+    from nitelos.evaluation.runner import _build_verifier_factory
+
+    factory, shared = _build_verifier_factory("smolvlm", str(tmp_path / "weights"), manifest.policy)
+    first = factory("c-ok", object(), {}, ())
+    second = factory("c-ok-2", object(), {}, ())
+    assert _MockSmolVLMBackend.instances, "the factory must construct SmolVLMBackend"
+    (instance,) = _MockSmolVLMBackend.instances  # one construction, not one per verifier
+    assert instance is shared
+    assert str(instance.model_dir).endswith("weights")
+    assert instance.revision, "the pinned default revision is passed"
+    assert first.backend is shared
+    assert second.backend is shared
+
+
+def test_smolvlm_factory_still_probes_module_availability(monkeypatch: pytest.MonkeyPatch) -> None:
+    import importlib.util
+
+    real = importlib.util.find_spec
+    monkeypatch.setattr(
+        importlib.util, "find_spec", lambda name: None if name == "nitelos.backends.smolvlm" else real(name)
+    )
+    from nitelos.evaluation.runner import ConfigError, _build_verifier_factory
+
+    with pytest.raises(ConfigError, match="local"):
+        _build_verifier_factory("smolvlm", "/weights", VerificationPolicy())
+
+
+def test_collector_shape_error_is_configuration_exit_two(tmp_path: Path) -> None:
+    mini = build_mini_benchmark(tmp_path / "bench", cases=["c-ok"])
+    collector_path = mini.root / "fixture-collector.json"
+    collector = json.loads(collector_path.read_text(encoding="utf-8"))
+    collector["collector_id"] = "wrong-collector"  # trusted runner configuration error
+    _write_json(collector_path, collector)
+    from nitelos.evaluation.runner import ConfigError
+
+    manifest = load_evaluation_manifest(mini.manifest_path, mini.root)
+    with pytest.raises(ConfigError, match="collector"):
+        evaluate(manifest, _factory(), tmp_path / "out")
+
+
+def test_collector_missing_file_is_configuration_exit_two(tmp_path: Path) -> None:
+    mini = build_mini_benchmark(tmp_path / "bench", cases=["c-ok"])
+    (mini.root / "fixture-collector.json").unlink()
+    from nitelos.evaluation.runner import ConfigError
+
+    manifest = load_evaluation_manifest(mini.manifest_path, mini.root)
+    with pytest.raises(ConfigError, match="collector"):
+        evaluate(manifest, _factory(), tmp_path / "out")
+
+
+def test_preprocessing_hash_captured_and_compared(tmp_path: Path) -> None:
+    bench_a = build_mini_benchmark(tmp_path / "bench-a", cases=["c-ok"])
+    run_a = _run_into(tmp_path, "pha", bench_a)
+    run_meta = json.loads((run_a / "run.json").read_text(encoding="utf-8"))
+    assert "preprocessing_hash" in run_meta
+    bench_b = build_mini_benchmark(tmp_path / "bench-b", cases=["c-ok"])
+    run_b = _run_into(tmp_path, "phb", bench_b)
+    assert compare_reports(run_a, run_b)["compatible"] is True
+    # mutate the recorded preprocessing hash -> disclosed mismatch
+    meta = json.loads((run_b / "run.json").read_text(encoding="utf-8"))
+    meta["preprocessing_hash"] = "f" * 64
+    _write_json(run_b / "run.json", meta)
+    comparison = compare_reports(run_a, run_b)
+    assert comparison["compatible"] is True  # disclosed, not refused
+    assert comparison["preprocessing"]["matched"] is False
+    assert comparison["preprocessing"]["delta"]
+
+
+# --------------------------------------------------------------------------
+# shared-backend mode: one construction, one lazy load, one close per run
+# --------------------------------------------------------------------------
+
+
+_VISUAL_POLICY = {"id": "visual-strict", "version": "1", "allow_model_inference": True}
+
+
+def _visual_bench(root: Path, cases: list[str]) -> MiniBenchmark:
+    policy = {**_VISUAL_POLICY}
+    policy["hash"] = _digest({k: v for k, v in policy.items() if k != "hash"})
+    return build_mini_benchmark(root, cases=cases, view="visual", policy=policy)
+
+
+class _HashedBackend:
+    """Minimal backend whose descriptor carries a preprocessing hash."""
+
+    def __init__(self) -> None:
+        self.closed = 0
+
+    @property
+    def descriptor(self) -> Any:
+        from nitelos.schemas import BackendDescriptor
+
+        return BackendDescriptor(id="hashed", version="1.0", preprocessing_hash="e" * 64)
+
+    @property
+    def capabilities(self) -> Any:
+        from nitelos.backends import BackendCapabilities
+
+        return BackendCapabilities()
+
+    def infer(self, prepared: object, context: object) -> Any:
+        raise AssertionError("no inference expected here")
+
+    def close(self) -> None:
+        self.closed += 1
+
+
+def test_shared_backend_wired_into_every_verifier_and_closed_once(tmp_path: Path) -> None:
+    from test_backend_contract import FakeVisualBackend
+
+    bench = _visual_bench(tmp_path / "bench", ["c-a", "c-b"])
+    manifest = load_evaluation_manifest(bench.manifest_path, bench.root)
+    shared = FakeVisualBackend()
+    built: list[Any] = []
+
+    class Factory:
+        def __call__(self, case_id: str, request: Any, artifacts: Any, bindings: Any) -> Any:
+            verifier = Verifier(backend=shared, policy=manifest.policy, trust_bindings=bindings)
+            built.append(verifier)
+            return verifier
+
+    summary = evaluate(manifest, Factory(), tmp_path / "out", backend=shared)
+    assert summary.status == "complete"
+    assert len(built) == 2
+    assert all(verifier.backend is shared for verifier in built)
+    assert len(shared.calls) == 2  # the shared instance serves every case
+    assert shared.closed == 1  # closed exactly once, by evaluate()
+    rows = _read_cases(tmp_path / "out")
+    assert all(row["model_invoked"] for row in rows)
+
+
+def test_shared_backend_closed_on_infra_abort(tmp_path: Path) -> None:
+    from nitelos.evaluation.runner import InfraError
+
+    bench = _visual_bench(tmp_path / "bench", ["c-a", "c-b"])
+    manifest = load_evaluation_manifest(bench.manifest_path, bench.root)
+    (bench.root / "requests" / "c-a-assertion.json").unlink()  # unreadable -> infra
+    shared = _HashedBackend()
+
+    class Factory:
+        def __call__(self, case_id: str, request: Any, artifacts: Any, bindings: Any) -> Any:
+            return Verifier(backend=shared, policy=manifest.policy, trust_bindings=bindings)
+
+    with pytest.raises(InfraError):
+        evaluate(manifest, Factory(), tmp_path / "out", backend=shared)
+    assert shared.closed == 1
+
+
+def test_shared_backend_closed_after_per_case_backend_error(tmp_path: Path) -> None:
+    from test_backend_contract import FakeVisualBackend
+
+    bench = _visual_bench(tmp_path / "bench", ["c-back", "c-ok"])
+    manifest = load_evaluation_manifest(bench.manifest_path, bench.root)
+    shared = FakeVisualBackend()
+
+    class RaisingVerifier:
+        def verify(self, request: Any, *, artifacts: Any = None) -> Any:
+            raise RuntimeError("SECRET model internals")
+
+    class Factory:
+        def __call__(self, case_id: str, request: Any, artifacts: Any, bindings: Any) -> Any:
+            if case_id == "c-back":
+                return RaisingVerifier()
+            return Verifier(backend=shared, policy=manifest.policy, trust_bindings=bindings)
+
+    summary = evaluate(manifest, Factory(), tmp_path / "out", backend=shared)
+    assert summary.status == "complete"  # per-case error is a result, not an abort
+    rows = {row["case_id"]: row for row in _read_cases(tmp_path / "out")}
+    assert rows["c-back"]["execution_status"] == "backend_error"
+    assert rows["c-ok"]["execution_status"] == "ok"
+    assert shared.closed == 1
+
+
+def test_shared_backend_hash_read_directly_skipping_the_probe(tmp_path: Path) -> None:
+    bench = _visual_bench(tmp_path / "bench", ["c-ok"])
+    manifest = load_evaluation_manifest(bench.manifest_path, bench.root)
+    shared = _HashedBackend()
+
+    class Factory:
+        def __call__(self, case_id: str, request: Any, artifacts: Any, bindings: Any) -> Any:
+            return Verifier(backend=shared, policy=manifest.policy, trust_bindings=bindings)
+
+    evaluate(manifest, Factory(), tmp_path / "out", backend=shared)
+    run = json.loads((tmp_path / "out" / "run.json").read_text(encoding="utf-8"))
+    assert run["preprocessing_hash"] == "e" * 64
+
+
+def test_probe_reads_hash_from_a_real_verifier_backend(tmp_path: Path) -> None:
+    """backend=None path: the run.json hash comes from a real Verifier's backend
+    (pins the public accessor the probe reads; regression: the probe silently
+    returned None for every factory-built verifier)."""
+    bench = _visual_bench(tmp_path / "bench", ["c-ok"])
+    manifest = load_evaluation_manifest(bench.manifest_path, bench.root)
+    hashed = _HashedBackend()
+
+    class Factory:
+        def __call__(self, case_id: str, request: Any, artifacts: Any, bindings: Any) -> Any:
+            return Verifier(backend=hashed, policy=manifest.policy, trust_bindings=bindings)
+
+    evaluate(manifest, Factory(), tmp_path / "out")
+    run = json.loads((tmp_path / "out" / "run.json").read_text(encoding="utf-8"))
+    assert run["preprocessing_hash"] == "e" * 64
+
+
+# --------------------------------------------------------------------------
+# CLI: the smolvlm path constructs exactly one backend per run
+# --------------------------------------------------------------------------
+
+
+class _CountingSmolVLM(_MockSmolVLMBackend):
+    """Mocked heavy backend: counts constructions, lazy loads and closes."""
+
+    constructed: ClassVar[int] = 0
+    loads: ClassVar[int] = 0
+    closed_count: ClassVar[int] = 0
+
+    def __init__(self, model_dir: object, revision: object, **kwargs: object) -> None:
+        super().__init__(model_dir, revision, **kwargs)
+        self._loaded = False
+        type(self).constructed += 1
+
+    def infer(self, prepared: object, context: object) -> Any:
+        from test_backend_contract import _supported_finding
+
+        if not self._loaded:  # the lazy model load happens on first inference
+            type(self).loads += 1
+            self._loaded = True
+        prepared_any = prepared  # the mock only needs the finding shape
+        return _supported_finding(prepared_any.criterion_id, prepared_any.images[0].evidence_id)
+
+    def close(self) -> None:
+        type(self).closed_count += 1
+
+
+def _run_cli_smolvlm(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, cases: list[str]
+) -> tuple[int, type[_CountingSmolVLM]]:
+    import importlib.util
+    import types
+
+    bench = _visual_bench(tmp_path / "bench", cases)
+    _CountingSmolVLM.constructed = 0
+    _CountingSmolVLM.loads = 0
+    _CountingSmolVLM.closed_count = 0
+    fake_module = types.ModuleType("nitelos.backends.smolvlm")
+    fake_module.SmolVLMBackend = _CountingSmolVLM  # type: ignore[attr-defined]
+    fake_module.DEFAULT_REVISION = "482adb537c021c86670beed01cd58990d01e72e4"
+    fake_spec = importlib.util.spec_from_file_location("nitelos.backends.smolvlm", __file__)
+    fake_module.__spec__ = fake_spec
+    monkeypatch.setitem(sys.modules, "nitelos.backends.smolvlm", fake_module)
+    from nitelos.evaluation.runner import main
+
+    code = main(
+        [
+            "run",
+            "--manifest",
+            str(bench.manifest_path),
+            "--artifacts",
+            str(bench.root),
+            "--output",
+            str(tmp_path / "out"),
+            "--backend",
+            "smolvlm",
+            "--model-dir",
+            str(tmp_path / "weights"),
+        ]
+    )
+    return code, _CountingSmolVLM
+
+
+def test_cli_smolvlm_constructs_one_backend_and_closes_once(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    code, mock = _run_cli_smolvlm(tmp_path, monkeypatch, ["c-a", "c-b"])
+    assert code == 0
+    assert mock.constructed == 1
+    assert mock.loads == 1  # one lazy load shared by both cases
+    assert mock.closed_count == 1
+    rows = _read_cases(tmp_path / "out")
+    assert all(row["model_invoked"] for row in rows)
+    assert (tmp_path / "out" / "COMPLETE").exists()
+    run = json.loads((tmp_path / "out" / "run.json").read_text(encoding="utf-8"))
+    assert run["preprocessing_hash"] == "e" * 64  # the mock descriptor's hash
+
+
+def test_cli_smolvlm_sixty_case_run_performs_exactly_one_load(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    cases = [f"c-{i:03d}" for i in range(60)]
+    code, mock = _run_cli_smolvlm(tmp_path, monkeypatch, cases)
+    assert code == 0
+    assert mock.constructed == 1
+    assert mock.loads == 1
+    assert mock.closed_count == 1
+    assert len(_read_cases(tmp_path / "out")) == 60
+
+
+def test_cli_smolvlm_backend_construction_failure_exits_three(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A backend that cannot be constructed is infrastructure (exit 3), not
+    configuration — and no output directory is created for a run that never
+    started."""
+    import importlib.util
+    import types
+
+    bench = _visual_bench(tmp_path / "bench", ["c-ok"])
+    fake_module = types.ModuleType("nitelos.backends.smolvlm")
+
+    class _ExplodingBackend:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            raise RuntimeError("torch exploded")
+
+    fake_module.SmolVLMBackend = _ExplodingBackend  # type: ignore[attr-defined]
+    fake_module.DEFAULT_REVISION = "482adb537c021c86670beed01cd58990d01e72e4"
+    fake_spec = importlib.util.spec_from_file_location("nitelos.backends.smolvlm", __file__)
+    fake_module.__spec__ = fake_spec
+    monkeypatch.setitem(sys.modules, "nitelos.backends.smolvlm", fake_module)
+    from nitelos.evaluation.runner import main
+
+    code = main(
+        [
+            "run",
+            "--manifest",
+            str(bench.manifest_path),
+            "--artifacts",
+            str(bench.root),
+            "--output",
+            str(tmp_path / "out"),
+            "--backend",
+            "smolvlm",
+            "--model-dir",
+            str(tmp_path / "weights"),
+        ]
+    )
+    assert code == 3
+    assert not (tmp_path / "out").exists()
