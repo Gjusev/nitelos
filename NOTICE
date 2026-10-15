@@ -1,0 +1,51 @@
+Nitelos
+Copyright 2026 Nitelos contributors
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this project except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0.
+
+This product includes software developed by third parties. The authoritative,
+versioned inventory is docs/implementation/dependency-licenses.md; the summary
+below is the bootstrap and is refreshed at each release from the frozen lock.
+
+== Core runtime (shipped wheel dependencies) ==
+
+- pydantic 2.14.1 — MIT
+- pydantic-core 2.50.1 — MIT
+- annotated-types 0.8.0 — MIT
+- typing-extensions 4.16.0 — PSF-2.0
+- typing-inspection 0.4.4 — MIT
+- pillow 12.3.0 — MIT-CMU (review the wheel's bundled image-library notices:
+  libjpeg-turzbo/libwebp/zlib/libtiff components and their attributions)
+
+== Optional extra: eval (not installed by default) ==
+
+- numpy 2.5.4 — BSD-3-Clause
+- scipy 1.18.1 — BSD-3-Clause (bundled math-library notices in the wheel)
+
+== Optional extra: local (not installed by default; experimental visual backend) ==
+
+Versions per the frozen lock on the NIT-008 branch; refresh at release.
+
+- torch 2.14.1+cpu — BSD-3-Clause (see the PyTorch legal notice for bundled
+  components; the +cpu wheel excludes CUDA components)
+- transformers 5.19.0 — Apache-2.0
+- tokenizers 0.23.3 — Apache-2.0
+- safetensors 0.8.0 — Apache-2.0
+- huggingface-hub 2.2.0 — MIT (incl. hf-xet — Apache-2.0)
+- tqdm, regex, pyyaml, filelock, fsspec, jinja2/markupsafe, sympy/mpmath,
+  networkx, packaging — MIT / BSD-3-Clause / Apache-2.0 / Unlicense per the
+  inventory table
+
+== Not redistributed ==
+
+Model checkpoints are NOT part of this distribution. Users provision them
+separately under their upstream licenses:
+- HuggingFaceTB/SmolVLM2-2.2B-Instruct @ revision 482adb5 (current pin,
+  Apache-2.0) and, as historical record, HuggingFaceTB/SmolVLM-500M-Instruct @
+  revision a7da5b9 (Apache-2.0).
+
+Authored synthetic fixtures in this repository (tests/fixtures, benchmarks/
+synthetic_v1) are original works licensed Apache-2.0 by the project
+contributors; they contain no personal data and no third-party assets.
