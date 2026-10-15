@@ -183,3 +183,9 @@ Recording notes: (N1) at the AR-4 docs pass, confirm installation.md's weight-pr
 ## NIT-010 re-verification — APPROVED and merged (2026-10-15)
 
 Reviewer: nitelos-14. The full 120-oracle state→truth table was rebuilt independently from design 4.1–4.15 with zero mismatches; S11 fixed systemically and pinned by a mechanical test; visual compositions verified structurally over every case; numeral removal spot-checked on regenerated renders (only labeled data values carry digits). Merged into integration/v0.1 (511 passed + 1 deselected; Linux strict replay OK). Final-test annotation and freeze remain PENDING the user-scheduled human gate (G4).
+
+## NIT-014 review — 2026-10-15
+
+Reviewer: nitelos-14 (ran the demos live; DOC-01..04 verified). Verdict: APPROVE-WITH-CHANGES.
+Required at merge (docs were written pre-ADR-012 and must not suppress the pass): (a) "executability gate under review" → passed on the dev smoke set, with the honest accuracy observation attached and benchmark numbers still pending NIT-013; (b) pinned model id/revision updated everywhere to SmolVLM2-2.2B-Instruct @ 482adb5; (c) the visual demo actually wired (the stub's "wiring arrives with NIT-008" is now false) — finding 2 folded into the required update; (d) the tautological `or True` assert replaced by a real benchmark-number ban.
+Windows-unsupported status for `local` stays (A4).
