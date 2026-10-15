@@ -21,9 +21,9 @@ No secrets or sensitive evidence are stored here.
 | NIT-010 Fixtures | done (merged; human gate pending for final-test audit/freeze) | nitelos-f2 impl, nitelos-14 review | nit/010-fixtures `f93e4d8` | 003, 009 | full truth table re-verified independently; compositions structural; numerals removed | G4 human reviewers scheduled by user at the end |
 | NIT-011 Metrics | done (merged) | nitelos-0f | nit/011-metrics + nit/011b-metrics `5ffd8e8` | 002, AR-1 | STAT 26 + MET 19 tests; reviews by nitelos-69 (A: approve-with-changes fixed; B: approve) | metrics numpy/scipy-free; Wilson endpoints exact |
 | NIT-012 Runner | done (merged with review fixes `82021a2`: smolvlm wiring, collector exit-2, preprocessing fingerprint) | nitelos-f2 impl, nitelos-14 review | nit/012-runner → nit/012-review-fix | 006, 010, 011 | Win 569+1 skip+1 desel; Linux 567+3 skips+1 desel | |
-| NIT-013 Evaluation | dev-split done+merged (deterministic 60/60 exact; visual 60/60, agreement 41/60, over-support recorded); FINAL runs pending AR-4 + G4 human gate | nitelos-14 impl, nitelos-f2 review | nit/013b-runs `94baa2e` | 008, 012 | preflight ruling applied; both dev-visual records kept | shared-backend runner mode assigned (nitelos-f2) before final runs |
+| NIT-013 Evaluation | done (four sealed-tree final runs + G8 summary, pre-AR-5 verified) | nitelos-f2 runs/report, nitelos-14 verification | nit/final-runs `fc03f38` | 008, 012 | det 120/120 exact; visual 26/38, unsafe 7/18; freeze accf8f46… | |
 | NIT-014 Docs/demo | done (merged `8f19a3e` after merge-time update) | nitelos-f2 impl, nitelos-14 review | nit/014-docs | 006, 009, 012 | Win 575+1+1desel; Linux 573+3+1desel; visual demo wired and gated | |
-| NIT-015 Release audit | finalization done+merged (`10b4d0c`: REL-01..04, license-inventory test, release-prep workflow); G4/final-runs/AR-5 pending | nitelos-f2 | nit/015-release | 013, 014 | Win 601+2 skips+1 desel; Linux 599+4+1 | dispatch-only workflow; no publish executed |
+| NIT-015 Release audit | done (REL-01..04 + workflow + checklist closed; publication = maintainer) | nitelos-f2 | nit/015-release | 013, 014 | Win 604+2 skips+1 desel; Linux replay OK | |
 
 ## Architectural reviews
 
@@ -33,7 +33,7 @@ No secrets or sensitive evidence are stored here.
 | AR-2 deterministic flow | done (approved; conditions verified 2026-10-15) | nitelos-0f | decisions.md AR-2 |
 | AR-3 local integration | done (approved; NIT-008 merged) | nitelos-f2 (independent) | brief sent 2026-10-15 |
 | AR-4 protocol freeze | done (protocol+inputs frozen; oracle seal pending G4 human gate) | orchestrator (dossier by nitelos-f2) | ar-4-freeze.md `d357037` |
-| AR-5 release candidate | pending | | |
+| AR-5 release candidate | done (approved 2026-10-16) | orchestrator; pre-verification nitelos-14 | decisions.md AR-5; reports/v0.1/ |
 
 ## Open orchestrator items
 
@@ -87,3 +87,4 @@ All pending.
 - 2026-10-15: preflight fix reviewed APPROVE and merged with dev-split records (582 passed). Shared-backend runner mode assigned to nitelos-f2.
 - 2026-10-15: shared-backend merged (589 passed Win; Linux replay OK). AR-4 dossier assembly assigned to nitelos-f2.
 - 2026-10-15: AR-4 dossier approved (digests independently recomputed) and merged. Project now waits on: G4 human annotation → final freeze → final runs → NIT-015 final → AR-5.
+- 2026-10-16: final runs merged; AR-5 APPROVED. v0.1 release candidate complete; publication awaits maintainer (human annotation review precondition per ADR-013).

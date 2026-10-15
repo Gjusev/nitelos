@@ -228,3 +228,19 @@ ORCHESTRATOR ADJUDICATION (verdicts against the actual request files, which the 
 3. AUTHOR-SIDE FIXES before freeze: fill the 10 empty rationales from state; rewrite the 2 subject_mismatch rationales; update the mechanical state→truth test to the per-variant S07 rule (subject_mismatch→unknown, wrong_id→failure); data-card note that packets should state per-view evidence composition (v2 improvement; the audited packets stand as issued).
 4. Sufficiency semantics ruling: evidence_sufficiency means "sufficient to establish the actually-observed state" (S05 pending+sufficient is coherent).
 Sign-off: recorded as TWO INDEPENDENT AI REVIEWERS + orchestrator adjudication per ADR-013, with the binding no-human-audit label on all downstream artifacts.
+
+## AR-5 — release candidate APPROVED (2026-10-16)
+
+Orchestrator approval. Pre-AR-5 verification by nitelos-14 (independent of the runs and the report pack): every number recomputed from raw artifacts, freeze seal recomputed live, all four runs RUN-01/02 valid; three SUMMARY wording fixes applied (fc03f38) and verified.
+
+Gate evidence:
+- G1 Contract: 100% of conformance cases (CON/EVD/DET/POL/SDK/BAK/TRC suites); schema snapshots stable; legal result matrix enforced. DONE.
+- G2 Trust/security: all SEC/POL negative cases green (SEC-01..08 across the suites); zero paths to false success under two independent adversarial reviews; no network/raw logging (socket-denied suites). DONE.
+- G3 Executable local path: SmolVLM2-2.2B @ 482adb5 CPU float32 — smoke 11/11 valid, 10 decisive; integration test re-run by the orchestrator; compatibility manifest recorded (ADR-012 history preserved). DONE.
+- G4 Reproducible evaluation: 120-case sealed benchmark (freeze accf8f46…), four complete validated runs (both views × both splits), run fingerprints verified. DONE — labels audited per ADR-013 by two independent AI reviewers + adjudication, with the binding no-human-audit label and human review as a publication precondition.
+- G5 Quality: core CI 3.12/3.13 × Linux/Windows matrices exercised throughout (604 passed integration, Linux strict replay green); lint/format/mypy strict clean. DONE.
+- G6 Rights/supply chain: full license inventory machine-checked against the lock (REL-04); NOTICE; checkpoints separate-download-only; no unresolved high/critical reachable issue in shipped paths; vulnerability advisory scan wired in the release workflow (executes at release dispatch). DONE.
+- G7 Adoption documentation: offline demo from installed wheel (DOC-01..04); 12 doc pages; recipe; examples tested. DONE.
+- G8 Honest reporting: reports/v0.1/SUMMARY.md — deterministic exactness 120/120; visual decisive accuracy 26/38 with unsafe acceptance 7/18 and far denominators named; identical-across-splits caveats; per-family tables; agent-audit label; no real-world claims. DONE.
+Known limitations recorded: over-support bias of the visual model (headline), S07 cross-split truth asymmetry (documented, no decision impact), Windows local extra unvalidated, agent-audited labels per ADR-013.
+Remaining (maintainer authority, outside this phase): human annotation review precondition, package-name/availability recheck, and any publication.
