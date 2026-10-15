@@ -16,14 +16,14 @@ No secrets or sensitive evidence are stored here.
 | NIT-005 Policy | done (merged) | nitelos-69 | nit/005-policy `42ef33a` | 004 | Win 246 passed; Linux 245 + 1 platform skip | reviewer nitelos-0f APPROVE-WITH-CHANGES (visual refs, eligible_evidence helper, immutable map) |
 | NIT-006 SDK | done (merged) | nitelos-69 | nit/006-sdk `fc7e278` | 005 | Win 288 passed; Linux strict replay OK | AR-2 approved; ADR-011 nullable request_id; F1 race, F2 strict env, F3 limitation code |
 | NIT-007 Backend boundary | review (reviewer nitelos-08, queued after NIT-010 fixes) | nitelos-3a | nit/007-backend-boundary `4e24012` | 006, AR-2, 009 | 26 BAK/contract tests; Win 333 passed; Linux 332 + 1 platform skip | rationale export deferred; deadline None until NIT-008 |
-| NIT-008 Local VLM | running (adapter + real CPU smoke) | nitelos-3a | nit/008-smolvlm | 007 | smoke set + design done | authorized to add `local` extra to pyproject/uv.lock |
+| NIT-008 Local VLM | running (ADR-012: swap to SmolVLM2-2.2B @482adb5, smoke re-run; 500M attempt records kept) | nitelos-14 | nit/008-smolvlm | 007 | attempt 1: 0/44 decisive, all ' UNKNOWN.'; D3: captions fine | G3 fallback pre-agreed: release candidate with G3 failed |
 | NIT-009 Traces | done (merged) | nitelos-0f/08 | nit/009-traces `2d5d3be` | 006, AR-2 | Win 307 passed after merge; Linux strict replay OK | reviewer nitelos-3a APPROVE-WITH-CHANGES (naive as_of fix) |
 | NIT-010 Fixtures | re-verification pending (fixes `5d5f35e..756968d` verified by orchestrator) | nitelos-08 (= resumed nitelos-0f) | nit/010-fixtures `2940b01` | 003, 009 | 120 cases/240 requests/128 PNGs; deterministic dry run 120/120 exact; Win 438 passed (eval); Linux 436 + 2 platform skips; freeze refuses (exit 1, 60 pending) | final-test audit + freeze PENDING human gate (G4) |
 | NIT-011 Metrics | done (merged) | nitelos-0f | nit/011-metrics + nit/011b-metrics `5ffd8e8` | 002, AR-1 | STAT 26 + MET 19 tests; reviews by nitelos-69 (A: approve-with-changes fixed; B: approve) | metrics numpy/scipy-free; Wilson endpoints exact |
 | NIT-012 Runner | delivered+verified; review queued (nitelos-3a) | nitelos-08 | nit/012-runner `3631943` | 006, 010, 011 | Win 478+1 skip; Linux fresh clone 476+3 skips; real CLI dev.json exit 0 (60/60/0, conformance 1.0) | smolvlm CLI path exits 2 until NIT-008; no faked runs |
 | NIT-013 Evaluation | part A (RUN validator) delivered+verified (`b451a6a`, Win 496+1 skip, Linux 494+3 skips); real runs pending AR-4 + human gate | nitelos-f2 | nit/013-reports | 008, 012, AR-4 | validator caught real runner bug (run_id stamping) | |
-| NIT-014 Docs/demo | pending | | | 006, 009, 012 | | |
-| NIT-015 Release audit | pending | | | 013, 014 | | |
+| NIT-014 Docs/demo | review pending (nitelos-14) | nitelos-f2 | nit/014-docs `f0ba219` | 006, 009, 012 | Win 506+1 skip; Linux 504+3 skips; DOC-01 wheel-install quickstart | |
+| NIT-015 Release audit | prep running | nitelos-f2 | nit/015-release | 013, 014 | | gates table/NOTICE/license inventory/workflow sketch |
 
 ## Architectural reviews
 
@@ -77,3 +77,4 @@ All pending.
 - 2026-10-15: peers identified after rename: `nitelos-f2` = nitelos-08 (ex 0f), full context, all work committed; `nitelos-14` = nitelos-3a (ex 69), full context, mid-NIT-008 (mocked tests green, WSL local env synced, CPU smoke imminent). Assignments: 14 continues NIT-008 (NIT-012 review + NIT-010 re-verify queued after smoke report); f2 reviews NIT-007 then implements the RUN-01/02 report validator (NIT-013 part A).
 - 2026-10-15: user decision — the G4 human reviewers come at the very end of all work. Final-test audit, freeze and final benchmark runs wait for them; everything else proceeds.
 - 2026-10-15: NIT-013A verified. NIT-008 G3 attempt 1 failed (0/11 valid, all ' UNKNOWN.'); ruling: one pre-declared prompt iteration round (v2/v3 + D1/D2 diagnostics), then viability review if still 0.
+- 2026-10-15: ADR-012 user-approved: checkpoint swap to SmolVLM2-2.2B-Instruct @482adb5. Weights provisioned by orchestrator; shard 2 corrupt on first download (hash mismatch caught by upstream-oid cross-check; sidecar regenerated after clean re-download). NIT-007 merged; NIT-014 verified; NIT-015 prep assigned.
