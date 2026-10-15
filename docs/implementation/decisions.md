@@ -168,3 +168,9 @@ SmolVLM2-2.2B-Instruct @ 482adb5, UNCHANGED prompt v1 (hash 08fde1e3…), WSL Ub
 Orchestrator independent verification: mocked suite 374 passed + 1 deselected (Windows, local extra); the gated real-model integration test re-run by the orchestrator on WSL PASSED (63.7 s).
 Honest accuracy observation (dev labels only, no tuning): smoke agreement 4/12; the 2.2B is format-compliant but over-supports (SUPPORTED on REFUTED-authored 004/007/009). Recorded as a model-judgment limitation for AR-3, the benchmark interpretation and all reporting; the executability gate is unaffected.
 Dependency additions under the pre-authorization (both required by the processor chain, justified in-branch): torchvision 0.29.1+cpu (unguarded import in transformers 5.19 smolvlm image processor) and num2words 0.5.14 (SmolVLM2 processor requirement), plus their transitives; core/eval closures unchanged; core import stays torch-free.
+
+## NIT-012 review — 2026-10-15
+
+Reviewer: nitelos-14. Verdict: APPROVE-WITH-CHANGES. Adversarial probes (Linux): path-escape table extended, symlink chains, kill-mid-run semantics, collector-shape attacks, trust-fingerprint tampering — all held.
+Required: wire the `--backend smolvlm` CLI factory to SmolVLMBackend now that NIT-008 has landed.
+Orchestrator rulings on the info findings: (2) collector-shape errors are reclassified as configuration → exit 2 (doc 06 treats the fixture collector as trusted runner configuration); (4) capture the backend descriptor's preprocessing_hash in run.json and compare it in compare_reports together with the finding-1 wiring — required before any visual comparison is reported as matched; (3) the realpath→open TOCTOU window is recorded as a residual (host-local tampering out of doc-07 scope); future hardening via dir_fd-relative opens.
