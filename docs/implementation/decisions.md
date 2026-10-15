@@ -122,3 +122,9 @@ Reviewer: nitelos-3a. Verdict: APPROVE-WITH-CHANGES. Required before any human a
 2. The visual-view compositions are corrected to the accepted design: S06 withholds the database observation; S07 v1 uses a visual criterion; S15 replaces its observed criterion with a visual one. A per-family composition test is added.
 3. The group-index numeral is removed from renders. The orchestrator made this required as leakage hygiene, because in S04/S12/S15 the group determines the variant or truth.
 Lesson recorded: the deterministic dry run validates decisions, not oracle truth labels and not visual-view composition; both now need their own tests.
+
+## NIT-007 implementer decisions (pending review) — 2026-10-15
+
+- Rationale export (an unsafe-content option) is deferred to NIT-012/014 reporting; v0.1 results carry no rationale field.
+- Finding validation raises `BackendOutputError` (backend codes); the verifier converts it to backend_error. `validate_backend_finding` is public as the conformance helper for custom backends.
+- `InferenceContext.deadline` is None until the NIT-008 adapter-level 120 s cooperative deadline.
