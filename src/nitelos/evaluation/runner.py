@@ -353,15 +353,22 @@ def _bindings_for(collector: list[dict[str, Any]], request: VerificationRequest)
 
 
 def _peak_rss_bytes() -> tuple[int | None, str]:
-    if sys.platform.startswith("linux"):
+    platform = sys.platform
+    if platform.startswith("linux"):
         import resource  # noqa: PLC0415 - POSIX-only module, imported where it exists
+        from types import ModuleType  # noqa: PLC0415 - pairs with the resource import
 
-        return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024, "ru_maxrss"
-    if sys.platform == "win32":
+        posix_resource: ModuleType = resource
+        getrusage = getattr(posix_resource, "getrusage", None)
+        if getrusage is None:  # pragma: no cover - exotic POSIX without getrusage
+            return None, "ru_maxrss_unavailable"
+        usage = getrusage(resource.RUSAGE_SELF)  # type: ignore[attr-defined, unused-ignore]
+        return usage.ru_maxrss * 1024, "ru_maxrss"
+    if platform == "win32":
         # GlobalMemoryStatusEx reports system-wide counters, not this process's
         # peak; the honest v0.1 answer on Windows is null-with-reason
         return None, "peak_rss_unavailable_on_windows"
-    return None, "peak_rss_unavailable"  # type: ignore[unreachable]  # other platforms
+    return None, "peak_rss_unavailable"  # pragma: no cover - linux/win32 handled above
 
 
 def _fail_incomplete(  # noqa: PLR0917 - internal failure writer, bundling would hurt clarity

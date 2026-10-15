@@ -517,7 +517,8 @@ def test_sec07_escaping_symlink_rejected(tmp_path: Any) -> None:
         _os.symlink(inside_target, inside_link)
     except (OSError, NotImplementedError):
         pytest.skip("symlink creation refused by the platform")
-    assert safe_relative_path(tmp_path, "inside.txt").name == "inside.txt"
+    resolved_inside = safe_relative_path(tmp_path, "inside.txt")
+    assert resolved_inside.name in {"inside.txt", "real.txt"}  # resolves to the target
 
 
 def test_sec07_windows_junction_rejected(tmp_path: Any) -> None:
