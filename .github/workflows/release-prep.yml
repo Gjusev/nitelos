@@ -6,7 +6,8 @@
 # job is the ONLY networked job (advisory DBs) and is labeled as such per doc 12.
 # The publish job exists but cannot fire unless a maintainer flips the manual
 # `publish` input AND approves the protected `pypi` environment; no secrets live
-# in this repository (PyPI trusted publishing via OIDC).
+# in this repository (PyPI trusted publishing via OIDC). Pending publisher
+# configured on PyPI 2026-10-16 (project name: nitelos, environment: pypi).
 
 name: release-prep
 
