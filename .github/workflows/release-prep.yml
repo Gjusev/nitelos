@@ -62,6 +62,9 @@ jobs:
   attest:
     needs: build
     runs-on: ubuntu-latest
+    # artifact attestations are unavailable on user-owned PRIVATE repositories
+    # (platform limitation); the job turns authoritative if the repo goes public
+    continue-on-error: true
     permissions:
       contents: read
       id-token: write # artifact attestation via OIDC; scoped to this job only
