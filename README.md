@@ -1,5 +1,7 @@
 # Nitelos
 
+[![PyPI version](https://img.shields.io/pypi/v/nitelos.svg)](https://pypi.org/project/nitelos/) ![Python](https://img.shields.io/pypi/pyversions/nitelos.svg)
+
 **Verify the outcome, not the attempt.**
 
 Nitelos is a Python SDK that checks whether an agent's success criteria are supported
