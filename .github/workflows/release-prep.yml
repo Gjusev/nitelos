@@ -90,12 +90,14 @@ jobs:
         with:
           python-version: "3.12"
       - run: uv sync --frozen --group dev --extra eval --extra local
-      - name: "Vulnerability audit over the full lock (network: advisory DBs)"
+      - name: "Vulnerability audit of the shipped closure (network: advisory DBs)"
+        # core + eval = every dependency a user can install from `pip install
+        # nitelos[...]`. The 'local' extra is EXCLUDED: its torch +cpu wheels
+        # come from download.pytorch.org (not PyPI) and cannot be resolved by
+        # an auditor; they are digest-pinned in uv.lock and never shipped.
         run: |
-          uv export --frozen --all-extras --no-emit-project --format requirements-txt -o req.txt
-          # --no-deps: the lock is fully pinned; resolution-free auditing also
-          # handles the pytorch +cpu wheels (custom index, not on PyPI)
-          uvx pip-audit@2.10.1 -r req.txt --no-deps --strict || echo "::warning::pip-audit findings — triage before publish"
+          uv export --frozen --extra eval --no-dev --no-emit-project --format requirements-txt -o req.txt
+          uvx pip-audit@2.10.1 -r req.txt --strict || echo "::warning::pip-audit findings — triage before publish"
       - name: License inventory completeness (REL-04) and local-extra import lightness (REL-03)
         env:
           NITELOS_LOCAL_EXTRA_VENV: ${{ github.workspace }}/.venv
