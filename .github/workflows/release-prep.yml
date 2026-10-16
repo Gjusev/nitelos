@@ -72,7 +72,7 @@ jobs:
           path: dist
       - uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
         with:
-          subject-path: "dist/nitelos-*.whl dist/nitelos-*.tar.gz"
+          subject-path: "dist/nitelos-*"  # one glob: the action takes a single subject-path
 
   audit: # G6 supply-chain row — NETWORKED (advisory DB access), disclosed per doc 12
     needs: build
@@ -88,7 +88,7 @@ jobs:
       - run: uv sync --frozen --group dev --extra eval --extra local
       - name: "Vulnerability audit over the full lock (network: advisory DBs)"
         run: |
-          uv export --frozen --all-extras --format requirements-txt -o req.txt
+          uv export --frozen --all-extras --no-emit-project --format requirements-txt -o req.txt
           uvx pip-audit@2.10.1 -r req.txt --strict || echo "::warning::pip-audit findings — triage before publish"
       - name: License inventory completeness (REL-04) and local-extra import lightness (REL-03)
         env:
