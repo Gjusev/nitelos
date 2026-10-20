@@ -133,6 +133,11 @@ module = ["inspect_ai", "inspect_ai.*"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
+# NIT-027 (mcp extra, not in the dev group): absent in core-only environments
+module = ["mcp", "mcp.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
 # the metric subclasses deepeval's BaseMetric, which is Any when the extra is
 # absent; its attr-defined ignore only fires when the extra IS installed
 module = "nitelos.integrations.deepeval_metric"
