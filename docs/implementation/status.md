@@ -43,6 +43,43 @@ No secrets or sensitive evidence are stored here.
 
 All pending.
 
+## v0.2 tasks
+
+Plan: [17-v0.2-product-and-plan.md](../planning/17-v0.2-product-and-plan.md). Integration branch: `integration/v0.2`
+(from `integration/v0.1` @ `0c29c17`). Worktrees: `C:\Code Main\nitelos-wt\nit-0XX`, branch `nit/0XX-<slug>`.
+
+| Task | State | Owner | Branch / worktree | Depends | Tests / results | Deviations / blockers |
+|---|---|---|---|---|---|---|
+| NIT-016 Repo hygiene | pending | — | — | — | — | |
+| NIT-017 F1 collector framework | pending | — | — | G9 | — | includes central extras-isolation test and `__all__` fix (see ADR-014) |
+| NIT-018 F2 git collector | pending | — | — | 017 | — | |
+| NIT-019 F3 test-results collector | pending | — | — | 017 | — | |
+| NIT-020 F4 GitHub collector | pending | — | — | 017 | — | |
+| NIT-021 F5 HTTP collector | pending | — | — | 017 | — | |
+| NIT-022 F6 Playwright helper | pending | — | — | 017 | — | |
+| NIT-023 F7 Claude Code plugin | pending | — | — | 017, 018, 019 | — | hook fields to be confirmed against Claude Code docs first |
+| NIT-024 F8 Inspect scorer | pending | — | — | 017 | — | |
+| NIT-025 F9 LangGraph node | pending | — | — | 017 | — | |
+| NIT-026 F10 DeepEval metric | pending | — | — | 017 | — | |
+| NIT-027 F11 MCP server | pending | — | — | 017 | — | |
+| NIT-028 F12 OpenTelemetry | pending | — | — | G9 | — | |
+| NIT-029 F13 Agent SDK adapters | pending | — | — | 023 adoption | — | |
+| NIT-030 tau2 study | pending | — | — | G11, 017 | — | license review first; no runs before G11 |
+| NIT-031 Dogfooding, incidents file | pending | maintainer | — | 023 | — | maintainer-owned |
+| NIT-032 G4 human audit | pending | maintainer | — | — | — | maintainer-owned |
+| NIT-033 F14 pre-action gate | pending | — | — | own ADR | — | |
+| NIT-034 Docs and comparison page | pending | — | — | features | — | |
+| NIT-035 v0.2.0 release candidate | pending | — | — | G12 | — | publication maintainer-owned |
+
+## Gates G9–G12
+
+| Gate | State |
+|---|---|
+| G9 ADR-014/015/016 | pending (proposed in decisions.md) |
+| G10 dogfooding review | pending |
+| G11 NIT-030 protocol freeze | pending |
+| G12 release candidate | pending |
+
 ## Log
 
 - 2026-10-14: planning baseline committed (`3fbcdf4`); NIT-001 completed by orchestrator.
@@ -88,3 +125,4 @@ All pending.
 - 2026-10-15: shared-backend merged (589 passed Win; Linux replay OK). AR-4 dossier assembly assigned to nitelos-f2.
 - 2026-10-15: AR-4 dossier approved (digests independently recomputed) and merged. Project now waits on: G4 human annotation → final freeze → final runs → NIT-015 final → AR-5.
 - 2026-10-16: final runs merged; AR-5 APPROVED. v0.1 release candidate complete; publication awaits maintainer (human annotation review precondition per ADR-013).
+- 2026-10-20: v0.2 setup: `integration/v0.2` created from `integration/v0.1` @ `0c29c17`; plan copied to docs/planning/17; NIT-016..035 added (pending); ADR-014/015/016 written as proposed. Found during setup: `from nitelos import *` raises AttributeError (`__all__` lists `Backend`, `BackendCapabilities`, which `nitelos/__init__.py` does not import); fix proposed in NIT-017. Waiting on G9.

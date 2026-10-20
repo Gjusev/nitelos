@@ -33,6 +33,7 @@ For project review: 00 → 01 → 09 → 02 → 03 → 05 → 14. For GLM 5.3: r
 | [14 Risks and ADRs](14-risks-and-adrs.md) | Ten decisions, risk register and adversarial self-review |
 | [15 Future roadmap](15-future-roadmap.md) | Optional priorities; no committed implementation authorization |
 | [16 Requirements traceability](16-requirements-traceability.md) | Requirement→task→test→gate mapping and completion audit |
+| [17 v0.2 product and plan](17-v0.2-product-and-plan.md) | v0.2 proposal: features F1–F15, tasks NIT-016..035, gates G9–G12; not approved scope until G9 |
 
 ## Authority and conflict resolution
 
