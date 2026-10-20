@@ -40,7 +40,7 @@ from __future__ import annotations
 
 import json
 from datetime import UTC, datetime
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, Protocol, cast
 
 from nitelos import TrustBinding, Verifier, parse_request
 from nitelos.schemas import VerificationResult
@@ -54,8 +54,25 @@ except ImportError as _exc:  # pragma: no cover - exercised via subprocess test
     ) from None
 
 if TYPE_CHECKING:  # pragma: no cover
-    from inspect_ai.scorer import Scorer, Target
-    from inspect_ai.solver import TaskState
+    pass
+
+
+class Scorer(Protocol):
+    """Structural stand-in for inspect's Scorer: callable on (state, target).
+
+    Defined locally (never imported) so the module type-checks identically
+    with and without the extra — inspect's own Scorer is Any under the
+    core-env mypy override.
+    """
+
+    async def __call__(self, state: Any, target: Any) -> Any: ...
+
+
+# inspect's decorators are typed with the extra installed and Any in
+# core-only mypy runs (central override). The decorated defs below are
+# deliberately UNANNOTATED inner factories wrapped by annotated outer
+# functions: mypy has nothing to untype in either environment, so no
+# per-line ignores are needed and none go unused in the other env.
 
 __all__ = ["NITELOS_EVIDENCE_KEY", "VALUE_ABSTAIN", "nitelos_accuracy", "nitelos_scorer"]
 
@@ -65,7 +82,6 @@ VALUE_INCORRECT = "I"
 VALUE_ABSTAIN = "A"
 
 
-@metric
 def nitelos_accuracy() -> Any:
     """C/(C+I) over the DECISIVE scores only — abstentions excluded.
 
@@ -77,14 +93,19 @@ def nitelos_accuracy() -> Any:
     if you want abstention counted as 0.
     """
 
-    def compute(scores: list[Any]) -> float:
-        decisive = [s for s in scores if s.score.value in (VALUE_CORRECT, VALUE_INCORRECT)]
-        if not decisive:
-            return 0.0
-        correct = sum(1 for s in decisive if s.score.value == VALUE_CORRECT)
-        return correct / len(decisive)
+    @metric
+    def _factory():  # type: ignore[no-untyped-def]  # inspect decorator shape; see imports note
 
-    return compute
+        def compute(scores: list[Any]) -> float:
+            decisive = [s for s in scores if s.score.value in (VALUE_CORRECT, VALUE_INCORRECT)]
+            if not decisive:
+                return 0.0
+            correct = sum(1 for s in decisive if s.score.value == VALUE_CORRECT)
+            return correct / len(decisive)
+
+        return compute
+
+    return _factory()
 
 
 def _score_metadata(result: VerificationResult, evidence: list[dict[str, Any]]) -> dict[str, Any]:
@@ -146,8 +167,10 @@ def nitelos_scorer(
     )
 
     @scorer(name=name, metrics=[nitelos_accuracy()])
-    def factory() -> Scorer:
-        async def score(state: TaskState, target: Target) -> Score:
+    def factory():  # type: ignore[no-untyped-def]  # inspect decorator shape; see imports note
+        # unannotated inner factory: see the typing note near the imports
+        async def score(state, target):  # type: ignore[no-untyped-def]  # ditto
+
             del target  # the truth comes from evidence, never from the target string
             criteria = state.metadata["nitelos_criteria"]
             checkpoint_id = state.metadata.get("nitelos_checkpoint_id", "cp-inspect")
@@ -169,4 +192,4 @@ def nitelos_scorer(
 
         return score
 
-    return factory()
+    return cast(Scorer, factory())
