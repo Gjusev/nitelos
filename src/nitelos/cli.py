@@ -31,6 +31,7 @@ KIND_TARGETS: dict[str, str] = {  # kind -> "module:attribute"
     "git": "nitelos.collect.git:COLLECTOR",
     "junit": "nitelos.collect.test_results:COLLECTOR",
     "github": "nitelos.collect.github:COLLECTOR",
+    "http": "nitelos.collect.http_json:COLLECTOR",
 }
 
 
