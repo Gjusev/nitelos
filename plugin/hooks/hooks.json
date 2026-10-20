@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "NITELOS_HOOK_ROLE=prompt bash \"${CLAUDE_PLUGIN_ROOT}/hooks/nitelos-hook.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/nitelos-hook.sh\"",
+            "timeout": 60
+          }
+        ]
+      }
+    ]
+  }
+}

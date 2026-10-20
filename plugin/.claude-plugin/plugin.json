@@ -1,0 +1,10 @@
+{
+  "name": "nitelos",
+  "version": "0.2.0",
+  "description": "Verify the outcome, not the attempt: check the agent's stop claim against collected evidence (JUnit test reports, git state).",
+  "author": {"name": "Nitelos contributors"},
+  "homepage": "https://github.com/Gjusev/nitelos",
+  "repository": "https://github.com/Gjusev/nitelos",
+  "license": "Apache-2.0",
+  "keywords": ["verification", "ai-agents", "testing", "junit", "git"]
+}
