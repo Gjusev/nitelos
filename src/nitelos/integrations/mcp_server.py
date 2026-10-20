@@ -40,8 +40,8 @@ from nitelos.errors import RequestValidationError
 from nitelos.schemas import parse_request
 
 try:
-    from mcp.server.lowlevel import Server  # type: ignore[import-not-found, unused-ignore]  # optional mcp extra; deepeval-precedent central override may replace
-    from mcp.types import (  # type: ignore[import-not-found, unused-ignore]  # optional mcp extra; deepeval-precedent central override may replace
+    from mcp.server.lowlevel import Server
+    from mcp.types import (
         CallToolResult,
         ListToolsResult,
         TextContent,
@@ -89,12 +89,27 @@ _TOOLS = (
 
 
 class McpServerConfig(BaseModel):
-    """Server configuration: where criteria live and which collectors run."""
+    """Server configuration: criteria location and HOST-pinned collectors.
+
+    ``collector_configs`` maps each enabled kind to the exact config mapping
+    the host pins for it (report roots, globs, repo paths -- chosen by the
+    host, never by the agent). An agent ``collect`` call supplies ONLY the
+    kind; a ``config`` argument in the call is rejected as a tool error
+    (ADR-015 finding 4: the host authorizes what gets collected).
+
+    ``_ACTIVE_CONFIG`` module-global tradeoff: the lowlevel Server API
+    registers plain callables with no closure scope of their own, so the
+    active config is held in a single-process module slot set by
+    :func:`build_server`. This server is single-connection by construction
+    (one stdio serve per process); a future multi-server process would need
+    closure capture instead.
+    """
 
     model_config = ConfigDict(extra="forbid", frozen=True)
 
     criteria_path: Path
     enabled_collectors: tuple[str, ...] = Field(default=(), min_length=0)
+    collector_configs: dict[str, dict[str, Any]] = Field(default_factory=dict)
     request_max_age_seconds: int = Field(default=300, ge=0, le=86400)
 
 
@@ -175,19 +190,23 @@ def _collect(arguments: Mapping[str, Any]) -> CallToolResult:
     from nitelos.cli import KIND_TARGETS  # noqa: PLC0415 - lazy: keeps import light for non-collect calls
 
     kind = str(arguments.get("kind", ""))
+    if "config" in arguments:
+        return _tool_error(
+            "collect accepts only the kind; collector configuration is pinned by the server host"
+        )
     config = _ACTIVE_CONFIG[0]
     if kind not in config.enabled_collectors or kind not in KIND_TARGETS:
         return _tool_error(f"collector kind not enabled on this server: {kind}")
+    pinned = config.collector_configs.get(kind)
+    if not isinstance(pinned, Mapping) or not pinned:
+        return _tool_error(f"collector kind enabled but not host-configured: {kind}")
     target = KIND_TARGETS[kind]
     module_name, _, attribute = target.partition(":")
     try:
         collector = getattr(importlib.import_module(module_name), attribute)
     except Exception:  # noqa: BLE001 - missing extra
         return _tool_error(f"collector {kind} unavailable (install its nitelos extra)")
-    collect_config = dict(arguments.get("config", {}))
-    collect_config.setdefault("evidence_id", f"mcp-{kind}")
-    collect_config.setdefault("checkpoint_id", "stop")
-    collect_config.setdefault("subject", {"source": "mcp"})
+    collect_config = dict(pinned)
     result = run_collector(collector, collect_config)
     if result.error is not None:
         logger.debug("collect: kind=%s error=%s", kind, result.error.code.value)
@@ -230,7 +249,7 @@ def build_server(config: McpServerConfig) -> Server:
 
 
 async def _run_stdio(config: McpServerConfig) -> None:
-    from mcp.server.stdio import stdio_server  # type: ignore[import-not-found, unused-ignore]  # optional mcp extra  # noqa: PLC0415  # lazy: serving path only
+    from mcp.server.stdio import stdio_server  # noqa: PLC0415  # lazy: serving path only
 
     server = build_server(config)
     options = server.create_initialization_options()
@@ -240,12 +259,21 @@ async def _run_stdio(config: McpServerConfig) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     """Serve MCP over stdio (python -m nitelos.integrations.mcp_server)."""
-    logging.basicConfig(level=logging.DEBUG, stream=sys.stderr)
+    logging.basicConfig(level=logging.INFO, stream=sys.stderr)
     criteria = os.environ.get("NITELOS_MCP_CRITERIA", ".nitelos/criteria.json")
-    collectors = tuple(
-        kind for kind in os.environ.get("NITELOS_MCP_COLLECTORS", "junit,git").split(",") if kind
+    collectors = tuple(kind for kind in os.environ.get("NITELOS_MCP_COLLECTORS", "").split(",") if kind)
+    pinned: dict[str, dict[str, Any]] = {}
+    configs_path = os.environ.get("NITELOS_MCP_COLLECTOR_CONFIGS")
+    if configs_path:
+        pinned = {
+            str(kind): dict(mapping)
+            for kind, mapping in json.loads(Path(configs_path).read_text(encoding="utf-8")).items()
+        }
+    config = McpServerConfig(
+        criteria_path=Path(criteria),
+        enabled_collectors=collectors,
+        collector_configs=pinned,
     )
-    config = McpServerConfig(criteria_path=Path(criteria), enabled_collectors=collectors)
     asyncio.run(_run_stdio(config))
     return 0
 

@@ -128,7 +128,21 @@ def _scenarios(workdir: Path) -> dict[str, Any]:
     criteria_path = workdir / "criteria.json"
     criteria_path.write_text(json.dumps(CRITERIA), encoding="utf-8")
     original = criteria_path.read_text(encoding="utf-8")
-    build_server(McpServerConfig(criteria_path=criteria_path, enabled_collectors=("junit",)))
+    build_server(
+        McpServerConfig(
+            criteria_path=criteria_path,
+            enabled_collectors=("junit",),
+            collector_configs={
+                "junit": {
+                    "evidence_id": "mcp-junit",
+                    "checkpoint_id": "stop",
+                    "subject": {"source": "mcp"},
+                    "report_root": str(workdir),
+                    "report_glob": "reports/*.xml",
+                }
+            },
+        )
+    )
     out: dict[str, Any] = {}
     listed = asyncio.run(on_list_tools(None, None))
     out["tool_names"] = [tool.name for tool in listed.tools]
@@ -157,15 +171,19 @@ def _scenarios(workdir: Path) -> dict[str, Any]:
     denied = _call("collect", {"kind": "github"})
     out["collect_denied_is_error"] = bool(denied.is_error)
     out["collect_denied_text"] = denied.content[0].text
-    collected = _payload(
-        _call(
-            "collect",
-            {
-                "kind": "junit",
-                "config": {"report_root": str(workdir), "report_glob": "reports/*.xml"},
-            },
-        )
+    agent_config = _call(
+        "collect",
+        {
+            "kind": "junit",
+            "config": {"report_root": str(workdir), "report_glob": "reports/*.xml"},
+        },
     )
+    out["agent_config_is_error"] = bool(agent_config.is_error)
+    out["agent_config_text"] = agent_config.content[0].text
+    unconfigured = _call("collect", {"kind": "git"})
+    out["unconfigured_is_error"] = bool(unconfigured.is_error)
+    out["unconfigured_text"] = unconfigured.content[0].text
+    collected = _payload(_call("collect", {"kind": "junit"}))
     out["collect_total"] = collected["evidence"][0]["data"]["total"]
     described = _payload(_call("describe_criteria", {}))
     out["described_version"] = described["version"]

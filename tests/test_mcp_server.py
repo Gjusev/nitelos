@@ -101,3 +101,15 @@ def test_mcp11_isolation_and_actionable_missing_extra() -> None:
     assert proc.returncode == 0, proc.stderr
     assert "core-ok" in proc.stdout
     assert "True" in proc.stdout
+
+
+def test_mcp12_agent_supplied_config_rejected(report: dict[str, Any]) -> None:
+    assert report["agent_config_is_error"]
+    assert "pinned by the server host" in report["agent_config_text"]
+
+
+def test_mcp13_enabled_but_unconfigured_kind_is_an_error(report: dict[str, Any]) -> None:
+    assert report["unconfigured_is_error"]
+    assert (
+        "not enabled" in report["unconfigured_text"] or "not host-configured" in report["unconfigured_text"]
+    )
