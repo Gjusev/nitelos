@@ -9,25 +9,32 @@
   <a href="https://github.com/Gjusev/nitelos/actions/workflows/ci.yml"><img src="https://github.com/Gjusev/nitelos/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
 </p>
 
-nitelos is a Python SDK for people who build AI agents. You write down what
-"done" means as explicit criteria, you hand it the evidence your agent left
-behind, and it answers `success`, `failure` or `abstained`, pointing at the
-evidence behind every decided criterion. It never acts on the agent's behalf: no
-clicks, no network fetches, no retries.
+**nitelos checks whether an AI agent really did what it says it did.** It is a
+small Python SDK: you describe what "done" means, hand it the evidence the agent
+left behind, and it answers `success`, `failure` or `abstained`.
 
-<p align="center"><img src="docs/assets/nitelos-loop.gif" width="760" alt="One observed value flips. With validation_error true, the criterion /validation_error equals false is refuted and the decision is failure; with validation_error false, it is supported and the decision is success. Synthetic example, real output."></p>
+<p align="center"><img src="docs/assets/nitelos-workflow.gif" width="760" alt="The workflow in five steps. 1: the agent says registration succeeded. 2: the criterion, no validation error remains on the form. 3: the evidence, the final form with validation_error true. 4: nitelos checks the criterion against the evidence. 5: the decision is failure, refuted by evidence obs-form at /validation_error, and the agent's claim is struck through. Synthetic example, real output."></p>
 
-## The problem
+## How it works
 
-An agent finishes a registration task and reports `registration succeeded`. The
-form it left behind still shows a validation error. If you trust the summary,
-that failure lands in your metrics as a success.
+1. **Your agent runs a task** and reports a result, for example `registration
+   succeeded`. nitelos treats that report as context, never as proof.
+2. **You write down what "done" means** as criteria: "no validation error remains
+   on the form", expressed as `/validation_error equals false`.
+3. **Your runner hands over the evidence** it captured: the final page state,
+   screenshots, what each tool returned, records read from external systems.
+4. **nitelos compares criteria and evidence** and answers `success`, `failure` or
+   `abstained`, with the evidence behind every decided criterion.
 
-![Verdict frame from the nitelos launch film. The agent's summary says registration succeeded; the observation shows validation_error true; nitelos returns decision failure, and the real output confirms the check itself ran fine.](docs/assets/nitelos-film-poster.jpg)
+nitelos only judges. It never clicks, fetches or retries for the agent; the
+runner that collects the evidence stays yours (an agent harness, a test suite, a
+CI job).
 
-nitelos checks the claim against the final state instead. The criterion is one
-line of data (`/validation_error equals false`), the evidence is the observation
-your runner captured, and the result is unambiguous. This is the real output of
+## Example: the summary says success, the form says otherwise
+
+The agent above reports `registration succeeded`, but the form it left behind
+still shows a validation error. Trust the summary and that failure lands in your
+metrics as a success. This is the real output of
 [`examples/demo_incomplete_form.py`](examples/demo_incomplete_form.py):
 
 ```text
@@ -41,18 +48,6 @@ reason_codes:     ['CRITERION_REFUTED']
 The check itself ran fine (`execution_status: ok`). The outcome failed
 (`decision: failure`), and the result names the exact piece of evidence that
 refuted it.
-
-## How it works
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/how-it-works-dark.svg">
-  <img src="docs/assets/how-it-works-light.svg" alt="Your host collects and normalizes evidence and writes the criteria. nitelos checks every criterion against that evidence, without clicking, fetching or retrying, and returns an execution status, a decision of success, failure or abstained, and the evidence references behind every decided criterion." width="100%">
-</picture>
-
-Your host (an agent runner, a test harness, a CI job) collects and normalizes the
-evidence and writes the criteria. nitelos only evaluates. Evidence can be a
-normalized observation, a screenshot with its digest, an action record, or an
-external read that the host vouches for with a `TrustBinding`.
 
 ## Install
 

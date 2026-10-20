@@ -13,7 +13,8 @@ shown is real ([evidence/](evidence/commands.md)).
 | [proofs/qa.md](proofs/qa.md) | QA gates, seam test, problems found and fixed |
 | [assets/licenses.md](assets/licenses.md) | Fonts, GSAP, music, SFX: licenses and obligations |
 
-Compositions: `index.html` (main, 30 s), `demo.html` (60 s), `vertical.html` (30 s),
+Compositions: `workflow.html` (how it works in five steps, 24 s; source of the README
+GIF), `index.html` (main, 30 s), `demo.html` (60 s), `vertical.html` (30 s),
 `teaser.html` (8 s vertical), `loop.html` (6 s, silent), `kit-card.html`, `poster.html`,
 `diagram-png.html` (stills).
 

@@ -24,12 +24,17 @@ How the fixes were checked: [documentation-validation.md](documentation-validati
 
 ## Visual assets added for the docs
 
-`docs/assets/brand/` (wordmark, mark, tile; dark and light), `docs/assets/how-it-works-{dark,light}.svg`
-(real text, accessible title and description) with PNG fallbacks, and
-`docs/assets/nitelos-film-poster.jpg` (verdict frame of the launch film, 107 KB), and
-`docs/assets/nitelos-loop.gif` (the 6 s loop at 960 px, 15 fps, 218 KB; the README hero,
-since GitHub does not play repository MP4s inline). Generators:
-`videos/nitelos-launch/tools/brand.py` and `tools/diagram.py`.
+- `docs/assets/brand/`: wordmark, mark and tile, dark and light.
+- `docs/assets/nitelos-workflow.gif`: the README hero. It is the five-step workflow film
+  (`videos/nitelos-launch/workflow.html`) up to the settled diagram, at 960 px, 12 fps,
+  96 colours (680 KB). It is a GIF because GitHub does not play repository MP4s inline.
+  A first README pass used the 6 s loop instead; feedback was that it did not explain
+  what the project does, so the workflow film replaced it.
+- `docs/assets/how-it-works-{dark,light}.svg` (real text, accessible title and
+  description) with PNG fallbacks, and `docs/assets/nitelos-film-poster.jpg` (verdict
+  frame, 107 KB). Neither is used by the README any more, since the GIF and the
+  numbered steps cover them; they are kept for slides and posts.
+- Generators: `videos/nitelos-launch/tools/brand.py` and `tools/diagram.py`.
 
 ## Left as is, on purpose
 

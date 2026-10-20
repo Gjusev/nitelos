@@ -51,6 +51,17 @@
       "render": "tools/stage.sh teaser.html render --quality delivery --output \"$(pwd -W)/renders/nitelos-teaser-8s.raw.mp4\" && tools/master.sh renders/nitelos-teaser-8s.raw.mp4 renders/nitelos-teaser-8s.mp4 4.5 stills/nitelos-teaser-poster.jpg"
     },
     {
+      "id": "workflow",
+      "path": "renders/nitelos-workflow-24s.mp4",
+      "composition": "workflow.html",
+      "width": 1920, "height": 1080, "fps": 30, "frames": 708, "duration_s": 23.616,
+      "video_codec": "h264", "audio_codec": "aac 48 kHz stereo 192k",
+      "loudness_lufs": -16.06, "true_peak_dbtp": -1.22,
+      "poster_frame_s": 18.5, "poster": "stills/nitelos-workflow-poster.jpg",
+      "readme_gif": "../../docs/assets/nitelos-workflow.gif (0.05 to 19.05 s, 960 px, 12 fps, 96 colours, 679802 bytes)",
+      "render": "tools/stage.sh workflow.html render --quality delivery --output \"$(pwd -W)/renders/nitelos-workflow-24s.raw.mp4\" && tools/master.sh renders/nitelos-workflow-24s.raw.mp4 renders/nitelos-workflow-24s.mp4 18.5 stills/nitelos-workflow-poster.jpg && ffmpeg -ss 0.05 -t 19.0 -i renders/nitelos-workflow-24s.mp4 -vf \"fps=12,scale=960:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=96:stats_mode=full[p];[b][p]paletteuse=dither=none:diff_mode=rectangle\" -loop 0 ../../docs/assets/nitelos-workflow.gif"
+    },
+    {
       "id": "loop",
       "path": ["renders/nitelos-loop-6s.mp4", "renders/nitelos-loop-6s.webm"],
       "composition": "loop.html",

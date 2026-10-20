@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>nitelos: how it works (24 s)</title>
+    <script src="/assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Archivo"; src: url("/assets/fonts/Archivo-VF.ttf") format("truetype"); font-weight: 100 900; font-stretch: 62% 125%; }
+      @font-face { font-family: "Martian Mono"; src: url("/assets/fonts/MartianMono-VF.ttf") format("truetype"); font-weight: 100 800; }
+      :root { --ground: #101318; --panel: #171b22; --ink: #f4f1e9; --muted: #8a93a3; --line: #59616f; --evidence: #79bfff; --refuted: #ff877a; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--ground); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--ground); color: var(--ink); }
+      .clip { position: absolute; inset: 0; }
+      .abs { position: absolute; }
+      .label { font-family: "Martian Mono"; font-variation-settings: "wdth" 100, "wght" 400; font-size: 24px; line-height: 1; color: var(--muted); white-space: nowrap; }
+      .label b { color: var(--evidence); font-weight: inherit; }
+      .hl { position: absolute; left: 120px; top: 110px; width: 1080px; font-family: Archivo; font-variation-settings: "wdth" 112, "wght" 650; font-size: 64px; line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance; }
+      .panel { position: absolute; background: var(--panel); border: 2px solid var(--line); border-radius: 6px; box-sizing: border-box; }
+      .mono { font-family: "Martian Mono"; font-variation-settings: "wdth" 100, "wght" 400; line-height: 1; white-space: nowrap; }
+    </style>
+  </head>
+  <body>
+    <!-- One idea per step. The settled frame at 18 s is the whole workflow: criteria + evidence -> nitelos -> decision. -->
+    <div id="root" data-composition-id="workflow" data-start="0" data-width="1920" data-height="1080" data-duration="23.6">
+      <section id="flow" class="clip" data-start="0" data-duration="19.6" data-track-index="1">
+        <div id="h1" class="hl" data-layout-allow-overlap>Your agent says the task is done.</div>
+        <div id="h2" class="hl" data-layout-allow-overlap>Write down what done means.</div>
+        <div id="h3" class="hl" data-layout-allow-overlap>Hand over the evidence it left behind.</div>
+        <div id="h4" class="hl" data-layout-allow-overlap>nitelos compares the two.</div>
+        <div id="h5" class="hl" data-layout-allow-overlap>The answer, with the evidence that decided it.</div>
+
+        <!-- 1: the claim (context, never proof) -->
+        <div id="claim" class="panel" style="left: 1300px; top: 110px; width: 500px; height: 130px">
+          <div class="label abs" style="left: 24px; top: 22px"><b>1</b>&nbsp; the agent says</div>
+          <!-- intentional: the strike crosses the claim once the decision lands -->
+          <div class="abs" data-layout-allow-occlusion style="left: 24px; top: 58px; font-family: Archivo; font-variation-settings: 'wdth' 62, 'wght' 800; font-size: 52px; line-height: 1; white-space: nowrap">registration succeeded</div>
+          <div id="strike" class="abs" style="left: 18px; top: 84px; width: 452px; height: 6px; background: var(--refuted); transform-origin: 0 50%"></div>
+        </div>
+
+        <!-- 2: the criterion -->
+        <div id="crit" class="panel" style="left: 120px; top: 380px; width: 640px; height: 190px">
+          <div class="label abs" style="left: 32px; top: 28px"><b>2</b>&nbsp; what done means</div>
+          <div class="abs" style="left: 32px; top: 76px; width: 560px; font-family: Archivo; font-variation-settings: 'wdth' 100, 'wght' 500; font-size: 38px; line-height: 1.15">No validation error remains on the form</div>
+        </div>
+
+        <!-- 3: the evidence -->
+        <div id="evid" class="panel" style="left: 120px; top: 620px; width: 640px; height: 190px">
+          <div class="abs" style="left: 32px; top: 26px; width: 20px; height: 20px; background: var(--evidence)"></div>
+          <div class="label abs" style="left: 64px; top: 28px"><b>3</b>&nbsp; evidence: the final form</div>
+          <div class="mono abs" style="left: 32px; top: 104px; font-size: 36px"><span style="color: var(--muted)">validation_error </span><span style="color: var(--refuted)">true</span></div>
+        </div>
+
+        <!-- 4: nitelos -->
+        <div id="node-label" class="label abs" style="left: 900px; top: 490px"><b>4</b>&nbsp; nitelos checks</div>
+        <div id="node" class="panel" style="left: 900px; top: 525px; width: 300px; height: 140px; border-color: var(--evidence)">
+          <img src="/assets/svg/nitelos-wordmark-dark.svg" alt="nitelos" class="abs" style="left: 40px; top: 47px; width: 220px" />
+        </div>
+
+        <!-- traces: inputs into nitelos, nitelos into the decision -->
+        <svg class="abs" width="1920" height="1080" viewBox="0 0 1920 1080" style="left: 0; top: 0">
+          <path id="t-crit" d="M760 475 H830 V575 H900" fill="none" stroke="#79bfff" stroke-width="4" />
+          <path id="t-evid" d="M760 715 H830 V615 H900" fill="none" stroke="#79bfff" stroke-width="4" />
+          <path id="t-out" d="M1200 595 H1280" fill="none" stroke="#79bfff" stroke-width="4" />
+          <path id="stop-out" d="M1280 575 V615" fill="none" stroke="#79bfff" stroke-width="4" />
+        </svg>
+
+        <!-- 5: the decision -->
+        <div id="dec" class="abs" style="left: 1300px; top: 500px; width: 500px; height: 330px">
+          <div class="label abs" style="left: 0; top: 0"><b>5</b>&nbsp; decision</div>
+          <svg width="96" height="96" viewBox="0 0 110 110" style="position: absolute; left: 0; top: 47px"><rect width="110" height="110" fill="#ff877a" /><path d="M0 110 L110 0" stroke="#101318" stroke-width="14" /></svg>
+          <div id="vword" class="abs" style="left: 112px; top: 50px; font-family: Archivo; --wdth: 62; font-variation-settings: 'wdth' var(--wdth), 'wght' 700; font-size: 90px; line-height: 1; color: var(--refuted); white-space: nowrap">failure</div>
+        </div>
+        <div id="why" class="abs" style="left: 1300px; top: 690px">
+          <div class="label abs" style="left: 0; top: 0">refuted by evidence</div>
+          <div class="mono abs" style="left: 0; top: 38px; font-size: 26px">obs-form at /validation_error</div>
+        </div>
+
+        <div class="label abs" style="left: 120px; top: 980px">synthetic example · real output</div>
+      </section>
+
+      <section id="close" class="clip" data-start="19.1" data-duration="4.5" data-track-index="2">
+        <div id="cover" class="abs" style="left: 0; top: 0; width: 1920px; height: 1080px; background: var(--ground)"></div>
+        <img id="wordmark" src="/assets/svg/nitelos-wordmark-dark.svg" alt="nitelos" class="abs" style="left: 510px; top: 330px; width: 900px" />
+        <div id="tagline" class="abs" style="left: 0; width: 1920px; top: 590px; text-align: center; font-family: Archivo; font-variation-settings: 'wdth' 112, 'wght' 500; font-size: 52px; line-height: 1">Verify the outcome, not the attempt.</div>
+        <div id="install" class="mono abs" style="left: 0; width: 1920px; top: 690px; text-align: center; font-size: 34px">pip install nitelos</div>
+      </section>
+
+      <audio id="music" src="/assets/audio/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3" data-start="0" data-duration="23.6" data-track-index="10" data-volume="0.85"
+        data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0},{"t":0.3,"v":0.85},{"t":22.4,"v":0.85},{"t":23.6,"v":0}]}]}'></audio>
+      <audio id="sfx-claim" src="/assets/audio/sfx/impactSoft_medium_002.ogg" data-start="0.56" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sfx-crit" src="/assets/audio/sfx/click2.ogg" data-start="4.37" data-track-index="12" data-volume="0.5"></audio>
+      <audio id="sfx-evid" src="/assets/audio/sfx/click2.ogg" data-start="8.2" data-track-index="13" data-volume="0.5"></audio>
+      <audio id="sfx-node" src="/assets/audio/sfx/click_003.ogg" data-start="11.47" data-track-index="14" data-volume="0.5"></audio>
+      <audio id="sfx-stop" src="/assets/audio/sfx/click2.ogg" data-start="12.55" data-track-index="15" data-volume="0.4"></audio>
+      <audio id="sfx-verdict" src="/assets/audio/sfx/impactSoft_heavy_003.ogg" data-start="15.84" data-track-index="16" data-volume="0.55"></audio>
+      <audio id="sfx-strike" src="/assets/audio/sfx/impactSoft_medium_004.ogg" data-start="16.93" data-track-index="17" data-volume="0.4"></audio>
+      <audio id="sfx-mark" src="/assets/audio/sfx/impactBell_heavy_000.ogg" data-start="19.4" data-track-index="18" data-volume="0.5"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const ARRIVE = "expo.out";
+      // beat grid of vol-12 (109.96 BPM): 0.01 + k * 0.5457 s; each step starts every 7 beats
+      const STEP = [0.01, 3.83, 7.65, 11.47, 15.29];
+
+      // initial states, outside the timeline; every tl.to below records them as its start
+      gsap.set(["#h1", "#h2", "#h3", "#h4", "#h5"], { opacity: 0, y: 30 });
+      gsap.set("#claim", { opacity: 0, x: -590, y: 365, scale: 2, transformOrigin: "50% 50%" });
+      gsap.set("#strike", { scaleX: 0 });
+      gsap.set(["#crit", "#evid", "#node", "#node-label", "#dec", "#why"], { opacity: 0, y: 40 });
+      gsap.set("#stop-out", { opacity: 0 });
+      gsap.set("#vword", { "--wdth": 62 });
+      ["#t-crit", "#t-evid", "#t-out"].forEach((s) => {
+        const p = document.querySelector(s);
+        const l = p.getTotalLength();
+        gsap.set(p, { strokeDasharray: l, strokeDashoffset: l });
+      });
+
+      // headlines: one at a time, the old one leaves before the new one arrives
+      ["#h1", "#h2", "#h3", "#h4", "#h5"].forEach((h, i) => {
+        tl.to(h, { opacity: 1, y: 0, duration: 0.5, ease: ARRIVE }, STEP[i] + 0.1);
+        if (i < 4) tl.to(h, { opacity: 0, y: -20, duration: 0.2 }, STEP[i + 1] - 0.05);
+      });
+
+      // 1: the claim arrives big, then steps aside to the corner
+      tl.to("#claim", { opacity: 1, duration: 0.3 }, 0.56);
+      tl.to("#claim", { x: 0, y: 0, scale: 1, duration: 0.7, ease: ARRIVE }, STEP[1]);
+      // 2, 3: criterion and evidence
+      tl.to("#crit", { opacity: 1, y: 0, duration: 0.5, ease: ARRIVE }, 4.37);
+      tl.to("#evid", { opacity: 1, y: 0, duration: 0.5, ease: ARRIVE }, 8.2);
+      // 4: nitelos reads both (trace, then stop)
+      tl.to(["#node", "#node-label"], { opacity: 1, y: 0, duration: 0.5, ease: ARRIVE }, STEP[3]);
+      tl.to(["#t-crit", "#t-evid"], { strokeDashoffset: 0, duration: 0.55, ease: "none" }, 12.0);
+      // 5: the decision, then the claim it contradicts is struck
+      tl.to("#t-out", { strokeDashoffset: 0, duration: 0.3, ease: "none" }, STEP[4]);
+      tl.to("#stop-out", { opacity: 1, duration: 0.05 }, STEP[4] + 0.3);
+      tl.to("#dec", { opacity: 1, y: 0, duration: 0.4, ease: ARRIVE }, 15.84);
+      tl.to("#vword", { "--wdth": 125, duration: 0.7, ease: ARRIVE }, 15.84);
+      tl.to("#why", { opacity: 1, y: 0, duration: 0.5, ease: ARRIVE }, 16.4);
+      tl.to("#strike", { scaleX: 1, duration: 0.4, ease: ARRIVE }, 16.93);
+
+      // close
+      tl.fromTo("#cover", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 19.1);
+      tl.fromTo("#wordmark", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: ARRIVE }, 19.4);
+      tl.fromTo("#tagline", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: ARRIVE }, 19.9);
+      tl.fromTo("#install", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 20.4);
+      tl.set({}, {}, 23.6);
+      window.__timelines["workflow"] = tl;
+    </script>
+  </body>
+</html>

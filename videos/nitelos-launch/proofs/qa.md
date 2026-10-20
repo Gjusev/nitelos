@@ -12,6 +12,7 @@ the raw renders. Full numbers per file: `../manifest.json`.
 | Demo 60 s, 1920×1080 | pass, 0 errors | all pass | 1800 / 60.01 s | −16.06 LUFS, −1.81 dBTP |
 | Vertical 30 s, 1080×1920 | pass, 0 errors | all pass | 900 / 30.016 s | −16.07 LUFS, −1.52 dBTP |
 | Teaser 8 s, 1080×1920 | pass, 0 errors | 25/25 pass | 240 / 8.0 s | −16.14 LUFS, −1.33 dBTP |
+| Workflow 24 s, 1920×1080 (README GIF, LinkedIn) | pass, 0 errors (an overflowing evidence label was shortened) | pass | 708 / 23.616 s | −16.06 LUFS, −1.22 dBTP |
 | Loop 6 s, 1600×900, MP4 + WebM | pass, 0 errors, 0 warnings | n/a (no text pairs flagged) | 180 / 6.0 s, no audio | n/a |
 | Stills: social card, 3 state cards, poster | pass, 0 errors | pass | PNG at exact size | n/a |
 

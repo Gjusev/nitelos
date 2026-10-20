@@ -15,6 +15,8 @@ Editorial lines (questions, instructions to the viewer) are marked as such.
 | `decision: abstained`, `INSUFFICIENT_EVIDENCE`, `MISSING_EVIDENCE` | executed output | `evidence/demo_external_pending.stdout.txt` (exit 0) |
 | `evidence_ids:` (empty) on the `stored` criterion | fixture data | `examples/demo_external_pending.py` (`evidence_ids: []`) |
 | `decision: success`, `criterion no-errors: supported` (demo film, success card) | executed output | `evidence/quickstart.stdout.txt` (exit 0) |
+| Workflow film: "No validation error remains on the form", `validation_error true`, `failure`, "refuted by evidence obs-form at /validation_error" | fixture data + executed output | `examples/demo_incomplete_form.py`; `evidence/demo_incomplete_form.stdout.txt` (`evidence obs-form at /validation_error (assertion_checked)`) |
+| Workflow film: "Your agent says the task is done.", "Write down what done means.", "Hand over the evidence it left behind.", "nitelos compares the two.", "The answer, with the evidence that decided it." | editorial (steps of the API flow) | README "How it works" |
 | Loop: `validation_error true` → `refuted` / `failure`, `false` → `supported` / `success`, `email_filled true` | executed output | `false`: `evidence/quickstart.stdout.txt`; `true`: the same script with that one value flipped, `evidence/quickstart_flipped.stdout.txt` (exit 0) |
 | State cards: `reason_codes` lines and the example file named under each | executed output | the three `evidence/*.stdout.txt` files above |
 | Social card: "A Python SDK that checks what an AI agent claims against the evidence it left." | product description | README opening paragraph |
