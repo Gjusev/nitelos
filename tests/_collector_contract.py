@@ -124,7 +124,7 @@ def _assert_kinds_within_capabilities(collector: Any, result: CollectionResult) 
         assert item.kind in declared, item.kind
 
 
-def _request_document(result: CollectionResult, cfg: CollectorConfig) -> dict[str, Any]:
+def _request_document(result: CollectionResult, cfg: CollectorConfig, cited: list[Any]) -> dict[str, Any]:
     captured_at = result.evidence[0].model_dump(mode="json")["captured_at"]
     return {
         "schema_version": "1",
@@ -138,13 +138,13 @@ def _request_document(result: CollectionResult, cfg: CollectorConfig) -> dict[st
                 "description": "The collected payload exists",
                 "kind": "assertion",
                 "scope": "external",
-                "evidence_ids": [item.id for item in result.evidence],
+                "evidence_ids": [item.id for item in cited],
                 "subject": dict(cfg.subject),
                 "pointer": "",
                 "operator": "exists",
             }
         ],
-        "evidence": [item.model_dump(mode="json") for item in result.evidence],
+        "evidence": [item.model_dump(mode="json") for item in cited],
         "metadata": {},
     }
 
@@ -157,7 +157,11 @@ def _wire_config(config: CollectorConfig | Mapping[str, Any]) -> CollectorConfig
 
 def _assert_wire_valid_evidence(result: CollectionResult, config: Any) -> None:
     cfg = _wire_config(config)
-    request = parse_request(_request_document(result, cfg))
+    # only the OBSERVATION evidence goes into the wire check: artifact-backed
+    # items (screenshots) live in the host's store, not in request JSON
+    cited = [item for item in result.evidence if item.kind == "observation"]
+    assert cited, "the contract requires at least one observation"
+    request = parse_request(_request_document(result, cfg, cited))
     verified = Verifier().verify(request)
     assert verified.execution_status.value == "ok", verified.error
 
@@ -165,7 +169,8 @@ def _assert_wire_valid_evidence(result: CollectionResult, config: Any) -> None:
 def _assert_decisive_round_trip(result: CollectionResult, config: Any) -> None:
     """Bound collected evidence must yield a DECISIVE verified decision."""
     cfg = _wire_config(config)
-    request = parse_request(_request_document(result, cfg))
+    cited = [item for item in result.evidence if item.kind == "observation"]
+    request = parse_request(_request_document(result, cfg, cited))
     verified = Verifier(trust_bindings=host_trust_bindings(result)).verify(request)
     assert verified.execution_status.value == "ok", verified.error
     assert verified.decision is not None

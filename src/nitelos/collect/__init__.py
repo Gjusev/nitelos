@@ -252,12 +252,25 @@ class Collector(Protocol):
     must set ``source_id`` to the collector id, and observations use channel
     ``external_api``. ``config_model`` is the model mapping and JSON configs
     are validated through (the base class unless a kind subclasses it).
+
+    The four descriptor members are read-only by intent (NIT-022 refinement:
+    declared as properties so both @property implementations and plain class
+    attributes satisfy the protocol, and config_model's type[...] variance is
+    covariant — the first in-package call site passing a live collector
+    exposed the settable-variable declaration as unimplementable).
     """
 
-    id: str
-    version: str
-    capabilities: CollectorCapabilities
-    config_model: type[CollectorConfig]
+    @property
+    def id(self) -> str: ...
+
+    @property
+    def version(self) -> str: ...
+
+    @property
+    def capabilities(self) -> CollectorCapabilities: ...
+
+    @property
+    def config_model(self) -> type[CollectorConfig]: ...
 
     def collect(self, config: CollectorConfig) -> CollectionResult: ...
 
