@@ -27,6 +27,7 @@ CORE_CLOSURE = {
     "pillow",
 }
 EVAL_CLOSURE = {"numpy", "scipy"}
+OTEL_CLOSURE = {"opentelemetry-api", "typing-extensions"}
 LOCAL_CLOSURE = {
     "torch",
     "transformers",
@@ -57,7 +58,7 @@ def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
     data = tomllib.loads((ROOT / "uv.lock").read_text(encoding="utf-8"))
     versions = {p["name"]: p["version"] for p in data["package"]}
     nitelos = next(p for p in data["package"] if p["name"] == "nitelos")
-    direct: dict[str, list[str]] = {"core": [], "eval": [], "local": []}
+    direct: dict[str, list[str]] = {"core": [], "eval": [], "local": [], "otel": []}
     for dep in nitelos["metadata"]["requires-dist"]:
         group = "core"
         if "marker" in dep:
@@ -65,6 +66,12 @@ def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
                 group = "eval"
             elif "extra == 'local'" in dep["marker"]:
                 group = "local"
+            elif "extra == 'otel'" in dep["marker"]:
+                group = "otel"
+            else:
+                raise AssertionError(
+                    f"unrecognised extra marker for {dep['name']}: inventory test needs the group"
+                )
         direct[group].append(dep["name"])
     return versions, direct
 
@@ -110,13 +117,16 @@ def test_direct_dependencies_land_in_the_right_sections() -> None:
     core_rows = {cells[0].lower() for cells in _rows(sections, "Core runtime")}
     eval_rows = {cells[0].lower() for cells in _rows(sections, "extra `eval`")}
     local_rows = {cells[0].lower() for cells in _rows(sections, "extra `local`")}
+    otel_rows = {cells[0].lower() for cells in _rows(sections, "extra `otel`")}
     assert set(direct["core"]) <= core_rows
     assert set(direct["eval"]) <= eval_rows
     assert set(direct["local"]) <= local_rows
+    assert set(direct["otel"]) <= otel_rows
     # and the recorded closures are fully covered by their sections
     assert core_rows >= CORE_CLOSURE
     assert eval_rows >= EVAL_CLOSURE
     assert local_rows >= LOCAL_CLOSURE
+    assert otel_rows >= OTEL_CLOSURE
     # closures are disjoint outside typing-extensions (shared core/local)
     assert not ((CORE_CLOSURE - {"typing-extensions"}) & (LOCAL_CLOSURE - {"typing-extensions"}))
     assert not (EVAL_CLOSURE & (CORE_CLOSURE | LOCAL_CLOSURE))

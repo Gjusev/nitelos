@@ -267,3 +267,22 @@ def test_ex01_custom_collector_example_prints_both_paths(capsys: pytest.CaptureF
     assert "without bindings" in out
     assert "with host bindings" in out
     assert "UNTRUSTED_EXTERNAL" in out
+
+
+def test_ex_otel_example_traces_verification() -> None:
+    """The OTel example runs offline and emits one allowlisted span."""
+    import subprocess
+    import sys
+
+    proc = subprocess.run(
+        [sys.executable, str(EXAMPLES / "otel_trace_verification.py")],
+        check=False,
+        capture_output=True,
+        text=True,
+        cwd=ROOT,
+    )
+    assert proc.returncode == 0, proc.stderr
+    assert "nitelos.verify" in proc.stdout
+    assert "nitelos.execution_status" in proc.stdout
+    assert "decision: failure" in proc.stdout
+    assert "opentelemetry-sdk" in (EXAMPLES / "otel_trace_verification.py").read_text(encoding="utf-8")

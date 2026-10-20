@@ -19,6 +19,7 @@ runnable check. This index is organized by what you are trying to do.
 | Write your own backend and pass the conformance rules | [custom-adapters.md](custom-adapters.md) |
 | Measure latency and memory honestly | [performance.md](performance.md) |
 | Review the security and privacy boundaries | [security-privacy.md](security-privacy.md) |
+| Export one span per verification | [opentelemetry.md](opentelemetry.md) |
 
 ## Evaluate nitelos
 
