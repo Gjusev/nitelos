@@ -1,6 +1,11 @@
 # Installation
 
-Nitelos targets Python 3.12 and 3.13 and installs with no optional dependencies.
+Nitelos targets Python 3.12 and 3.13. The core needs only pydantic and pillow;
+everything else is an opt-in extra.
+
+nitelos is published on PyPI ([pypi.org/project/nitelos](https://pypi.org/project/nitelos/),
+0.1.0 at the time of writing), so the commands below install the released
+package. To work on the source instead, see [From a checkout](#from-a-checkout).
 
 ## Core (deterministic verification)
 
@@ -45,3 +50,18 @@ yourself (per-file SHA-256 manifest required; see
 [backends.md](backends.md)) and point `NITELOS_MODEL_DIR` at it.
 
 There is no `all` extra by design: it would pull GPU stacks into core users.
+
+## From a checkout
+
+With [uv](https://docs.astral.sh/uv/) and the committed lockfile:
+
+```text
+uv sync --frozen                      # core plus the dev tools (pytest, ruff, mypy)
+uv sync --frozen --extra eval         # the same plus the eval extra
+uv sync --frozen --no-dev             # core only
+uv run python examples/quickstart.py  # prints decision: success
+```
+
+`--frozen` installs exactly the locked versions; uv includes the `dev` group by
+default, so `--no-dev` is the core-only install. The `local` extra resolves
+torch and torchvision from the PyTorch CPU index declared in `pyproject.toml`.

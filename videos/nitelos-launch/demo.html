@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>nitelos: technical demo (60 s)</title>
+    <script src="/assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Archivo"; src: url("/assets/fonts/Archivo-VF.ttf") format("truetype"); font-weight: 100 900; font-stretch: 62% 125%; }
+      @font-face { font-family: "Martian Mono"; src: url("/assets/fonts/MartianMono-VF.ttf") format("truetype"); font-weight: 100 800; }
+      :root {
+        --ground: #101318; --panel: #171b22; --ink: #f4f1e9; --muted: #8a93a3; --line: #59616f;
+        --evidence: #79bfff; --success: #95d8ac; --refuted: #ff877a; --abstained: #f0c878;
+      }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--ground); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--ground); color: var(--ink); }
+      .clip { position: absolute; inset: 0; }
+      .cover { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; background: var(--ground); }
+      .abs { position: absolute; }
+      .label { font-family: "Martian Mono"; font-variation-settings: "wdth" 100, "wght" 400; font-size: 26px; line-height: 1; color: var(--muted); white-space: nowrap; }
+      .hl { position: absolute; left: 120px; top: 130px; width: 1680px; overflow: hidden; padding-bottom: 0.12em; }
+      .hl-in { display: block; font-family: "Archivo"; font-variation-settings: "wdth" 112, "wght" 650; font-size: 72px; line-height: 1.06; letter-spacing: -0.02em; color: var(--ink); text-wrap: balance; }
+      .panel { position: absolute; background: var(--panel); border: 2px solid var(--line); border-radius: 6px; box-sizing: border-box; }
+      .code { position: absolute; left: 40px; font-family: "Martian Mono"; font-variation-settings: "wdth" 100, "wght" 400; font-size: 25px; line-height: 30px; white-space: pre; color: var(--ink); }
+      .code .k { color: var(--muted); }
+      .out { position: absolute; left: 48px; font-family: "Martian Mono"; font-variation-settings: "wdth" 100, "wght" 400; font-size: 27px; line-height: 33px; white-space: pre; color: var(--ink); }
+      .verdict .kicker { position: absolute; left: 0; top: 0; }
+      .verdict svg { position: absolute; left: 0; top: 40px; }
+      .verdict .word { position: absolute; left: 0; top: 150px; font-family: "Archivo"; --wdth: 62; font-variation-settings: "wdth" var(--wdth), "wght" 700; font-size: 104px; line-height: 1; white-space: nowrap; }
+      .verdict .code-reason { position: absolute; left: 0; top: 290px; font-family: "Martian Mono"; font-variation-settings: "wdth" 100, "wght" 400; font-size: 26px; color: var(--muted); white-space: nowrap; }
+      .box-title { position: absolute; font-family: "Archivo"; font-variation-settings: "wdth" 112, "wght" 650; font-size: 44px; line-height: 1; }
+      .box-text { position: absolute; font-family: "Archivo"; font-variation-settings: "wdth" 100, "wght" 400; font-size: 30px; line-height: 40px; color: var(--muted); white-space: nowrap; }
+      .legend-row { position: absolute; left: 120px; height: 96px; }
+      .legend-row svg { position: absolute; left: 0; top: 10px; }
+      .legend-row .word { position: absolute; left: 120px; top: 6px; font-family: "Archivo"; font-variation-settings: "wdth" 112, "wght" 650; font-size: 72px; line-height: 1; }
+      .legend-row .meaning { position: absolute; left: 640px; top: 22px; font-family: "Archivo"; font-variation-settings: "wdth" 100, "wght" 400; font-size: 42px; line-height: 1; color: var(--ink); white-space: nowrap; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="demo" data-start="0" data-width="1920" data-height="1080" data-duration="60">
+
+      <!-- ============ intro + diagram (0 to 13.5 s) ============ -->
+      <section id="intro" class="clip" data-start="0" data-duration="13.5" data-track-index="1">
+        <div class="hl" data-layout-allow-overflow id="hi1" style="top: 380px; width: 1400px"><span class="hl-in" style="font-size: 84px">Three real runs, each judged on the evidence supplied.</span></div>
+        <div class="label abs" id="hi1-sub" style="left: 120px; top: 640px">synthetic examples · local run · nitelos 0.1.0</div>
+        <div class="hl" data-layout-allow-overflow id="hi2"><span class="hl-in">Your host supplies the evidence. nitelos only evaluates.</span></div>
+
+        <div id="diagram">
+          <div class="panel" id="d-host" style="left: 120px; top: 380px; width: 520px; height: 500px">
+            <div class="box-title" style="left: 40px; top: 40px">your host</div>
+            <div class="box-text" style="left: 40px; top: 104px">agent runner, harness, CI job</div>
+            <div class="box-text" style="left: 40px; top: 178px; color: var(--ink)">collects the evidence</div>
+            <div class="box-text" style="left: 40px; top: 228px">observation, screenshot,</div>
+            <div class="box-text" style="left: 40px; top: 268px">action, external read</div>
+            <div class="box-text" style="left: 40px; top: 342px; color: var(--ink)">writes the criteria</div>
+            <div class="box-text" style="left: 40px; top: 392px; font-family: 'Martian Mono'; font-size: 26px; color: var(--evidence)">/validation_error</div>
+            <div class="box-text" style="left: 40px; top: 428px; font-family: 'Martian Mono'; font-size: 26px; color: var(--muted)">equals false</div>
+          </div>
+          <div class="panel" id="d-nit" style="left: 760px; top: 480px; width: 420px; height: 300px">
+            <div class="box-title" style="left: 0; width: 420px; text-align: center; top: 46px">nitelos</div>
+            <div class="box-text" style="left: 0; width: 420px; text-align: center; top: 122px; font-family: 'Martian Mono'; font-size: 22px; color: var(--ink)">Verifier().verify(request)</div>
+            <div class="box-text" style="left: 0; width: 420px; text-align: center; top: 186px">no clicks, no fetches,</div>
+            <div class="box-text" style="left: 0; width: 420px; text-align: center; top: 226px">no retries</div>
+          </div>
+          <div class="panel" id="d-res" style="left: 1300px; top: 380px; width: 500px; height: 500px">
+            <div class="box-title" style="left: 40px; top: 40px">result</div>
+            <div class="box-text" style="left: 40px; top: 104px; font-family: 'Martian Mono'; font-size: 26px">execution_status: ok</div>
+            <div class="box-text" style="left: 40px; top: 150px; font-family: 'Martian Mono'; font-size: 26px">decision:</div>
+            <div class="box-text d-row" style="left: 40px; top: 206px; color: var(--success)">success</div>
+            <div class="box-text d-row" style="left: 40px; top: 256px; color: var(--refuted)">failure</div>
+            <div class="box-text d-row" style="left: 40px; top: 306px; color: var(--abstained)">abstained</div>
+            <div class="box-text" style="left: 40px; top: 386px">plus the evidence references</div>
+            <div class="box-text" style="left: 40px; top: 426px">behind every decided criterion</div>
+          </div>
+          <svg class="abs" width="1920" height="1080" viewBox="0 0 1920 1080" style="left: 0; top: 0; overflow: visible">
+            <path id="d-link1" d="M640 630 H758" stroke="#79bfff" stroke-width="4" fill="none" />
+            <path id="d-stop1" d="M758 614 V646" stroke="#79bfff" stroke-width="6" />
+            <path id="d-link2" d="M1180 630 H1298" stroke="#79bfff" stroke-width="4" fill="none" />
+            <path id="d-stop2" d="M1298 614 V646" stroke="#79bfff" stroke-width="6" />
+          </svg>
+        </div>
+      </section>
+
+      <!-- ============ run 1: failure (13 to 27.5 s) ============ -->
+      <section id="run1" class="clip" data-start="13" data-duration="14.5" data-track-index="2">
+        <div class="cover" id="run1-cover"></div>
+        <div id="run1-body">
+          <div class="label abs" style="left: 200px; top: 60px">run 1 of 3 · examples/demo_incomplete_form.py</div>
+          <div class="hl" data-layout-allow-overflow id="run1-hl"><span class="hl-in">The agent says it registered.</span></div>
+          <div class="panel" id="run1-req" style="left: 120px; top: 240px; width: 1040px; height: 510px">
+            <div class="label abs" style="left: 40px; top: 26px">request excerpt · criteria and evidence prepared</div>
+            <div class="code" data-lines="1"></div>
+          </div>
+          <div class="verdict abs" id="run1-v" style="left: 1220px; top: 270px; width: 580px; height: 340px">
+            <div class="label kicker">decision</div>
+            <svg width="90" height="90" viewBox="0 0 110 110"><rect width="110" height="110" fill="#ff877a" /><path d="M0 110 L110 0" stroke="#101318" stroke-width="14" /></svg>
+            <div class="word" style="color: var(--refuted)">failure</div>
+            <div class="code-reason">CRITERION_REFUTED</div>
+          </div>
+          <div class="panel" id="run1-out" style="left: 120px; top: 765px; width: 1680px; height: 230px">
+            <div class="label abs" style="left: 48px; top: 22px">real output · python examples/demo_incomplete_form.py</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ run 2: success (27 to 39.5 s) ============ -->
+      <section id="run2" class="clip" data-start="27" data-duration="12.5" data-track-index="3">
+        <div class="cover" id="run2-cover"></div>
+        <div id="run2-body">
+          <div class="label abs" style="left: 200px; top: 60px">run 2 of 3 · examples/quickstart.py</div>
+          <div class="hl" data-layout-allow-overflow id="run2-hl"><span class="hl-in">The same criterion, on a clean form.</span></div>
+          <div class="panel" id="run2-req" style="left: 120px; top: 240px; width: 1040px; height: 510px">
+            <div class="label abs" style="left: 40px; top: 26px">request excerpt · criteria and evidence prepared</div>
+            <div class="code"></div>
+          </div>
+          <div class="verdict abs" id="run2-v" style="left: 1220px; top: 270px; width: 580px; height: 340px">
+            <div class="label kicker">decision</div>
+            <svg width="90" height="90" viewBox="0 0 110 110"><rect width="110" height="110" fill="#95d8ac" /></svg>
+            <div class="word" style="color: var(--success)">success</div>
+            <div class="code-reason">ALL_CRITERIA_SUPPORTED</div>
+          </div>
+          <div class="panel" id="run2-out" style="left: 120px; top: 765px; width: 1680px; height: 230px">
+            <div class="label abs" style="left: 48px; top: 22px">real output · python examples/quickstart.py</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ run 3: abstained (39 to 52.5 s) ============ -->
+      <section id="run3" class="clip" data-start="39" data-duration="13.5" data-track-index="4">
+        <div class="cover" id="run3-cover"></div>
+        <div id="run3-body">
+          <div class="label abs" style="left: 200px; top: 60px">run 3 of 3 · examples/demo_external_pending.py</div>
+          <div class="hl" data-layout-allow-overflow id="run3-hl"><span class="hl-in">A tool that reports completed.</span></div>
+          <div class="panel" id="run3-req" style="left: 120px; top: 240px; width: 1040px; height: 510px">
+            <div class="label abs" style="left: 40px; top: 26px">request excerpt · criteria and evidence prepared</div>
+            <div class="code"></div>
+          </div>
+          <div class="verdict abs" id="run3-v" style="left: 1220px; top: 270px; width: 580px; height: 340px">
+            <div class="label kicker">decision</div>
+            <svg width="90" height="90" viewBox="0 0 110 110"><rect x="7" y="7" width="96" height="96" fill="none" stroke="#f0c878" stroke-width="14" /></svg>
+            <div class="word" style="color: var(--abstained)">abstained</div>
+            <div class="code-reason">MISSING_EVIDENCE</div>
+          </div>
+          <div class="panel" id="run3-out" style="left: 120px; top: 765px; width: 1680px; height: 230px">
+            <div class="label abs" style="left: 48px; top: 22px">real output · python examples/demo_external_pending.py</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ summary + close (52 to 60 s) ============ -->
+      <section id="close" class="clip" data-start="52" data-duration="8" data-track-index="5">
+        <div class="cover" id="close-cover"></div>
+        <div id="legend">
+          <div class="hl" data-layout-allow-overflow id="close-hl"><span class="hl-in">Evidence-based verification of your criteria.</span></div>
+          <div class="legend-row" id="r1" style="top: 380px">
+            <svg width="76" height="76" viewBox="0 0 76 76"><rect width="76" height="76" fill="#95d8ac" /></svg>
+            <div class="word" style="color: var(--success)">success</div><div class="meaning">every criterion supported</div>
+          </div>
+          <div class="legend-row" id="r2" style="top: 520px">
+            <svg width="76" height="76" viewBox="0 0 76 76"><rect width="76" height="76" fill="#ff877a" /><path d="M0 76 L76 0" stroke="#101318" stroke-width="10" /></svg>
+            <div class="word" style="color: var(--refuted)">failure</div><div class="meaning">a criterion refuted</div>
+          </div>
+          <div class="legend-row" id="r3" style="top: 660px">
+            <svg width="76" height="76" viewBox="0 0 76 76"><rect x="5" y="5" width="66" height="66" fill="none" stroke="#f0c878" stroke-width="10" /></svg>
+            <div class="word" style="color: var(--abstained)">abstained</div><div class="meaning">not enough evidence to decide</div>
+          </div>
+        </div>
+        <div id="logo">
+          <img id="wordmark" src="/assets/svg/nitelos-wordmark-dark-open.svg" alt="nitelos" style="position: absolute; left: 410px; top: 330px; width: 1100px" />
+          <svg class="abs" width="1920" height="1080" viewBox="0 0 1920 1080" style="left: 0; top: 0"><path id="drop-line" d="M583.35 150 V497.8" fill="none" stroke="#79bfff" stroke-width="4" /></svg>
+          <div id="dock-square" style="position: absolute; left: 562.4px; top: 497.8px; width: 41.9px; height: 41.9px; background: var(--evidence)"></div>
+          <div id="tagline" style="position: absolute; left: 0; width: 1920px; top: 620px; text-align: center; font-family: Archivo; font-variation-settings: 'wdth' 112, 'wght' 500; font-size: 52px; line-height: 1">Verify the outcome, not the attempt.</div>
+          <div class="panel" id="install" style="left: 760px; top: 720px; width: 400px; height: 76px"><span style="position: absolute; left: 0; width: 400px; top: 20px; text-align: center; font-family: 'Martian Mono'; font-variation-settings: 'wdth' 100, 'wght' 500; font-size: 30px; line-height: 36px">pip install nitelos</span></div>
+        </div>
+      </section>
+
+      <!-- persistent chrome until the logo -->
+      <div class="clip" id="chrome" data-start="0" data-duration="56" data-track-index="6" style="pointer-events: none">
+        <img src="/assets/svg/nitelos-mark-dark.svg" alt="" style="position: absolute; left: 120px; top: 44px; width: 52px; height: 52px" />
+        <div class="label abs" style="left: 120px; top: 1010px">synthetic examples · real output</div>
+      </div>
+
+      <audio id="music" src="/assets/audio/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3" data-start="0" data-duration="60" data-track-index="10" data-volume="0.85"
+        data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0},{"t":0.8,"v":0.85},{"t":58.2,"v":0.85},{"t":60,"v":0}]}]}'></audio>
+      <audio id="sfx-wipe1" src="/assets/audio/sfx/impactSoft_medium_004.ogg" data-start="13" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="sfx-v1" src="/assets/audio/sfx/impactSoft_heavy_003.ogg" data-start="18" data-track-index="12" data-volume="0.55"></audio>
+      <audio id="sfx-wipe2" src="/assets/audio/sfx/impactSoft_medium_004.ogg" data-start="27" data-track-index="13" data-volume="0.45"></audio>
+      <audio id="sfx-v2" src="/assets/audio/sfx/bong_001.ogg" data-start="32" data-track-index="14" data-volume="0.7"></audio>
+      <audio id="sfx-wipe3" src="/assets/audio/sfx/impactSoft_medium_004.ogg" data-start="39" data-track-index="15" data-volume="0.45"></audio>
+      <audio id="sfx-v3" src="/assets/audio/sfx/impactSoft_medium_002.ogg" data-start="44" data-track-index="16" data-volume="0.55"></audio>
+      <audio id="sfx-dock" src="/assets/audio/sfx/impactBell_heavy_000.ogg" data-start="57.1" data-track-index="17" data-volume="0.55"></audio>
+    </div>
+
+    <script>
+      // ---- content: request excerpts (JSON as passed to parse_request) and verbatim stdout ----
+      const RUNS = {
+        run1: {
+          code: [
+            '"criteria": [{',
+            '  "id": "no-errors",',
+            '  "pointer": "/validation_error",',
+            '  "operator": "equals",',
+            '  "expected": false',
+            '}],',
+            '"evidence": [{',
+            '  "id": "obs-form",',
+            '  "data": {"validation_error": true, ...}',
+            '}],',
+            '"metadata": {',
+            '  "agent_summary": "registration succeeded"}',
+          ],
+          marks: [[4, "#79bfff", false], [8, "#ff877a", false]],
+          out: [
+            "execution_status: ok",
+            "decision:         failure",
+            "criterion no-errors: refuted (basis: deterministic)",
+            "  evidence obs-form at /validation_error (assertion_checked)",
+            "reason_codes:     ['CRITERION_REFUTED']",
+          ],
+          emphasis: 3,
+        },
+        run2: {
+          code: [
+            '"criteria": [{',
+            '  "id": "no-errors",',
+            '  "pointer": "/validation_error",',
+            '  "operator": "equals",',
+            '  "expected": false',
+            '}],',
+            '"evidence": [{',
+            '  "id": "obs-form",',
+            '  "data": {"validation_error": false, ...}',
+            '}],',
+            '"metadata": {}',
+          ],
+          marks: [[4, "#79bfff", false], [8, "#95d8ac", false]],
+          out: [
+            "execution_status: ok",
+            "decision:         success",
+            "criterion no-errors: supported (basis: deterministic)",
+            "reason_codes:     ['ALL_CRITERIA_SUPPORTED']",
+          ],
+          emphasis: 2,
+        },
+        run3: {
+          code: [
+            '"criteria": [{',
+            '  "id": "stored",',
+            '  "scope": "external",',
+            '  "pointer": "/status",',
+            '  "expected": "stored",',
+            '  "evidence_ids": []',
+            '}], "evidence": [{',
+            '  "id": "act-upload",',
+            '  "kind": "action",',
+            '  "name": "upload-file",',
+            '  "reported_status": "completed"',
+            '}]',
+          ],
+          marks: [[10, "#8a93a3", false], [5, "#f0c878", true]],
+          out: [
+            "execution_status: ok",
+            "decision:         abstained",
+            "criterion stored: unknown",
+            "reason_codes:     ['INSUFFICIENT_EVIDENCE', 'MISSING_EVIDENCE']",
+          ],
+          emphasis: 3,
+        },
+      };
+      // 25 px code on a 33 px grid: glyphs fill 30 px, marks sit in the 3 px gaps between rows
+      const CODE_TOP = 100, CODE_LH = 33, OUT_TOP = 58, OUT_LH = 33;
+      const SVGNS = "http://www.w3.org/2000/svg";
+
+      // build the panels once, before the timeline (static DOM, no measurement at tween time)
+      for (const [id, run] of Object.entries(RUNS)) {
+        const req = document.querySelector("#" + id + "-req");
+        const svg = document.createElementNS(SVGNS, "svg");
+        svg.setAttribute("width", "1040"); svg.setAttribute("height", "510");
+        svg.style.position = "absolute"; svg.style.left = "0"; svg.style.top = "0"; svg.style.overflow = "visible";
+        run.marks.forEach(([line, color, dashed], i) => {
+          const r = document.createElementNS(SVGNS, "rect");
+          r.setAttribute("x", "24"); r.setAttribute("y", String(CODE_TOP + line * CODE_LH - 2));
+          r.setAttribute("width", "992"); r.setAttribute("height", "34"); r.setAttribute("rx", "4");
+          r.setAttribute("fill", "none"); r.setAttribute("stroke", color); r.setAttribute("stroke-width", "3");
+          if (dashed) r.setAttribute("stroke-dasharray", "12 9");
+          r.id = `${id}-mark${i}`;
+          svg.appendChild(r);
+        });
+        req.appendChild(svg);
+        const code = req.querySelector(".code");
+        code.remove();
+        run.code.forEach((text, i) => {
+          const line = document.createElement("div");
+          line.className = "code"; line.id = `${id}-c${i}`;
+          line.style.top = `${CODE_TOP + i * CODE_LH}px`;
+          line.textContent = text;
+          req.appendChild(line);
+        });
+        const out = document.querySelector("#" + id + "-out");
+        run.out.forEach((text, i) => {
+          const line = document.createElement("div");
+          line.className = "out"; line.id = `${id}-o${i}`;
+          line.style.top = `${OUT_TOP + i * OUT_LH}px`;
+          line.textContent = text;
+          out.appendChild(line);
+        });
+        const em = document.createElement("div");
+        em.id = `${id}-em`;
+        Object.assign(em.style, { position: "absolute", left: "48px", top: `${OUT_TOP + run.emphasis * OUT_LH + 31}px`, width: `${run.out[run.emphasis].length * 18.9}px`, height: "3px", background: "#79bfff", transformOrigin: "0 50%" });
+        out.appendChild(em);
+      }
+
+      const tl = gsap.timeline({ paused: true });
+      const ARRIVE = "expo.out", MOVE = "power2.inOut";
+      const hlIn = (sel, t) => tl.fromTo(`${sel} .hl-in`, { yPercent: 110 }, { yPercent: 0, duration: 0.45, ease: ARRIVE }, t);
+      const hlOut = (sel, t) => tl.to(`${sel} .hl-in`, { yPercent: -110, duration: 0.3, ease: "power2.in" }, t);
+      const draw = (sel, t, dur) => {
+        const p = document.querySelector(sel);
+        const len = p.getTotalLength();
+        tl.fromTo(p, { strokeDasharray: len, strokeDashoffset: len }, { strokeDashoffset: 0, duration: dur, ease: "none" }, t);
+      };
+
+      // ---- intro 0-5 ----
+      hlIn("#hi1", 0.1);
+      tl.fromTo("#hi1-sub", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.7);
+      hlOut("#hi1", 4.6);
+      tl.to("#hi1-sub", { opacity: 0, duration: 0.3 }, 4.6);
+
+      // ---- diagram 5-13: host -> nitelos -> result, traces that stop dead ----
+      hlIn("#hi2", 5.0);
+      tl.fromTo("#d-host", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.5, ease: ARRIVE }, 5.6);
+      draw("#d-link1", 7.0, 0.4);
+      tl.fromTo("#d-stop1", { opacity: 0 }, { opacity: 1, duration: 0.01 }, 7.4);
+      tl.fromTo("#d-nit", { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.45, ease: ARRIVE }, 7.45);
+      draw("#d-link2", 8.9, 0.4);
+      tl.fromTo("#d-stop2", { opacity: 0 }, { opacity: 1, duration: 0.01 }, 9.3);
+      tl.fromTo("#d-res", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.5, ease: ARRIVE }, 9.35);
+      tl.fromTo("#d-res .d-row", { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.3, ease: ARRIVE, stagger: 0.25 }, 9.9);
+
+      // ---- one run: same choreography for all three ----
+      function run(id, start, verdictAt, holdNotes) {
+        const r = RUNS[id];
+        tl.fromTo(`#${id}-cover`, { xPercent: 100 }, { xPercent: 0, duration: 0.5, ease: MOVE }, start);
+        tl.fromTo(`#${id}-body`, { opacity: 0 }, { opacity: 1, duration: 0.01 }, start + 0.45);
+        hlIn(`#${id}-hl`, start + 0.45);
+        tl.fromTo(`#${id}-req`, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: ARRIVE }, start + 0.7);
+        tl.fromTo(r.code.map((_, i) => `#${id}-c${i}`).join(","), { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: 0.04 }, start + 0.85);
+        r.marks.forEach((_, i) => {
+          const mark = document.getElementById(id + "-mark" + i);
+          const len = mark.getTotalLength();
+          tl.fromTo(mark, { strokeDasharray: mark.getAttribute("stroke-dasharray") ? "12 9" : len, strokeDashoffset: mark.getAttribute("stroke-dasharray") ? 0 : len, opacity: mark.getAttribute("stroke-dasharray") ? 0 : 1 },
+            { strokeDashoffset: 0, opacity: 1, duration: 0.5, ease: "none" }, start + 2.0 + i * 0.9);
+        });
+        tl.fromTo(`#${id}-out`, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: ARRIVE }, start + 3.4);
+        tl.fromTo(r.out.map((_, i) => `#${id}-o${i}`).join(","), { opacity: 0 }, { opacity: 1, duration: 0.15, stagger: 0.22 }, start + 3.6);
+        tl.fromTo(`#${id}-v .kicker`, { opacity: 0 }, { opacity: 1, duration: 0.3 }, verdictAt);
+        tl.fromTo(`#${id}-v svg`, { scale: 0 }, { scale: 1, duration: 0.35, ease: ARRIVE, transformOrigin: "50% 50%" }, verdictAt);
+        tl.fromTo(`#${id}-v .word`, { opacity: 0, "--wdth": 62 }, { opacity: 1, "--wdth": 112, duration: 0.7, ease: ARRIVE }, verdictAt);
+        tl.fromTo(`#${id}-v .code-reason`, { opacity: 0 }, { opacity: 1, duration: 0.3 }, verdictAt + 0.4);
+        tl.fromTo(`#${id}-em`, { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: ARRIVE }, verdictAt + holdNotes);
+      }
+      run("run1", 13, 18, 0.9);
+      run("run2", 27, 32, 0.9);
+      run("run3", 39, 44, 0.9);
+
+      // ---- summary 52-56, close 56-60 ----
+      tl.fromTo("#close-cover", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 52);
+      hlIn("#close-hl", 52.2);
+      ["#r1", "#r2", "#r3"].forEach((r, i) => {
+        tl.fromTo(`${r} svg`, { scale: 0 }, { scale: 1, duration: 0.3, ease: ARRIVE, transformOrigin: "50% 50%" }, 52.7 + i * 0.6);
+        tl.fromTo(`${r} .word, ${r} .meaning`, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.35, ease: ARRIVE, stagger: 0.08 }, 52.75 + i * 0.6);
+      });
+      tl.to("#legend", { opacity: 0, duration: 0.3 }, 56.0);
+      tl.fromTo("#wordmark", { opacity: 0, clipPath: "inset(100% 0 0 0)" }, { opacity: 1, clipPath: "inset(0% 0 0 0)", duration: 0.5, ease: ARRIVE }, 56.4);
+      draw("#drop-line", 56.75, 0.35);
+      tl.fromTo("#dock-square", { opacity: 0 }, { opacity: 1, duration: 0.08 }, 56.75);
+      tl.fromTo("#dock-square", { y: -347.8 }, { y: 0, duration: 0.35, ease: "none" }, 56.75); // docks at 57.1
+      tl.to("#drop-line", { opacity: 0, duration: 0.3 }, 57.25);
+      tl.fromTo("#tagline", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: ARRIVE }, 57.5);
+      tl.fromTo("#install", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: ARRIVE }, 57.8);
+
+      window.__timelines["demo"] = tl;
+    </script>
+  </body>
+</html>

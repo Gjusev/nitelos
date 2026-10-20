@@ -35,8 +35,10 @@ real local-model runs are separately gated (`NITELOS_RUN_LOCAL`).
 2. Branch, write failing behavioral tests, then the smallest correct change.
 3. Keep diffs scoped: no unrelated refactors or silent scope expansion.
 4. All checks green (suite, ruff, format, strict mypy) before opening a PR.
-5. Sign your commits (DCO sign-off, `git commit -s`) — the lightweight
-   attestation we use; no CLA infrastructure.
+5. Add a DCO sign-off to each commit (`git commit -s`, which appends a
+   `Signed-off-by:` line). This is a text attestation that you may submit the
+   work, not a cryptographic signature: GPG or SSH commit signing is welcome
+   but optional. There is no CLA.
 
 ## What we value in review
 

@@ -20,6 +20,10 @@ takes at most two images per criterion; the model context window is the last
 eight actions by name and reported status only — arguments are kept for audit
 and never transmitted.
 
+A sketch of the last step (`trace_json_text` is the trace you recorded; the
+`"..."` values are yours to fill). The complete, runnable version is in the
+recipe linked above.
+
 ```python
 from nitelos import parse_trace
 

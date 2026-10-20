@@ -1,0 +1,4 @@
+execution_status: ok
+decision:         failure
+criterion no-errors: refuted (basis: deterministic)
+reason_codes:     ['CRITERION_REFUTED']

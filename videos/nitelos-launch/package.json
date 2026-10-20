@@ -1,0 +1,10 @@
+{
+  "name": "nitelos-launch",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "npx --yes hyperframes@0.8.181 check",
+    "preview": "npx --yes hyperframes@0.8.181 preview",
+    "render:main": "npx --yes hyperframes@0.8.181 render --quality delivery --output renders/nitelos-main-30s.mp4"
+  }
+}

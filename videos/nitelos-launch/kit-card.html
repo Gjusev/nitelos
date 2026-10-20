@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1200, height=630" />
+    <title>nitelos: static cards (1200x630)</title>
+    <script src="/assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Archivo"; src: url("/assets/fonts/Archivo-VF.ttf") format("truetype"); font-weight: 100 900; font-stretch: 62% 125%; }
+      @font-face { font-family: "Martian Mono"; src: url("/assets/fonts/MartianMono-VF.ttf") format("truetype"); font-weight: 100 800; }
+      :root { --ground: #101318; --ink: #f4f1e9; --muted: #8a93a3; --evidence: #79bfff; --success: #95d8ac; --refuted: #ff877a; --abstained: #f0c878; }
+      html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: var(--ground); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--ground); color: var(--ink); }
+      .clip { position: absolute; inset: 0; background: var(--ground); }
+      .abs { position: absolute; white-space: nowrap; line-height: 1; }
+      .mono { font-family: "Martian Mono"; font-variation-settings: "wdth" 100, "wght" 400; }
+      .sans { font-family: Archivo; }
+      .muted { color: var(--muted); }
+      .word { font-family: Archivo; font-variation-settings: "wdth" 125, "wght" 700; font-size: 132px; }
+    </style>
+  </head>
+  <body>
+    <!-- One 1 s segment per still; tools/stage.sh kit-card.html snapshot --at 0.5,1.5,2.5,3.5 -->
+    <div id="root" data-composition-id="kit-card" data-start="0" data-width="1200" data-height="630" data-duration="4">
+      <section id="social" class="clip" data-start="0" data-duration="1" data-track-index="1">
+        <img src="/assets/svg/nitelos-wordmark-dark.svg" alt="nitelos" class="abs" style="left: 80px; top: 92px; width: 560px" />
+        <div class="abs sans" style="left: 80px; top: 262px; font-size: 44px; font-variation-settings: 'wdth' 112, 'wght' 500">Verify the outcome, not the attempt.</div>
+        <div class="abs sans muted" style="left: 80px; top: 334px; font-size: 26px; font-variation-settings: 'wdth' 100, 'wght' 400">A Python SDK that checks what an AI agent claims against the evidence it left.</div>
+        <div class="abs" style="left: 80px; top: 450px; width: 22px; height: 22px; background: var(--evidence)"></div>
+        <div class="abs mono" style="left: 118px; top: 448px; font-size: 28px">pip install nitelos</div>
+        <svg class="abs" width="1200" height="60" viewBox="0 0 1200 60" style="left: 0; top: 520px">
+          <rect x="80" y="10" width="26" height="26" fill="#95d8ac" />
+          <text x="120" y="33" font-family="Archivo" font-size="28" font-weight="650" fill="#95d8ac">success</text>
+          <rect x="272" y="10" width="26" height="26" fill="#ff877a" /><path d="M272 36 L298 10" stroke="#101318" stroke-width="4" />
+          <text x="312" y="33" font-family="Archivo" font-size="28" font-weight="650" fill="#ff877a">failure</text>
+          <rect x="460" y="12" width="22" height="22" fill="none" stroke="#f0c878" stroke-width="4" />
+          <text x="500" y="33" font-family="Archivo" font-size="28" font-weight="650" fill="#f0c878">abstained</text>
+        </svg>
+      </section>
+
+      <section id="card-success" class="clip" data-start="1" data-duration="1" data-track-index="1">
+        <img src="/assets/svg/nitelos-wordmark-dark.svg" alt="nitelos" class="abs" style="left: 80px; top: 72px; width: 180px" />
+        <svg class="abs" width="150" height="150" viewBox="0 0 110 110" style="left: 80px; top: 214px"><rect width="110" height="110" fill="#95d8ac" /></svg>
+        <div class="abs mono muted" style="left: 270px; top: 204px; font-size: 22px">decision</div>
+        <div class="abs word" style="left: 266px; top: 238px; color: var(--success)">success</div>
+        <div class="abs sans" style="left: 80px; top: 420px; font-size: 34px">Every criterion is supported by the evidence.</div>
+        <div class="abs mono muted" style="left: 80px; top: 486px; font-size: 22px">reason_codes: ['ALL_CRITERIA_SUPPORTED']</div>
+        <div class="abs mono muted" style="left: 80px; top: 556px; font-size: 18px">real output · examples/quickstart.py</div>
+      </section>
+
+      <section id="card-failure" class="clip" data-start="2" data-duration="1" data-track-index="1">
+        <img src="/assets/svg/nitelos-wordmark-dark.svg" alt="nitelos" class="abs" style="left: 80px; top: 72px; width: 180px" />
+        <svg class="abs" width="150" height="150" viewBox="0 0 110 110" style="left: 80px; top: 214px"><rect width="110" height="110" fill="#ff877a" /><path d="M0 110 L110 0" stroke="#101318" stroke-width="14" /></svg>
+        <div class="abs mono muted" style="left: 270px; top: 204px; font-size: 22px">decision</div>
+        <div class="abs word" style="left: 266px; top: 238px; color: var(--refuted)">failure</div>
+        <div class="abs sans" style="left: 80px; top: 420px; font-size: 34px">At least one criterion is refuted by the evidence.</div>
+        <div class="abs mono muted" style="left: 80px; top: 486px; font-size: 22px">reason_codes: ['CRITERION_REFUTED']</div>
+        <div class="abs mono muted" style="left: 80px; top: 556px; font-size: 18px">real output · examples/demo_incomplete_form.py</div>
+      </section>
+
+      <section id="card-abstained" class="clip" data-start="3" data-duration="1" data-track-index="1">
+        <img src="/assets/svg/nitelos-wordmark-dark.svg" alt="nitelos" class="abs" style="left: 80px; top: 72px; width: 180px" />
+        <svg class="abs" width="150" height="150" viewBox="0 0 110 110" style="left: 80px; top: 214px"><rect x="8" y="8" width="94" height="94" fill="none" stroke="#f0c878" stroke-width="16" /></svg>
+        <div class="abs mono muted" style="left: 270px; top: 204px; font-size: 22px">decision</div>
+        <div class="abs word" style="left: 266px; top: 238px; color: var(--abstained)">abstained</div>
+        <div class="abs sans" style="left: 80px; top: 420px; font-size: 34px">The evidence cannot decide a criterion, and none is refuted.</div>
+        <div class="abs mono muted" style="left: 80px; top: 486px; font-size: 22px">reason_codes: ['INSUFFICIENT_EVIDENCE', 'MISSING_EVIDENCE']</div>
+        <div class="abs mono muted" style="left: 80px; top: 556px; font-size: 18px">real output · examples/demo_external_pending.py</div>
+      </section>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.set({}, {}, 4); // stills: no motion, the timeline only spans the segments
+      window.__timelines["kit-card"] = tl;
+    </script>
+  </body>
+</html>

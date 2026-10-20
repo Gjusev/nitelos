@@ -7,8 +7,12 @@ The evaluation module is a bounded research utility, not a product feature:
   scheduled case produces a result, including input and backend errors
   (`scheduled = errors + ok`).
 - **Synthetic-first.** The v0.1 benchmark is 120 authored synthetic cases with
-  frozen splits. **No benchmark run has been executed yet** — no accuracy,
-  coverage or latency number exists to cite, and none appears in these docs.
+  frozen splits. The final runs on the sealed tree are complete: four runs (both
+  views, both splits), every figure with its denominator in
+  [reports/v0.1/SUMMARY.md](../reports/v0.1/SUMMARY.md). These docs quote no
+  numbers; the summary is the single source. Final-test labels were audited by
+  two independent AI reviewers plus adjudication; no human annotation audit was
+  performed, and human review remains a precondition for broader claims.
   Real-world audit data is a separate, later step with its own licensing and
   privacy review.
 - **Uncertainty is honest.** Wilson intervals for descriptive proportions,

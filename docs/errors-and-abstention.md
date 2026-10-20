@@ -24,7 +24,7 @@ Missing evidence is not failure, and pending is not failure:
 | Pending-phase evidence | `PENDING_STATE` → abstained, never failure |
 | Contradictory final snapshots | `CONTRADICTORY_EVIDENCE` → unknown |
 | Unbound external claim | `UNTRUSTED_EXTERNAL` → ineligible → abstained |
-| A criterion the backend cannot judge | `input_error/UNSUPPORTED_CAPABILITY` |
+| A visual criterion the configured backend cannot judge (assertions are always evaluated by the core) | `input_error/UNSUPPORTED_CAPABILITY` |
 | Model output that is garbage | `backend_error/INVALID_OUTPUT` — never a guessed label |
 
 The demo: an agent summary in metadata claims success while the observation

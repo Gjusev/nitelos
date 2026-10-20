@@ -15,8 +15,9 @@ valid under the strict parser, 10 decisive, 0 backend errors. Honest
 observation from that dev-only record: the model is format-compliant but
 over-claiming (it answered SUPPORTED on cases authored as refuted/unknown;
 agreement with the authored labels was 4/12). No accuracy claim is made from
-these development labels; benchmark numbers are pending the frozen evaluation
-(NIT-013). History: the original pin SmolVLM-500M-Instruct @ `a7da5b9…`
+these development labels. The frozen evaluation has since run on the sealed
+benchmark; its results, including the same over-claiming pattern, are in
+[reports/v0.1/SUMMARY.md](../reports/v0.1/SUMMARY.md). History: the original pin SmolVLM-500M-Instruct @ `a7da5b9…`
 failed the gate (0/44 valid labels — every generation `' UNKNOWN.'`) and was
 replaced per ADR-012; the failure records are retained. Two images per
 visual criterion maximum; model context is bounded (the last eight actions by

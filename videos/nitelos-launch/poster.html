@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>nitelos: vertical poster</title>
+    <script src="/assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Archivo"; src: url("/assets/fonts/Archivo-VF.ttf") format("truetype"); font-weight: 100 900; font-stretch: 62% 125%; }
+      @font-face { font-family: "Martian Mono"; src: url("/assets/fonts/MartianMono-VF.ttf") format("truetype"); font-weight: 100 800; }
+      :root { --ground: #101318; --panel: #171b22; --ink: #f4f1e9; --muted: #8a93a3; --line: #59616f; --evidence: #79bfff; --refuted: #ff877a; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--ground); color: var(--ink); }
+      .abs { position: absolute; white-space: nowrap; line-height: 1; }
+      .label { font-family: "Martian Mono"; font-variation-settings: "wdth" 100, "wght" 400; font-size: 26px; color: var(--muted); }
+      .panel { position: absolute; background: var(--panel); border: 2px solid var(--line); border-radius: 6px; box-sizing: border-box; }
+    </style>
+  </head>
+  <body>
+    <!-- The teaser's verdict frame plus the brand lockup, composed as one still. -->
+    <div id="root" data-composition-id="poster" data-start="0" data-width="1080" data-height="1920" data-duration="1">
+      <div class="panel" style="left: 86px; top: 230px; width: 908px; height: 300px">
+        <div class="label abs" style="left: 40px; top: 40px">agent summary</div>
+        <!-- intentional: the strike-through crosses the claim -->
+        <div class="abs" data-layout-allow-occlusion style="left: 40px; top: 118px; font-family: Archivo; font-variation-settings: 'wdth' 62, 'wght' 800; font-size: 104px">registration succeeded</div>
+        <div class="abs" style="left: 32px; top: 168px; width: 832px; height: 12px; background: var(--refuted)"></div>
+      </div>
+      <div class="panel" style="left: 86px; top: 590px; width: 908px; height: 190px">
+        <div class="abs" style="left: 40px; top: 38px; width: 22px; height: 22px; background: var(--evidence)"></div>
+        <div class="label abs" style="left: 76px; top: 36px">final state of the form</div>
+        <div class="abs" style="left: 40px; top: 100px; font-family: 'Martian Mono'; font-variation-settings: 'wdth' 100, 'wght' 400; font-size: 46px"><span style="color: var(--muted)">validation_error </span><span style="color: var(--refuted)">true</span></div>
+      </div>
+      <div class="abs" style="left: 86px; top: 850px; width: 908px; height: 180px">
+        <div class="label abs" style="left: 120px; top: 0">decision</div>
+        <svg width="96" height="96" viewBox="0 0 110 110" style="position: absolute; left: 0; top: 44px"><rect width="110" height="110" fill="#ff877a" /><path d="M0 110 L110 0" stroke="#101318" stroke-width="14" /></svg>
+        <div class="abs" style="left: 120px; top: 34px; font-family: Archivo; font-variation-settings: 'wdth' 125, 'wght' 700; font-size: 130px; color: var(--refuted)">failure</div>
+      </div>
+
+      <img src="/assets/svg/nitelos-wordmark-dark.svg" alt="nitelos" class="abs" style="left: 160px; top: 1200px; width: 760px" />
+      <div class="abs" style="left: 0; width: 1080px; top: 1410px; text-align: center; font-family: Archivo; font-variation-settings: 'wdth' 112, 'wght' 500; font-size: 42px">Verify the outcome, not the attempt.</div>
+      <div class="abs" style="left: 0; width: 1080px; top: 1490px; text-align: center; font-family: 'Martian Mono'; font-variation-settings: 'wdth' 100, 'wght' 400; font-size: 32px">pip install nitelos</div>
+      <div class="label abs" style="left: 86px; top: 1780px">synthetic example · real output</div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.set({}, {}, 1);
+      window.__timelines["poster"] = tl;
+    </script>
+  </body>
+</html>

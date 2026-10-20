@@ -1,0 +1,10 @@
+# renders and caches stay local (large binaries; see README.md)
+renders/
+.hyperframes/
+node_modules/
+proofs/viability/
+.stage/
+# post copy is published by hand, not from the repo
+share-copy.txt
+# ende.app terms cover use inside the films, not redistribution of the raw file (assets/licenses.md)
+assets/audio/*.mp3

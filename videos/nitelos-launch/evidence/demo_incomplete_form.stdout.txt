@@ -1,0 +1,5 @@
+execution_status: ok
+decision:         failure
+criterion no-errors: refuted (basis: deterministic)
+  evidence obs-form at /validation_error (assertion_checked)
+reason_codes:     ['CRITERION_REFUTED']

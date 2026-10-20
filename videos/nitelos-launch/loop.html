@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1600, height=900" />
+    <title>nitelos: loop (6 s)</title>
+    <script src="/assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Archivo"; src: url("/assets/fonts/Archivo-VF.ttf") format("truetype"); font-weight: 100 900; font-stretch: 62% 125%; }
+      @font-face { font-family: "Martian Mono"; src: url("/assets/fonts/MartianMono-VF.ttf") format("truetype"); font-weight: 100 800; }
+      :root { --ground: #101318; --panel: #171b22; --ink: #f4f1e9; --muted: #8a93a3; --line: #59616f; --evidence: #79bfff; --success: #95d8ac; --refuted: #ff877a; }
+      html, body { margin: 0; width: 1600px; height: 900px; overflow: hidden; background: var(--ground); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--ground); color: var(--ink); }
+      .abs { position: absolute; }
+      .label { font-family: "Martian Mono"; font-variation-settings: "wdth" 100, "wght" 400; font-size: 22px; line-height: 1; color: var(--muted); white-space: nowrap; }
+      .mono { font-family: "Martian Mono"; font-variation-settings: "wdth" 100, "wght" 400; line-height: 1; white-space: nowrap; }
+      .panel { position: absolute; background: var(--panel); border: 2px solid var(--line); border-radius: 6px; box-sizing: border-box; }
+      .word { position: absolute; left: 120px; top: 30px; font-family: Archivo; --wdth: 125; font-variation-settings: "wdth" var(--wdth), "wght" 700; font-size: 120px; line-height: 1; white-space: nowrap; }
+    </style>
+  </head>
+  <body>
+    <!-- One value flips; everything downstream follows. t=0 and t=6 are the same settled failure frame. -->
+    <div id="root" data-composition-id="loop" data-start="0" data-width="1600" data-height="900" data-duration="6">
+      <img src="/assets/svg/nitelos-wordmark-dark.svg" alt="nitelos" class="abs" style="left: 120px; top: 96px; width: 200px" />
+
+      <div class="panel" style="left: 120px; top: 240px; width: 620px; height: 260px">
+        <div class="abs" style="left: 36px; top: 34px; width: 18px; height: 18px; background: var(--evidence)"></div>
+        <div class="label abs" style="left: 66px; top: 32px">final state of the form</div>
+        <div class="mono abs" style="left: 36px; top: 118px; font-size: 34px; color: var(--muted)">validation_error</div>
+        <div id="v-true" class="mono abs" data-layout-allow-overlap style="left: 446px; top: 118px; font-size: 34px; color: var(--refuted)">true</div>
+        <div id="v-false" class="mono abs" data-layout-allow-overlap style="left: 446px; top: 118px; font-size: 34px; color: var(--success); opacity: 0">false</div>
+        <div class="mono abs" style="left: 36px; top: 186px; font-size: 34px; color: var(--muted)">email_filled</div>
+        <div class="mono abs" style="left: 446px; top: 186px; font-size: 34px; color: var(--muted)">true</div>
+      </div>
+
+      <div class="panel" style="left: 860px; top: 240px; width: 620px; height: 260px">
+        <div class="label abs" style="left: 36px; top: 32px">criterion no-errors</div>
+        <div class="mono abs" style="left: 36px; top: 118px; font-size: 26px">/validation_error equals false</div>
+        <div id="s-ref" class="mono abs" data-layout-allow-overlap style="left: 36px; top: 186px; font-size: 34px; color: var(--refuted)">refuted</div>
+        <div id="s-sup" class="mono abs" data-layout-allow-overlap style="left: 36px; top: 186px; font-size: 34px; color: var(--success); opacity: 0">supported</div>
+      </div>
+
+      <!-- the trace: from the observed value to the criterion that reads it -->
+      <svg class="abs" width="1600" height="900" viewBox="0 0 1600 900" style="left: 0; top: 0">
+        <path id="trace" d="M566 402 H800 V375 H856" fill="none" stroke="#79bfff" stroke-width="4" />
+        <path id="stop" d="M856 355 V395" fill="none" stroke="#79bfff" stroke-width="4" />
+      </svg>
+
+      <div class="abs" style="left: 120px; top: 590px; width: 1360px; height: 180px">
+        <div class="label abs" style="left: 120px; top: 0">decision</div>
+        <svg id="shape-fail" width="88" height="88" viewBox="0 0 110 110" style="position: absolute; left: 0; top: 46px"><rect width="110" height="110" fill="#ff877a" /><path d="M0 110 L110 0" stroke="#101318" stroke-width="14" /></svg>
+        <svg id="shape-ok" width="88" height="88" viewBox="0 0 110 110" style="position: absolute; left: 0; top: 46px; opacity: 0"><rect width="110" height="110" fill="#95d8ac" /></svg>
+        <div id="w-fail" class="word" data-layout-allow-overlap style="color: var(--refuted)">failure</div>
+        <div id="w-ok" class="word" data-layout-allow-overlap style="color: var(--success); opacity: 0; --wdth: 62">success</div>
+      </div>
+
+      <div class="label abs" style="left: 120px; top: 806px">synthetic example · real output</div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true, defaults: { immediateRender: false } });
+      const ARRIVE = "expo.out";
+      const trace = document.querySelector("#trace");
+      const len = trace.getTotalLength();
+      trace.style.strokeDasharray = len;
+
+      // flip(t, out, in): one value changes, the trace re-draws, then criterion and decision follow
+      function flip(t, o, i) {
+        tl.fromTo("#v-" + o.v, { opacity: 1, y: 0 }, { opacity: 0, y: -14, duration: 0.15 }, t);
+        tl.fromTo("#v-" + i.v, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35, ease: ARRIVE }, t + 0.15);
+        tl.fromTo("#stop", { opacity: 1 }, { opacity: 0, duration: 0.05 }, t);
+        tl.fromTo(trace, { strokeDashoffset: len }, { strokeDashoffset: 0, duration: 0.5, ease: "none" }, t);
+        tl.fromTo("#stop", { opacity: 0 }, { opacity: 1, duration: 0.05 }, t + 0.5); // trace, then stop
+        tl.fromTo("#s-" + o.s, { opacity: 1 }, { opacity: 0, duration: 0.1 }, t + 0.5);
+        tl.fromTo("#s-" + i.s, { opacity: 0 }, { opacity: 1, duration: 0.25 }, t + 0.6);
+        tl.fromTo("#shape-" + o.d, { opacity: 1, scale: 1 }, { opacity: 0, scale: 0.6, duration: 0.2, transformOrigin: "50% 50%" }, t + 0.55);
+        tl.fromTo("#shape-" + i.d, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.35, ease: ARRIVE, transformOrigin: "50% 50%" }, t + 0.6);
+        tl.fromTo("#w-" + o.d, { opacity: 1, "--wdth": 125 }, { opacity: 0, "--wdth": 62, duration: 0.2 }, t + 0.55);
+        tl.fromTo("#w-" + i.d, { opacity: 0, "--wdth": 62 }, { opacity: 1, "--wdth": 125, duration: 0.6, ease: ARRIVE }, t + 0.6);
+      }
+      // baseline: the settled failure frame, identical to the frame at t=6
+      tl.set(trace, { strokeDashoffset: 0 }, 0);
+      tl.set("#stop", { opacity: 1 }, 0);
+      tl.set(["#v-true", "#s-ref", "#shape-fail"], { opacity: 1, y: 0, scale: 1 }, 0);
+      tl.set(["#v-false", "#s-sup", "#shape-ok"], { opacity: 0 }, 0);
+      tl.set("#w-fail", { opacity: 1, "--wdth": 125 }, 0);
+      tl.set("#w-ok", { opacity: 0, "--wdth": 62 }, 0);
+      const FAIL = { v: "true", s: "ref", d: "fail" };
+      const OK = { v: "false", s: "sup", d: "ok" };
+      flip(1.0, FAIL, OK); // settles by 2.2
+      flip(4.0, OK, FAIL); // settles by 5.2, holds to the seam
+      tl.set({}, {}, 6);
+      window.__timelines["loop"] = tl;
+    </script>
+  </body>
+</html>

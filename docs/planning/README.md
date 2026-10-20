@@ -1,5 +1,13 @@
 # Nitelos planning index
 
+> **Historical baseline.** This directory is the design baseline as approved on
+> 2026-10-14 and is kept unchanged as the normative reference. The status line
+> below describes that date. The implementation has since shipped: nitelos 0.1.0
+> was published on 2026-10-16. For the current state, start at the
+> [project README](../../README.md) and the [documentation index](../README.md);
+> later decisions that refine this baseline are recorded in
+> [implementation/decisions.md](../implementation/decisions.md).
+
 **Status: planning complete; implementation not started.** Baseline 2026-10-14. This directory specifies the first release of Nitelos: **Verify the outcome, not the attempt.** No application source, models, installed dependencies or test results accompany this plan.
 
 ## Recommended reading order

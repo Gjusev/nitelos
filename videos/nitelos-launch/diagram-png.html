@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1600, height=560" />
+    <title>nitelos: diagram raster</title>
+    <script src="/assets/vendor/gsap.min.js"></script>
+    <style>
+      html, body { margin: 0; width: 1600px; height: 560px; overflow: hidden; background: #101318; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+      .clip { position: absolute; inset: 0; }
+      .clip img { position: absolute; left: 0; top: 0; width: 1600px; height: 560px; }
+    </style>
+  </head>
+  <body>
+    <!-- Rasterizes docs/assets/how-it-works-*.svg on each theme's ground: snapshot --at 0.5,1.5 -->
+    <div id="root" data-composition-id="diagram-png" data-start="0" data-width="1600" data-height="560" data-duration="2">
+      <section class="clip" data-start="0" data-duration="1" data-track-index="1" style="background: #101318"><img src="/assets/diagram/how-it-works-dark.svg" alt="How nitelos works, dark theme" /></section>
+      <section class="clip" data-start="1" data-duration="1" data-track-index="1" style="background: #ffffff"><img src="/assets/diagram/how-it-works-light.svg" alt="How nitelos works, light theme" /></section>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.set({}, {}, 2);
+      window.__timelines["diagram-png"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+{
+  "project": "nitelos launch films",
+  "source_commit": "64299ce",
+  "renderer": "hyperframes@0.8.181 (Chromium, hardware GPU, Windows 11)",
+  "renders_in_git": false,
+  "renders_note": "renders/ is git-ignored. Rebuild with the commands below from videos/nitelos-launch/.",
+  "audio_target": "-16 LUFS integrated, true peak <= -1 dBTP, measured with ffmpeg loudnorm after mastering",
+  "videos": [
+    {
+      "id": "main",
+      "path": "renders/nitelos-main-30s.mp4",
+      "composition": "index.html",
+      "width": 1920, "height": 1080, "fps": 30, "frames": 900, "duration_s": 30.016,
+      "video_codec": "h264", "audio_codec": "aac 48 kHz stereo 192k",
+      "loudness_lufs": -15.95, "true_peak_dbtp": -1.77,
+      "poster_frame_s": 17.2, "poster": "stills/nitelos-main-poster.jpg",
+      "bytes": 2518871,
+      "render": "tools/stage.sh index.html render --quality delivery --output \"$(pwd -W)/renders/nitelos-main-30s.raw.mp4\" && tools/master.sh renders/nitelos-main-30s.raw.mp4 renders/nitelos-main-30s.mp4 17.2 stills/nitelos-main-poster.jpg"
+    },
+    {
+      "id": "demo",
+      "path": "renders/nitelos-demo-60s.mp4",
+      "composition": "demo.html",
+      "width": 1920, "height": 1080, "fps": 30, "frames": 1800, "duration_s": 60.01,
+      "video_codec": "h264", "audio_codec": "aac 48 kHz stereo 192k",
+      "loudness_lufs": -16.06, "true_peak_dbtp": -1.81,
+      "poster_frame_s": 20.5, "poster": "stills/nitelos-demo-poster.jpg",
+      "bytes": 4083252,
+      "render": "tools/stage.sh demo.html render --quality delivery --output \"$(pwd -W)/renders/nitelos-demo-60s.raw.mp4\" && tools/master.sh renders/nitelos-demo-60s.raw.mp4 renders/nitelos-demo-60s.mp4 20.5 stills/nitelos-demo-poster.jpg"
+    },
+    {
+      "id": "vertical",
+      "path": "renders/nitelos-vertical-30s.mp4",
+      "composition": "vertical.html",
+      "width": 1080, "height": 1920, "fps": 30, "frames": 900, "duration_s": 30.016,
+      "video_codec": "h264", "audio_codec": "aac 48 kHz stereo 192k",
+      "loudness_lufs": -16.07, "true_peak_dbtp": -1.52,
+      "poster_frame_s": 17.0, "poster": "stills/nitelos-vertical-poster.jpg",
+      "bytes": 2039970,
+      "render": "tools/stage.sh vertical.html render --quality delivery --output \"$(pwd -W)/renders/nitelos-vertical-30s.raw.mp4\" && tools/master.sh renders/nitelos-vertical-30s.raw.mp4 renders/nitelos-vertical-30s.mp4 17 stills/nitelos-vertical-poster.jpg"
+    },
+    {
+      "id": "teaser",
+      "path": "renders/nitelos-teaser-8s.mp4",
+      "composition": "teaser.html",
+      "width": 1080, "height": 1920, "fps": 30, "frames": 240, "duration_s": 8.0,
+      "video_codec": "h264", "audio_codec": "aac 48 kHz stereo 192k",
+      "loudness_lufs": -16.14, "true_peak_dbtp": -1.33,
+      "poster_frame_s": 4.5, "poster": "stills/nitelos-teaser-poster.jpg",
+      "bytes": 429259,
+      "render": "tools/stage.sh teaser.html render --quality delivery --output \"$(pwd -W)/renders/nitelos-teaser-8s.raw.mp4\" && tools/master.sh renders/nitelos-teaser-8s.raw.mp4 renders/nitelos-teaser-8s.mp4 4.5 stills/nitelos-teaser-poster.jpg"
+    },
+    {
+      "id": "loop",
+      "path": ["renders/nitelos-loop-6s.mp4", "renders/nitelos-loop-6s.webm"],
+      "composition": "loop.html",
+      "width": 1600, "height": 900, "fps": 30, "frames": 180, "duration_s": 6.0,
+      "video_codec": ["h264 crf 18", "vp9 crf 32"], "audio_codec": null,
+      "seamless": "frame 179 vs frame 0 PSNR 48.98 dB; 3x concatenation in renders/nitelos-loop-6s.x3.mp4 (18.0 s)",
+      "bytes": [162819, 149458],
+      "render": "tools/stage.sh loop.html render --quality delivery --output \"$(pwd -W)/renders/nitelos-loop-6s.raw.mp4\" && ffmpeg -i renders/nitelos-loop-6s.raw.mp4 -an -c:v libx264 -crf 18 -preset slow -pix_fmt yuv420p -movflags +faststart renders/nitelos-loop-6s.mp4 && ffmpeg -i renders/nitelos-loop-6s.raw.mp4 -an -c:v libvpx-vp9 -b:v 0 -crf 32 -row-mt 1 renders/nitelos-loop-6s.webm"
+    }
+  ],
+  "stills": [
+    { "path": "stills/nitelos-main-poster.jpg", "width": 1920, "height": 1080, "role": "cover / main poster (frame 17.2 s)" },
+    { "path": "stills/nitelos-endcard.png", "width": 1920, "height": 1080, "role": "end card" },
+    { "path": "stills/nitelos-demo-poster.jpg", "width": 1920, "height": 1080, "role": "demo poster (frame 20.5 s)" },
+    { "path": "stills/nitelos-vertical-poster.jpg", "width": 1080, "height": 1920, "role": "vertical film poster (frame 17 s)" },
+    { "path": "stills/nitelos-teaser-poster.jpg", "width": 1080, "height": 1920, "role": "teaser poster (frame 4.5 s)" },
+    { "path": "stills/nitelos-vertical-poster-designed.png", "width": 1080, "height": 1920, "role": "designed vertical poster", "render": "tools/stage.sh poster.html snapshot --at 0.5" },
+    { "path": "stills/nitelos-social-card.png", "width": 1200, "height": 630, "role": "social / Open Graph card", "render": "tools/stage.sh kit-card.html snapshot --at 0.5,1.5,2.5,3.5" },
+    { "path": "stills/cards/nitelos-state-success.png", "width": 1200, "height": 630, "role": "state card", "svg": "stills/cards/nitelos-state-success.svg" },
+    { "path": "stills/cards/nitelos-state-failure.png", "width": 1200, "height": 630, "role": "state card", "svg": "stills/cards/nitelos-state-failure.svg" },
+    { "path": "stills/cards/nitelos-state-abstained.png", "width": 1200, "height": 630, "role": "state card", "svg": "stills/cards/nitelos-state-abstained.svg" },
+    { "path": "../../docs/assets/how-it-works-dark.png", "width": 1600, "height": 560, "role": "diagram raster", "render": "diagram-png.html snapshot --at 0.5,1.5 (copy docs/assets/how-it-works-*.svg to assets/diagram/ first)" },
+    { "path": "../../docs/assets/how-it-works-light.png", "width": 1600, "height": 560, "role": "diagram raster" }
+  ],
+  "brand": {
+    "generator": "uv run --with fonttools --with uharfbuzz --with skia-pathops python tools/brand.py",
+    "files": "assets/svg/nitelos-{wordmark,mark,tile}-{dark,light}.svg, copies in docs/assets/brand/",
+    "svg_generator": "uv run python tools/diagram.py (diagram SVGs + state-card SVGs)"
+  },
+  "licenses": "assets/licenses.md",
+  "claims": "claims.md",
+  "qa": "proofs/qa.md"
+}

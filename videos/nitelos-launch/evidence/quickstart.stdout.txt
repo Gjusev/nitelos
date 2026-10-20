@@ -1,0 +1,4 @@
+execution_status: ok
+decision:         success
+criterion no-errors: supported (basis: deterministic)
+reason_codes:     ['ALL_CRITERIA_SUPPORTED']
