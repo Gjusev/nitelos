@@ -31,11 +31,15 @@ local = [
     "transformers==5.19.0",
     "num2words>=0.5.14",
 ]
+otel = [
+    "opentelemetry-api>=1.45.1,<2",
+]
 
 [dependency-groups]
 dev = [
     "hatchling>=1.32.4",
     "mypy>=2.4.0",
+    "opentelemetry-sdk>=1.45.1,<2",
     "pytest>=9.1.1",
     "pytest-asyncio>=1.4.0",
     "pytest-cov>=7.1.0",

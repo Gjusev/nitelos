@@ -60,11 +60,22 @@ lock and reconcile (REL-04 assertion), then capture each wheel's metadata verbat
 | torchvision | 0.29.1+cpu | BSD-3-Clause | download.pytorch.org/whl/cpu | AR-3 addition (nit/008-smolvlm @ 37e4b8a/d945626): module-level unguarded `from torchvision.transforms.v2 import functional as tvF` in transformers 5.19's smolvlm image processor — verified in the installed wheel source; **Release action**: same PyTorch legal-notice review as torch |
 | num2words | 0.5.14 | MIT (verify at release) | github.com/savoirfairelinux/num2words | AR-3 addition: SmolVLM2 processor raises ImportError without it (guarded import, hard requirement at construction); pure-Python |
 
+## Optional extra `otel` — `pip install 'nitelos[otel]'` (v0.2, NIT-028)
+
+The extra installs the OpenTelemetry API only; the host brings its own SDK and exporter.
+
+| Distribution | Version | License | Source | Notes |
+|---|---|---|---|---|
+| opentelemetry-api | 1.45.1 | Apache-2.0 | github.com/open-telemetry/opentelemetry-python | pure-Python; added 2026-10-20 (orchestrator, NIT-028 central change) |
+| typing-extensions | 4.16.0 | PSF-2.0 | github.com/python/typing_extensions | shared with core |
+
 ## Development group (not shipped; distributed in-repo via the lock)
 
 | Distribution | Version | License |
 |---|---|---|
 | pytest | 9.1.1 | MIT |
+| opentelemetry-sdk | 1.45.1 | Apache-2.0 |
+| opentelemetry-semantic-conventions | 0.66b1 | Apache-2.0 |
 | pytest-asyncio | 1.4.0 | Apache-2.0 |
 | pytest-cov | 7.1.0 | MIT |
 | coverage | 7.16.2 | Apache-2.0 |
