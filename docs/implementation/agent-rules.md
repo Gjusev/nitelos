@@ -23,8 +23,8 @@ These rules apply to every Claude Code instance assigned a Nitelos task. The orc
 7. Before reporting, run in your worktree:
    `uv sync --frozen --group dev` (once), the task's verification command, the full offline suite
    `uv run pytest -q`, `uv run ruff check .`, `uv run ruff format --check .`, `uv run mypy`.
-8. Commit your work on your task branch with message prefix `NIT-0XX:` and the trailer
-   `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`. Several commits are fine.
+8. Commit your work on your task branch with message prefix `NIT-0XX:`. Never add a `Co-Authored-By` trailer
+   or any other AI attribution (maintainer ruling 2026-10-20). Several commits are fine.
 9. Final report format (plain text, concise):
    - Task ID, branch, final commit SHA.
    - Files created/changed.

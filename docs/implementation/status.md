@@ -75,7 +75,7 @@ Plan: [17-v0.2-product-and-plan.md](../planning/17-v0.2-product-and-plan.md). In
 
 | Gate | State |
 |---|---|
-| G9 ADR-014/015/016 | pending (proposed in decisions.md) |
+| G9 ADR-014/015/016 | PASSED 2026-10-20 (all three accepted as recommended) |
 | G10 dogfooding review | pending |
 | G11 NIT-030 protocol freeze | pending |
 | G12 release candidate | pending |
@@ -126,3 +126,4 @@ Plan: [17-v0.2-product-and-plan.md](../planning/17-v0.2-product-and-plan.md). In
 - 2026-10-15: AR-4 dossier approved (digests independently recomputed) and merged. Project now waits on: G4 human annotation → final freeze → final runs → NIT-015 final → AR-5.
 - 2026-10-16: final runs merged; AR-5 APPROVED. v0.1 release candidate complete; publication awaits maintainer (human annotation review precondition per ADR-013).
 - 2026-10-20: v0.2 setup: `integration/v0.2` created from `integration/v0.1` @ `0c29c17`; plan copied to docs/planning/17; NIT-016..035 added (pending); ADR-014/015/016 written as proposed. Found during setup: `from nitelos import *` raises AttributeError (`__all__` lists `Backend`, `BackendCapabilities`, which `nitelos/__init__.py` does not import); fix proposed in NIT-017. Waiting on G9.
+- 2026-10-20: G9 PASSED: user approved ADR-014 (option A), ADR-015 (with findings 1–4) and ADR-016 (with findings 1–3). User ruling: no `Co-Authored-By` Claude trailer in this repo (agent rule 8 amended), consistent with the 2026-10-20 history rewrite.

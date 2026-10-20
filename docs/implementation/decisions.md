@@ -245,7 +245,7 @@ Gate evidence:
 Known limitations recorded: over-support bias of the visual model (headline), S07 cross-split truth asymmetry (documented, no decision impact), Windows local extra unvalidated, agent-audited labels per ADR-013.
 Remaining (maintainer authority, outside this phase): human annotation review precondition, package-name/availability recheck, and any publication.
 
-## ADR-014 — v0.2 packaging (state: proposed, gate G9)
+## ADR-014 — v0.2 packaging (state: accepted, option A; user-approved 2026-10-20, G9)
 
 **Context:** v0.2 adds collectors (git, junit, github, http, playwright) and integrations (claude-code, inspect, langgraph, deepeval, mcp, otel). The core must still install with only pydantic and pillow (doc 09, plan section 4).
 **Options:**
@@ -258,7 +258,7 @@ Remaining (maintainer authority, outside this phase): human annotation review pr
 4. `uv.lock` is universal and the `local` extra pins torch from an explicit index. Each new extra changes the lock, so extras are added centrally by the orchestrator, one task at a time, never by an implementer.
 **Recommendation:** A.
 
-## ADR-015 — Side effects allowed in collectors (state: proposed, gate G9)
+## ADR-015 — Side effects allowed in collectors (state: accepted with findings 1–4; user-approved 2026-10-20, G9)
 
 **Context:** Agent rule 5 forbids subprocess in library code. Doc 07 forbids default network access, and its "later allowlisted read-only collectors" row anticipates this ADR.
 **Proposal (plan, section 9):** subprocess (an allowlist of fixed argv lists) and network (opt-in GET-only collectors) are allowed only inside `nitelos.collect.*`. Core, verifier, policy and backends keep the no-network and no-subprocess rules. This amends agent rule 5 for collector modules only. The other controls are a scrubbed environment, `shell=False`, timeouts, output caps, defused XML, TLS verification on, no cross-host redirects, and evidence treated as data that is never executed or followed.
@@ -269,7 +269,7 @@ Remaining (maintainer authority, outside this phase): human annotation review pr
 4. **Channel and trust:** `Channel` is closed (`dom`, `accessibility`, `tool`, `external_api`, `database`, `human`). Collector observations need a channel. Recommendation: `external_api`, with the host, never the collector, creating a `TrustBinding` for exactly the evidence it collected itself. Criteria then use scope `external`. Evidence supplied by an agent (for example through MCP `verify_outcome`) never gets a binding, so it can never satisfy those criteria. Limitation: `external_api` is a loose name for a local `git status`. A dedicated `collector` channel would be a v1 wire change and needs its own ADR.
 **Recommendation:** approve as proposed, with findings 1–4.
 
-## ADR-016 — Claude Code hook semantics (state: proposed, gate G9)
+## ADR-016 — Claude Code hook semantics (state: accepted with findings 1–3; user-approved 2026-10-20, G9)
 
 **Proposal (plan, section 9):** block only on failure. Abstain warns by default (`on_abstain: "block"` opts in to blocking). Loop guard on the evidence fingerprint. Criteria come from the repo (`.nitelos/criteria.json`), never from the agent. The agent's last reported status is context only. On internal error, warn and exit 0.
 **Findings from the code and plan that affect this ADR:**
