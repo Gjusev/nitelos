@@ -1,0 +1,30 @@
+name: Feature request
+description: Propose an addition or change. nitelos judges outcomes from supplied evidence; it does not act for the agent.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: The verification situation you could not express or could not run.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: What you would write and what nitelos would answer.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you considered
+      description: Including doing it outside nitelos.
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This asks nitelos to judge from evidence, not to act, browse, retry or fetch for the agent.
+          required: true
