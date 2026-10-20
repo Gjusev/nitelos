@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -41,9 +43,6 @@ def _result(kind: str) -> Any:
             ],
             "evidence": [],
         }
-        import hashlib
-        import json
-
         observation = {
             "id": "obs",
             "kind": "observation",
@@ -89,11 +88,16 @@ def _result(kind: str) -> Any:
     raise AssertionError(kind)
 
 
+def test_dev07_metric_name_is_specific() -> None:
+    metric = NitelosOutcomeMetric(lambda: _result("success"))
+    assert metric.__name__ == "NitelosOutcomeMetric"
+
+
 def test_dev01_success_scores_one() -> None:
     metric = NitelosOutcomeMetric(lambda: _result("success"))
     score = metric.measure(None)
     assert score == 1.0
-    assert metric.is_successful is True
+    assert metric.is_successful() is True
     assert metric.score == 1.0
 
 
@@ -101,7 +105,7 @@ def test_dev02_execution_error_scores_zero_not_success() -> None:
     metric = NitelosOutcomeMetric(lambda: _result("failure"))
     score = metric.measure(None)
     assert score == 0.0
-    assert metric.is_successful is False
+    assert metric.is_successful() is False
     assert "input_error" in metric.reason
     assert "decision" in metric.reason
 
@@ -110,7 +114,7 @@ def test_dev03_abstention_is_never_a_pass_with_distinct_reason() -> None:
     metric = NitelosOutcomeMetric(lambda: _result("abstained"))
     score = metric.measure(None)
     assert score == 0.0
-    assert metric.is_successful is False
+    assert metric.is_successful() is False
     assert metric.reason.startswith("abstained")
     assert "MISSING_EVIDENCE" in metric.reason
     assert metric.reason != "success"

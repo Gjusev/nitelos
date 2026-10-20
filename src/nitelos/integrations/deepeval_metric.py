@@ -21,7 +21,7 @@ from collections.abc import Callable
 from typing import Any
 
 try:
-    from deepeval.metrics import BaseMetric  # type: ignore[import-not-found]  # optional extra: central mypy override lands with the deepeval provisioning
+    from deepeval.metrics import BaseMetric  # type: ignore[attr-defined]  # deepeval 2.9.3 re-exports without __all__
 except ImportError as _exc:  # pragma: no cover - exercised via subprocess test
     raise ImportError(
         "nitelos.integrations.deepeval_metric requires the deepeval extra; "
@@ -31,7 +31,7 @@ except ImportError as _exc:  # pragma: no cover - exercised via subprocess test
 __all__ = ["NitelosOutcomeMetric"]
 
 
-class NitelosOutcomeMetric(BaseMetric):  # type: ignore[misc]  # BaseMetric is Any until the deepeval extra is provisioned; remove with the central override
+class NitelosOutcomeMetric(BaseMetric):
     """Score a verification outcome: 1.0 success, 0.0 anything else.
 
     ``result_provider`` is called once per ``measure`` and must return a
@@ -45,7 +45,8 @@ class NitelosOutcomeMetric(BaseMetric):  # type: ignore[misc]  # BaseMetric is A
         self.score: float | None = None
         self.reason: str | None = None
         self.success: bool | None = None
-        self.__name__ = "NitelosOutcomeMetric"
+        # BaseMetric.__name__ is a read-only property in deepeval 2.9.3
+        # deriving the class name; do not assign it.
 
     def measure(self, test_case: Any = None, **_kwargs: Any) -> float:
         result = self._result_provider()
@@ -73,7 +74,12 @@ class NitelosOutcomeMetric(BaseMetric):  # type: ignore[misc]  # BaseMetric is A
             self.reason = f"abstained: {', '.join(codes) if codes else 'no criteria decided'}"
         return self.score
 
+    def is_successful(self) -> bool:
+        """The abstract success method (deepeval 2.9.3 declares it as a
+        method, not a property); False before ``measure``."""
+        return bool(self.success)
+
     @property
-    def is_successful(self) -> bool | None:
-        """DeepEval-style success flag; None before ``measure``."""
-        return self.success
+    def __name__(self) -> str:
+        """The metric name (supertype returns the generic "Base Metric")."""
+        return "NitelosOutcomeMetric"
