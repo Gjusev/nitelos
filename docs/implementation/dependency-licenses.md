@@ -285,3 +285,14 @@ wheels' metadata against the frozen lock. Not in the dev group.
 | requests-toolbelt | 1.0.0 | Apache-2.0 | github.com/requests/toolbelt | |
 | uuid-utils | 0.18.0 | BSD-3-Clause | github.com/aminalaee/uuid-utils | compiled wheel |
 | xxhash | 4.0.2 | BSD-2 (repository; verify at release) | github.com/ifduyue/python-xxhash | license from its repository (classifier absent); compiled wheel |
+
+## Optional extra `playwright` — `pip install 'nitelos[playwright]'`
+
+Added 2026-10-21 (NIT-022, central provisioning). The caller supplies the live
+Playwright `Page`; browsers are NOT installed by this extra. Not in the dev group.
+
+| Distribution | Version | License | Source | Notes |
+|---|---|---|---|---|
+| greenlet | 3.5.6 | MIT AND PSF-2.0 | greenlet.readthedocs.io | compiled wheel |
+| playwright | 1.64.0 | Apache-2.0 | github.com/Microsoft/playwright-python | **Release action**: the package itself installs no browsers; if tests or docs ever run a browser, the browser binaries carry their own notices (Chromium BSD-family, Firefox MPL) — review before shipping any such usage |
+| pyee | 14.0.0 | MIT | github.com/jfhbrook/pyee | |

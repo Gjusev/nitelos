@@ -52,6 +52,9 @@ inspect = [
 langgraph = [
     "langgraph>=0.2",
 ]
+playwright = [
+    "playwright>=1.40",
+]
 
 [project.scripts]
 nitelos-hook = "nitelos.claude_code:main"
@@ -143,6 +146,11 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 # NIT-025 (langgraph extra, not in the dev group): absent in core-only environments
 module = ["langgraph", "langgraph.*", "langchain_core", "langchain_core.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# NIT-022 (playwright extra, not in the dev group): absent in core-only environments
+module = ["playwright", "playwright.*"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
