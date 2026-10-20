@@ -28,8 +28,10 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
-KIND_TARGETS: dict[str, str] = {  # kind -> "module:attribute" (junit arrives with NIT-019)
+KIND_TARGETS: dict[str, str] = {  # kind -> "module:attribute" (junit arrived with NIT-019)
     "git": "nitelos.collect.git:COLLECTOR",
+    "junit": "nitelos.collect.test_results:COLLECTOR",
+    "github": "nitelos.collect.github:COLLECTOR",
 }
 
 

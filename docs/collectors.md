@@ -143,6 +143,35 @@ reports as dirty — correct for a byte-level view, surprising if you rely on
 your global line-ending config. The provenance `sha256` digests the
 concatenated raw stdouts.
 
+## The shared GET transport and the GitHub collector (`nitelos[github]`, NIT-020)
+
+Network collection goes through one shared transport
+(`nitelos.collect._http`, the ADR-015 collector exception): GET only,
+`https://` only, TLS verification on, redirects followed only within the
+original host (a cross-host redirect raises `COLLECTOR_UNAVAILABLE` and never
+leaks the Authorization header to another origin), the body read incrementally
+with a running byte count (`COLLECTOR_OUTPUT_TOO_LARGE` at the cap, never
+silent truncation), socket timeouts → `COLLECTOR_TIMEOUT`. The transport is
+an injectable seam: offline tests replay recorded fixtures and never open a
+socket; the default transport is the framework's only network path.
+
+`GithubCollector` (kind `github`, config with `owner`/`repo`/`pr_number` and
+an optional `enterprise_host`) reports one observation under `/github/pr/`:
+`state`, `merged`, `draft`, `head_sha`, `mergeable_state`, `review_decision`
+(DERIVED from the latest APPROVED/CHANGES_REQUESTED review per reviewer — an
+approximation of GraphQL's field, kept REST-only), `checks[]` (name/status/
+conclusion from the head sha's check-runs), `required_checks` (branch
+protection contexts; null when unreadable — e.g. no admin scope — rather
+than guessed) and `checks_all_green` (computed from REQUIRED checks only; a
+failing non-required check does not flip it; null when the required set is
+unknown). Token from `GITHUB_TOKEN` or `GH_TOKEN` — a read-only fine-grained
+token with Pull requests: read and Checks: read suffices (Contents: read for
+protection contexts); the token never appears in evidence, provenance, logs
+or stdout. Status mapping to abstention: 401 → `COLLECTOR_AUTH_MISSING`;
+rate limit (429 or 403 with `X-RateLimit-Remaining: 0`) and 404 →
+`COLLECTOR_UNAVAILABLE`; other 4xx → `COLLECTOR_CONFIG_INVALID`; 5xx →
+`COLLECTOR_UNAVAILABLE`.
+
 ## The debug CLI
 
 ```

@@ -1,0 +1,4 @@
+[
+  {"user": {"login": "reviewer-1"}, "state": "APPROVED", "submitted_at": "2026-10-20T10:00:00Z"},
+  {"user": {"login": "reviewer-2"}, "state": "CHANGES_REQUESTED", "submitted_at": "2026-10-20T10:05:00Z"}
+]

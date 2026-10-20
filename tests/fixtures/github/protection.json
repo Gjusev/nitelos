@@ -1,0 +1,6 @@
+{
+  "url": "https://api.github.com/repos/example/app/branches/main/protection/required_status_checks",
+  "enforcement_level": "non_admins",
+  "contexts": ["build", "test"],
+  "checks": []
+}
