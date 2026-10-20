@@ -29,6 +29,8 @@ from nitelos.collect import (
 class DeploymentStatusCollector:
     """Read-only collector over an in-memory deployment record."""
 
+    config_model = CollectorConfig  # kind-specific configs subclass CollectorConfig
+
     def __init__(self, record: dict[str, Any]) -> None:
         self.record = record
 

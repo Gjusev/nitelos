@@ -17,6 +17,7 @@ from nitelos import Evidence, canonical_json, cli
 from nitelos.collect import (
     CollectionResult,
     CollectorCapabilities,
+    CollectorConfig,
     CollectorError,
     CollectorErrorCode,
     ProvenanceRecord,
@@ -28,6 +29,7 @@ SENTINEL = "SENTINEL-SENTINEL-cli"
 class _FakeCollector:
     id = "cli-fixture"
     version = "9.9.9"
+    config_model = CollectorConfig
 
     @property
     def capabilities(self) -> CollectorCapabilities:
@@ -189,3 +191,83 @@ def test_cli03_known_kind_with_unimportable_module_exits_three(
     code = cli.main(["collect", "fake", "--config", str(config), "--out", str(tmp_path / "out.json")])
     assert code == 3
     assert "COLLECTOR_UNAVAILABLE" in capsys.readouterr().out
+
+
+class _SubConfigCollector(_FakeCollector):
+    """Kind-specific config shape (NIT-018 preview) with one extra field."""
+
+    def collect(self, config: Any) -> CollectionResult:
+        item = Evidence.observation(
+            id=config.evidence_id,
+            sequence=config.sequence_start,
+            captured_at="2026-10-20T12:00:00Z",
+            checkpoint_id=config.checkpoint_id,
+            source_id=self.id,
+            subject=config.subject,
+            phase="final",
+            channel="external_api",
+            data={"repo_path": config.repo_path},
+        )
+        from nitelos.collect import ProvenanceRecord
+
+        size = len(canonical_json({"repo_path": config.repo_path}).encode("utf-8"))
+        return CollectionResult(
+            collector_id=self.id,
+            collector_version=self.version,
+            evidence=(item,),
+            provenance=(
+                ProvenanceRecord(
+                    evidence_id=item.id,
+                    collector_id=self.id,
+                    collector_version=self.version,
+                    source="cli fixture",
+                    invocation="static",
+                    captured_at=item.captured_at,
+                    subject=config.subject,
+                    sha256=item.sha256,
+                    raw_bytes=size,
+                    normalized_bytes=size,
+                ),
+            ),
+        )
+
+
+class _SubConfig(CollectorConfig):
+    repo_path: str
+
+
+_SUB_CONFIG_COLLECTOR: _SubConfigCollector = _SubConfigCollector()
+_SUB_CONFIG_COLLECTOR.config_model = _SubConfig  # type: ignore[attr-defined]
+
+
+def test_cli02_subclass_config_from_json(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    monkeypatch.setattr(cli, "KIND_TARGETS", {"fake": "test_cli:_SUB_CONFIG_COLLECTOR"})
+    (tmp_path / "config.json").write_text(
+        '{"evidence_id": "obs-1", "checkpoint_id": "cp-1", "subject": {"repo": "r"}, '
+        '"repo_path": "/tmp/r", "redact_pointers": []}',
+        encoding="utf-8",
+    )
+    out = tmp_path / "out.json"
+    assert cli.main(["collect", "fake", "--config", str(tmp_path / "config.json"), "--out", str(out)]) == 0
+    document = json.loads(out.read_text(encoding="utf-8"))
+    assert document["error"] is None
+    assert document["evidence"][0]["data"] == {"repo_path": "/tmp/r"}
+    capsys.readouterr()
+
+
+def test_cli03_module_invocation_works(tmp_path: Path) -> None:
+    import subprocess
+    import sys
+
+    config = _write_config(tmp_path / "config.json")
+    out = tmp_path / "out.json"
+    proc = subprocess.run(
+        [sys.executable, "-m", "nitelos.cli", "collect", "nope", "--config", str(config), "--out", str(out)],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert proc.returncode == 2
+    assert "unknown kind" in proc.stderr
