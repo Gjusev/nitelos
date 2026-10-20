@@ -50,8 +50,8 @@ Plan: [17-v0.2-product-and-plan.md](../planning/17-v0.2-product-and-plan.md). In
 
 | Task | State | Owner | Branch / worktree | Depends | Tests / results | Deviations / blockers |
 |---|---|---|---|---|---|---|
-| NIT-016 Repo hygiene | pending | — | — | — | — | |
-| NIT-017 F1 collector framework | pending | — | — | G9 | — | includes central extras-isolation test and `__all__` fix (see ADR-014) |
+| NIT-016 Repo hygiene | running | implementer instance | nit/016-repo-hygiene / nitelos-wt/nit-016 | — | — | |
+| NIT-017 F1 collector framework | running | implementer instance | nit/017-collector-framework / nitelos-wt/nit-017 | G9 | — | includes central extras-isolation test and `__all__` fix (see ADR-014) |
 | NIT-018 F2 git collector | pending | — | — | 017 | — | |
 | NIT-019 F3 test-results collector | pending | — | — | 017 | — | |
 | NIT-020 F4 GitHub collector | pending | — | — | 017 | — | |
@@ -127,3 +127,4 @@ Plan: [17-v0.2-product-and-plan.md](../planning/17-v0.2-product-and-plan.md). In
 - 2026-10-16: final runs merged; AR-5 APPROVED. v0.1 release candidate complete; publication awaits maintainer (human annotation review precondition per ADR-013).
 - 2026-10-20: v0.2 setup: `integration/v0.2` created from `integration/v0.1` @ `0c29c17`; plan copied to docs/planning/17; NIT-016..035 added (pending); ADR-014/015/016 written as proposed. Found during setup: `from nitelos import *` raises AttributeError (`__all__` lists `Backend`, `BackendCapabilities`, which `nitelos/__init__.py` does not import); fix proposed in NIT-017. Waiting on G9.
 - 2026-10-20: G9 PASSED: user approved ADR-014 (option A), ADR-015 (with findings 1–4) and ADR-016 (with findings 1–3). User ruling: no `Co-Authored-By` Claude trailer in this repo (agent rule 8 amended), consistent with the 2026-10-20 history rewrite.
+- 2026-10-20: Phase 1 started: NIT-016 and NIT-017 implementers launched (worktrees from `253bbeb`); Claude Code hook/plugin facts being confirmed against the docs ahead of NIT-023.
