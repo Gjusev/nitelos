@@ -1,6 +1,6 @@
 # Documentation audit (launch pass, 2026-10-20)
 
-Scope: `README.md`, `CONTRIBUTING.md` and `docs/` at commit `64299ce` (nitelos 0.1.0 on
+Scope: `README.md`, `CONTRIBUTING.md` and `docs/` at commit `6b3d108` (nitelos 0.1.0 on
 PyPI). Each finding names the evidence that showed it was wrong and the fix made.
 How the fixes were checked: [documentation-validation.md](documentation-validation.md).
 

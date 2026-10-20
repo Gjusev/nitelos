@@ -1,7 +1,7 @@
 # Documentation validation (2026-10-20)
 
 What was checked after the [documentation audit](documentation-audit.md), on Windows 11,
-CPython 3.12.2, `uv run`, commit `64299ce` plus the uncommitted doc changes.
+CPython 3.12.2, `uv run`, commit `6b3d108` plus the uncommitted doc changes.
 Status per line: **checked** (ran, passed), **failed**, or **not run**.
 
 | Check | Command | Result | Status |

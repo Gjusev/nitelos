@@ -1,6 +1,6 @@
 # Evidence capture: the three examples (Phase A)
 
-Captured 2026-10-20 from the main checkout at commit `64299ce` (nitelos 0.1.0,
+Captured 2026-10-20 from the main checkout at commit `6b3d108` (nitelos 0.1.0,
 CPython 3.12.2, Windows 11, project venv via `uv run`). Output below is literal;
 any stylized terminal in the films derives from these files and is labeled
 "Real output, edited visualization".
