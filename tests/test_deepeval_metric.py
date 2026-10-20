@@ -60,8 +60,47 @@ def _result(kind: str) -> Any:
         ).hexdigest()
         request["evidence"] = [observation]
         return Verifier().verify(parse_request(json.dumps(request)))
-    if kind == "failure":
-        return Verifier().verify({"schema_version": "1", "bogus": True})  # input_error path
+    if kind == "refuted":
+        document = {
+            "schema_version": "1",
+            "request_id": "d-1",
+            "objective": "x",
+            "checkpoint_id": "cp",
+            "as_of": "2099-01-01T00:00:00Z",
+            "criteria": [
+                {
+                    "id": "c1",
+                    "description": "d",
+                    "kind": "assertion",
+                    "scope": "observed_state",
+                    "evidence_ids": ["obs"],
+                    "subject": {"s": "1"},
+                    "pointer": "/ok",
+                    "operator": "equals",
+                    "expected": True,
+                }
+            ],
+            "evidence": [],
+        }
+        observation = {
+            "id": "obs",
+            "kind": "observation",
+            "sequence": 0,
+            "captured_at": "2099-01-01T00:00:00Z",
+            "checkpoint_id": "cp",
+            "source_id": "t",
+            "subject": {"s": "1"},
+            "phase": "final",
+            "channel": "dom",
+            "data": {"ok": False},
+        }
+        observation["sha256"] = hashlib.sha256(
+            canonical_json(observation["data"]).encode("utf-8")
+        ).hexdigest()
+        document["evidence"] = [observation]
+        return Verifier().verify(parse_request(json.dumps(document)))
+    if kind == "input_error":
+        return Verifier().verify({"schema_version": "1", "bogus": True})
     if kind == "abstained":
         request = {
             "schema_version": "1",
@@ -102,12 +141,22 @@ def test_dev01_success_scores_one() -> None:
 
 
 def test_dev02_execution_error_scores_zero_not_success() -> None:
-    metric = NitelosOutcomeMetric(lambda: _result("failure"))
+    metric = NitelosOutcomeMetric(lambda: _result("input_error"))
     score = metric.measure(None)
     assert score == 0.0
     assert metric.is_successful() is False
     assert "input_error" in metric.reason
     assert "decision" in metric.reason
+
+
+def test_dev02b_decision_failure_reason_lists_refuted_criterion() -> None:
+    metric = NitelosOutcomeMetric(lambda: _result("refuted"))
+    score = metric.measure(None)
+    assert score == 0.0
+    assert metric.is_successful() is False
+    assert metric.reason is not None
+    assert metric.reason.startswith("decision failure")
+    assert "c1" in metric.reason
 
 
 def test_dev03_abstention_is_never_a_pass_with_distinct_reason() -> None:
@@ -121,7 +170,7 @@ def test_dev03_abstention_is_never_a_pass_with_distinct_reason() -> None:
 
 
 def test_dev04_deterministic_mapping() -> None:
-    for kind in ("success", "failure", "abstained"):
+    for kind in ("success", "input_error", "abstained", "refuted"):
         first = NitelosOutcomeMetric(lambda k=kind: _result(k))
         second = NitelosOutcomeMetric(lambda k=kind: _result(k))
         first.measure(None)
@@ -131,7 +180,7 @@ def test_dev04_deterministic_mapping() -> None:
 
 
 def test_dev05_scores_are_only_zero_or_one() -> None:
-    for kind in ("success", "failure", "abstained"):
+    for kind in ("success", "input_error", "abstained", "refuted"):
         metric = NitelosOutcomeMetric(lambda k=kind: _result(k))
         metric.measure(None)
         assert metric.score in (0.0, 1.0)

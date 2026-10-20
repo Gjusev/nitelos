@@ -50,6 +50,11 @@ class NitelosOutcomeMetric(BaseMetric):
 
     def measure(self, test_case: Any = None, **_kwargs: Any) -> float:
         result = self._result_provider()
+        if not hasattr(result, "execution_status"):
+            self.score = 0.0
+            self.success = False
+            self.reason = "result_provider returned a non-VerificationResult"
+            return self.score
         status = str(result.execution_status)
         if status != "ok":
             code = result.error.code.value if result.error is not None else "unknown"
