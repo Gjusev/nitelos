@@ -169,11 +169,18 @@ guessing.
 ## Evaluation status
 
 v0.1 was measured on a synthetic benchmark of 120 authored cases, split into a
-development half and a held-out test half. The deterministic path returned the
-expected decision on every case in both halves. The experimental visual backend
-over-claims: when it gets a decisive case wrong, it answers `success` where the
-evidence refutes or withholds the outcome. Every figure, with its denominator,
-is in [reports/v0.1/SUMMARY.md](reports/v0.1/SUMMARY.md).
+development half and a held-out test half. On the deterministic path this is
+policy conformance, not accuracy: the expected decision is derived from
+each case's state by the policy's own specified rules, so the benchmark
+checks the implementation against its own specification on authored fixtures. It matched on 120 of 120 cases
+(60 per half). The experimental visual backend is a different story. Per half it conformed
+on 41 of 60 cases and answered decisively on 42 of 60. Of the 38 decisive
+answers on cases with a known outcome, 12 were wrong, every one of them an
+over-claim of `success` (false-rejection rate 0.0). Separately, it answered
+`success` on 7 of the 18 cases whose evidence was insufficient or
+contradictory.
+Every figure, with its denominator, is in
+[reports/v0.1/SUMMARY.md](reports/v0.1/SUMMARY.md).
 
 Final-test labels were audited by two independent AI reviewers plus
 adjudication; no human annotation audit was performed. The benchmark is
@@ -197,5 +204,7 @@ The full index, including the historical design baseline, is
 [docs/README.md](docs/README.md). Brand assets and the sources of the launch
 films (HTML compositions; renders are built locally) live in
 [videos/nitelos-launch](videos/nitelos-launch/).
+
+Release history: [CHANGELOG.md](CHANGELOG.md).
 
 [Contributing](CONTRIBUTING.md) · [Security policy](SECURITY.md) · [Apache-2.0](LICENSE)

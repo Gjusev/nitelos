@@ -1,0 +1,59 @@
+name: False verdict
+description: nitelos ran fine but decided wrongly - false success, false failure, or an abstention that should have been decisive.
+labels: ["false-verdict"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A false-verdict report needs the exact criteria and the evidence (or its
+        digests) so the decision can be replayed. Confirmed cases become
+        regression fixtures in the test suite (the sealed v0.1 benchmark is not modified), so synthetic content only:
+        no secrets, credentials, personal data or third-party screenshots.
+  - type: input
+    id: version
+    attributes:
+      label: nitelos version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind of false verdict
+      options:
+        - False success (decided success, the outcome did not hold)
+        - False failure (decided failure, the outcome did hold)
+        - Wrong abstention (should have been decisive)
+        - Other decision-path behavior
+    validations:
+      required: true
+  - type: textarea
+    id: criteria
+    attributes:
+      label: Criteria (JSON)
+      description: The criterion objects exactly as sent, including scope, subject, and pointer/operator where applicable.
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or its fingerprints
+      description: The evidence items as JSON, or their ids and sha256 digests plus a note on what each contained. Screenshots, describe them or attach a synthetic equivalent.
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: expected-actual
+    attributes:
+      label: Expected vs actual
+      description: The decision and reason codes you expected, and what nitelos returned (per criterion if relevant).
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: policy
+    attributes:
+      label: Policy and trust configuration
+      description: VerificationPolicy fields and the TrustBindings involved (source_id and checkpoint_id only, never credentials).
+      render: text

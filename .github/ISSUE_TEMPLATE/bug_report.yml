@@ -1,0 +1,44 @@
+name: Bug report
+description: nitelos behaves incorrectly as software (crash, wrong error code, schema rejection).
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Replace every request, evidence item and screenshot with a minimal synthetic reproduction.
+        Do not paste secrets, API keys, tokens, personal data or real user screenshots.
+  - type: input
+    id: version
+    attributes:
+      label: nitelos version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Python version and OS
+      placeholder: "3.12, Linux"
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: The smallest request, criteria and evidence that trigger it. Synthetic values only.
+      render: python
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output or error
+      description: Result fields such as execution_status, decision and reason codes, or the traceback. Codes and paths only, no raw secrets.
+      render: text
