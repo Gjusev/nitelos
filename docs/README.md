@@ -11,6 +11,7 @@ runnable check. This index is organized by what you are trying to do.
 | Run a complete first check and change it | [quickstart.md](quickstart.md) |
 | Decide what "done" means and write criteria for it | [success-criteria.md](success-criteria.md) |
 | Collect evidence from your own agent runner | [traces.md](traces.md), then [recipes/caller-collection.md](recipes/caller-collection.md) |
+| Collect evidence from a source with the collector framework | [collectors.md](collectors.md) |
 | Know what a digest or a trust binding can and cannot prove | [evidence-limits.md](evidence-limits.md) |
 | Interpret `success`, `failure`, `abstained` and every error code | [errors-and-abstention.md](errors-and-abstention.md) |
 | Use the async API, close a verifier, cancel safely | [lifecycle.md](lifecycle.md) |
