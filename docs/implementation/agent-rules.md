@@ -17,6 +17,8 @@ These rules apply to every Claude Code instance assigned a Nitelos task. The orc
    paths presented as done, swallowed exceptions, `except BaseException`, network in unit tests, mocks
    presented as model accuracy, changing expectations to fit wrong behavior, broad `type: ignore`
    (every ignore needs a code and reason), logging of raw values, `eval`/`exec`/subprocess in library code.
+   ADR-015 exception: inside `src/nitelos/collect/` only, fixed-argv allowlisted subprocess and opt-in
+   GET-only network are allowed (no shell, scrubbed env, timeouts, caps); test BND-03 enforces the boundary.
 6. Code style: Python 3.12 syntax, strict mypy clean, Ruff lint+format clean, pure functions where the spec
    says pure, frozen/immutable models, safe `repr` (IDs/types/counts only), no hidden globals or caches,
    public docstrings stating authority, exceptions and limitations. Match the surrounding code; keep it small.
