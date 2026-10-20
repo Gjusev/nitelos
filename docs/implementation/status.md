@@ -50,7 +50,7 @@ Plan: [17-v0.2-product-and-plan.md](../planning/17-v0.2-product-and-plan.md). In
 
 | Task | State | Owner | Branch / worktree | Depends | Tests / results | Deviations / blockers |
 |---|---|---|---|---|---|---|
-| NIT-016 Repo hygiene | review fixes | nitelos-d7 impl, independent reviewer instance | nit/016-repo-hygiene / nitelos-wt/nit-016 | — | `f29a91f`: Win 600+13 skips; Linux 609+4 skips (orchestrator) | review APPROVE-WITH-CHANGES: wrong visual decisive count (38→42 of 60), unsafe-acceptance nesting, broken security link, incomplete [Unreleased] |
+| NIT-016 Repo hygiene | done (merged `48f9853`) | nitelos-d7 impl, independent reviewer instance | nit/016-repo-hygiene `43854b2` | — | integration Win 612+2 skips; branch Linux 610+4 skips | review APPROVE-WITH-CHANGES, all 11 items applied; topics/description/labels prepared in nit-016-repo-settings.md (maintainer applies) |
 | NIT-017 F1 collector framework | running | nitelos-97 | nit/017-collector-framework / nitelos-wt/nit-017 | G9 | — | includes central extras-isolation test and `__all__` fix (see ADR-014) |
 | NIT-018 F2 git collector | pending | — | — | 017 | — | |
 | NIT-019 F3 test-results collector | pending | — | — | 017 | — | |
@@ -62,7 +62,7 @@ Plan: [17-v0.2-product-and-plan.md](../planning/17-v0.2-product-and-plan.md). In
 | NIT-025 F9 LangGraph node | pending | — | — | 017 | — | |
 | NIT-026 F10 DeepEval metric | pending | — | — | 017 | — | |
 | NIT-027 F11 MCP server | pending | — | — | 017 | — | |
-| NIT-028 F12 OpenTelemetry | ready | — | nit/028-otel / nitelos-wt/nit-028 | G9 | — | central deps `8431370`: extra otel = opentelemetry-api 1.45.1 (<2); dev opentelemetry-sdk |
+| NIT-028 F12 OpenTelemetry | running | nitelos-d7 | nit/028-otel / nitelos-wt/nit-028 | G9 | — | central deps `8431370`: extra otel = opentelemetry-api 1.45.1 (<2); dev opentelemetry-sdk |
 | NIT-029 F13 Agent SDK adapters | pending | — | — | 023 adoption | — | |
 | NIT-030 tau2 study | pending | — | — | G11, 017 | — | license review first; no runs before G11 |
 | NIT-031 Dogfooding, incidents file | pending | maintainer | — | 023 | — | maintainer-owned |
@@ -131,3 +131,4 @@ Plan: [17-v0.2-product-and-plan.md](../planning/17-v0.2-product-and-plan.md). In
 - 2026-10-20: user instruction: implementation goes to the peer Claude Code sessions, not subagents. The NIT-016/017 subagents were stopped (NIT-016 partial work stashed in its worktree, unreviewed). NIT-017 → nitelos-aa, NIT-016 → nitelos-c3; each reviews the other's task. Claude Code hook/plugin facts recorded in nit-023-claude-code-facts.md (no turn-start field → UserPromptSubmit records the turn start).
 - 2026-10-20: first peer assignments expired unapproved (permission-mode mismatch). Peers restarted as nitelos-97 and nitelos-d7; NIT-017 → nitelos-97, NIT-016 → nitelos-d7, resent.
 - 2026-10-20: NIT-016 delivered by nitelos-d7 (`f29a91f`), verified by the orchestrator on Win+Linux; review APPROVE-WITH-CHANGES (4 required: README visual figures, security link, CHANGELOG coverage); fixes sent. NIT-028 central deps committed (`8431370`).
+- 2026-10-20: NIT-016 fixes `43854b2` verified (Win 601+13 skips in worktree; Linux 610+4 skips); merged into integration/v0.2 (`48f9853`, Win 612 passed + 2 skips). Maintainer item: apply repo topics/description and create labels bug/enhancement/false-verdict (docs/implementation/nit-016-repo-settings.md). NIT-028 → nitelos-d7.
