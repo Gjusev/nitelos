@@ -31,6 +31,7 @@ from __future__ import annotations
 import hashlib
 import importlib
 import json
+import logging
 import os
 import re
 import sys
@@ -47,6 +48,7 @@ from nitelos.collect import CollectorError, host_trust_bindings, run_collector
 from nitelos.schemas import parse_request
 
 _MAX_STDIN_BYTES = 1_048_576
+logger = logging.getLogger("nitelos.hook")
 _STATE_SESSION_RE = re.compile(r"[^A-Za-z0-9._-]")
 _SAFE_ID_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}")
 
@@ -84,9 +86,7 @@ def _state_path(state_dir: Path, session_id: str) -> Path:
 
 def _read_state(state_dir: Path, session_id: str) -> dict[str, Any]:
     try:
-        loaded: dict[str, Any] = json.loads(
-            _state_path(state_dir, session_id).read_text(encoding="utf-8")
-        )
+        loaded: dict[str, Any] = json.loads(_state_path(state_dir, session_id).read_text(encoding="utf-8"))
         return loaded
     except (OSError, ValueError):
         return {}
@@ -98,6 +98,19 @@ def _write_state(state_dir: Path, session_id: str, data: dict[str, Any]) -> None
     tmp = path.with_suffix(".tmp")
     tmp.write_text(json.dumps(data), encoding="utf-8")
     tmp.replace(path)
+
+
+def _try_write_state(state_dir: Path, session_id: str, state: dict[str, Any], fingerprint: str) -> None:
+    """Best-effort loop-guard write: never let it break the block/warn path.
+
+    A failed state write (unwritable temp dir, transient OSError) only means
+    the loop guard may repeat a block; the decision document is unaffected,
+    per ADR-016 ("on internal error, warn and exit 0").
+    """
+    try:
+        _write_state(state_dir, session_id, {**state, "last_block_fingerprint": fingerprint})
+    except OSError:
+        logger.debug("loop-guard state write failed (best-effort; block unaffected)")
 
 
 def run_prompt(event_text: str, *, state_dir: Path) -> dict[str, Any]:
@@ -282,7 +295,7 @@ def run_stop(stdin_text: str, *, state_dir: Path, require_turn_start: bool = Tru
         criteria = CriteriaFile.model_validate(
             json.loads((cwd / ".nitelos" / "criteria.json").read_text(encoding="utf-8"))
         )
-    except (OSError, ValueError, Exception) as error:  # noqa: BLE001 - any failure is a warn
+    except Exception as error:  # noqa: BLE001 - any criteria failure is a warn
         return _warn(
             f"criteria invalid or missing ({type(error).__name__}); "
             "run /nitelos:init to create .nitelos/criteria.json"
@@ -350,12 +363,12 @@ def run_stop(stdin_text: str, *, state_dir: Path, require_turn_start: bool = Tru
         state = _read_state(state_dir, session_id)
         fingerprint = _fingerprint(criteria, evidence, "failure")
         if event.get("stop_hook_active") and state.get("last_block_fingerprint") == fingerprint:
-            _write_state(state_dir, session_id, {**state, "last_block_fingerprint": fingerprint})
+            _try_write_state(state_dir, session_id, state, fingerprint)
             return _warn(
                 "same failed verification was already blocked once this session; "
                 "passing to avoid a loop — fix the criteria or the evidence"
             )
-        _write_state(state_dir, session_id, {**state, "last_block_fingerprint": fingerprint})
+        _try_write_state(state_dir, session_id, state, fingerprint)
     return document
 
 

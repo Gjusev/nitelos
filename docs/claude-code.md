@@ -54,6 +54,21 @@ Python 3.12, median of 5): junit 0.8 ms per small report set; git 83.6 ms on a
 fresh repository (three fixed git invocations). Both are far below the default
 `max_seconds: 2.0`; an overrun degrades to a warning and the stop passes.
 
+## State file and prerequisites
+
+The turn-start record and the loop-guard fingerprint share one small
+per-session JSON file under the OS temp directory (`nitelos-hooks/`,
+overridable with `NITELOS_HOOK_STATE_DIR`); it is the plugin's only write
+and the repository is never touched. The `wall` field in it records the
+prompt hook's wall-clock time, useful if a future feature needs an
+absolute reference.
+
+On Windows, shell-form hooks run through Git Bash (or PowerShell if Git
+Bash is absent); the launcher `hooks/nitelos-hook.sh` requires Git Bash,
+which ships with Git for Windows. Alternatively, set `NITELOS_PYTHON` to
+an absolute interpreter path and the launcher only needs `bash` to exist
+somewhere on PATH.
+
 ## Limitations
 
 - SubagentStop is not wired in this version (blocking a subagent would change
