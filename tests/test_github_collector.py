@@ -9,6 +9,7 @@ outside this task's file list (rule-2 stop, reported).
 from __future__ import annotations
 
 import json
+import os
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
@@ -330,3 +331,33 @@ def test_gh12_provenance_shape(monkeypatch: pytest.MonkeyPatch) -> None:
 
 def test_gh13_cli_kind_registered() -> None:
     assert cli.KIND_TARGETS["github"] == "nitelos.collect.github:COLLECTOR"
+
+
+@pytest.mark.github_live
+@pytest.mark.skipif(
+    os.environ.get("NITELOS_RUN_GITHUB_LIVE") != "1" or not os.environ.get("GITHUB_TOKEN"),
+    reason="live GitHub REST: set NITELOS_RUN_GITHUB_LIVE=1 and GITHUB_TOKEN (deselected by default)",
+)
+def test_gh14_live_collection_against_a_real_pr() -> None:
+    """The default transport against python/cpython PR #1 (closed, stable since 2016)."""
+    collector = GithubCollector()  # default transport: the framework's only socket path
+    config = GithubConfig.model_validate(
+        {
+            "evidence_id": "obs-gh-live",
+            "checkpoint_id": "cp-live",
+            "subject": {"repo": "python/cpython"},
+            "owner": "python",
+            "repo": "cpython",
+            "pr_number": 1,
+            "limits": {"timeout_s": 20.0},
+        }
+    )
+    result = run_collector(collector, config)
+    assert result.error is None, result.error
+    (item,) = result.evidence
+    pr = dict(item.data)["github"]["pr"]
+    assert pr["state"] in ("open", "closed")
+    assert pr["merged"] is True or pr["merged"] is False
+    assert pr["head_sha"] is None or len(str(pr["head_sha"])) == 40
+    (record,) = result.provenance
+    assert record.evidence_sha256 == item.sha256

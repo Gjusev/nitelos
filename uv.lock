@@ -493,7 +493,7 @@ requires-dist = [
     { name = "torchvision", marker = "extra == 'local'", specifier = "==0.29.1+cpu", index = "https://download.pytorch.org/whl/cpu" },
     { name = "transformers", marker = "extra == 'local'", specifier = "==5.19.0" },
 ]
-provides-extras = ["eval", "local", "otel", "git", "junit"]
+provides-extras = ["eval", "local", "otel", "git", "junit", "github", "claude-code"]
 
 [package.metadata.requires-dev]
 dev = [
