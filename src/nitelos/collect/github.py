@@ -49,7 +49,12 @@ from nitelos.collect import (
     CollectorErrorCode,
     ProvenanceRecord,
 )
-from nitelos.collect._http import GetTransport, HttpResponse, default_transport
+from nitelos.collect._http import (
+    GetTransport,
+    HttpResponse,
+    default_transport,
+    map_http_error,
+)
 from nitelos.schemas import Evidence as _EvidenceFactory
 from nitelos.schemas import canonical_json
 
@@ -108,11 +113,11 @@ class GithubCollector:
                 return response
             if response.status in tolerate:
                 return None
-            _map_http_error(response)
-            return None  # unreachable: _map_http_error always raises
+            map_http_error(response)
+            return None  # unreachable: map_http_error always raises
 
         pr_response = get("pull_request", f"{repo_base}/pulls/{cfg.pr_number}")
-        if pr_response is None:  # pragma: no cover - _map_http_error always raises
+        if pr_response is None:  # pragma: no cover - map_http_error always raises
             raise CollectorError(CollectorErrorCode.UNAVAILABLE)
         pr = json.loads(pr_response.body)
         head_sha = str(pr.get("head", {}).get("sha") or "")
@@ -149,7 +154,7 @@ class GithubCollector:
                 required = [str(context) for context in contexts]
 
         reviews_response = get("reviews", f"{repo_base}/pulls/{cfg.pr_number}/reviews")
-        if reviews_response is None:  # pragma: no cover - _map_http_error always raises
+        if reviews_response is None:  # pragma: no cover - map_http_error always raises
             raise CollectorError(CollectorErrorCode.UNAVAILABLE)
         reviews = json.loads(reviews_response.body)
 
@@ -207,27 +212,6 @@ class GithubCollector:
             evidence=(item,),
             provenance=(record,),
         )
-
-
-def _map_http_error(response: HttpResponse) -> None:
-    """Map non-2xx statuses to collector codes (abstention, never failure)."""
-    if 200 <= response.status < 300:
-        return
-    remaining = next(
-        (value for key, value in response.headers.items() if key.lower() == "x-ratelimit-remaining"),
-        None,
-    )
-    if response.status == 401:
-        raise CollectorError(CollectorErrorCode.AUTH_MISSING)
-    if response.status == 429 or (response.status == 403 and remaining == "0"):
-        raise CollectorError(CollectorErrorCode.UNAVAILABLE)  # rate limited right now
-    if response.status == 404:
-        raise CollectorError(CollectorErrorCode.UNAVAILABLE)
-    if 500 <= response.status < 600:
-        raise CollectorError(CollectorErrorCode.UNAVAILABLE)
-    if 400 <= response.status < 500:
-        raise CollectorError(CollectorErrorCode.CONFIG_INVALID)
-    raise CollectorError(CollectorErrorCode.EXCEPTION)
 
 
 def _review_decision(reviews: Any) -> str | None:
