@@ -37,6 +37,11 @@ otel = [
 # empty named extras: stdlib-only collectors (ADR-014 finding 4; uniform install command)
 git = []
 junit = []
+github = []
+claude-code = []
+
+[project.scripts]
+nitelos-hook = "nitelos.claude_code:main"
 
 [dependency-groups]
 dev = [
@@ -71,10 +76,11 @@ exclude = ["tests/**/*.safetensors"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = ["-ra", "--strict-markers", "--strict-config", "-m", "not local_model and not paid_api"]
+addopts = ["-ra", "--strict-markers", "--strict-config", "-m", "not local_model and not paid_api and not github_live"]
 markers = [
     "local_model: real local model inference; requires NITELOS_RUN_LOCAL=1 and NITELOS_MODEL_DIR",
     "paid_api: reserved; v0.1 ships no paid adapter",
+    "github_live: live GitHub REST against a real PR; requires GITHUB_TOKEN and NITELOS_RUN_GITHUB_LIVE=1",
 ]
 asyncio_mode = "strict"
 asyncio_default_fixture_loop_scope = "function"
