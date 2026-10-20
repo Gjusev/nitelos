@@ -122,6 +122,46 @@ MCP_CLOSURE = {
     "uvicorn",
 }
 
+INSPECT_CLOSURE = {
+    "agent-client-protocol",
+    "aiobotocore",
+    "aioitertools",
+    "beautifulsoup4",
+    "boto3",
+    "botocore",
+    "debugpy",
+    "docstring-parser",
+    "fastapi",
+    "ijson",
+    "inspect-ai",
+    "jmespath",
+    "jsonlines",
+    "jsonpatch",
+    "jsonpath-ng",
+    "jsonpointer",
+    "jsonref",
+    "linkify-it-py",
+    "mdit-py-plugins",
+    "mmh3",
+    "nest-asyncio2",
+    "pathlib-abc",
+    "platformdirs",
+    "psutil",
+    "python-dotenv",
+    "s3fs",
+    "s3transfer",
+    "semver",
+    "shortuuid",
+    "soupsieve",
+    "textual",
+    "tiktoken",
+    "universal-pathlib",
+    "wrapt",
+    "zipfile-zstd",
+    "zipp",
+    "zstandard",
+}
+
 
 def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
     data = tomllib.loads((ROOT / "uv.lock").read_text(encoding="utf-8"))
@@ -134,6 +174,7 @@ def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
         "otel": [],
         "deepeval": [],
         "mcp": [],
+        "inspect": [],
     }
     for dep in nitelos["metadata"]["requires-dist"]:
         group = "core"
@@ -148,6 +189,8 @@ def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
                 group = "deepeval"
             elif "extra == 'mcp'" in dep["marker"]:
                 group = "mcp"
+            elif "extra == 'inspect'" in dep["marker"]:
+                group = "inspect"
             else:
                 raise AssertionError(
                     f"unrecognised extra marker for {dep['name']}: inventory test needs the group"
@@ -200,6 +243,7 @@ def test_direct_dependencies_land_in_the_right_sections() -> None:
     otel_rows = {cells[0].lower() for cells in _rows(sections, "extra `otel`")}
     deepeval_rows = {cells[0].lower() for cells in _rows(sections, "extra `deepeval`")}
     mcp_rows = {cells[0].lower() for cells in _rows(sections, "extra `mcp`")}
+    inspect_rows = {cells[0].lower() for cells in _rows(sections, "extra `inspect`")}
     assert set(direct["core"]) <= core_rows
     assert set(direct["eval"]) <= eval_rows
     assert set(direct["local"]) <= local_rows
@@ -208,6 +252,8 @@ def test_direct_dependencies_land_in_the_right_sections() -> None:
     assert deepeval_rows >= DEEPEVAL_CLOSURE
     assert set(direct["mcp"]) <= mcp_rows
     assert mcp_rows >= MCP_CLOSURE
+    assert set(direct["inspect"]) <= inspect_rows
+    assert inspect_rows >= INSPECT_CLOSURE
     # and the recorded closures are fully covered by their sections
     assert core_rows >= CORE_CLOSURE
     assert eval_rows >= EVAL_CLOSURE

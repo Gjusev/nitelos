@@ -45,6 +45,9 @@ deepeval = [
 mcp = [
     "mcp>=1.0",
 ]
+inspect = [
+    "inspect-ai>=0.3.282,<0.4",
+]
 
 [project.scripts]
 nitelos-hook = "nitelos.claude_code:main"
@@ -121,6 +124,11 @@ ignore_missing_imports = true
 # NIT-026 (deepeval extra, deliberately NOT in the dev group): absent in
 # core-only environments, imported lazily inside the metric module
 module = ["deepeval", "deepeval.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# NIT-024 (inspect extra, not in the dev group): absent in core-only environments
+module = ["inspect_ai", "inspect_ai.*"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]

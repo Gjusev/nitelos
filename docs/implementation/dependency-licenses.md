@@ -46,7 +46,7 @@ lock and reconcile (REL-04 assertion), then capture each wheel's metadata verbat
 | huggingface-hub | 2.2.0 | MIT | github.com/huggingface/huggingface_hub | |
 | hf-xet | 1.7.0 | Apache-2.0 | github.com/huggingface/hf_xet (Rust) | **verify from wheel metadata at release** |
 | filelock | 4.2.0 | Unlicense | github.com/tox-dev/filelock | public-domain-equivalent; attribution retained |
-| fsspec | 2026.9.0 | BSD-3-Clause | github.com/fsspec/filesystem_spec | |
+| fsspec | 2026.6.0 | BSD-3-Clause | github.com/fsspec/filesystem_spec |held down by the inspect tree's s3fs constraint (was 2026.9.0 before NIT-024) |
 | jinja2 | 3.1.6 | BSD-3-Clause | github.com/pallets/jinja | |
 | markupsafe | 3.0.4 | BSD-3-Clause | github.com/pallets/markupsafe | compiled wheel |
 | mpmath | 1.3.0 | BSD-3-Clause | github.com/mpmath/mpmath | |
@@ -169,7 +169,7 @@ for verification at release. This tree is deliberately NOT in the dev group.
 | httpx | 0.28.1 | BSD-3 (classifier; verify at release) | github.com/encode/httpx | |
 | jiter | 0.17.0 | MIT | github.com/pydantic/jiter/ | compiled wheel |
 | monotonic | 1.6 | Apache-2.0 | github.com/atdt/monotonic | |
-| multidict | 7.1.0 | Apache-2.0 | github.com/aio-libs/multidict | compiled wheel |
+| multidict | 6.9.1 | Apache-2.0 | github.com/aio-libs/multidict | compiled wheel |
 | nest-asyncio | 1.6.0 | BSD-3 (classifier; verify at release) | github.com/erdewit/nest_asyncio | |
 | ollama | 0.6.3 | MIT | ollama.com | |
 | openai | 3.35.1 | Apache-2.0 | github.com/openai/openai-python | |
@@ -218,3 +218,50 @@ wheels' metadata against the frozen lock. Not in the dev group.
 | sse-starlette | 3.5.0 | BSD-3-Clause | github.com/sysid/sse-starlette | |
 | starlette | 1.9.0 | BSD-3-Clause | github.com/Kludex/starlette | |
 | uvicorn | 0.54.0 | BSD-3-Clause | uvicorn.dev/ | |
+
+## Optional extra `inspect` — `pip install 'nitelos[inspect]'`
+
+Added 2026-10-21 (NIT-024, central provisioning). Rows generated from the resolved
+wheels' metadata against the frozen lock; rows whose wheels carry no license
+classifier state the license from the upstream repository and are release-verify
+items. Not in the dev group.
+
+| Distribution | Version | License | Source | Notes |
+|---|---|---|---|---|
+| agent-client-protocol | 0.12.1 | MIT | agentclientprotocol.github.io/python-sdk/ | license from its repository (classifier absent) |
+| aiobotocore | 3.9.2 | Apache-2.0 | github.com/aio-libs/aiobotocore | |
+| aioitertools | 0.13.0 | MIT | pypi.org/project/aioitertools | |
+| beautifulsoup4 | 4.15.0 | MIT | www.crummy.com/software/BeautifulSoup/bs4/ | |
+| boto3 | 1.43.106 | Apache-2.0 | github.com/boto/boto3 | license from its repository (classifier absent) |
+| botocore | 1.43.106 | Apache-2.0 | github.com/boto/botocore | license from its repository (classifier absent) |
+| debugpy | 1.8.22 | MIT | github.com/microsoft/debugpy | |
+| docstring-parser | 0.18.0 | MIT | github.com/rr-/docstring_parser | |
+| fastapi | 0.156.3 | MIT | github.com/fastapi/fastapi | |
+| ijson | 3.6.0 | BSD-3-Clause AND ISC | github.com/ICRAR/ijson | compiled wheel |
+| inspect-ai | 0.3.282 | MIT | github.com/UKGovernmentBEIS/inspect_ai | pinned <0.4 (API churn) |
+| jmespath | 1.1.0 | MIT | github.com/jmespath/jmespath.py | |
+| jsonlines | 4.0.0 | BSD-3 (classifier; verify at release) | github.com/wbolster/jsonlines | |
+| jsonpatch | 1.36 | BSD-3-Clause | github.com/stefankoegl/python-json-patch | |
+| jsonpath-ng | 1.11.0 | Apache-2.0 | github.com/jsonpath-ng/jsonpath-ng | |
+| jsonpointer | 3.4 | BSD-3 (classifier; verify at release) | github.com/stefankoegl/python-json-pointer | |
+| jsonref | 1.1.0 | MIT | github.com/gazpachoking/jsonref | license from its repository (classifier absent) |
+| linkify-it-py | 2.2.0 | MIT | github.com/tsutsu3/linkify-it-py | |
+| mdit-py-plugins | 0.6.1 | MIT | github.com/executablebooks/mdit-py-plugins | |
+| mmh3 | 5.3.1 | MIT | pypi.org/project/mmh3 | compiled wheel |
+| nest-asyncio2 | 1.7.4 | BSD-3 (classifier; verify at release) | github.com/Chaoses-Ib/nest-asyncio2 | |
+| pathlib-abc | 0.5.2 | PSF-2.0 | github.com/barneygale/pathlib-abc | |
+| platformdirs | 4.13.5 | MIT | github.com/tox-dev/platformdirs | |
+| psutil | 7.2.2 | BSD-3-Clause | github.com/giampaolo/psutil | license from its repository (classifier absent); compiled wheel |
+| python-dotenv | 1.2.4 | BSD-3-Clause | github.com/theskumar/python-dotenv | license from its repository (classifier absent) |
+| s3fs | 2026.6.0 | BSD-3 (classifier; verify at release) | github.com/fsspec/s3fs/ | |
+| s3transfer | 0.19.3 | Apache-2.0 | github.com/boto/s3transfer | |
+| semver | 3.1.0 | BSD License | pypi.org/project/semver | |
+| shortuuid | 1.0.13 | BSD-3 (classifier; verify at release) | github.com/skorokithakis/shortuuid/ | |
+| soupsieve | 3.0.3 | MIT | github.com/facelessuser/soupsieve | |
+| textual | 6.2.1 | MIT | github.com/Textualize/textual | |
+| tiktoken | 0.14.0 | MIT | github.com/openai/tiktoken | license from its repository (classifier absent); compiled wheel |
+| universal-pathlib | 0.3.10 | MIT | github.com/fsspec/universal-pathlib | |
+| wrapt | 2.5.1 | BSD-2-Clause | github.com/GrahamDumpleton/wrapt | compiled wheel |
+| zipfile-zstd | 0.0.4 | MIT | github.com/taisei-project/python-zipfile-zstd | |
+| zipp | 4.1.1 | MIT | github.com/jaraco/zipp | |
+| zstandard | 0.25.0 | BSD-3-Clause | github.com/indygreg/python-zstandard | compiled wheel |
