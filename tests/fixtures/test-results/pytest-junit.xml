@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites name="pytest" tests="5" failures="1" errors="1" skipped="1" time="0.05">
+  <testsuite name="tests/test_reg.py" tests="5" failures="1" errors="1" skipped="1" time="0.05">
+    <testcase classname="tests.test_reg" name="test_ok" time="0.01"/>
+    <testcase classname="tests.test_reg" name="test_email_required" time="0.02">
+      <failure message="assert False">AssertionError: assert False</failure>
+    </testcase>
+    <testcase classname="tests.test_reg" name="test_crash" time="0.01">
+      <error message="fixture boom">RuntimeError: fixture boom</error>
+    </testcase>
+    <testcase classname="tests.test_reg" name="test_skip" time="0.0">
+      <skipped type="pytest.skip" message="not implemented"/>
+    </testcase>
+    <testcase classname="tests.test_reg" name="test_ok2" time="0.01"/>
+  </testsuite>
+</testsuites>

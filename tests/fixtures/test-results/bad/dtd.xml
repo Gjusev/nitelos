@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE testsuites [<!ENTITY boom "x">]>
+<testsuites name="evil" tests="1">&boom;</testsuites>
