@@ -30,6 +30,7 @@ from typing import Any
 KIND_TARGETS: dict[str, str] = {  # kind -> "module:attribute"
     "git": "nitelos.collect.git:COLLECTOR",
     "junit": "nitelos.collect.test_results:COLLECTOR",
+    "github": "nitelos.collect.github:COLLECTOR",
 }
 
 

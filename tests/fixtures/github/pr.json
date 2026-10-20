@@ -1,0 +1,9 @@
+{
+  "number": 27,
+  "state": "open",
+  "merged": false,
+  "draft": false,
+  "mergeable_state": "clean",
+  "head": {"sha": "a41b0c6d2e3f4051672839abcdef0123456789a"},
+  "base": {"ref": "main"}
+}
