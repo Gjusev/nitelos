@@ -53,12 +53,66 @@ LOCAL_CLOSURE = {
 # rows that must carry a release-action / verify note (doc-12 honesty)
 _FLAGGED = ("pillow", "numpy", "scipy", "torch", "torchvision", "num2words", "hf-xet", "regex", "pathspec")
 
+DEEPEVAL_CLOSURE = {
+    "aiohappyeyeballs",
+    "aiohttp",
+    "aiosignal",
+    "anthropic",
+    "attrs",
+    "backoff",
+    "certifi",
+    "cffi",
+    "charset-normalizer",
+    "cryptography",
+    "deepeval",
+    "distro",
+    "execnet",
+    "frozenlist",
+    "google-auth",
+    "google-genai",
+    "googleapis-common-protos",
+    "grpcio",
+    "httpcore",
+    "httpx",
+    "jiter",
+    "monotonic",
+    "multidict",
+    "nest-asyncio",
+    "ollama",
+    "openai",
+    "opentelemetry-exporter-otlp-common",
+    "opentelemetry-exporter-otlp-proto-common",
+    "opentelemetry-exporter-otlp-proto-grpc",
+    "opentelemetry-proto",
+    "portalocker",
+    "posthog",
+    "propcache",
+    "protobuf",
+    "pyasn1",
+    "pyasn1-modules",
+    "pycparser",
+    "pytest-repeat",
+    "pytest-rerunfailures",
+    "pytest-xdist",
+    "python-dateutil",
+    "requests",
+    "sentry-sdk",
+    "six",
+    "sniffio",
+    "tabulate",
+    "tenacity",
+    "urllib3",
+    "websockets",
+    "wheel",
+    "yarl",
+}
+
 
 def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
     data = tomllib.loads((ROOT / "uv.lock").read_text(encoding="utf-8"))
     versions = {p["name"]: p["version"] for p in data["package"]}
     nitelos = next(p for p in data["package"] if p["name"] == "nitelos")
-    direct: dict[str, list[str]] = {"core": [], "eval": [], "local": [], "otel": []}
+    direct: dict[str, list[str]] = {"core": [], "eval": [], "local": [], "otel": [], "deepeval": []}
     for dep in nitelos["metadata"]["requires-dist"]:
         group = "core"
         if "marker" in dep:
@@ -68,6 +122,8 @@ def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
                 group = "local"
             elif "extra == 'otel'" in dep["marker"]:
                 group = "otel"
+            elif "extra == 'deepeval'" in dep["marker"]:
+                group = "deepeval"
             else:
                 raise AssertionError(
                     f"unrecognised extra marker for {dep['name']}: inventory test needs the group"
@@ -118,10 +174,13 @@ def test_direct_dependencies_land_in_the_right_sections() -> None:
     eval_rows = {cells[0].lower() for cells in _rows(sections, "extra `eval`")}
     local_rows = {cells[0].lower() for cells in _rows(sections, "extra `local`")}
     otel_rows = {cells[0].lower() for cells in _rows(sections, "extra `otel`")}
+    deepeval_rows = {cells[0].lower() for cells in _rows(sections, "extra `deepeval`")}
     assert set(direct["core"]) <= core_rows
     assert set(direct["eval"]) <= eval_rows
     assert set(direct["local"]) <= local_rows
     assert set(direct["otel"]) <= otel_rows
+    assert set(direct["deepeval"]) <= deepeval_rows
+    assert deepeval_rows >= DEEPEVAL_CLOSURE
     # and the recorded closures are fully covered by their sections
     assert core_rows >= CORE_CLOSURE
     assert eval_rows >= EVAL_CLOSURE

@@ -96,7 +96,7 @@ The extra installs the OpenTelemetry API only; the host brings its own SDK and e
 | ast-serialize | 0.13.0 | MIT |
 | click | 8.5.0 | BSD-3-Clause |
 | typer | 0.27.3 | MIT |
-| rich | 15.0.0 | MIT |
+| rich | 13.9.4 | MIT |
 | markdown-it-py | 4.2.0 | MIT |
 | mdurl | 0.1.2 | MIT |
 | anyio / httpcore2 / httpx2 / h11 / idna / truststore / shellingham / httpx2-jsfetch / setuptools | per lock | MIT / BSD-3-Clause |
@@ -138,3 +138,63 @@ before landing (release-workflow.md).
    at release (the two Rust wheels and `regex` are the flagged ones).
 2. Pillow/NumPy/SciPy bundled-library notice review per built platform.
 3. The `uv tree` closure reconciliation (REL-04 machine check).
+
+## Optional extra `deepeval` — `pip install 'nitelos[deepeval]'`
+
+Added 2026-10-20 (NIT-026, central provisioning). Rows generated from the resolved
+wheels' metadata against the frozen lock; ambiguous classifier licenses are marked
+for verification at release. This tree is deliberately NOT in the dev group.
+
+| Distribution | Version | License | Source | Notes |
+|---|---|---|---|---|
+| aiohappyeyeballs | 2.7.1 | PSF-2.0 | github.com/aio-libs/aiohappyeyeballs | |
+| aiohttp | 3.14.5 | Apache-2.0 AND MIT | github.com/aio-libs/aiohttp | |
+| aiosignal | 1.4.0 | Apache-2.0 | github.com/aio-libs/aiosignal | |
+| anthropic | 0.49.0 | MIT | github.com/anthropics/anthropic-sdk-python | |
+| attrs | 26.1.0 | MIT | pypi.org/project/attrs | |
+| backoff | 2.2.1 | MIT | github.com/litl/backoff | |
+| certifi | 2026.10.19 | MPL-2.0 | github.com/certifi/python-certifi | |
+| cffi | 2.1.1 | MIT-0 | github.com/python-cffi/cffi | |
+| charset-normalizer | 3.5.2 | MIT | pypi.org/project/charset-normalizer | |
+| cryptography | 50.0.2 | Apache-2.0 OR BSD-3-Clause | github.com/pyca/cryptography | compiled wheel |
+| deepeval | 2.9.3 | Apache-2.0 | github.com/confident-ai/deepeval | **Release action**: the framework can call LLM providers and ships telemetry (sentry-sdk, posthog in its tree). Our metric is deterministic and offline; verify at release that importing the metric does not enable telemetry and document the opt-out envs. |
+| distro | 1.9.0 | Apache-2.0 | github.com/python-distro/distro | |
+| execnet | 2.1.2 | MIT | execnet.readthedocs.io/en/latest/ | |
+| frozenlist | 1.8.0 | Apache-2.0 | github.com/aio-libs/frozenlist | |
+| google-auth | 2.62.0 | Apache-2.0 | github.com/googleapis/google-cloud-python | |
+| google-genai | 1.75.0 | Apache-2.0 | github.com/googleapis/python-genai | |
+| googleapis-common-protos | 1.75.5 | Apache-2.0 | github.com/googleapis/google-cloud-python | |
+| grpcio | 1.84.0 | Apache-2.0 | grpc.io | compiled wheel |
+| httpcore | 1.0.9 | BSD-3-Clause | www.encode.io/httpcore/ | |
+| httpx | 0.28.1 | BSD-3 (classifier; verify at release) | github.com/encode/httpx | |
+| jiter | 0.17.0 | MIT | github.com/pydantic/jiter/ | compiled wheel |
+| monotonic | 1.6 | Apache-2.0 | github.com/atdt/monotonic | |
+| multidict | 7.1.0 | Apache-2.0 | github.com/aio-libs/multidict | compiled wheel |
+| nest-asyncio | 1.6.0 | BSD-3 (classifier; verify at release) | github.com/erdewit/nest_asyncio | |
+| ollama | 0.6.3 | MIT | ollama.com | |
+| openai | 3.35.1 | Apache-2.0 | github.com/openai/openai-python | |
+| opentelemetry-exporter-otlp-common | 0.66b1 | Apache-2.0 | github.com/open-telemetry/opentelemetry-python | |
+| opentelemetry-exporter-otlp-proto-common | 1.45.1 | Apache-2.0 | github.com/open-telemetry/opentelemetry-python | |
+| opentelemetry-exporter-otlp-proto-grpc | 1.45.1 | Apache-2.0 | github.com/open-telemetry/opentelemetry-python | |
+| opentelemetry-proto | 1.45.1 | Apache-2.0 | github.com/open-telemetry/opentelemetry-python | |
+| portalocker | 4.4.1 | BSD-3-Clause | github.com/wolph/portalocker/ | |
+| posthog | 3.25.0 | MIT | github.com/posthog/posthog-python | **Release action**: telemetry client in deepeval's tree; see the deepeval row |
+| propcache | 0.5.4 | Apache-2.0 | github.com/aio-libs/propcache | compiled wheel |
+| protobuf | 7.36.2 | BSD-3-Clause | developers.google.com/protocol-buffers/ | compiled wheel |
+| pyasn1 | 0.6.4 | BSD-2-Clause | github.com/pyasn1/pyasn1 | |
+| pyasn1-modules | 0.4.2 | BSD-3 (classifier; verify at release) | github.com/pyasn1/pyasn1-modules | |
+| pycparser | 3.11 | BSD-3-Clause | github.com/eliben/pycparser | |
+| pytest-repeat | 0.9.4 | MPL-2.0 | pypi.org/project/pytest-repeat | |
+| pytest-rerunfailures | 12.0 | MPL-2.0 | github.com/pytest-dev/pytest-rerunfailures | |
+| pytest-xdist | 3.8.0 | MIT | github.com/pytest-dev/pytest-xdist | |
+| python-dateutil | 2.9.0.post0 | Apache-2.0 | github.com/dateutil/dateutil | |
+| requests | 2.34.2 | Apache-2.0 | github.com/psf/requests | |
+| sentry-sdk | 2.72.0 | MIT | github.com/getsentry/sentry-python | **Release action**: telemetry client in deepeval's tree; see the deepeval row |
+| six | 1.17.0 | MIT | github.com/benjaminp/six | |
+| sniffio | 1.3.1 | Apache-2.0 | github.com/python-trio/sniffio | |
+| tabulate | 0.9.0 | MIT | github.com/astanin/python-tabulate | |
+| tenacity | 9.0.0 | Apache-2.0 | github.com/jd/tenacity | |
+| urllib3 | 2.8.0 | MIT | pypi.org/project/urllib3 | |
+| websockets | 16.1.1 | BSD-3-Clause | github.com/python-websockets/websockets | |
+| wheel | 0.48.0 | MIT | github.com/pypa/wheel | |
+| yarl | 1.25.1 | Apache-2.0 | github.com/aio-libs/yarl | compiled wheel |
