@@ -225,3 +225,21 @@ shapes (arrays for `redact_pointers`) work from files.
 - Redaction is by key; a secret stored under an innocent key survives.
 - `external_api` is a loose channel name for local sources such as `git
   status`; a dedicated channel would be a wire change (ADR-015 finding 4).
+
+## The Playwright page-state helper (`nitelos[playwright]`, NIT-022)
+
+`nitelos.integrations.playwright_capture.capture_page_state(page, selectors,
+..., artifacts=...)` takes the caller's LIVE Playwright `Page` (sync API) and
+captures — never drives: no navigation, clicks, fills, waits or evaluation;
+it touches only `page.url`, `page.title()`, `page.screenshot(full_page=True)`
+and the per-selector `text_content()/is_visible()/input_value()/count()` (a
+non-input element yields `value: null`, never an error). The result is one
+observation under `/page/` (url, title, per-selector text/visible/value/
+count) plus one full-page screenshot evidence item, run through the NIT-017
+framework — provenance, cross-checks, the observation cap and redaction all
+apply (note: selector keys are dict keys, so a selector matching the secret
+pattern is redacted — prefer neutral names). Screenshot bytes go to the
+caller's `artifacts` dict, never to files; `captured_at` is the capture
+moment, so criteria freshness governs like any other evidence. The module
+imports playwright never — the `playwright` extra is the caller's
+dependency; the async API is not supported in v0.2.
