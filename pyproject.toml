@@ -39,6 +39,9 @@ git = []
 junit = []
 github = []
 claude-code = []
+deepeval = [
+    "deepeval>=2.0",
+]
 
 [project.scripts]
 nitelos-hook = "nitelos.claude_code:main"
