@@ -25,7 +25,12 @@ How the fixes were checked: [documentation-validation.md](documentation-validati
 ## Visual assets added for the docs
 
 - `docs/assets/brand/`: wordmark, mark and tile, dark and light.
-- `docs/assets/nitelos-workflow.gif`: the README hero. It is the five-step workflow film
+- `docs/assets/nitelos-film-preview.gif`: the current README hero, a silent preview of the
+  28 s explainer (`videos/nitelos-launch/explainer.html`, 0 to 21 s, 800 px, 10 fps, 96
+  colours, 3.5 MB) linking to the full film with sound, hosted on Hugging Face
+  (`datasets/Gjusev/nitelos-launch`). GitHub strips `<video>` tags pointing at repository
+  or external files, so an inline player would need a web-uploaded attachment.
+- Earlier hero, removed: `docs/assets/nitelos-workflow.gif`, the five-step workflow film
   (`videos/nitelos-launch/workflow.html`) up to the settled diagram, at 960 px, 12 fps,
   96 colours (680 KB). It is a GIF because GitHub does not play repository MP4s inline.
   A first README pass used the 6 s loop instead; feedback was that it did not explain

@@ -13,7 +13,7 @@ shown is real ([evidence/](evidence/commands.md)).
 | [proofs/qa.md](proofs/qa.md) | QA gates, seam test, problems found and fixed |
 | [assets/licenses.md](assets/licenses.md) | Fonts, GSAP, music, SFX: licenses and obligations |
 
-Compositions: `explainer.html` (44 s: any model, the evidence, the criteria, the
+Compositions: `explainer.html` (28 s: any model, the evidence, the criteria, the
 decision, who it is for; one virtual camera over one world), `workflow.html` (how it
 works in five steps, 24 s; source of the README GIF), `index.html` (main, 30 s), `demo.html` (60 s), `vertical.html` (30 s),
 `teaser.html` (8 s vertical), `loop.html` (6 s, silent), `kit-card.html`, `poster.html`,

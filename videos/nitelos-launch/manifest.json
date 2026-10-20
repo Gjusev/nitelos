@@ -52,15 +52,17 @@
     },
     {
       "id": "explainer",
-      "path": "renders/nitelos-explainer-44s.mp4",
+      "path": "renders/nitelos-explainer-28s.mp4",
       "composition": "explainer.html",
-      "width": 1920, "height": 1080, "fps": 30, "frames": 1320, "duration_s": 44.01,
+      "width": 1920, "height": 1080, "fps": 30, "frames": 855, "duration_s": 28.501,
       "video_codec": "h264", "audio_codec": "aac 48 kHz stereo 192k",
-      "loudness_lufs": -16.06, "true_peak_dbtp": -1.32,
-      "poster_frame_s": 30, "poster": "stills/nitelos-explainer-poster.jpg",
-      "bytes": 4876801,
-      "technique": "one oversized world canvas traversed by a virtual camera (hyperframes-animation: spatial-pan-stations, viewport-change, constellation-hub adapted to the brand's no-bounce motion)",
-      "render": "tools/stage.sh explainer.html render --quality delivery --output \"$(pwd -W)/renders/nitelos-explainer-44s.raw.mp4\" && tools/master.sh renders/nitelos-explainer-44s.raw.mp4 renders/nitelos-explainer-44s.mp4 30 stills/nitelos-explainer-poster.jpg"
+      "loudness_lufs": -16.05, "true_peak_dbtp": -2.35,
+      "poster_frame_s": 17.6, "poster": "stills/nitelos-explainer-poster.jpg",
+      "bytes": 4699940,
+      "hosted": "https://huggingface.co/datasets/Gjusev/nitelos-launch (public, uploaded 2026-10-20)",
+      "readme_preview": "../../docs/assets/nitelos-film-preview.gif (0.05 to 21.25 s, 800 px, 10 fps, 96 colours, 3548432 bytes), links to the hosted MP4",
+      "technique": "one oversized world canvas traversed by a virtual camera with speed blur on each move; word-by-word masked headlines; models burst out of the agent (hyperframes-animation: spatial-pan-stations, viewport-change, constellation-hub, center-outward-expansion, adapted to the brand's no-bounce motion); every step lands on the music's beat grid",
+      "render": "tools/stage.sh explainer.html render --quality delivery --output \"$(pwd -W)/renders/nitelos-explainer-28s.raw.mp4\" && tools/master.sh renders/nitelos-explainer-28s.raw.mp4 renders/nitelos-explainer-28s.mp4 17.6 stills/nitelos-explainer-poster.jpg"
     },
     {
       "id": "workflow",
@@ -70,7 +72,7 @@
       "video_codec": "h264", "audio_codec": "aac 48 kHz stereo 192k",
       "loudness_lufs": -16.06, "true_peak_dbtp": -1.22,
       "poster_frame_s": 18.5, "poster": "stills/nitelos-workflow-poster.jpg",
-      "readme_gif": "../../docs/assets/nitelos-workflow.gif (0.05 to 19.05 s, 960 px, 12 fps, 96 colours, 679802 bytes)",
+      "readme_gif": "removed from the README; superseded by the explainer preview",
       "render": "tools/stage.sh workflow.html render --quality delivery --output \"$(pwd -W)/renders/nitelos-workflow-24s.raw.mp4\" && tools/master.sh renders/nitelos-workflow-24s.raw.mp4 renders/nitelos-workflow-24s.mp4 18.5 stills/nitelos-workflow-poster.jpg && ffmpeg -ss 0.05 -t 19.0 -i renders/nitelos-workflow-24s.mp4 -vf \"fps=12,scale=960:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=96:stats_mode=full[p];[b][p]paletteuse=dither=none:diff_mode=rectangle\" -loop 0 ../../docs/assets/nitelos-workflow.gif"
     },
     {

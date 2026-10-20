@@ -13,7 +13,10 @@
 small Python SDK: you describe what "done" means, hand it the evidence the agent
 left behind, and it answers `success`, `failure` or `abstained`.
 
-<p align="center"><img src="docs/assets/nitelos-workflow.gif" width="760" alt="The workflow in five steps. 1: the agent says registration succeeded. 2: the criterion, no validation error remains on the form. 3: the evidence, the final form with validation_error true. 4: nitelos checks the criterion against the evidence. 5: the decision is failure, refuted by evidence obs-form at /validation_error, and the agent's claim is struck through. Synthetic example, real output."></p>
+<p align="center">
+  <a href="https://huggingface.co/datasets/Gjusev/nitelos-launch/resolve/main/nitelos-explainer-28s.mp4"><img src="docs/assets/nitelos-film-preview.gif" width="800" alt="The nitelos film. The agent says registration succeeded. It can run on any model, and nitelos never calls the model. nitelos reads the evidence the run left behind, checks it against the criterion you wrote, and decides failure, refuted by evidence obs-form at /validation_error. The agent's claim is struck through. Synthetic example, real output."></a>
+  <br><sub><a href="https://huggingface.co/datasets/Gjusev/nitelos-launch/resolve/main/nitelos-explainer-28s.mp4">▶ Watch the 28-second film with sound</a></sub>
+</p>
 
 ## How it works
 

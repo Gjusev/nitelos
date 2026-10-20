@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1920, height=1080" />
-    <title>nitelos: explainer (44 s)</title>
+    <title>nitelos: explainer (28 s)</title>
     <script src="/assets/vendor/gsap.min.js"></script>
     <style>
       @font-face { font-family: "Archivo"; src: url("/assets/fonts/Archivo-VF.ttf") format("truetype"); font-weight: 100 900; font-stretch: 62% 125%; }
@@ -29,14 +29,15 @@
       .row { position: absolute; left: 4130px; height: 80px; width: 560px; }
       .row svg { position: absolute; left: 0; top: 5px; }
       .row .w { position: absolute; left: 96px; top: 2px; font-family: Archivo; --wdth: 100; font-variation-settings: "wdth" var(--wdth), "wght" 700; font-size: 72px; line-height: 1; white-space: nowrap; }
-      /* HUD: screen-space text above the world */
-      .hl { position: absolute; left: 120px; top: 84px; width: 1680px; font-family: Archivo; font-variation-settings: "wdth" 112, "wght" 650; font-size: 60px; line-height: 1.05; letter-spacing: -0.02em; white-space: nowrap; }
-      .tok { position: absolute; left: 120px; top: 500px; font-family: Archivo; font-variation-settings: "wdth" 112, "wght" 700; font-size: 110px; line-height: 1; letter-spacing: -0.02em; white-space: nowrap; }
+      /* HUD: screen-space text above the world; words rise through a mask */
+      .hl { position: absolute; left: 120px; top: 78px; width: 1680px; height: 80px; overflow: hidden; font-family: Archivo; font-variation-settings: "wdth" 112, "wght" 650; font-size: 60px; line-height: 76px; letter-spacing: -0.02em; white-space: nowrap; }
+      .hl .wd, .tok .wd { display: inline-block; }
+      .tok { position: absolute; left: 120px; top: 488px; width: 1700px; height: 136px; overflow: hidden; font-family: Archivo; font-variation-settings: "wdth" 112, "wght" 700; font-size: 110px; line-height: 132px; letter-spacing: -0.02em; white-space: nowrap; }
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="explainer" data-start="0" data-width="1920" data-height="1080" data-duration="44">
-      <section id="story" class="clip" data-start="0" data-duration="39.6" data-track-index="1">
+    <div id="root" data-composition-id="explainer" data-start="0" data-width="1920" data-height="1080" data-duration="28.5">
+      <section id="story" class="clip" data-start="0" data-duration="24.3" data-track-index="1">
         <!-- intentional: the world is larger than the frame; the camera decides what is on screen -->
         <div id="world-fade" data-layout-allow-overflow>
           <div id="world" data-layout-allow-overflow>
@@ -102,25 +103,25 @@
           </div>
         </div>
 
-        <!-- HUD -->
-        <div id="h1" class="hl" data-layout-allow-overlap>Your agent says it's done.</div>
-        <div id="h2" class="hl" data-layout-allow-overlap>It can run on any model.</div>
-        <div id="h3" class="hl" data-layout-allow-overlap>nitelos never calls the model.</div>
-        <div id="h4" class="hl" data-layout-allow-overlap>It reads the evidence the run left behind.</div>
-        <div id="h5" class="hl" data-layout-allow-overlap>You write down what done means.</div>
-        <div id="h6" class="hl" data-layout-allow-overlap>nitelos checks one against the other.</div>
-        <div id="h7" class="hl" data-layout-allow-overlap>The decision, with the evidence behind it.</div>
-        <div id="h8" class="hl" data-layout-allow-overlap>The summary was never the proof.</div>
+        <!-- HUD (words are wrapped in .wd spans at setup) -->
+        <div id="h1" class="hl" data-layout-allow-overlap data-layout-allow-overflow>Your agent says it's done.</div>
+        <div id="h2" class="hl" data-layout-allow-overlap data-layout-allow-overflow>It can run on any model.</div>
+        <div id="h3" class="hl" data-layout-allow-overlap data-layout-allow-overflow>nitelos never calls the model.</div>
+        <div id="h4" class="hl" data-layout-allow-overlap data-layout-allow-overflow>It reads the evidence the run left behind.</div>
+        <div id="h5" class="hl" data-layout-allow-overlap data-layout-allow-overflow>You write down what done means.</div>
+        <div id="h6" class="hl" data-layout-allow-overlap data-layout-allow-overflow>nitelos checks one against the other.</div>
+        <div id="h7" class="hl" data-layout-allow-overlap data-layout-allow-overflow>The decision, with the evidence behind it.</div>
+        <div id="h8" class="hl" data-layout-allow-overlap data-layout-allow-overflow>The summary was never the proof.</div>
         <div id="built" class="abs" style="left: 120px; top: 410px; font-family: Archivo; font-variation-settings: 'wdth' 112, 'wght' 500; font-size: 56px; line-height: 1; color: var(--muted)">Built for</div>
-        <div id="k1" class="tok" data-layout-allow-overlap>agent developers</div>
-        <div id="k2" class="tok" data-layout-allow-overlap>evaluation engineers</div>
-        <div id="k3" class="tok" data-layout-allow-overlap>computer-use research</div>
-        <div id="k4" class="tok" data-layout-allow-overlap>reliability teams</div>
+        <div id="k1" class="tok" data-layout-allow-overlap data-layout-allow-overflow>agent developers</div>
+        <div id="k2" class="tok" data-layout-allow-overlap data-layout-allow-overflow>evaluation engineers</div>
+        <div id="k3" class="tok" data-layout-allow-overlap data-layout-allow-overflow>computer-use research</div>
+        <div id="k4" class="tok" data-layout-allow-overlap data-layout-allow-overflow>reliability teams</div>
         <div id="footnote" class="label abs" style="left: 120px; top: 968px; font-size: 20px">model names are examples · nitelos ships no integration with them</div>
         <div id="honesty" class="label abs" style="left: 120px; top: 1006px">synthetic example · real output</div>
       </section>
 
-      <section id="close" class="clip" data-start="39.2" data-duration="4.8" data-track-index="2">
+      <section id="close" class="clip" data-start="24" data-duration="4.5" data-track-index="2">
         <div id="cover" class="abs" style="left: 0; top: 0; width: 1920px; height: 1080px; background: var(--ground)"></div>
         <img id="wordmark" src="/assets/svg/nitelos-wordmark-dark-open.svg" alt="nitelos" class="abs" style="left: 410px; top: 330px; width: 1100px" />
         <svg class="abs" width="1920" height="1080" viewBox="0 0 1920 1080" style="left: 0; top: 0"><path id="drop-line" d="M583.35 150 V497.8" fill="none" stroke="#79bfff" stroke-width="4" /></svg>
@@ -129,25 +130,32 @@
         <div id="install" class="mono abs" style="left: 0; width: 1920px; top: 720px; text-align: center; font-size: 34px">pip install nitelos</div>
       </section>
 
-      <audio id="music" src="/assets/audio/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3" data-start="0" data-duration="44" data-track-index="10" data-volume="0.85"
-        data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0},{"t":0.3,"v":0.85},{"t":42.8,"v":0.85},{"t":44,"v":0}]}]}'></audio>
-      <audio id="sfx-claim" src="/assets/audio/sfx/impactSoft_medium_002.ogg" data-start="0.56" data-track-index="11" data-volume="0.5"></audio>
-      <audio id="sfx-chips" src="/assets/audio/sfx/click_003.ogg" data-start="5.47" data-track-index="12" data-volume="0.35"></audio>
-      <audio id="sfx-pan" src="/assets/audio/sfx/card-slide-1.ogg" data-start="10.92" data-track-index="13" data-volume="0.35"></audio>
-      <audio id="sfx-crit" src="/assets/audio/sfx/click2.ogg" data-start="16.93" data-track-index="14" data-volume="0.45"></audio>
-      <audio id="sfx-node" src="/assets/audio/sfx/click_003.ogg" data-start="23.1" data-track-index="15" data-volume="0.45"></audio>
-      <audio id="sfx-stop" src="/assets/audio/sfx/click2.ogg" data-start="24.02" data-track-index="16" data-volume="0.4"></audio>
-      <audio id="sfx-verdict" src="/assets/audio/sfx/impactSoft_heavy_003.ogg" data-start="28.93" data-track-index="17" data-volume="0.55"></audio>
-      <audio id="sfx-strike" src="/assets/audio/sfx/impactSoft_medium_004.ogg" data-start="32.2" data-track-index="18" data-volume="0.4"></audio>
-      <audio id="sfx-dock" src="/assets/audio/sfx/impactBell_heavy_000.ogg" data-start="40.39" data-track-index="19" data-volume="0.55"></audio>
+      <audio id="music" src="/assets/audio/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3" data-start="0" data-duration="28.5" data-track-index="10" data-volume="0.85"
+        data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0},{"t":0.2,"v":0.85},{"t":27.4,"v":0.85},{"t":28.5,"v":0}]}]}'></audio>
+      <audio id="sfx-claim" src="/assets/audio/sfx/impactSoft_medium_002.ogg" data-start="0.28" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sfx-chips" src="/assets/audio/sfx/click_003.ogg" data-start="3.28" data-track-index="12" data-volume="0.4"></audio>
+      <audio id="sfx-pan" src="/assets/audio/sfx/card-slide-1.ogg" data-start="6.56" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="sfx-crit" src="/assets/audio/sfx/click2.ogg" data-start="10.38" data-track-index="14" data-volume="0.45"></audio>
+      <audio id="sfx-node" src="/assets/audio/sfx/click_003.ogg" data-start="13.11" data-track-index="15" data-volume="0.45"></audio>
+      <audio id="sfx-stop" src="/assets/audio/sfx/click2.ogg" data-start="13.93" data-track-index="16" data-volume="0.4"></audio>
+      <audio id="sfx-verdict" src="/assets/audio/sfx/impactSoft_heavy_003.ogg" data-start="16.93" data-track-index="17" data-volume="0.55"></audio>
+      <audio id="sfx-strike" src="/assets/audio/sfx/impactSoft_medium_004.ogg" data-start="19.11" data-track-index="18" data-volume="0.4"></audio>
+      <audio id="sfx-dock" src="/assets/audio/sfx/impactBell_heavy_000.ogg" data-start="25.11" data-track-index="19" data-volume="0.55"></audio>
     </div>
     <script>
       const tl = gsap.timeline({ paused: true });
       const ARRIVE = "expo.out";
-      const MOVE = "power3.inOut";
+      const MOVE = "expo.inOut"; // fast camera: quick through the middle, settled at both ends
       // beat grid of vol-12 (109.96 BPM): 0.01 + k * 0.5457 s
 
-      // ---- build the model ring (deterministic layout, world coordinates) ----
+      // ---- split HUD lines into words (deterministic, at setup) ----
+      const words = (id) => {
+        const el = document.getElementById(id);
+        el.innerHTML = el.textContent.split(" ").map((w) => '<span class="wd">' + w + "</span>").join(" ");
+        return Array.from(el.querySelectorAll(".wd"));
+      };
+
+      // ---- build the model ring (world coordinates) ----
       const MODELS = ["Claude", "GPT", "Gemini", "Llama", "Mistral", "Qwen", "DeepSeek", "your own model"];
       const HUB = { x: 1000, y: 1100 };
       const wires = document.getElementById("wires");
@@ -165,9 +173,9 @@
         c.style.top = cy - 32 + "px";
         c.textContent = name;
         chipsEl.appendChild(c);
-        chips.push(c);
+        chips.push({ el: c, dx: HUB.x - cx, dy: HUB.y - cy });
         const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        p.setAttribute("d", "M" + cx + " " + cy + " L" + HUB.x + " " + HUB.y);
+        p.setAttribute("d", "M" + HUB.x + " " + HUB.y + " L" + cx + " " + cy); // drawn hub -> model
         p.setAttribute("stroke", "#59616f");
         p.setAttribute("stroke-width", "3");
         p.setAttribute("fill", "none");
@@ -179,33 +187,44 @@
       const world = document.getElementById("world");
       const at = (wx, wy, s) => ({ x: 960 - s * wx, y: 620 - s * wy, s: s });
       const K = {
-        claim: at(1000, 630, 1.6), claimPush: at(1000, 630, 1.68),
-        ring: at(1000, 1010, 0.8), ringDrift: at(1000, 1010, 0.83), // lowest chip stays above the footnote
-        evidence: at(2690, 1116, 1), criteria: at(2900, 1398, 0.8), // evidence stays under the headline
-        node: at(3200, 1320, 0.8), decision: at(4280, 1430, 1),
-        map: at(2500, 1170, 0.41), mapDrift: at(2500, 1170, 0.43),
+        claim: at(1000, 630, 1.6), claimPush: at(1000, 630, 1.72),
+        ring: at(1000, 1010, 0.8), ringPush: at(1000, 1010, 0.83), // lowest chip stays above the footnote
+        evidence: at(2690, 1116, 1), evidencePush: at(2690, 1116, 1.03),
+        criteria: at(2900, 1398, 0.8), criteriaPush: at(2900, 1398, 0.82),
+        node: at(3200, 1320, 0.8), nodePush: at(3200, 1320, 0.82),
+        decision: at(4280, 1430, 1), decisionPush: at(4280, 1430, 1.03),
+        map: at(2500, 1170, 0.41), mapDrift: at(2500, 1170, 0.44),
       };
       const cam = { ...K.claim };
       const apply = () => { world.style.transform = "translate(" + cam.x + "px," + cam.y + "px) scale(" + cam.s + ")"; };
       apply();
       const leg = (t, d, a, b, ease) => tl.fromTo(cam, { ...a }, { ...b, duration: d, ease: ease, immediateRender: false, onUpdate: apply }, t);
+      // speed blur rides each fast move (in, then out), on the wrapper, never on the camera node
+      gsap.set("#world-fade", { filter: "blur(0px)" });
+      const move = (t, d, a, b) => {
+        leg(t, d, a, b, MOVE);
+        tl.to("#world-fade", { filter: "blur(3px)", duration: d / 2, ease: "sine.in" }, t);
+        tl.to("#world-fade", { filter: "blur(0px)", duration: d / 2, ease: "sine.out" }, t + d / 2);
+      };
       leg(0, 0.01, K.claim, K.claim, "none");
-      leg(0.6, 3.7, K.claim, K.claimPush, "none"); // slow push on the hook
-      leg(4.38, 1.4, K.claimPush, K.ring, MOVE); // pull back: the agent and its models
-      leg(5.8, 5.1, K.ring, K.ringDrift, "none");
-      leg(10.92, 1.4, K.ringDrift, K.evidence, MOVE); // follow the trace to the evidence
-      leg(16.38, 1.0, K.evidence, K.criteria, "power2.inOut");
-      leg(21.84, 1.25, K.criteria, K.node, MOVE);
-      leg(27.84, 1.1, K.node, K.decision, MOVE);
-      leg(30.6, 1.7, K.decision, K.map, "power2.inOut"); // the whole loop
-      leg(34.94, 4.3, K.map, K.mapDrift, "sine.inOut");
+      leg(0.3, 2.44, K.claim, K.claimPush, "none"); // push on the hook
+      move(2.74, 0.75, K.claimPush, K.ring);
+      leg(3.49, 3.07, K.ring, K.ringPush, "none");
+      move(6.56, 0.9, K.ringPush, K.evidence); // the camera rides the trace
+      leg(7.46, 2.37, K.evidence, K.evidencePush, "none");
+      move(9.83, 0.6, K.evidencePush, K.criteria);
+      leg(10.43, 2.13, K.criteria, K.criteriaPush, "none");
+      move(12.56, 0.6, K.criteriaPush, K.node);
+      leg(13.16, 2.68, K.node, K.nodePush, "none");
+      move(15.84, 0.6, K.nodePush, K.decision);
+      leg(16.44, 1.56, K.decision, K.decisionPush, "none");
+      leg(18.0, 1.1, K.decisionPush, K.map, MOVE); // pull out to the whole loop
+      leg(19.1, 5.0, K.map, K.mapDrift, "none");
 
       // ---- initial states (outside the timeline) ----
       const hidden = ["#claim", "#hub", "#ev1", "#ev2", "#ev3", "#ev4", "#crit", "#node", "#node-notes", "#dec-label", "#r-ok", "#r-fail", "#r-abs", "#why", "#footnote", "#built"];
       gsap.set(hidden, { opacity: 0 });
-      gsap.set(chips, { opacity: 0, scale: 0.85, transformOrigin: "50% 50%" });
-      gsap.set(["#h1", "#h2", "#h3", "#h4", "#h5", "#h6", "#h7", "#h8"], { opacity: 0, y: 26 });
-      gsap.set(["#k1", "#k2", "#k3", "#k4"], { opacity: 0, y: 50 });
+      chips.forEach((c) => gsap.set(c.el, { opacity: 0, x: c.dx, y: c.dy, scale: 0.4, transformOrigin: "50% 50%" }));
       gsap.set("#strike", { scaleX: 0 });
       gsap.set(["#stop-n", "#stop-d"], { opacity: 0 });
       gsap.set("#w-fail", { "--wdth": 62 });
@@ -213,70 +232,73 @@
       spokes.forEach(draw);
       ["#t-ev", "#t-up", "#t-down", "#t-b1", "#t-b2", "#t-b3", "#t-b4", "#t-n1", "#t-n2", "#t-d", "#drop-line"].forEach((s) => draw(document.querySelector(s)));
 
-      // ---- HUD headlines: the old one leaves (faster) before the new one arrives ----
-      const HL = [["#h1", 0.2], ["#h2", 4.6], ["#h3", 7.8], ["#h4", 11.1], ["#h5", 16.6], ["#h6", 22.0], ["#h7", 28.1], ["#h8", 32.3]];
-      HL.forEach(([h, t], i) => {
-        tl.to(h, { opacity: 1, y: 0, duration: 0.55, ease: ARRIVE }, t);
-        const end = i < HL.length - 1 ? HL[i + 1][1] - 0.22 : 34.94;
-        tl.to(h, { opacity: 0, y: -18, duration: 0.2, ease: "power2.in" }, end);
+      // ---- HUD headlines: words rise through the mask, leave upward faster ----
+      const HL = [["h1", 0.1], ["h2", 2.8], ["h3", 4.92], ["h4", 6.62], ["h5", 9.9], ["h6", 12.62], ["h7", 15.9], ["h8", 18.1]];
+      HL.forEach(([id, t], i) => {
+        const w = words(id);
+        gsap.set(w, { yPercent: 110 });
+        tl.to(w, { yPercent: 0, duration: 0.5, ease: ARRIVE, stagger: 0.035 }, t);
+        const end = i < HL.length - 1 ? HL[i + 1][1] - 0.2 : 21.25;
+        tl.to(w, { yPercent: -110, duration: 0.18, ease: "power2.in", stagger: 0.012 }, end);
       });
 
-      // ---- 1: the claim (condensed, unverified voice) ----
-      tl.fromTo("#claim", { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 0.35, ease: ARRIVE, immediateRender: false }, 0.56);
+      // ---- 1: the claim slams in (condensed, unverified voice) ----
+      tl.fromTo("#claim", { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1, duration: 0.28, ease: "expo.out", immediateRender: false }, 0.28);
 
-      // ---- 2: the agent and the models it can run on ----
-      tl.to("#hub", { opacity: 1, duration: 0.4, ease: "power1.out" }, 4.9);
-      chips.forEach((c, i) => tl.to(c, { opacity: 1, scale: 1, duration: 0.5, ease: ARRIVE }, 5.47 + i * 0.055));
-      spokes.forEach((p, i) => tl.to(p, { strokeDashoffset: 0, duration: 0.3, ease: "none" }, 5.9 + i * 0.05));
-      tl.to("#footnote", { opacity: 1, duration: 0.4 }, 7.8);
-      tl.to("#footnote", { opacity: 0, duration: 0.2 }, 10.9);
+      // ---- 2: the agent, and the models burst out of it ----
+      tl.fromTo("#hub", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.35, ease: ARRIVE, transformOrigin: "50% 50%", immediateRender: false }, 2.95);
+      chips.forEach((c, i) => tl.to(c.el, { opacity: 1, x: 0, y: 0, scale: 1, duration: 0.6, ease: ARRIVE }, 3.28 + i * 0.03));
+      spokes.forEach((p, i) => tl.to(p, { strokeDashoffset: 0, duration: 0.25, ease: "none" }, 3.55 + i * 0.03));
+      tl.to("#footnote", { opacity: 1, duration: 0.3 }, 4.92);
+      tl.to("#footnote", { opacity: 0, duration: 0.2 }, 6.5);
 
-      // ---- 3: the trace leaves the agent, the camera follows it to the evidence ----
-      tl.to("#t-ev", { strokeDashoffset: 0, duration: 1.0, ease: "none" }, 11.0);
-      tl.to(["#t-up", "#t-down"], { strokeDashoffset: 0, duration: 0.18, ease: "none" }, 12.0); // the trace splits at the junction
-      ["#t-b1", "#t-b2", "#t-b3", "#t-b4"].forEach((s, i) => tl.to(s, { strokeDashoffset: 0, duration: 0.12, ease: "none" }, 12.2 + i * 0.05));
-      ["#ev1", "#ev2", "#ev3", "#ev4"].forEach((s, i) => tl.fromTo(s, { opacity: 0, x: -36 }, { opacity: 1, x: 0, duration: 0.45, ease: ARRIVE, immediateRender: false }, 12.1 + i * 0.08));
+      // ---- 3: the trace leaves the agent; the camera follows it to the evidence ----
+      tl.to("#t-ev", { strokeDashoffset: 0, duration: 0.85, ease: "none" }, 6.56);
+      tl.to(["#t-up", "#t-down"], { strokeDashoffset: 0, duration: 0.14, ease: "none" }, 7.41); // splits at the junction
+      ["#t-b1", "#t-b2", "#t-b3", "#t-b4"].forEach((s, i) => tl.to(s, { strokeDashoffset: 0, duration: 0.1, ease: "none" }, 7.55 + i * 0.04));
+      ["#ev1", "#ev2", "#ev3", "#ev4"].forEach((s, i) => tl.fromTo(s, { opacity: 0, x: 90 }, { opacity: 1, x: 0, duration: 0.45, ease: ARRIVE, immediateRender: false }, 7.6 + i * 0.06));
 
       // ---- 4: the criterion ----
-      tl.fromTo("#crit", { opacity: 0, y: 44 }, { opacity: 1, y: 0, duration: 0.6, ease: ARRIVE, immediateRender: false }, 16.93);
+      tl.fromTo("#crit", { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 0.5, ease: ARRIVE, immediateRender: false }, 10.38);
 
       // ---- 5: nitelos reads both: trace, then stop ----
-      tl.fromTo("#node", { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 0.5, ease: ARRIVE, transformOrigin: "50% 50%", immediateRender: false }, 23.1);
-      tl.to(["#t-n1", "#t-n2"], { strokeDashoffset: 0, duration: 0.6, ease: "none" }, 23.42);
-      tl.to("#stop-n", { opacity: 1, duration: 0.04 }, 24.02);
-      tl.to("#node-notes", { opacity: 1, duration: 0.6, ease: "power1.out" }, 24.5);
+      tl.fromTo("#node", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.4, ease: ARRIVE, transformOrigin: "50% 50%", immediateRender: false }, 13.11);
+      tl.to(["#t-n1", "#t-n2"], { strokeDashoffset: 0, duration: 0.45, ease: "none" }, 13.48);
+      tl.to("#stop-n", { opacity: 1, duration: 0.03 }, 13.93);
+      tl.to("#node-notes", { opacity: 1, duration: 0.4, ease: "power1.out" }, 14.1);
 
       // ---- 6: the decision: three possible answers, failure lands on the beat ----
-      tl.to("#t-d", { strokeDashoffset: 0, duration: 0.35, ease: "none" }, 28.3);
-      tl.to("#stop-d", { opacity: 1, duration: 0.04 }, 28.65);
-      tl.to("#dec-label", { opacity: 1, duration: 0.3 }, 28.4);
-      tl.to(["#r-ok", "#r-abs"], { opacity: 0.28, duration: 0.3, stagger: 0.08 }, 28.45);
-      tl.to("#r-fail", { opacity: 1, duration: 0.2 }, 28.93);
-      tl.to("#w-fail", { "--wdth": 125, duration: 0.7, ease: ARRIVE }, 28.93);
-      tl.to("#why", { opacity: 1, duration: 0.5, ease: "power1.out" }, 29.6);
-      // the camera pulls out to the whole loop; the claim is struck where it started
-      tl.to("#strike", { scaleX: 1, duration: 0.45, ease: ARRIVE }, 32.2);
+      tl.to("#t-d", { strokeDashoffset: 0, duration: 0.25, ease: "none" }, 16.3);
+      tl.to("#stop-d", { opacity: 1, duration: 0.03 }, 16.55);
+      tl.to("#dec-label", { opacity: 1, duration: 0.2 }, 16.4);
+      tl.fromTo(["#r-ok", "#r-abs"], { opacity: 0, x: -40 }, { opacity: 0.28, x: 0, duration: 0.3, ease: ARRIVE, stagger: 0.06, immediateRender: false }, 16.45);
+      tl.fromTo("#r-fail", { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 0.3, ease: "expo.out", transformOrigin: "0% 50%", immediateRender: false }, 16.93);
+      tl.to("#w-fail", { "--wdth": 125, duration: 0.6, ease: ARRIVE }, 16.93);
+      tl.to("#why", { opacity: 1, duration: 0.35, ease: "power1.out" }, 17.35);
+      tl.to("#strike", { scaleX: 1, duration: 0.35, ease: ARRIVE }, 19.11); // struck where the run started
 
       // ---- 7: who it is for (fixed anchor, the token swaps in place) ----
-      tl.to("#world-fade", { opacity: 0.12, duration: 0.6, ease: "power2.out" }, 34.94);
-      tl.to("#honesty", { opacity: 0, duration: 0.3 }, 34.94);
-      tl.to("#built", { opacity: 1, duration: 0.4, ease: "power1.out" }, 35.05);
-      const TOK = [["#k1", 35.2], ["#k2", 36.2], ["#k3", 37.2], ["#k4", 38.2]];
-      TOK.forEach(([k, t], i) => {
-        tl.to(k, { opacity: 1, y: 0, duration: 0.4, ease: ARRIVE }, t);
-        if (i < TOK.length - 1) tl.to(k, { opacity: 0, y: -50, duration: 0.18, ease: "power2.in" }, TOK[i + 1][1] - 0.2);
+      tl.to("#world-fade", { opacity: 0.1, duration: 0.4, ease: "power2.out" }, 21.25);
+      tl.to("#honesty", { opacity: 0, duration: 0.2 }, 21.25);
+      tl.fromTo("#built", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.35, ease: ARRIVE, immediateRender: false }, 21.3);
+      const TOK = [["k1", 21.4], ["k2", 22.05], ["k3", 22.7], ["k4", 23.35]];
+      TOK.forEach(([id, t], i) => {
+        const w = words(id);
+        gsap.set(w, { yPercent: 110 });
+        tl.to(w, { yPercent: 0, duration: 0.35, ease: ARRIVE, stagger: 0.03 }, t);
+        if (i < TOK.length - 1) tl.to(w, { yPercent: -110, duration: 0.14, ease: "power2.in", stagger: 0.01 }, TOK[i + 1][1] - 0.15);
       });
 
       // ---- 8: close: the evidence square completes the n ----
-      tl.fromTo("#cover", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 39.2);
-      tl.fromTo("#wordmark", { opacity: 0, clipPath: "inset(100% 0 0 0)" }, { opacity: 1, clipPath: "inset(0% 0 0 0)", duration: 0.5, ease: ARRIVE }, 39.5);
-      tl.to("#drop-line", { strokeDashoffset: 0, duration: 0.35, ease: "none" }, 40.04);
-      tl.fromTo("#dock-square", { opacity: 0 }, { opacity: 1, duration: 0.08 }, 40.04);
-      tl.fromTo("#dock-square", { y: -347.8 }, { y: 0, duration: 0.35, ease: "none" }, 40.04); // stops dead at 40.39
-      tl.to("#drop-line", { opacity: 0, duration: 0.3 }, 40.55);
-      tl.fromTo("#tagline", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: ARRIVE }, 40.8);
-      tl.fromTo("#install", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 41.3);
-      tl.set({}, {}, 44);
+      tl.fromTo("#cover", { opacity: 0 }, { opacity: 1, duration: 0.25 }, 24.0);
+      tl.fromTo("#wordmark", { opacity: 0, clipPath: "inset(100% 0 0 0)" }, { opacity: 1, clipPath: "inset(0% 0 0 0)", duration: 0.45, ease: ARRIVE }, 24.2);
+      tl.to("#drop-line", { strokeDashoffset: 0, duration: 0.35, ease: "none" }, 24.76);
+      tl.fromTo("#dock-square", { opacity: 0 }, { opacity: 1, duration: 0.08 }, 24.76);
+      tl.fromTo("#dock-square", { y: -347.8 }, { y: 0, duration: 0.35, ease: "none" }, 24.76); // stops dead at 25.11
+      tl.to("#drop-line", { opacity: 0, duration: 0.3 }, 25.25);
+      tl.fromTo("#tagline", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: ARRIVE }, 25.4);
+      tl.fromTo("#install", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 25.8);
+      tl.set({}, {}, 28.5);
       window.__timelines["explainer"] = tl;
     </script>
   </body>
