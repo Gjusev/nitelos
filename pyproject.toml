@@ -49,6 +49,9 @@ mcp = [
 inspect = [
     "inspect-ai>=0.3.282,<0.4",
 ]
+langgraph = [
+    "langgraph>=0.2",
+]
 
 [project.scripts]
 nitelos-hook = "nitelos.claude_code:main"
@@ -135,6 +138,11 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 # NIT-027 (mcp extra, not in the dev group): absent in core-only environments
 module = ["mcp", "mcp.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# NIT-025 (langgraph extra, not in the dev group): absent in core-only environments
+module = ["langgraph", "langgraph.*", "langchain_core", "langchain_core.*"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]

@@ -265,3 +265,23 @@ items. Not in the dev group.
 | zipfile-zstd | 0.0.4 | MIT | github.com/taisei-project/python-zipfile-zstd | |
 | zipp | 4.1.1 | MIT | github.com/jaraco/zipp | |
 | zstandard | 0.25.0 | BSD-3-Clause | github.com/indygreg/python-zstandard | compiled wheel |
+
+## Optional extra `langgraph` — `pip install 'nitelos[langgraph]'`
+
+Added 2026-10-21 (NIT-025, central provisioning). Rows generated from the resolved
+wheels' metadata against the frozen lock. Not in the dev group.
+
+| Distribution | Version | License | Source | Notes |
+|---|---|---|---|---|
+| langchain-core | 1.6.12 | MIT | docs.langchain.com/ | |
+| langchain-protocol | 0.0.20 | MIT | github.com/langchain-ai/agent-protocol | |
+| langgraph | 1.2.16 | MIT | docs.langchain.com/oss/python/langgraph/overview | |
+| langgraph-checkpoint | 4.3.0 | MIT | github.com/langchain-ai/langgraph | |
+| langgraph-prebuilt | 1.1.1 | MIT | github.com/langchain-ai/langgraph | |
+| langgraph-sdk | 0.4.8 | MIT | github.com/langchain-ai/langgraph | |
+| langsmith | 0.14.11 | MIT | github.com/langchain-ai/langsmith-python | **Release action**: telemetry-capable client (LangSmith tracing) in the langgraph tree; verify opt-out envs (LANGSMITH_TRACING off by default) at release |
+| orjson | 3.13.0 | MPL-2.0 AND (Apache-2.0 OR MIT) | github.com/ijl/orjson | compiled wheel |
+| ormsgpack | 1.13.0 | Apache-2.0 OR MIT | github.com/ormsgpack/ormsgpack | compiled wheel |
+| requests-toolbelt | 1.0.0 | Apache-2.0 | github.com/requests/toolbelt | |
+| uuid-utils | 0.18.0 | BSD-3-Clause | github.com/aminalaee/uuid-utils | compiled wheel |
+| xxhash | 4.0.2 | BSD-2 (repository; verify at release) | github.com/ifduyue/python-xxhash | license from its repository (classifier absent); compiled wheel |

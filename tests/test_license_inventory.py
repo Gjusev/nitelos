@@ -162,6 +162,21 @@ INSPECT_CLOSURE = {
     "zstandard",
 }
 
+LANGGRAPH_CLOSURE = {
+    "langchain-core",
+    "langchain-protocol",
+    "langgraph",
+    "langgraph-checkpoint",
+    "langgraph-prebuilt",
+    "langgraph-sdk",
+    "langsmith",
+    "orjson",
+    "ormsgpack",
+    "requests-toolbelt",
+    "uuid-utils",
+    "xxhash",
+}
+
 
 def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
     data = tomllib.loads((ROOT / "uv.lock").read_text(encoding="utf-8"))
@@ -175,6 +190,7 @@ def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
         "deepeval": [],
         "mcp": [],
         "inspect": [],
+        "langgraph": [],
     }
     for dep in nitelos["metadata"]["requires-dist"]:
         group = "core"
@@ -191,6 +207,8 @@ def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
                 group = "mcp"
             elif "extra == 'inspect'" in dep["marker"]:
                 group = "inspect"
+            elif "extra == 'langgraph'" in dep["marker"]:
+                group = "langgraph"
             else:
                 raise AssertionError(
                     f"unrecognised extra marker for {dep['name']}: inventory test needs the group"
@@ -244,6 +262,7 @@ def test_direct_dependencies_land_in_the_right_sections() -> None:
     deepeval_rows = {cells[0].lower() for cells in _rows(sections, "extra `deepeval`")}
     mcp_rows = {cells[0].lower() for cells in _rows(sections, "extra `mcp`")}
     inspect_rows = {cells[0].lower() for cells in _rows(sections, "extra `inspect`")}
+    langgraph_rows = {cells[0].lower() for cells in _rows(sections, "extra `langgraph`")}
     assert set(direct["core"]) <= core_rows
     assert set(direct["eval"]) <= eval_rows
     assert set(direct["local"]) <= local_rows
@@ -254,6 +273,8 @@ def test_direct_dependencies_land_in_the_right_sections() -> None:
     assert mcp_rows >= MCP_CLOSURE
     assert set(direct["inspect"]) <= inspect_rows
     assert inspect_rows >= INSPECT_CLOSURE
+    assert set(direct["langgraph"]) <= langgraph_rows
+    assert langgraph_rows >= LANGGRAPH_CLOSURE
     # and the recorded closures are fully covered by their sections
     assert core_rows >= CORE_CLOSURE
     assert eval_rows >= EVAL_CLOSURE
