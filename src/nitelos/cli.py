@@ -28,7 +28,9 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
-KIND_TARGETS: dict[str, str] = {}  # kind -> "module:attribute" (NIT-018/019 add entries)
+KIND_TARGETS: dict[str, str] = {
+    "junit": "nitelos.collect.test_results:COLLECTOR",  # NIT-019
+}  # NIT-018 adds "git"
 
 
 def _error_document(code: Any, message: str) -> dict[str, Any]:

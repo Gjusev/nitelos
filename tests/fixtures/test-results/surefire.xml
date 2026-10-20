@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="com.example.RegTest" time="0.3" tests="4" errors="1" skipped="0" failures="0">
+  <testcase name="loadsPage" classname="com.example.RegTest" time="0.1"/>
+  <testcase name="submits" classname="com.example.RegTest" time="0.05"/>
+  <testcase name="confirms" classname="com.example.RegTest" time="0.0">
+    <error type="java.lang.NullPointerException">NPE at line 7</error>
+  </testcase>
+  <testcase name="audit" classname="com.example.RegTest" time="0.15"/>
+</testsuite>

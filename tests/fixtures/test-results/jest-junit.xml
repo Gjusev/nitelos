@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites name="jest tests" tests="3" failures="1" skipped="0" time="0.9">
+  <testsuite name="tests/app.test.js" tests="3" failures="1" skipped="0" timestamp="2026-10-20T10:00:00">
+    <testcase classname="app renders the completion banner" name="shows banner" time="0.1"/>
+    <testcase classname="app renders the completion banner" name="hides spinner" time="0.2">
+      <failure>Expected hidden, received visible</failure>
+    </testcase>
+    <testcase classname="app submits" name="submits form" time="0.6"/>
+  </testsuite>
+</testsuites>
