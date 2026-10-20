@@ -39,6 +39,7 @@ git = []
 junit = []
 github = []
 claude-code = []
+http = []
 deepeval = [
     "deepeval>=2.0",
 ]
