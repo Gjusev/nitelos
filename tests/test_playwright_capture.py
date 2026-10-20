@@ -177,13 +177,20 @@ def test_pws03b_two_captures_stash_their_own_bytes() -> None:
     artifacts_a: dict[str, bytes] = {}
     artifacts_b: dict[str, bytes] = {}
     first = capture_page_state(
-        _page(), ("#confirm",), evidence_id="pa", checkpoint_id="cp",
-        subject=dict(SUBJECT), artifacts=artifacts_a,
+        _page(),
+        ("#confirm",),
+        evidence_id="pa",
+        checkpoint_id="cp",
+        subject=dict(SUBJECT),
+        artifacts=artifacts_a,
     )
     second = capture_page_state(
         _OtherPage({"#confirm": FakeLocator(text="b", visible=True, count=1, value=None)}),
-        ("#confirm",), evidence_id="pb", checkpoint_id="cp",
-        subject=dict(SUBJECT), artifacts=artifacts_b,
+        ("#confirm",),
+        evidence_id="pb",
+        checkpoint_id="cp",
+        subject=dict(SUBJECT),
+        artifacts=artifacts_b,
     )
     assert first.error is None
     assert second.error is None
@@ -217,9 +224,21 @@ def test_pws05_never_drives_the_browser() -> None:
         return raise_it
 
     for name in (
-        "goto", "go_back", "go_forward", "set_content", "click", "fill",
-        "select_option", "press", "hover", "wait_for", "wait_for_timeout",
-        "wait_for_load_state", "wait_for_url", "reload", "evaluate",
+        "goto",
+        "go_back",
+        "go_forward",
+        "set_content",
+        "click",
+        "fill",
+        "select_option",
+        "press",
+        "hover",
+        "wait_for",
+        "wait_for_timeout",
+        "wait_for_load_state",
+        "wait_for_url",
+        "reload",
+        "evaluate",
     ):
         setattr(page, name, forbidden(name))
     result = _capture(page)
