@@ -165,6 +165,34 @@ def test_pws03_helper_returns_result_and_stashes_artifact_bytes() -> None:
     assert artifacts[shot.artifact_id] == PNG
 
 
+def test_pws03b_two_captures_stash_their_own_bytes() -> None:
+    # the review's corruption scenario: two captures, distinct pages/bytes —
+    # each artifacts dict must hold its own capture's bytes, never the other's
+    other_png = png_bytes(6, 6, "RGB", (200, 100, 50))
+
+    class _OtherPage(FakePage):
+        def screenshot(self, **kwargs: Any) -> bytes:
+            return other_png
+
+    artifacts_a: dict[str, bytes] = {}
+    artifacts_b: dict[str, bytes] = {}
+    first = capture_page_state(
+        _page(), ("#confirm",), evidence_id="pa", checkpoint_id="cp",
+        subject=dict(SUBJECT), artifacts=artifacts_a,
+    )
+    second = capture_page_state(
+        _OtherPage({"#confirm": FakeLocator(text="b", visible=True, count=1, value=None)}),
+        ("#confirm",), evidence_id="pb", checkpoint_id="cp",
+        subject=dict(SUBJECT), artifacts=artifacts_b,
+    )
+    assert first.error is None
+    assert second.error is None
+    shot_a = next(i for i in first.evidence if i.kind == "screenshot")
+    shot_b = next(i for i in second.evidence if i.kind == "screenshot")
+    assert artifacts_a[shot_a.artifact_id] == PNG
+    assert artifacts_b[shot_b.artifact_id] == other_png
+
+
 def test_pws04_one_provenance_per_evidence_with_final_digests() -> None:
     result = _capture()
     assert len(result.evidence) == 2
@@ -188,7 +216,11 @@ def test_pws05_never_drives_the_browser() -> None:
 
         return raise_it
 
-    for name in ("goto", "click", "fill", "wait_for", "wait_for_timeout", "reload", "evaluate"):
+    for name in (
+        "goto", "go_back", "go_forward", "set_content", "click", "fill",
+        "select_option", "press", "hover", "wait_for", "wait_for_timeout",
+        "wait_for_load_state", "wait_for_url", "reload", "evaluate",
+    ):
         setattr(page, name, forbidden(name))
     result = _capture(page)
     assert result.error is None

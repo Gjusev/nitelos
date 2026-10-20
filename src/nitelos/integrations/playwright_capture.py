@@ -21,10 +21,13 @@ observation, so a selector matching the default secret pattern
 (token|secret|password|authorization) is REDACTED — prefer neutral selector
 names. Screenshot bytes are handed back via the ``artifacts`` dict (keyed by
 artifact id; nitelos never writes files). ``captured_at`` is the capture
-moment, so criteria freshness governs page state like any other evidence. The
-async Playwright API is not supported in v0.2. The module-level COLLECTOR
-keeps the last capture's screenshot bytes just long enough to stash them —
-captures are sequential by design.
+moment, so criteria freshness governs page state like any other evidence.
+Visible text, URLs and input values are captured as-is; pass
+``redact_pointers`` (for example ``/page/selectors/#field/text``) to drop
+specific values before the digest. The async Playwright API is not supported
+in v0.2. The module-level COLLECTOR is exported for direct/framework use and
+is per-process sequential; :func:`capture_page_state` always builds its own
+collector instance, so concurrent calls cannot exchange bytes.
 """
 
 from __future__ import annotations
@@ -174,7 +177,9 @@ def capture_page_state(
     screenshot's artifact id when the dict is given (nitelos never writes
     files). Absent elements are values (``count: 0``, null fields), never
     errors; framework errors (e.g. the observation cap) come back as the
-    structured ``error`` on the result.
+    structured ``error`` on the result. A private collector instance is
+    created per call, so concurrent captures cannot exchange bytes through
+    the last-screenshot slot.
     """
     values: dict[str, Any] = {
         "evidence_id": evidence_id,
@@ -184,10 +189,11 @@ def capture_page_state(
         "selectors": selectors,
     }
     values.update(config_overrides)
-    result = run_collector(COLLECTOR, PageStateConfig.model_validate(values))
+    collector = PageStateCollector()
+    result = run_collector(collector, PageStateConfig.model_validate(values))
     if artifacts is not None and result.error is None:
         shot = next((item for item in result.evidence if item.kind == "screenshot"), None)
-        if shot is not None and COLLECTOR._last_screenshot_bytes is not None:
-            # just captured by THIS process; the provenance digest proves it
-            artifacts[shot.artifact_id] = COLLECTOR._last_screenshot_bytes
+        if shot is not None and collector._last_screenshot_bytes is not None:
+            # just captured by THIS call; the provenance digest proves it
+            artifacts[shot.artifact_id] = collector._last_screenshot_bytes
     return result
