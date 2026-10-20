@@ -242,3 +242,28 @@ def test_doc04_contributing_and_security_exist() -> None:
     security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
     assert "private" in security.lower()
     assert "report" in security.lower()
+
+
+# --------------------------------------------------------------------------
+# EX-01: the custom-collector example runs offline and prints honest decisions
+# --------------------------------------------------------------------------
+
+
+def test_ex01_custom_collector_example_decisions() -> None:
+    example = _load_example("collect_custom_collector")
+    without_bindings, with_bindings = example.run()
+    assert without_bindings.execution_status.value == "ok"
+    assert without_bindings.decision is not None
+    assert without_bindings.decision.value == "abstained"
+    assert "UNTRUSTED_EXTERNAL" in without_bindings.reason_codes
+    assert with_bindings.execution_status.value == "ok"
+    assert with_bindings.decision is not None
+    assert with_bindings.decision.value == "success"
+
+
+def test_ex01_custom_collector_example_prints_both_paths(capsys: pytest.CaptureFixture[str]) -> None:
+    _load_example("collect_custom_collector").run()
+    out = capsys.readouterr().out
+    assert "without bindings" in out
+    assert "with host bindings" in out
+    assert "UNTRUSTED_EXTERNAL" in out

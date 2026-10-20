@@ -6,7 +6,7 @@ no optional model or evaluation dependencies.
 
 __version__ = "0.1.0"
 
-from nitelos.backends import DeterministicBackend
+from nitelos.backends import Backend, BackendCapabilities, DeterministicBackend
 from nitelos.errors import (
     AbstentionReason,
     BackendErrorCode,
