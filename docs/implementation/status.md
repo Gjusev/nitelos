@@ -50,8 +50,8 @@ Plan: [17-v0.2-product-and-plan.md](../planning/17-v0.2-product-and-plan.md). In
 
 | Task | State | Owner | Branch / worktree | Depends | Tests / results | Deviations / blockers |
 |---|---|---|---|---|---|---|
-| NIT-016 Repo hygiene | running | nitelos-c3 | nit/016-repo-hygiene / nitelos-wt/nit-016 | — | — | |
-| NIT-017 F1 collector framework | running | nitelos-aa | nit/017-collector-framework / nitelos-wt/nit-017 | G9 | — | includes central extras-isolation test and `__all__` fix (see ADR-014) |
+| NIT-016 Repo hygiene | running | nitelos-d7 | nit/016-repo-hygiene / nitelos-wt/nit-016 | — | — | |
+| NIT-017 F1 collector framework | running | nitelos-97 | nit/017-collector-framework / nitelos-wt/nit-017 | G9 | — | includes central extras-isolation test and `__all__` fix (see ADR-014) |
 | NIT-018 F2 git collector | pending | — | — | 017 | — | |
 | NIT-019 F3 test-results collector | pending | — | — | 017 | — | |
 | NIT-020 F4 GitHub collector | pending | — | — | 017 | — | |
@@ -129,3 +129,4 @@ Plan: [17-v0.2-product-and-plan.md](../planning/17-v0.2-product-and-plan.md). In
 - 2026-10-20: G9 PASSED: user approved ADR-014 (option A), ADR-015 (with findings 1–4) and ADR-016 (with findings 1–3). User ruling: no `Co-Authored-By` Claude trailer in this repo (agent rule 8 amended), consistent with the 2026-10-20 history rewrite.
 - 2026-10-20: Phase 1 started: NIT-016 and NIT-017 implementers launched (worktrees from `253bbeb`); Claude Code hook/plugin facts being confirmed against the docs ahead of NIT-023.
 - 2026-10-20: user instruction: implementation goes to the peer Claude Code sessions, not subagents. The NIT-016/017 subagents were stopped (NIT-016 partial work stashed in its worktree, unreviewed). NIT-017 → nitelos-aa, NIT-016 → nitelos-c3; each reviews the other's task. Claude Code hook/plugin facts recorded in nit-023-claude-code-facts.md (no turn-start field → UserPromptSubmit records the turn start).
+- 2026-10-20: first peer assignments expired unapproved (permission-mode mismatch). Peers restarted as nitelos-97 and nitelos-d7; NIT-017 → nitelos-97, NIT-016 → nitelos-d7, resent.
