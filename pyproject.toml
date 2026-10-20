@@ -34,6 +34,9 @@ local = [
 otel = [
     "opentelemetry-api>=1.45.1,<2",
 ]
+# empty named extras: stdlib-only collectors (ADR-014 finding 4; uniform install command)
+git = []
+junit = []
 
 [dependency-groups]
 dev = [
