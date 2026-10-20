@@ -17,8 +17,9 @@ left behind, and it answers `success`, `failure` or `abstained`.
 
 ## How it works
 
-1. **Your agent runs a task** and reports a result, for example `registration
-   succeeded`. nitelos treats that report as context, never as proof.
+1. **Your agent runs a task**, on whatever model or framework you use, and
+   reports a result, for example `registration succeeded`. nitelos never calls
+   that model and treats the report as context, never as proof.
 2. **You write down what "done" means** as criteria: "no validation error remains
    on the form", expressed as `/validation_error equals false`.
 3. **Your runner hands over the evidence** it captured: the final page state,

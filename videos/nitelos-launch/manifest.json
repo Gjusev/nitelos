@@ -51,6 +51,18 @@
       "render": "tools/stage.sh teaser.html render --quality delivery --output \"$(pwd -W)/renders/nitelos-teaser-8s.raw.mp4\" && tools/master.sh renders/nitelos-teaser-8s.raw.mp4 renders/nitelos-teaser-8s.mp4 4.5 stills/nitelos-teaser-poster.jpg"
     },
     {
+      "id": "explainer",
+      "path": "renders/nitelos-explainer-44s.mp4",
+      "composition": "explainer.html",
+      "width": 1920, "height": 1080, "fps": 30, "frames": 1320, "duration_s": 44.01,
+      "video_codec": "h264", "audio_codec": "aac 48 kHz stereo 192k",
+      "loudness_lufs": -16.06, "true_peak_dbtp": -1.32,
+      "poster_frame_s": 30, "poster": "stills/nitelos-explainer-poster.jpg",
+      "bytes": 4876801,
+      "technique": "one oversized world canvas traversed by a virtual camera (hyperframes-animation: spatial-pan-stations, viewport-change, constellation-hub adapted to the brand's no-bounce motion)",
+      "render": "tools/stage.sh explainer.html render --quality delivery --output \"$(pwd -W)/renders/nitelos-explainer-44s.raw.mp4\" && tools/master.sh renders/nitelos-explainer-44s.raw.mp4 renders/nitelos-explainer-44s.mp4 30 stills/nitelos-explainer-poster.jpg"
+    },
+    {
       "id": "workflow",
       "path": "renders/nitelos-workflow-24s.mp4",
       "composition": "workflow.html",
