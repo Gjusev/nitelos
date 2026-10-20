@@ -9,8 +9,8 @@ the COLLECTOR_* code printed. Stdout carries a safe summary (counts, codes)
 only; the evidence (v0.1 wire form), provenance and error go to ``--out`` as
 JSON.
 
-The kind table is fixed in code — no entry-point scan (doc 04). It ships
-EMPTY: real kinds (git, junit) arrive with NIT-018/019. Each entry maps a kind
+The kind table is fixed in code — no entry-point scan (doc 04). ``git``
+ships here (NIT-018); junit arrives with NIT-019. Each entry maps a kind
 to ``"module:attribute"``, imported lazily so a missing extra never breaks an
 unrelated invocation; an unloadable module maps to COLLECTOR_UNAVAILABLE
 (ADR-014 finding 2). Configs validate through the collector's own
@@ -28,7 +28,9 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
-KIND_TARGETS: dict[str, str] = {}  # kind -> "module:attribute" (NIT-018/019 add entries)
+KIND_TARGETS: dict[str, str] = {  # kind -> "module:attribute" (junit arrives with NIT-019)
+    "git": "nitelos.collect.git:COLLECTOR",
+}
 
 
 def _error_document(code: Any, message: str) -> dict[str, Any]:
