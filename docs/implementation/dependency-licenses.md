@@ -198,3 +198,23 @@ for verification at release. This tree is deliberately NOT in the dev group.
 | websockets | 16.1.1 | BSD-3-Clause | github.com/python-websockets/websockets | |
 | wheel | 0.48.0 | MIT | github.com/pypa/wheel | |
 | yarl | 1.25.1 | Apache-2.0 | github.com/aio-libs/yarl | compiled wheel |
+
+## Optional extra `mcp` — `pip install 'nitelos[mcp]'`
+
+Added 2026-10-20 (NIT-027, central provisioning). Rows generated from the resolved
+wheels' metadata against the frozen lock. Not in the dev group.
+
+| Distribution | Version | License | Source | Notes |
+|---|---|---|---|---|
+| jsonschema | 4.26.0 | MIT | github.com/python-jsonschema/jsonschema | |
+| jsonschema-specifications | 2025.9.1 | MIT | github.com/python-jsonschema/jsonschema-specifications | |
+| mcp | 2.3.0 | MIT | modelcontextprotocol.io | **Release action**: server framework; telemetry-free per its metadata, re-verify at release |
+| mcp-types | 2.3.0 | MIT | modelcontextprotocol.io | |
+| pyjwt | 2.15.1 | MIT | github.com/jpadilla/pyjwt | |
+| python-multipart | 0.0.32 | Apache-2.0 | github.com/Kludex/python-multipart | |
+| pywin32 | 312 | PSF-2.0 | github.com/mhammond/pywin32 | Windows-only compiled wheel |
+| referencing | 0.37.0 | MIT | github.com/python-jsonschema/referencing | |
+| rpds-py | 2026.9.1 | MIT | github.com/crate-py/rpds | compiled wheel |
+| sse-starlette | 3.5.0 | BSD-3-Clause | github.com/sysid/sse-starlette | |
+| starlette | 1.9.0 | BSD-3-Clause | github.com/Kludex/starlette | |
+| uvicorn | 0.54.0 | BSD-3-Clause | uvicorn.dev/ | |

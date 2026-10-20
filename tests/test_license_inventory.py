@@ -107,12 +107,34 @@ DEEPEVAL_CLOSURE = {
     "yarl",
 }
 
+MCP_CLOSURE = {
+    "jsonschema",
+    "jsonschema-specifications",
+    "mcp",
+    "mcp-types",
+    "pyjwt",
+    "python-multipart",
+    "pywin32",
+    "referencing",
+    "rpds-py",
+    "sse-starlette",
+    "starlette",
+    "uvicorn",
+}
+
 
 def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
     data = tomllib.loads((ROOT / "uv.lock").read_text(encoding="utf-8"))
     versions = {p["name"]: p["version"] for p in data["package"]}
     nitelos = next(p for p in data["package"] if p["name"] == "nitelos")
-    direct: dict[str, list[str]] = {"core": [], "eval": [], "local": [], "otel": [], "deepeval": []}
+    direct: dict[str, list[str]] = {
+        "core": [],
+        "eval": [],
+        "local": [],
+        "otel": [],
+        "deepeval": [],
+        "mcp": [],
+    }
     for dep in nitelos["metadata"]["requires-dist"]:
         group = "core"
         if "marker" in dep:
@@ -124,6 +146,8 @@ def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
                 group = "otel"
             elif "extra == 'deepeval'" in dep["marker"]:
                 group = "deepeval"
+            elif "extra == 'mcp'" in dep["marker"]:
+                group = "mcp"
             else:
                 raise AssertionError(
                     f"unrecognised extra marker for {dep['name']}: inventory test needs the group"
@@ -175,12 +199,15 @@ def test_direct_dependencies_land_in_the_right_sections() -> None:
     local_rows = {cells[0].lower() for cells in _rows(sections, "extra `local`")}
     otel_rows = {cells[0].lower() for cells in _rows(sections, "extra `otel`")}
     deepeval_rows = {cells[0].lower() for cells in _rows(sections, "extra `deepeval`")}
+    mcp_rows = {cells[0].lower() for cells in _rows(sections, "extra `mcp`")}
     assert set(direct["core"]) <= core_rows
     assert set(direct["eval"]) <= eval_rows
     assert set(direct["local"]) <= local_rows
     assert set(direct["otel"]) <= otel_rows
     assert set(direct["deepeval"]) <= deepeval_rows
     assert deepeval_rows >= DEEPEVAL_CLOSURE
+    assert set(direct["mcp"]) <= mcp_rows
+    assert mcp_rows >= MCP_CLOSURE
     # and the recorded closures are fully covered by their sections
     assert core_rows >= CORE_CLOSURE
     assert eval_rows >= EVAL_CLOSURE
