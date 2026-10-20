@@ -1,4 +1,4 @@
-# Nitelos — plan de producción audiovisual para Claude Opus 5.5
+# Nitelos — plan de producción audiovisual
 
 ## 1. Encargo y resultado esperado
 
@@ -288,7 +288,7 @@ Auditar también las demás guías públicas y corregir enlaces, terminología y
 
 La documentación se considera terminada cuando ofrece un recorrido reproducible desde instalación hasta interpretación del resultado, mantiene los límites del SDK, elimina las contradicciones detectadas y enlaza únicamente recursos reales. Un bloqueo del render no debe impedir terminar las mejoras documentales independientes.
 
-## 11. Prompt listo para Claude Opus 5.5
+## 11. Prompt de producción
 
 ```text
 Trabaja en el repositorio Nitelos. Lee docs/video-production-plan.md y las
