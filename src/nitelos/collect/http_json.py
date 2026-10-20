@@ -5,9 +5,14 @@ One GET to a host-pinned https URL through the shared NIT-020 transport
 incremental size cap, timeout; injectable transport for offline tests).
 The URL and the JSON pointers to extract are HOST configuration; the agent
 never chooses where requests go. The observation exposes the status code,
-the transport-kept headers (the allowlist lives in ``_http._KEPT_HEADERS``)
+the transport-kept headers (the allowlist lives in ``_http.KEPT_HEADERS``)
 and the values at the configured pointers (null when a pointer is absent —
-missing is a value, not an error). Non-2xx maps through the collector error
+missing is a value, not an error; note that in ``values`` an absent key and
+a JSON null at the key are indistinguishable: an ``exists`` criterion is
+about the pointer being configured and the document parseable, not about
+the remote document's key presence). v0.2 sends NO auth headers itself
+(the 401 mapping exists for hosts fronting the URL with their own
+transport that adds credentials). Non-2xx maps through the collector error
 table (401 AUTH_MISSING; 404/5xx UNAVAILABLE; other 4xx CONFIG_INVALID); a
 non-JSON body or a JSON non-object root is COLLECTOR_EXCEPTION. Response
 values never enter provenance or logs; the raw digest covers the response
@@ -24,6 +29,7 @@ from urllib.parse import urlsplit
 
 from pydantic import Field, field_validator
 
+from nitelos.backends.deterministic import _array_index
 from nitelos.collect import (
     CollectionResult,
     CollectorCapabilities,
@@ -33,11 +39,12 @@ from nitelos.collect import (
     ProvenanceRecord,
 )
 from nitelos.collect._http import (
-    _KEPT_HEADERS,
+    KEPT_HEADERS,
     GetTransport,
     default_transport,
+    map_http_error,
 )
-from nitelos.collect.github import _map_http_error
+from nitelos.errors import EvidenceValidationError
 from nitelos.schemas import Evidence as _EvidenceFactory
 from nitelos.schemas import JsonPointerType, canonical_json
 
@@ -64,8 +71,11 @@ def _walk(document: Any, pointer: str) -> Any:
         token = raw_token.replace("~1", "/").replace("~0", "~")
         if isinstance(node, dict):
             node = node.get(token)
-        elif isinstance(node, list) and token.isdigit():
-            index = int(token)
+        elif isinstance(node, list):
+            try:
+                index = _array_index(token)
+            except EvidenceValidationError:
+                return None  # non-canonical index: no target, not an error here
             node = node[index] if index < len(node) else None
         else:
             return None
@@ -93,7 +103,7 @@ class HttpJsonCollector:
         )
         response = self._transport(cfg.url, {}, cfg.limits.timeout_s, cfg.limits.max_raw_bytes)
         if not 200 <= response.status < 300:
-            _map_http_error(response)
+            map_http_error(response)
         try:
             document = json.loads(response.body)
         except ValueError:
@@ -105,9 +115,7 @@ class HttpJsonCollector:
             "http": {
                 "status_code": response.status,
                 "headers": {
-                    key: value
-                    for key, value in dict(response.headers).items()
-                    if key.lower() in _KEPT_HEADERS
+                    key: value for key, value in dict(response.headers).items() if key.lower() in KEPT_HEADERS
                 },
                 "values": values,
             }

@@ -75,6 +75,13 @@ def test_htc02_nested_pointers() -> None:
     assert data["http"]["values"] == {"/nested/owner": "ada", "/nested/ids/1": 20}
 
 
+def test_htc03b_leading_zero_index_stays_unresolved() -> None:
+    body = json.dumps({"l": [10, 20]}).encode()
+    cfg = _config(pointers=("/l/01", "/l/1"))
+    data = _data(_run([_transport_reply(200, body)], cfg))
+    assert data["http"]["values"] == {"/l/01": None, "/l/1": 20}
+
+
 def test_htc03_missing_pointer_is_null_not_error() -> None:
     body = json.dumps({"status": "active"}).encode()
     cfg = _config(pointers=("/status", "/absent"))

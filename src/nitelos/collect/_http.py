@@ -31,7 +31,9 @@ from urllib.parse import urlsplit
 from nitelos.collect import CollectorError, CollectorErrorCode
 
 _READ_CHUNK = 65_536
-_KEPT_HEADERS = ("x-ratelimit-remaining", "x-ratelimit-reset", "retry-after", "content-type")
+#: The response headers collectors may surface (public: collectors and future
+#: transports share one allowlist).
+KEPT_HEADERS = ("x-ratelimit-remaining", "x-ratelimit-reset", "retry-after", "content-type")
 
 
 class _HttpReply(Protocol):
@@ -78,7 +80,7 @@ def _open(request: urllib.request.Request, timeout: float) -> Any:
 
 
 def _kept_headers(items: Iterable[tuple[str, str]]) -> dict[str, str]:
-    return {key: value for key, value in items if key.lower() in _KEPT_HEADERS}
+    return {key: value for key, value in items if key.lower() in KEPT_HEADERS}
 
 
 def _read_capped(response: Any, max_bytes: int) -> bytes:
@@ -93,6 +95,35 @@ def _read_capped(response: Any, max_bytes: int) -> bytes:
         if total > max_bytes:
             raise CollectorError(CollectorErrorCode.OUTPUT_TOO_LARGE)
     return b"".join(chunks)
+
+
+def map_http_error(response: HttpResponse) -> None:
+    """Map a non-2xx status to a collector code (abstention, never failure).
+
+    Shared table for every HTTP-based collector: 401 -> COLLECTOR_AUTH_MISSING;
+    429 or 403-with-X-RateLimit-Remaining:0 (rate limited right now), 404 and
+    5xx -> COLLECTOR_UNAVAILABLE; other 4xx -> COLLECTOR_CONFIG_INVALID.
+    Non-2xx here means the caller already treats it as an error; a 2xx input
+    returns silently.
+    """
+
+    if 200 <= response.status < 300:
+        return
+    remaining = next(
+        (value for key, value in response.headers.items() if key.lower() == "x-ratelimit-remaining"),
+        None,
+    )
+    if response.status == 401:
+        raise CollectorError(CollectorErrorCode.AUTH_MISSING)
+    if response.status == 429 or (response.status == 403 and remaining == "0"):
+        raise CollectorError(CollectorErrorCode.UNAVAILABLE)
+    if response.status == 404:
+        raise CollectorError(CollectorErrorCode.UNAVAILABLE)
+    if 500 <= response.status < 600:
+        raise CollectorError(CollectorErrorCode.UNAVAILABLE)
+    if 400 <= response.status < 500:
+        raise CollectorError(CollectorErrorCode.CONFIG_INVALID)
+    raise CollectorError(CollectorErrorCode.EXCEPTION)
 
 
 def default_transport(url: str, headers: Mapping[str, str], timeout_s: float, max_bytes: int) -> HttpResponse:
@@ -123,4 +154,4 @@ def default_transport(url: str, headers: Mapping[str, str], timeout_s: float, ma
 #: The injectable transport seam every network collector takes in its constructor.
 GetTransport = Callable[[str, Mapping[str, str], float, int], HttpResponse]
 
-__all__ = ["GetTransport", "HttpResponse", "default_transport"]
+__all__ = ["GetTransport", "HttpResponse", "KEPT_HEADERS", "default_transport", "map_http_error"]  # noqa: RUF022  # logical grouping
