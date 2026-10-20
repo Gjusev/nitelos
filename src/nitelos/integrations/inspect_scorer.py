@@ -15,7 +15,12 @@ Contract (documented, versioned by this module):
 - final state (``state.store``): the evidence list under
   :data:`NITELOS_EVIDENCE_KEY` (v0.1 wire form), written by the task's
   solver/tools (for example a collector-backed tool). No evidence is a
-  legitimate state: the request then abstains with MISSING_EVIDENCE.
+  legitimate state — and so is a citation the agent could not satisfy:
+  criteria citations are filtered to the ids actually present, so an empty
+  store or a dangling citation abstains with MISSING_EVIDENCE instead of
+  crashing the eval. Malformed agent-written evidence scores "A" with
+  INVALID_SCHEMA; only eval-author mistakes (broken criteria documents) stay
+  loud.
 - ``as_of`` is the scoring moment (UTC); captured evidence is subject to the
   criteria's ``max_age_seconds`` freshness exactly as in core nitelos.
 
@@ -130,6 +135,25 @@ def _explanation(result: VerificationResult) -> str:
     return f"nitelos {result.execution_status.value} ({reasons})"
 
 
+def _agent_evidence_fault_score(evidence: list[dict[str, Any]], code: str) -> Score:
+    """Score "A" for agent-side evidence faults (crashing would DoS the eval)."""
+    return Score(
+        value=VALUE_ABSTAIN,
+        explanation=f"nitelos input_error ({code})",
+        metadata={
+            "nitelos": {
+                "decision": None,
+                "execution_status": "input_error",
+                "reason_codes": [code],
+                "limitation_codes": [],
+                "evidence_fingerprints": [
+                    str(item.get("sha256")) for item in evidence if isinstance(item, dict)
+                ],
+            }
+        },
+    )
+
+
 def _to_score(result: VerificationResult, evidence: list[dict[str, Any]]) -> Score:
     if result.decision is not None and result.decision.value == "success":
         value = VALUE_CORRECT
@@ -176,17 +200,52 @@ def nitelos_scorer(
             checkpoint_id = state.metadata.get("nitelos_checkpoint_id", "cp-inspect")
             request_id = state.metadata.get("nitelos_request_id", f"inspect-{state.sample_id}")
             evidence: list[dict[str, Any]] = list(state.store.get(NITELOS_EVIDENCE_KEY) or [])
+            # NIT-023 composition: citations are filtered to the ids the agent's
+            # store actually holds, so a dangling citation abstains with
+            # MISSING_EVIDENCE instead of raising UNKNOWN_REFERENCE (an agent
+            # that captured nothing must not crash — or DoS — the eval).
+            present = {
+                str(item.get("id"))
+                for item in evidence
+                if isinstance(item, dict) and item.get("id") is not None
+            }
+            filtered_criteria = []
+            for raw in criteria:
+                entry = dict(raw) if isinstance(raw, dict) else raw
+                if isinstance(entry, dict):
+                    entry["evidence_ids"] = [
+                        cited for cited in entry.get("evidence_ids", []) if str(cited) in present
+                    ]
+                filtered_criteria.append(entry)
             document = {
                 "schema_version": "1",
                 "request_id": request_id,
                 "objective": "Verify the outcome the agent claimed",
                 "checkpoint_id": checkpoint_id,
                 "as_of": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
-                "criteria": criteria,
+                "criteria": filtered_criteria,
                 "evidence": evidence,
                 "metadata": {},
             }
-            request = parse_request(json.dumps(document))
+            try:
+                request = parse_request(json.dumps(document))
+            except Exception:  # noqa: BLE001 - parse failures are discriminated below, not swallowed
+                # Author-vs-agent split: re-validate with the evidence dropped
+                # AND citations blanked — if that parses, the criteria document
+                # itself is sound and the fault is the agent-written evidence
+                # -> score A; otherwise the eval author misconfigured the
+                # criteria -> stay loud.
+                criteria_only = dict(document)
+                criteria_only["evidence"] = []
+                criteria_only["criteria"] = [
+                    ({**entry, "evidence_ids": []} if isinstance(entry, dict) else entry)
+                    for entry in document["criteria"]
+                ]
+                try:
+                    parse_request(json.dumps(criteria_only))
+                except Exception:
+                    raise
+                return _agent_evidence_fault_score(evidence, "INVALID_SCHEMA")
             result = effective_verifier.verify(request)
             return _to_score(result, evidence)
 

@@ -38,6 +38,21 @@ _SUBPROCESS_CODE = (
 pytest.importorskip("inspect_ai", reason="nitelos[inspect] extra required for the scorer tests")
 
 
+_CRITERIA = [
+    {
+        "id": "c-status",
+        "description": "The deployment record reports the expected status",
+        "kind": "assertion",
+        "scope": "external",
+        "evidence_ids": ["obs-1"],
+        "subject": {"repo": "example/app"},
+        "pointer": "/status",
+        "operator": "equals",
+        "expected": "deployed",
+    }
+]
+
+
 def _run(scenario: dict[str, Any]) -> dict[str, Any]:
     proc = subprocess.run(
         [sys.executable, str(RUNNER)],
@@ -134,6 +149,47 @@ def test_ins04_missing_criteria_metadata_is_a_loud_configuration_error() -> None
     )
     assert proc.returncode != 0
     assert "KeyError" in proc.stderr or "criteria" in proc.stderr
+
+
+def test_ins04b_dangling_citation_scores_a_not_a_crash() -> None:
+    # probe 1 (review): criteria cite obs-1 but the store lacks it -> the
+    # PRIMARY honest-abstention scenario must score A, never a traceback
+    dangling = _run(
+        {
+            "criteria": _CRITERIA,  # cites obs-1
+            "evidence": [],  # agent captured nothing
+        }
+    )
+    assert dangling["value"] == "A"
+    assert "MISSING_EVIDENCE" in dangling["metadata"]["nitelos"]["reason_codes"]
+
+
+def test_ins04c_malformed_agent_evidence_scores_a_not_a_crash() -> None:
+    # probe 2 (review): malformed agent-written evidence in the store ->
+    # A with INVALID_SCHEMA; only author-level criteria faults stay loud
+    malformed = _run(
+        {
+            "criteria": _CRITERIA,
+            "evidence": [{"id": "obs-1", "kind": "observation", "bogus_field": True}],
+        }
+    )
+    assert malformed["value"] == "A"
+    assert malformed["metadata"]["nitelos"]["execution_status"] == "input_error"
+    assert "INVALID_SCHEMA" in malformed["metadata"]["nitelos"]["reason_codes"]
+
+
+def test_ins04d_author_misconfiguration_stays_loud() -> None:
+    # broken criteria (missing required field) -> loud crash, not a silent A
+    proc = subprocess.run(
+        [sys.executable, str(RUNNER)],
+        input=json.dumps({"criteria": [{"id": "c-broken"}], "evidence": []}),
+        check=False,
+        capture_output=True,
+        text=True,
+        cwd=ROOT,
+    )
+    assert proc.returncode != 0
+    assert "RequestValidationError" in proc.stderr or "ValidationError" in proc.stderr
 
 
 def test_ins04b_no_citable_evidence_abstains_with_missing_evidence() -> None:
