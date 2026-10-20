@@ -62,7 +62,7 @@ Plan: [17-v0.2-product-and-plan.md](../planning/17-v0.2-product-and-plan.md). In
 | NIT-025 F9 LangGraph node | pending | — | — | 017 | — | |
 | NIT-026 F10 DeepEval metric | pending | — | — | 017 | — | |
 | NIT-027 F11 MCP server | pending | — | — | 017 | — | |
-| NIT-028 F12 OpenTelemetry | running | nitelos-d7 | nit/028-otel / nitelos-wt/nit-028 | G9 | — | central deps `8431370`: extra otel = opentelemetry-api 1.45.1 (<2); dev opentelemetry-sdk |
+| NIT-028 F12 OpenTelemetry | review | nitelos-d7 impl, independent reviewer instance | nit/028-otel `a564c40` / nitelos-wt/nit-028 | G9 | Win 611+13 skips; Linux 620+4 skips (orchestrator) | central deps `8431370`; finding: SDK start_as_current_span records exception messages → manual span end, type-only status; evidence count = distinct cited evidence IDs |
 | NIT-029 F13 Agent SDK adapters | pending | — | — | 023 adoption | — | |
 | NIT-030 tau2 study | pending | — | — | G11, 017 | — | license review first; no runs before G11 |
 | NIT-031 Dogfooding, incidents file | pending | maintainer | — | 023 | — | maintainer-owned |
@@ -133,3 +133,4 @@ Plan: [17-v0.2-product-and-plan.md](../planning/17-v0.2-product-and-plan.md). In
 - 2026-10-20: NIT-016 delivered by nitelos-d7 (`f29a91f`), verified by the orchestrator on Win+Linux; review APPROVE-WITH-CHANGES (4 required: README visual figures, security link, CHANGELOG coverage); fixes sent. NIT-028 central deps committed (`8431370`).
 - 2026-10-20: NIT-016 fixes `43854b2` verified (Win 601+13 skips in worktree; Linux 610+4 skips); merged into integration/v0.2 (`48f9853`, Win 612 passed + 2 skips). Maintainer item: apply repo topics/description and create labels bug/enhancement/false-verdict (docs/implementation/nit-016-repo-settings.md). NIT-028 → nitelos-d7.
 - 2026-10-20: NIT-017 delivered by nitelos-97 (`54b1008`), green on Win+Linux; independent review REJECT with 10 required fixes (security: redaction leak, subprocess bounds, executable hijack, error-text passthrough, provenance spoofing). Fixes sent to nitelos-97. Planned for NIT-018/019: stdlib only (no defusedxml: expat with DOCTYPE/entity rejection), empty named extras `git`/`junit`; git hardening (`-c core.fsmonitor=false`, GIT_OPTIONAL_LOCKS=0, GIT_CONFIG_NOSYSTEM, no safe.directory bypass).
+- 2026-10-20: NIT-028 delivered by nitelos-d7 (`a564c40`), verified Win+Linux; independent review running.
