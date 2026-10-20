@@ -2,13 +2,13 @@
 
 Prepared only; nothing here has been applied. GitHub repo settings are maintainer-owned.
 
-## Proposed description (226 chars)
+## Proposed description (219 chars)
 
 ```
 Verify the outcome, not the attempt. A Python SDK that checks an AI agent's claimed result against the evidence its run left behind: deterministic assertions, host-bound trust, optional experimental local visual checks.
 ```
 
-## Proposed topics (13)
+## Proposed topics (12)
 
 | Topic | Justified by |
 |---|---|
@@ -23,10 +23,10 @@ Verify the outcome, not the attempt. A Python SDK that checks an AI agent's clai
 | `pydantic` | Public schema-1 contract is built on Pydantic v2. |
 | `deterministic` | The default path is pure, offline, same-input-same-answer. |
 | `evidence` | Evidence digests, eligibility and references are core concepts. |
-| `computer-use-agents` | DOM/screenshot evidence views target browser-operating agents. |
-| `testing` | The SDK is used as an outcome check in agent test/CI loops. |
+| `computer-use-agents` | DOM/screenshot evidence views target browser-operating agents (docs/planning/00-executive-summary.md). |
 
 ## Notes
 
 - No superlatives, no "first", no unqualified claims in the description.
 - Topics follow GitHub rules: lowercase, hyphenated, no spaces.
+- Maintainer action before the forms go live: the labels `bug`, `enhancement` and `false-verdict` must exist in the repository, otherwise the issue forms cannot apply them.

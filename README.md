@@ -170,14 +170,16 @@ guessing.
 
 v0.1 was measured on a synthetic benchmark of 120 authored cases, split into a
 development half and a held-out test half. On the deterministic path this is
-policy conformance, not accuracy: the expected decision is defined by the
-verification policy itself, so the benchmark checks the implementation against
-its own specification on authored fixtures. It matched on 120 of 120 cases
-(60 per half). The experimental visual backend is a different story: per half
-it answered decisively on 38 of 60 cases and got 12 of those 38 wrong, every
-one of them an over-claim of `success` (false-rejection rate 0.0), including
+policy conformance, not accuracy: the expected decision is derived from
+each case's state by the policy's own specified rules, so the benchmark
+checks the implementation against its own specification on authored fixtures. It matched on 120 of 120 cases
+(60 per half). The experimental visual backend is a different story. Per half it conformed
+on 41 of 60 cases and answered decisively on 42 of 60. Of the 38 decisive
+answers on cases with a known outcome, 12 were wrong, every one of them an
+over-claim of `success` (false-rejection rate 0.0). Separately, it answered
 `success` on 7 of the 18 cases whose evidence was insufficient or
-contradictory. Every figure, with its denominator, is in
+contradictory.
+Every figure, with its denominator, is in
 [reports/v0.1/SUMMARY.md](reports/v0.1/SUMMARY.md).
 
 Final-test labels were audited by two independent AI reviewers plus

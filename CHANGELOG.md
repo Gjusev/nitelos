@@ -6,6 +6,10 @@ follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- README and documentation overhaul after the v0.1.0 tag: PyPI version and supported-Python badges, a README restructured around the user workflow, docs index (docs/README.md), expanded quickstart, brand assets and launch-film sources under videos/nitelos-launch, and the hosted explainer film linked from the README.
+
 ### Internal
 
 - v0.2 planning: product and task plan ([docs/planning/17-v0.2-product-and-plan.md](docs/planning/17-v0.2-product-and-plan.md)) with proposed ADR-014/015/016 recorded in [docs/implementation/decisions.md](docs/implementation/decisions.md).
@@ -30,4 +34,7 @@ No public interface changes yet.
 
 ### Notes
 
-- Evaluation results, with every denominator, are in [reports/v0.1/SUMMARY.md](reports/v0.1/SUMMARY.md): the deterministic path conformed on 120 of 120 authored synthetic cases; the experimental visual backend over-claims (unsafe acceptance 7 of 18). Final-test labels were audited by two independent AI reviewers plus adjudication; no human annotation audit was performed (ADR-013). No claim is made about real-world performance.
+- Evaluation results, with every denominator, are in [reports/v0.1/SUMMARY.md](reports/v0.1/SUMMARY.md): the deterministic path conformed on 120 of 120 authored synthetic cases; the experimental visual backend over-claims (decisive accuracy 26 of 38 in each split; unsafe acceptance 7 of 18 in each split). Final-test labels were audited by two independent AI reviewers plus adjudication; no human annotation audit was performed (ADR-013). No claim is made about real-world performance.
+
+[Unreleased]: https://github.com/Gjusev/nitelos/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/Gjusev/nitelos/releases/tag/v0.1.0

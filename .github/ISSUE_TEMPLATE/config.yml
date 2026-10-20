@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
   - name: Security reports
-    url: https://github.com/Gjusev/nitelos/blob/main/SECURITY.md
+    url: https://github.com/Gjusev/nitelos/security/advisories/new
     about: Report vulnerabilities privately, never as a public issue. See SECURITY.md for the channel.
