@@ -253,6 +253,7 @@ def test_tst12_failed_ids_capped(tmp_path: Path) -> None:
     assert data["failed"] == 5
     assert len(data["failed_ids"]) == 3
     assert data["failed_ids"] == ("c::t0", "c::t1", "c::t2")
+    assert data["failed_ids_truncated"] == 2
 
 
 def test_tst13_too_many_report_files_is_error(tmp_path: Path) -> None:
@@ -269,6 +270,31 @@ def test_tst13_too_many_report_files_is_error(tmp_path: Path) -> None:
     result = run_collector(COLLECTOR, cfg)
     assert result.error is not None
     assert result.error.code == CollectorErrorCode.OUTPUT_TOO_LARGE
+
+
+def test_tst13b_doctype_scan_only_in_xml_branch(tmp_path: Path) -> None:
+    report = tmp_path / "report.json"
+    report.write_text(
+        json.dumps(
+            {
+                "summary": {"total": 1, "passed": 0, "failed": 1, "skipped": 0},
+                "tests": [{"nodeid": "tests/test_x.py::test_mentions[<!DOCTYPE html>]", "outcome": "failed"}],
+            }
+        ),
+        encoding="utf-8",
+    )
+    cfg = JunitConfig(
+        evidence_id="d-1",
+        checkpoint_id="cp",
+        subject={"suite": "s"},
+        report_root=tmp_path,
+        report_glob="*.json",
+    )
+    result = run_collector(COLLECTOR, cfg)
+    assert result.error is None
+    data = dict(result.evidence[0].data)
+    assert data["total"] == 1
+    assert data["failed_ids"] == ("tests/test_x.py::test_mentions[<!DOCTYPE html>]",)
 
 
 def test_tst14_zero_matches_is_empty_success() -> None:

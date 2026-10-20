@@ -2,7 +2,9 @@
 
 Reads test-report files from a glob and produces ONE aggregated
 ``external_api`` observation under ``/tests``: total, passed, failed, errors,
-skipped, failed_ids[] (capped), report_paths[], report_mtime_max. Supported
+skipped, failed_ids[] (capped with an explicit failed_ids_truncated count;
+failed_ids includes both failure and error cases), report_paths[],
+report_mtime_max. Supported
 formats: JUnit XML (pytest, jest-junit, vitest, Maven Surefire) and
 pytest-json-report. Detection is by content: leading ``<`` means XML,
 otherwise JSON.
@@ -195,9 +197,9 @@ class TestResultsCollector:
         total = failed = errors = skipped = 0
         failed_ids: list[str] = []
         for _path, raw, _mtime in eligible:
-            if b"<!DOCTYPE" in raw or b"<!ENTITY" in raw:
-                raise ValueError("XML with DOCTYPE or ENTITY declarations is rejected")
             if raw.lstrip()[:1] == b"<":
+                if b"<!DOCTYPE" in raw or b"<!ENTITY" in raw:
+                    raise ValueError("XML with DOCTYPE or ENTITY declarations is rejected")
                 parsed = _parse_junit_xml(raw)
             else:
                 parsed = _parse_pytest_json(json.loads(raw))
@@ -218,6 +220,7 @@ class TestResultsCollector:
             "errors": errors,
             "skipped": skipped,
             "failed_ids": failed_ids[: cfg.limits.max_list_items],
+            "failed_ids_truncated": max(0, len(failed_ids) - cfg.limits.max_list_items),
             "report_paths": [p.relative_to(cfg.report_root).as_posix() for p, _r, _m in eligible],
             "report_mtime_max": captured_at.isoformat().replace("+00:00", "Z"),
         }
