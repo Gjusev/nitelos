@@ -14,12 +14,19 @@ from nitelos import canonical_json
 from nitelos.integrations.langgraph_node import NitelosVerification, verify_outcome_node
 
 
-def _observation(data: dict[str, Any]) -> dict[str, Any]:
+def _captured_at(offset_s: int = -10) -> str:
+    from datetime import UTC, datetime, timedelta
+
+    stamp = datetime.now(UTC) + timedelta(seconds=offset_s)
+    return stamp.isoformat().replace("+00:00", "Z")
+
+
+def _observation(data: dict[str, Any], *, captured_at: str | None = None) -> dict[str, Any]:
     obs = {
         "id": "obs-1",
         "kind": "observation",
         "sequence": 0,
-        "captured_at": "2099-01-01T00:00:00Z",
+        "captured_at": captured_at or _captured_at(),
         "checkpoint_id": "cp",
         "source_id": "collector",
         "subject": {"record": "rec-1"},
@@ -69,9 +76,9 @@ CRITERIA = [
 ]
 
 
-def _evidence_provider(data: dict[str, Any]):
+def _evidence_provider(data: dict[str, Any], *, captured_at: str | None = None):
     def provide() -> list[dict[str, Any]]:
-        return [_observation(data)]
+        return [_observation(data, captured_at=captured_at)]
 
     return provide
 
@@ -82,6 +89,22 @@ def test_lgn01_success_result_in_state() -> None:
     assert isinstance(update["nitelos"], NitelosVerification)
     assert update["nitelos"].decision == "success"
     assert set(update) == {"nitelos"}  # a state UPDATE: LangGraph merges it
+
+
+def test_lgn01b_fresh_evidence_decides_not_abstains() -> None:
+    node = verify_outcome_node(criteria=CRITERIA, evidence_provider=_evidence_provider({"written": True}))
+    update = node({})
+    assert update["nitelos"].decision == "success"  # freshness flows through
+
+
+def test_lgn01c_stale_evidence_abstains_with_stale_reason() -> None:
+    node = verify_outcome_node(
+        criteria=CRITERIA,
+        evidence_provider=_evidence_provider({"written": True}, captured_at=_captured_at(-7200)),
+    )
+    update = node({})
+    assert update["nitelos"].decision == "abstained"
+    assert "STALE_EVIDENCE" in update["nitelos"].reason_codes
 
 
 def test_lgn02_failure_result_in_state() -> None:

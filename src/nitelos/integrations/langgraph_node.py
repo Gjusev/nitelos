@@ -17,6 +17,12 @@ only — a graph stays debuggable instead of crashing mid-run. The result
 object carries decision, execution_status, reason codes and evidence ids;
 raw evidence values never enter it.
 
+Graph-author notes: state schemas MUST be module-level TypedDicts —
+langgraph serializes node/router function source for checkpointing and a
+function-local class raises NameError at invoke time (verified against
+langgraph 1.2.16). ``NitelosVerification.criterion_states`` is a tuple of
+``(criterion_id, state)`` pairs.
+
 Requires the ``langgraph`` extra; importing this module without the package
 raises :class:`ImportError` naming the install command. Importing
 ``nitelos`` itself never loads langgraph.
@@ -26,6 +32,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import Callable, Mapping, Sequence
+from datetime import UTC, datetime
 from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -106,11 +113,7 @@ def verify_outcome_node(
             "request_id": "langgraph-verify",
             "objective": "Verify the outcome the graph claimed",
             "checkpoint_id": checkpoint_id,
-            # far-future cutoff: the host captured evidence moments ago and the
-            # criteria freshness (max_age_seconds) governs eligibility, which
-            # parse_request cannot know; a 2099 as_of keeps every realistic
-            # captured_at valid while freshness still gates in the policy.
-            "as_of": "2099-01-01T00:00:00Z",
+            "as_of": _now_iso(),
             "criteria": maps,
             "evidence": evidence,
             "metadata": {},
@@ -134,3 +137,7 @@ def verify_outcome_node(
         return {"nitelos": summary}
 
     return node
+
+
+def _now_iso() -> str:
+    return datetime.now(UTC).isoformat().replace("+00:00", "Z")
