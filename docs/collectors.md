@@ -117,6 +117,32 @@ repository" is distinguishable from empty output); raw output is never logged.
 An `OSError` at process creation (bad cwd, exec format) maps to
 `COLLECTOR_UNAVAILABLE`. Network collection is not part of this framework yet.
 
+## The git collector (`nitelos[git]`, NIT-018)
+
+`nitelos.collect.git.GitCollector` (kind `git`, config `GitCollectorConfig`
+with `repo_path`) reports one observation under `/git/...`: `head_sha`,
+`branch` (null when detached, with `detached: true`), `dirty_count`,
+`dirty_paths[]` (tracked changes, capped at 200 and by
+`limits.max_list_items`, with the dropped count in `dirty_paths_truncated`),
+`untracked_count`, `ahead`/`behind`/`upstream` (null without an upstream),
+and `last_commit.{subject_sha256,timestamp}` (null before the first commit).
+
+It runs exactly four hardened argvs through the shared runner:
+`git -c core.fsmonitor=false {rev-parse HEAD | status --porcelain=v2 --branch
+| log -1 --format=%s%n%ct | rev-list --left-right --count @{upstream}...HEAD}`
+with `GIT_OPTIONAL_LOCKS=0` and `GIT_CONFIG_NOSYSTEM=1`. There is deliberately
+no `safe.directory` bypass: a repository git refuses as dubious ownership
+fails the collection with `COLLECTOR_UNAVAILABLE`, as does a directory that is
+not a repository or a missing git binary. A non-zero exit from `status` means
+no state; the other commands' failures just null their fields (unborn head,
+vanished upstream).
+
+Limitation worth knowing: the scrubbed environment does not inherit the
+user's `core.autocrlf`, so a CRLF working tree over LF-normalized blobs
+reports as dirty — correct for a byte-level view, surprising if you rely on
+your global line-ending config. The provenance `sha256` digests the
+concatenated raw stdouts.
+
 ## The debug CLI
 
 ```
