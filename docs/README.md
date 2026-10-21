@@ -21,6 +21,7 @@ runnable check. This index is organized by what you are trying to do.
 | Review the security and privacy boundaries | [security-privacy.md](security-privacy.md) |
 | Export one span per verification | [opentelemetry.md](opentelemetry.md) |
 | Verify agent stops in Claude Code | [claude-code.md](claude-code.md) |
+| Gate actions before they happen (experimental) | [gate.md](gate.md) |
 
 ## Evaluate nitelos
 

@@ -6,6 +6,10 @@ follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Pre-action gate (`nitelos.gate`, NIT-033): the act/ask decision math ported from gate-calibrated per ADR-017 (temperature scaling and logistic calibrators, conformal risk-controlled threshold, three policies); signals arrive as host-supplied numbers, the tier map is host configuration, irreversible actions always ask. Experimental research port: the source's negative result and assumptions ship in the docs.
+
 ### Changed
 
 - README and documentation overhaul after the v0.1.0 tag: PyPI version and supported-Python badges, a README restructured around the user workflow, docs index (docs/README.md), expanded quickstart, brand assets and launch-film sources under videos/nitelos-launch, and the hosted explainer film linked from the README.

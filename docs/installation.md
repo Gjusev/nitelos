@@ -49,6 +49,12 @@ smoke run exists. Weights are never bundled: provision the model directory
 yourself (per-file SHA-256 manifest required; see
 [backends.md](backends.md)) and point `NITELOS_MODEL_DIR` at it.
 
+## The v0.2 integration extras
+
+| Extra | Installs | Guide |
+|---|---|---|
+| `nitelos[gate]` | numpy (the pre-action gate's calibrators) | [gate.md](gate.md) |
+
 There is no `all` extra by design: it would pull GPU stacks into core users.
 
 ## From a checkout
