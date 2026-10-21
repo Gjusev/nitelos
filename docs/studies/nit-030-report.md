@@ -29,8 +29,8 @@ Pooled over 1,824 trajectories; per-model detail in the table.
 | Source | False-success rate | False-failure rate | Abstain |
 |---|---|---|---|
 | V-judge | 33/602 = 0.055 [0.039, 0.076] | 202/1,216 = 0.166 [0.146, 0.188] | 6 unparseable (0.3%) |
-| V-self (frozen P2) | 5/37 = 0.135 [0.059, 0.280] | 1/1 = 1.000 [0.207, 1.000] | 1,786 no-claim (97.9%) |
-| V-nitelos | 0/772 = 0.000 [0.000, 0.004] | 1/1,016 = 0.001 [0.000, 0.006] | 36/1,824 = 0.020 [0.014, 0.027] |
+| V-self (frozen P2) | 5/37 = 0.135 [0.059, 0.280] | 0/1 = 0.000 [0.000, 0.793] | 1,786 no-claim (97.9%) |
+| V-nitelos | 0/772 = 0.000 [0.000, 0.005] | 1/1,016 = 0.001 [0.000, 0.006] | 36/1,824 = 0.020 [0.014, 0.027] |
 
 Judge accuracy against the reference (excluding its 6 unparseables):
 1,583/1,818 = 0.871 [0.855, 0.885]. Pairwise agreement where all three
