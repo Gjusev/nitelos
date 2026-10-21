@@ -26,6 +26,7 @@ runnable check. This index is organized by what you are trying to do.
 | Score outcomes with DeepEval | [deepeval.md](deepeval.md) |
 | Verify inside a LangGraph graph | [langgraph.md](langgraph.md) |
 | Compare nitelos with related tools | [comparison.md](comparison.md) |
+| Gate actions before they happen (experimental) | [gate.md](gate.md) |
 
 ## Evaluate nitelos
 

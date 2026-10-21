@@ -17,6 +17,7 @@ follows [Semantic Versioning](https://semver.org/).
 - Playwright page-state helper (NIT-022): read-only page capture (never drives the browser) producing one observation and one screenshot evidence item.
 - OpenTelemetry export improvements (NIT-028): per-verification spans with allowlisted GenAI attributes and a traced-verify helper.
 - Console entry points: `nitelos` (debug `collect` subcommand) and `nitelos-hook`.
+- Pre-action gate (`nitelos.gate`, NIT-033): the act/ask decision math ported from gate-calibrated per ADR-017 (temperature scaling and logistic calibrators, conformal risk-controlled threshold, three policies); signals arrive as host-supplied numbers, the tier map is host configuration, irreversible actions always ask. Experimental research port: the source's negative result and assumptions ship in the docs.
 
 ### Changed
 

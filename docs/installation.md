@@ -63,6 +63,7 @@ and importing `nitelos` never pulls them in.
 | `nitelos[mcp]` | the mcp package | [mcp.md](mcp.md) |
 | `nitelos[langgraph]` | langgraph 1.x | [langgraph.md](langgraph.md) |
 | `nitelos[playwright]` | nothing beyond core (Playwright itself is the caller's dependency) | [collectors.md](collectors.md#the-playwright-page-state-helper-nitelosplaywright-nit-022) |
+| `nitelos[gate]` | numpy (the pre-action gate's calibrators) | [gate.md](gate.md) |
 
 The `git`, `junit`, `github` and `http` collectors are stdlib-only and need
 no extra beyond core ([collectors.md](collectors.md)).

@@ -85,6 +85,7 @@ agent's claim.
 | DeepEval metric | Deterministic 1/0 `NitelosOutcomeMetric` | [docs/deepeval.md](docs/deepeval.md) |
 | LangGraph node | `verify_outcome_node` with routing on the decision | [docs/langgraph.md](docs/langgraph.md) |
 | OpenTelemetry | One span per verification with allowlisted attributes | [docs/opentelemetry.md](docs/opentelemetry.md) |
+| Pre-action gate (experimental) | Act/ask decision math from host-supplied confidence signals | [docs/gate.md](docs/gate.md) |
 
 ## Quickstart
 
