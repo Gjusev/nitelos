@@ -8,12 +8,15 @@ import shutil
 import subprocess
 import sys
 import tarfile
+import tomllib
 import zipfile
 from pathlib import Path
 
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
+with (ROOT / "pyproject.toml").open("rb") as _pf:
+    VERSION = tomllib.load(_pf)["project"]["version"]
 HEAVY_MODULES = ("torch", "transformers", "scipy", "numpy", "playwright", "httpx")
 FORBIDDEN_SUFFIXES = (".safetensors", ".bin", ".pt", ".pth", ".onnx", ".gguf", ".env", ".pem", ".key")
 
@@ -45,7 +48,7 @@ def test_import_has_no_side_effects_and_no_heavy_imports() -> None:
         "socket.socket.connect = deny\n"
         "before = list(logging.getLogger().handlers)\n"
         "import nitelos\n"
-        "assert nitelos.__version__ == '0.1.0', nitelos.__version__\n"
+        f"assert nitelos.__version__ == '{VERSION}', nitelos.__version__\n"
         "assert logging.getLogger().handlers == before\n"
         "assert logging.getLogger('nitelos').handlers == []\n"
         f"heavy = [m for m in {HEAVY_MODULES!r} if m in sys.modules]\n"
@@ -74,7 +77,7 @@ def test_pkg01_built_wheel_imports_without_extras_or_network(dist_dir: Path, tmp
         [sys.executable, "-c", code], check=False, capture_output=True, text=True, env=env, cwd=tmp_path
     )
     assert proc.returncode == 0, proc.stderr
-    assert proc.stdout.strip() == "0.1.0"
+    assert proc.stdout.strip() == VERSION
 
 
 def test_pkg02_wheel_contains_py_typed_and_no_weights_or_secrets(dist_dir: Path) -> None:

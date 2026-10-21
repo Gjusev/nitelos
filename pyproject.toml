@@ -1,6 +1,6 @@
 [project]
 name = "nitelos"
-version = "0.1.0"
+version = "0.2.0rc1"
 description = "Verify the outcome, not the attempt: evidence-based success verification for AI agents."
 readme = "README.md"
 requires-python = ">=3.12,<3.14"

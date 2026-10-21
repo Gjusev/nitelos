@@ -14,6 +14,7 @@ import shutil
 import subprocess
 import sys
 import tarfile
+import tomllib
 from pathlib import Path
 
 import pytest
@@ -32,6 +33,9 @@ CONFORMANCE_SELECTION = (
 )
 FORBIDDEN_SUFFIXES = (".safetensors", ".bin", ".pt", ".pth", ".onnx", ".gguf", ".env", ".pem", ".key")
 _LOCKED_TEST_DEPS = ("pytest==9.1.1", "pytest-asyncio==1.4.0")  # asyncio: the repo ini names its option
+
+with (ROOT / "pyproject.toml").open("rb") as _pf:
+    VERSION = tomllib.load(_pf)["project"]["version"]  # release-prep: versions stay in pyproject
 
 
 def _uv() -> str:
@@ -65,15 +69,15 @@ def built_dist(tmp_path_factory: pytest.TempPathFactory) -> Path:
         capture_output=True,
     )
     names = {p.name for p in out.iterdir()}
-    assert "nitelos-0.1.0-py3-none-any.whl" in names
-    assert "nitelos-0.1.0.tar.gz" in names
-    assert names <= {"nitelos-0.1.0-py3-none-any.whl", "nitelos-0.1.0.tar.gz", ".gitignore"}
+    assert f"nitelos-{VERSION}-py3-none-any.whl" in names
+    assert f"nitelos-{VERSION}.tar.gz" in names
+    assert names <= {f"nitelos-{VERSION}-py3-none-any.whl", f"nitelos-{VERSION}.tar.gz", ".gitignore"}
     return out
 
 
 @pytest.fixture(scope="module")
 def wheel_venv(built_dist: Path, tmp_path_factory: pytest.TempPathFactory) -> Path:
-    wheel = built_dist / "nitelos-0.1.0-py3-none-any.whl"
+    wheel = built_dist / f"nitelos-{VERSION}-py3-none-any.whl"
     venv = tmp_path_factory.mktemp("wheel-venv")
     subprocess.run([_uv(), "venv", str(venv)], check=True, capture_output=True)
     vpython = _venv_python(venv)
@@ -87,7 +91,7 @@ def wheel_venv(built_dist: Path, tmp_path_factory: pytest.TempPathFactory) -> Pa
 
 @pytest.fixture(scope="module")
 def sdist_venv(built_dist: Path, tmp_path_factory: pytest.TempPathFactory) -> Path:
-    sdist = built_dist / "nitelos-0.1.0.tar.gz"
+    sdist = built_dist / f"nitelos-{VERSION}.tar.gz"
     venv = tmp_path_factory.mktemp("sdist-venv")
     subprocess.run([_uv(), "venv", str(venv)], check=True, capture_output=True)
     vpython = _venv_python(venv)
@@ -158,7 +162,7 @@ def test_rel01_examples_run_from_installed_wheel(wheel_venv: Path, tmp_path: Pat
 
 
 def test_rel02_sdist_contents(built_dist: Path) -> None:
-    sdist = built_dist / "nitelos-0.1.0.tar.gz"
+    sdist = built_dist / f"nitelos-{VERSION}.tar.gz"
     with tarfile.open(sdist) as tf:
         names = tf.getnames()
     # fixtures ship (the smoke set is part of the distribution)
@@ -183,7 +187,7 @@ def test_rel02_sdist_installs_and_imports_in_fresh_venv(sdist_venv: Path, tmp_pa
             "def deny(*a, **k): raise OSError('network disabled')\n"
             "socket.socket.connect = deny\n"
             "import nitelos\n"
-            "assert nitelos.__version__ == '0.1.0'\n"
+            f"assert nitelos.__version__ == '{VERSION}'\n"
             f"assert nitelos.__file__.startswith({str(sdist_venv)!r})\n"
             f"exec(open({str(EXAMPLES / 'quickstart.py')!r}, encoding='utf-8').read())",
         ],

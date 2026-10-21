@@ -6,6 +6,8 @@ follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.0rc1] - 2026-10-21
+
 ### Added
 
 - Collector framework (`nitelos.collect`): read-only, bounded collectors whose errors become structured results so the verifier abstains instead of failing (NIT-017, ADR-014/015), with the `git`, `junit`, `github` and `http` collectors (NIT-018..021) and the shared hardened GET transport (NIT-020).
