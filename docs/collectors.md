@@ -172,6 +172,20 @@ rate limit (429 or 403 with `X-RateLimit-Remaining: 0`) and 404 →
 `COLLECTOR_UNAVAILABLE`; other 4xx → `COLLECTOR_CONFIG_INVALID`; 5xx →
 `COLLECTOR_UNAVAILABLE`.
 
+## The HTTP JSON collector (`nitelos[http]`, NIT-021)
+
+`HttpJsonCollector` (kind `http`) performs one GET to a host-pinned absolute
+`https://` URL through the shared transport and extracts JSON pointer values
+into one observation under `/http/`: `status_code`, the allowlisted
+headers, and `values` at the configured pointers (1 to 32, RFC 6901). A
+missing pointer yields `null`: missing is a value, not an error. Note that
+in `values` an absent key and a JSON null at the key are indistinguishable;
+an `exists` criterion is about the pointer being configured, not about the
+remote document's key presence. Non-2xx statuses map through the shared
+table above; a non-JSON body or a non-object root is `COLLECTOR_EXCEPTION`.
+v0.2 sends no authentication headers itself; the 401 mapping exists for
+hosts fronting the URL with their own transport that adds credentials.
+
 ## The debug CLI
 
 ```
@@ -238,7 +252,10 @@ observation under `/page/` (url, title, per-selector text/visible/value/
 count) plus one full-page screenshot evidence item, run through the NIT-017
 framework — provenance, cross-checks, the observation cap and redaction all
 apply (note: selector keys are dict keys, so a selector matching the secret
-pattern is redacted — prefer neutral names). Screenshot bytes go to the
+pattern is redacted — prefer neutral names). Visible text, URLs and input
+values are captured verbatim into the observation: pass
+`redact_pointers` (for example `/page/selectors/#field/text`) to drop
+specific values before the digest. Screenshot bytes go to the
 caller's `artifacts` dict, never to files; `captured_at` is the capture
 moment, so criteria freshness governs like any other evidence. The module
 imports playwright never — the `playwright` extra is the caller's

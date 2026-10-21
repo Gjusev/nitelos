@@ -66,7 +66,25 @@ statistics, and `nitelos[local]` adds the experimental local visual backend
 [docs/installation.md](docs/installation.md).
 
 Status: alpha (v0.1.0). Requests carry `schema_version: "1"`; expect the Python
-API to change before 1.0.
+API to change before 1.0. v0.1 code keeps working on the v0.2 line: the public
+request/result contract is unchanged (see the migration notes in
+[CHANGELOG.md](CHANGELOG.md)).
+
+## Integrations (v0.2, unreleased)
+
+Verify outcomes where your agents already run. Every integration follows the
+same rule: the truth comes from host-collected evidence, never from the
+agent's claim.
+
+| Integration | What it does | Guide |
+|---|---|---|
+| Claude Code plugin | Stop hook that blocks a stop when verification fails; `/nitelos:init`, `/nitelos:check` | [docs/claude-code.md](docs/claude-code.md) |
+| Collectors: git, junit, github, http, Playwright | Read-only evidence collection with caps, redaction and provenance | [docs/collectors.md](docs/collectors.md) |
+| MCP server | `verify_outcome`, host-pinned `collect`, read-only `describe_criteria` over stdio | [docs/mcp.md](docs/mcp.md) |
+| Inspect AI scorer | Verification as a `C`/`I`/`A` score with abstention-aware accuracy | [docs/inspect.md](docs/inspect.md) |
+| DeepEval metric | Deterministic 1/0 `NitelosOutcomeMetric` | [docs/deepeval.md](docs/deepeval.md) |
+| LangGraph node | `verify_outcome_node` with routing on the decision | [docs/langgraph.md](docs/langgraph.md) |
+| OpenTelemetry | One span per verification with allowlisted attributes | [docs/opentelemetry.md](docs/opentelemetry.md) |
 
 ## Quickstart
 

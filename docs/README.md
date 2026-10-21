@@ -21,6 +21,11 @@ runnable check. This index is organized by what you are trying to do.
 | Review the security and privacy boundaries | [security-privacy.md](security-privacy.md) |
 | Export one span per verification | [opentelemetry.md](opentelemetry.md) |
 | Verify agent stops in Claude Code | [claude-code.md](claude-code.md) |
+| Expose verification over MCP | [mcp.md](mcp.md) |
+| Score outcomes inside Inspect AI | [inspect.md](inspect.md) |
+| Score outcomes with DeepEval | [deepeval.md](deepeval.md) |
+| Verify inside a LangGraph graph | [langgraph.md](langgraph.md) |
+| Compare nitelos with related tools | [comparison.md](comparison.md) |
 
 ## Evaluate nitelos
 

@@ -49,6 +49,24 @@ smoke run exists. Weights are never bundled: provision the model directory
 yourself (per-file SHA-256 manifest required; see
 [backends.md](backends.md)) and point `NITELOS_MODEL_DIR` at it.
 
+## The v0.2 integration extras
+
+Each extra installs one integration's dependency; all of them load lazily
+and importing `nitelos` never pulls them in.
+
+| Extra | Installs | Guide |
+|---|---|---|
+| `nitelos[claude-code]` | nothing beyond core (the plugin launcher needs your Python) | [claude-code.md](claude-code.md) |
+| `nitelos[otel]` | the OpenTelemetry API | [opentelemetry.md](opentelemetry.md) |
+| `nitelos[inspect]` | inspect-ai 0.3.x | [inspect.md](inspect.md) |
+| `nitelos[deepeval]` | deepeval 2.x | [deepeval.md](deepeval.md) |
+| `nitelos[mcp]` | the mcp package | [mcp.md](mcp.md) |
+| `nitelos[langgraph]` | langgraph 1.x | [langgraph.md](langgraph.md) |
+| `nitelos[playwright]` | nothing beyond core (Playwright itself is the caller's dependency) | [collectors.md](collectors.md#the-playwright-page-state-helper-nitelosplaywright-nit-022) |
+
+The `git`, `junit`, `github` and `http` collectors are stdlib-only and need
+no extra beyond core ([collectors.md](collectors.md)).
+
 There is no `all` extra by design: it would pull GPU stacks into core users.
 
 ## From a checkout
