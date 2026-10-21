@@ -35,6 +35,7 @@ runnable check. This index is organized by what you are trying to do.
 | Understand the evaluation design and its limits | [evaluation.md](evaluation.md) |
 | Read the v0.1 benchmark results, with every denominator | [reports/v0.1/SUMMARY.md](../reports/v0.1/SUMMARY.md) |
 | Inspect the benchmark data, labels and audit records | [benchmarks/synthetic_v1/DATA_CARD.md](../benchmarks/synthetic_v1/DATA_CARD.md) |
+| Read the tau2-bench three-verdict study (frozen protocol, published data) | [studies/nit-030-report.md](studies/nit-030-report.md) |
 
 ## Contribute
 
