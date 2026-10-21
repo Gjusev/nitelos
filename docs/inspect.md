@@ -45,12 +45,12 @@ from safe codes only; raw evidence values never enter the Score.
 
 ## Abstention and accuracy
 
-Attach the shipped metric:
+The scorer attaches `nitelos_accuracy` by default; there is nothing to pass:
 
 ```python
-from nitelos.integrations.inspect_scorer import nitelos_accuracy
+from nitelos.integrations.inspect_scorer import nitelos_scorer
 
-scorer = nitelos_scorer(metrics=[nitelos_accuracy()])
+scorer = nitelos_scorer()  # nitelos_accuracy is already attached
 ```
 
 `nitelos_accuracy` computes C/(C+I) over the decisive scores only and

@@ -22,6 +22,10 @@ follows [Semantic Versioning](https://semver.org/).
 
 - README and documentation overhaul after the v0.1.0 tag: PyPI version and supported-Python badges, a README restructured around the user workflow, docs index (docs/README.md), expanded quickstart, brand assets and launch-film sources under videos/nitelos-launch, and the hosted explainer film linked from the README.
 
+### Internal
+
+- Repository hygiene (NIT-016): issue templates with verdict-reporting paths, repository description and topic plan, and repo-hygiene tests.
+
 ### Migration notes
 
 v0.1 code keeps working on the v0.2 line. The public request and result

@@ -38,8 +38,9 @@ It is independent of which agent ran the task.
 
 BrowserGym, AgentLab, WebArena, VisualWebArena and OSWorld provide
 environments, trajectories and task evaluators; Inspect AI provides the
-evaluation harness we integrate with as a scorer; Langfuse provides
-observability; Playwright provides page state we capture read-only. The
+evaluation harness we integrate with as a scorer; Langfuse is where
+OpenTelemetry traces land (we ship the OTel export, not a Langfuse
+integration); Playwright provides page state we capture read-only. The
 ledger's standing instructions apply: reuse, do not rebuild, and do not
 call a subset of a benchmark a reproduction
 ([ledger](planning/01-competitive-landscape.md#benchmarks-and-agent-research-infrastructure),
