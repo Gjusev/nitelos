@@ -29,7 +29,9 @@ commit because upstream moved on the day of review.
 - Repository `sierra-research/tau2-bench`, default branch `main` (S1, S2).
 - Reviewed commit: `57e54143025bec219b5726884651c98eede202e2`, "Merge pull
   request #653 from sierra-research/soham/sandbox-minimal-env", commit date
-  2026-10-21 (S2). This was the branch HEAD on the day of review.
+  2026-10-21 (S2). This was the branch HEAD on the day of review, and a
+  second check later the same day found it unchanged; this is the final pin
+  proposed for G11.
 - The README now brands the project as tau3-bench and adds voice domains; the
   tau2 text benchmark remains in place under `data/tau2/` (S1, S6). This study
   uses text tau2 only.

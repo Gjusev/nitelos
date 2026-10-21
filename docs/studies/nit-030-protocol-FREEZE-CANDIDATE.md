@@ -1,10 +1,30 @@
-# NIT-030 protocol DRAFT: tau2-bench re-scoring with Nitelos
+# NIT-030 protocol FREEZE CANDIDATE: tau2-bench re-scoring with Nitelos
 
-Status: DRAFT for the maintainer's G11 freeze. Nothing in this file is a
-result: no runs were made, no model was called, no trajectories were scored
-(hard scope of the pre-G11 assignment). When frozen, this document is the
+Status: freeze candidate for the maintainer's G11 signature. Nothing in this
+file is a result: no runs were made, no model was called, no trajectory
+payloads were opened for analysis. When signed, this document is the
 pre-registration; any change after the first trajectory is scored requires a
 new dated pre-registration note, not a silent edit.
+
+## What the maintainer signs at G11
+
+1. The pin: `sierra-research/tau2-bench` at commit
+   `57e54143025bec219b5726884651c98eede202e2` (verified twice on 2026-10-21,
+   unchanged between checks; re-checked at the moment of signature).
+2. The subset: exactly the four telecom files named in section 2, every task
+   present, every recorded trial. Airline and retail stay out (maintainer
+   ruling 2026-10-21: separate pre-registration if ever).
+3. Three verdicts per trajectory: agent self-report (rule P2), LLM judge,
+   Nitelos over final environment state. The judge is glm-4.7 at temperature
+   0.0, single call, prompt P1 (maintainer: accepted in principle).
+4. The budget ceiling: the judge leg is estimated at USD 8.84 for the base
+   split (arithmetic in section 8; labeled estimate, placeholders replaced at
+   V1 before any spend). Paid spend approved in principle pending this figure.
+5. The metrics of section 7, Wilson intervals, denominators always printed.
+6. The negative-result commitment of section 9, including: raw trajectories
+   and model outputs are never republished; only derived verdicts and
+   criteria ship, with the tau2-bench citation (arXiv 2506.07982) and the
+   MIT notice.
 
 Companion: docs/studies/nit-030-license-review.md (terms, pin, and the arXiv
 2606.09863 source check). Upstream prior art read before drafting (read-only):
@@ -44,7 +64,8 @@ Pre-registered, falsifiable expectations (sources: Advani 2026, arXiv
 ## 2. Data and subset (fixed in advance)
 
 Upstream pin: `sierra-research/tau2-bench` at commit
-`57e54143025bec219b5726884651c98eede202e2` (license review, section 2).
+`57e54143025bec219b5726884651c98eede202e2` (license review, section 2;
+re-checked later the same day, unchanged).
 
 Selection rule, mechanical, no discretion at run time. Included: exactly these
 four files under `data/tau2/results/final/`:
@@ -60,14 +81,22 @@ Units of analysis: every task present in each file, every recorded trial (4 per
 task per model). The gpt-4.1-mini file ships with strategy "base" while the
 others use "default"; recorded as observed upstream, not re-run.
 
+Task counts at the pin (counted from the task spec files, see V3):
+`data/tau2/domains/telecom/tasks.json` holds 2,285 unique task ids (the full
+combinatorial set); `split_tasks.json` defines the named splits: base 114,
+train 74, test 40, small 20, full 2285. The four included files are expected
+to cover the base split (114 tasks), consistent with the upstream results
+README's "telecom is unchanged and verifies". V1 confirms the actual per-file
+task count structurally; any delta from 114 is recorded and the section 8 cost
+is recomputed before spend, never after.
+
 Exclusions, with reasons fixed now:
 
 - Airline and retail shipped trajectories: the upstream results README states
   29 (airline) and 114 (retail) tasks differ from the current base task sets,
-  so criteria could not be authored from the current tree against them. Using
-  them would require archaeology into the June 2025 pre-v1.0.0 task snapshot
-  that generated the trajectories; that is a follow-up option only with
-  maintainer approval (section 9).
+  so criteria could not be authored from the current tree against them.
+  Maintainer ruling 2026-10-21: they stay out; any future use is a separate
+  pre-registration.
 - telecom-workflow and the no-user / no-user-op / op control variants: shipped
   for only two of the four models; a control-regime confound.
 - Voice, multilingual, tau3 domains: out of scope for a text tau2 study.
@@ -87,13 +116,13 @@ approach of Advani 2026.
 - V-self: parse rule P2 (appendix) over the agent's final message in the
   transcript. Three outcomes: claims-done, claims-not-done, no-claim. No-claim
   counts as abstain and is reported as such.
-- V-judge (PROPOSED, paid, maintainer decision required): one call per
+- V-judge (accepted in principle by the maintainer 2026-10-21): one call per
   trajectory, glm-4.7 at temperature 0.0, prompt P1 (appendix): task
   instruction plus full transcript, one binary question. Alternatives
-  (claude-opus-5-5, gpt-5.2) acceptable at freeze; whichever is chosen is
-  recorded here before any call. Rationale for keeping the judge despite E2:
-  it is the practice baseline the study compares against, and Advani's result
-  is itself one of the things an independent replication speaks to.
+  (claude-opus-5-5, gpt-5.2) may be substituted only by a dated note before
+  the first call. Rationale for keeping the judge despite E2: it is the
+  practice baseline the study compares against, and Advani's result is itself
+  one of the things an independent replication speaks to.
 - V-nitelos: the frozen criteria set (section 5) evaluated over final
   environment state evidence for the trial (section 6).
 
@@ -151,54 +180,68 @@ n (telecom, 4 agent models), with the benchmark reward as reference:
   wall-clock per trajectory; the machine spec is stated in the report.
 - Runtime: end-to-end wall-clock per leg.
 
-## 8. Cost estimate and the paid-API question (flagged for the maintainer)
+## 8. Cost (computed for the real N; labeled estimate)
 
-- Unit count: 4 models x 4 trials x N tasks, N counted at V3. The upstream
-  README mentions 114 telecom tasks for the voice-v1 set; the text task count
-  is unverified. Planning placeholder N = 115 gives 1,840 judge calls.
-- Token estimate, labeled estimate: per call 8,000 input tokens (task plus
-  transcript) and 20 output; totals about 14.7M input and 37k output tokens.
-  V1 replaces both placeholders with measured distributions before any budget
-  is committed.
-- Only the judge leg costs money. V-self, V-nitelos, replay and metrics run
-  offline at zero marginal cost. APPROVAL REQUESTED at G11: judge model choice
-  and budget. If no budget is approved, the study runs with two verdicts
-  (V-self, V-nitelos) and the report title says so; no silent downgrade.
+Published price (source: Z.ai pricing page, https://docs.z.ai/guides/overview/pricing,
+accessed 2026-10-21, USD per 1M tokens): GLM-4.7 input 0.6, output 2.2.
+
+Judge calls, base split: 4 models x 4 trials x 114 tasks = 1,824 calls.
+
+Token placeholders (per call, measured at V1 and replaced before spend):
+8,000 input, 20 output.
+
+- Input: 1,824 x 8,000 = 14,592,000 tokens -> 14.592M x USD 0.6 = USD 8.76
+- Output: 1,824 x 20 = 36,480 tokens -> 0.03648M x USD 2.2 = USD 0.08
+- Total estimate: USD 8.84
+
+Ceiling if V1 finds the files cover more than the base split, at the full
+2,285-task set (36,560 calls): input 292.48M -> USD 175.49, output 0.7312M ->
+USD 1.61, total USD 177.10. The recomputed figure replaces this paragraph
+before any spend; spend above the recomputed figure stops the judge leg and is
+reported.
+
+Everything except the judge leg (V-self, V-nitelos, replay, metrics) runs
+offline at zero marginal cost.
 
 ## 9. Negative-result commitment
 
 All numbers are published, including: Nitelos abstaining on most trials; most
 criteria hard or impossible; zero false-success events in telecom (a real
 possibility given E1's 3% of failures prior); the judge outperforming Nitelos.
-No post-hoc domain switch: adding retail or airline (higher false-success
-regime, via pre-v1.0.0 task archaeology or fresh paid runs) is a separate
-follow-up that requires its own frozen pre-registration. The gate-calibrated
-precedent (public negative results on tau-bench retail) is the house style.
+No post-hoc domain switch: adding retail or airline is a separate follow-up
+that requires its own frozen pre-registration. Raw trajectories and model
+outputs are never republished (maintainer ruling 2026-10-21); only derived
+verdicts and criteria ship, with the tau2-bench citation (arXiv 2506.07982)
+and the preserved MIT notice. The gate-calibrated precedent (public negative
+results on tau-bench retail) is the house style.
 
 ## 10. Pre-run verification items (verify at start, do not assume)
 
 - V1 schema: field-level schema of the four included files at the pin; confirm
-  what final-state evidence and task ids are present; measure transcript token
-  distribution for section 8.
+  what final-state evidence and task ids are present; count tasks per file
+  structurally; measure transcript token distribution; replace the section 8
+  placeholders. Done before any budget is committed.
 - V2 replay: deterministic replay reproduces recorded rewards on a 20-trial
   pilot before any full run.
-- V3 counts: exact task count and trial count per file, recorded before
-  criteria authoring begins.
+- V3 counts: DONE at the pin on 2026-10-21 from the task spec files:
+  tasks.json 2,285 unique ids; split_tasks.json base 114, train 74, test 40,
+  small 20, full 2285. The per-file trial counts remain a run-start check
+  under V1.
 - V4 P2 dry run: the self-report parse rule applied to 5 random trajectories
   per model for format confirmation only, before criteria authoring.
 - V5 correspondence: telecom task files at the pin match the task ids in the
   shipped trajectories (independently verifies the upstream README's
   "telecom is unchanged" claim).
-- V6 license re-pin: upstream movement since 57e5414 reviewed and recorded;
-  per-file license headers of included files walked (closes license-review
-  uncertainty 2).
+- V6 license re-pin: DONE twice on 2026-10-21 (unchanged, 57e5414); re-check
+  once more at the G11 signature; per-file license headers of included files
+  walked before the first run (closes license-review uncertainty 2).
 
 ## 11. Timeline (proposal, maintainer adjusts)
 
-1. G11: maintainer freezes this protocol (and decides the judge budget).
-2. Same day, offline: V1 through V6.
+1. G11: maintainer signs this protocol (budget figure confirmed).
+2. Same day, offline: V1 through V6 remaining items.
 3. Criteria authoring, blinded (section 5), criteria file committed.
-4. Judge leg (if funded), V-self and V-nitelos legs.
+4. Judge leg, V-self and V-nitelos legs.
 5. Metrics and report; criteria files, ledger and verdict records published
    under the license-review obligations (MIT notice plus arXiv 2506.07982
    citation).
@@ -206,9 +249,10 @@ precedent (public negative results on tau-bench retail) is the house style.
 ## 12. Out of scope
 
 Voice and multilingual sets, tau3 domains, AppWorld, any new agent runs, human
-labels, and any change of subset after freeze.
+labels, republishing raw trajectories or model outputs, and any change of
+subset after freeze.
 
-## Appendix P1: judge prompt (PROPOSED, frozen at G11 with any model choice)
+## Appendix P1: judge prompt (frozen at G11 with the model choice)
 
 ```text
 You are auditing an AI customer-service agent's completed session.
