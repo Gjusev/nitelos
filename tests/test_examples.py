@@ -286,3 +286,38 @@ def test_ex_otel_example_traces_verification() -> None:
     assert "nitelos.execution_status" in proc.stdout
     assert "decision: failure" in proc.stdout
     assert "opentelemetry-sdk" in (EXAMPLES / "otel_trace_verification.py").read_text(encoding="utf-8")
+
+
+# --------------------------------------------------------------------------
+# NIT-034: the v0.2 integration examples (deepeval, langgraph, mcp). They are
+# skip-gated at runtime: without the extra the example prints the gate
+# requirement and exits 0; with the extra it prints the real output. Both
+# outcomes are asserted, so the test is meaningful in core and extra envs.
+# --------------------------------------------------------------------------
+
+
+def _run_gated_example(name: str, real_marker: str) -> None:
+    proc = subprocess.run(
+        [sys.executable, str(EXAMPLES / f"{name}.py")],
+        check=False,
+        capture_output=True,
+        text=True,
+        cwd=ROOT,
+    )
+    assert proc.returncode == 0, proc.stderr
+    source = (EXAMPLES / f"{name}.py").read_text(encoding="utf-8")
+    assert "nitelos[" in source  # the gate names its extra
+    skipped = "skip: install" in proc.stdout
+    assert skipped or real_marker in proc.stdout, proc.stdout
+
+
+def test_ex_deepeval_metric_demo_maps_the_decision() -> None:
+    _run_gated_example("deepeval_metric_demo", "score: 1.0")
+
+
+def test_ex_langgraph_verify_node_routes_on_decision() -> None:
+    _run_gated_example("langgraph_verify_node", "decision: success")
+
+
+def test_ex_mcp_server_demo_drives_the_tools() -> None:
+    _run_gated_example("mcp_server_demo", "agent config rejected: True")
