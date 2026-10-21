@@ -277,3 +277,21 @@ Remaining (maintainer authority, outside this phase): human annotation review pr
 2. **Turn start for freshness (US-2):** it is not yet confirmed that the Stop hook input carries a turn-start time. NIT-023 starts by confirming the current Stop and SubagentStop input fields, the block response format and the plugin manifest format against the Claude Code docs. If no turn start exists, the fallback is the timestamp of the last user message in the transcript; if that is unavailable too, abstain with `STALE_EVIDENCE`.
 3. **Trust:** the hook is the trusted host under ADR-015 finding 4. It binds only evidence its own collectors produced in that invocation.
 **Recommendation:** approve as proposed, with findings 1–3.
+
+## ADR-017 — Pre-action gate port, NIT-033 (state: proposed; awaiting maintainer decision)
+
+**Context:** plan F14 asks to port the act/ask gate from the maintainer's `gate-calibrated` into `nitelos.gate`, so one library covers "before" (should the agent act or ask?) and "after" (did it really happen?), keeping its negative result visible. The source repository splits cleanly (read 2026-10-21): the decision math (`calibrator.py` temperature scaling and logistic calibration, `threshold.py` conformal risk control choosing lambda, `policy.py` confirm-all / fixed-threshold / calibrated policies, `types.py`) depends only on numpy; the signal collection (`llm.py`, `signals.py`, `middleware.py`) calls models through litellm and is bound to tau-bench; `tiers.py` maps tau-bench retail tool names.
+
+**Options:**
+- **A (recommended): port the decision math only.** `nitelos.gate` takes the confidence signals as numbers supplied by the host (the host's own model calls produce verbalized confidence and k-sample agreement) and returns act or ask. The tier map (read / write / irreversible) is host configuration, like criteria; irreversible always asks, the source repository's invariant. No model calls, no network, no tau-bench, so "nitelos never calls the model" stays true and BND-01..03 apply unchanged. New extra `gate` = numpy, same pin as `eval`.
+- **B: port everything, including signal collection.** Rejected: nitelos would call models and open network connections from library code, contradicting the product boundary (README, launch films) and ADR-015's collector-only exception.
+- **C: do not port; document `gate-calibrated` as the companion "before" project.** Cheapest; does not meet the plan's one-library goal.
+
+**Findings that bind option A:**
+1. **The negative result ships with the code.** The gate page and the module docstring reproduce the source's main result as written: risk control held in point estimates, it did not beat the simple alternatives, and the likely cause was a saturated signal (glm-5.3-flash stated 0.9 or more on all 43 wrong write steps). The README presents the gate as an experimental research port, never as a validated improvement.
+2. **The guarantee's assumptions travel with it.** Conformal risk control bounds expected loss under exchangeability between calibration and test trajectories, computed on ungated runs; under the gate a rejection changes the later path. This goes into the `choose_lambda` docstring and the docs page verbatim, together with the perfect-oracle limitation.
+3. **No dataset is copied.** Port tests use synthetic labeled records; tau-bench gold labels and collected trajectories stay in the source repository.
+4. **No coupling with verification in v0.2.** `GateDecision` and `VerificationResult` stay separate types; recording gate decisions as verification context (for example in the Claude Code hook) needs its own ADR.
+5. **Licensing is the maintainer's call.** `gate-calibrated` is MIT, copyright 2026 Gjusev; nitelos is Apache-2.0. The copyright holder is the maintainer, so relicensing the ported files is permitted, but it is the copyright holder's decision and is recorded here when approved.
+
+**Recommendation:** approve option A with findings 1–5. On approval, NIT-033 becomes assignable: `nitelos.gate` (calibrator, conformal threshold, three policies, host tier map), extra `gate` provisioned centrally first, the negative result and assumptions in docs, synthetic-record tests, independent review.
