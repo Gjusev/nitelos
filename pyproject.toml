@@ -55,6 +55,9 @@ langgraph = [
 playwright = [
     "playwright>=1.40",
 ]
+gate = [
+    "numpy>=2.5.4",
+]
 
 [project.scripts]
 nitelos-hook = "nitelos.claude_code:main"

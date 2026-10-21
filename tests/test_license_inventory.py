@@ -198,6 +198,7 @@ def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
         "inspect": [],
         "langgraph": [],
         "playwright": [],
+        "gate": [],
     }
     for dep in nitelos["metadata"]["requires-dist"]:
         group = "core"
@@ -218,6 +219,8 @@ def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
                 group = "langgraph"
             elif "extra == 'playwright'" in dep["marker"]:
                 group = "playwright"
+            elif "extra == 'gate'" in dep["marker"]:
+                group = "gate"
             else:
                 raise AssertionError(
                     f"unrecognised extra marker for {dep['name']}: inventory test needs the group"
@@ -273,6 +276,7 @@ def test_direct_dependencies_land_in_the_right_sections() -> None:
     inspect_rows = {cells[0].lower() for cells in _rows(sections, "extra `inspect`")}
     langgraph_rows = {cells[0].lower() for cells in _rows(sections, "extra `langgraph`")}
     playwright_rows = {cells[0].lower() for cells in _rows(sections, "extra `playwright`")}
+    gate_rows = {cells[0].lower() for cells in _rows(sections, "extra `gate`")}
     assert set(direct["core"]) <= core_rows
     assert set(direct["eval"]) <= eval_rows
     assert set(direct["local"]) <= local_rows
@@ -287,6 +291,7 @@ def test_direct_dependencies_land_in_the_right_sections() -> None:
     assert langgraph_rows >= LANGGRAPH_CLOSURE
     assert set(direct["playwright"]) <= playwright_rows
     assert playwright_rows >= PLAYWRIGHT_CLOSURE
+    assert set(direct["gate"]) <= gate_rows
     # and the recorded closures are fully covered by their sections
     assert core_rows >= CORE_CLOSURE
     assert eval_rows >= EVAL_CLOSURE

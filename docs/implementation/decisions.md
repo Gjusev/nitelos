@@ -278,7 +278,7 @@ Remaining (maintainer authority, outside this phase): human annotation review pr
 3. **Trust:** the hook is the trusted host under ADR-015 finding 4. It binds only evidence its own collectors produced in that invocation.
 **Recommendation:** approve as proposed, with findings 1–3.
 
-## ADR-017 — Pre-action gate port, NIT-033 (state: proposed; awaiting maintainer decision)
+## ADR-017 — Pre-action gate port, NIT-033 (state: accepted, option A with findings 1–5; user-approved 2026-10-21)
 
 **Context:** plan F14 asks to port the act/ask gate from the maintainer's `gate-calibrated` into `nitelos.gate`, so one library covers "before" (should the agent act or ask?) and "after" (did it really happen?), keeping its negative result visible. The source repository splits cleanly (read 2026-10-21): the decision math (`calibrator.py` temperature scaling and logistic calibration, `threshold.py` conformal risk control choosing lambda, `policy.py` confirm-all / fixed-threshold / calibrated policies, `types.py`) depends only on numpy; the signal collection (`llm.py`, `signals.py`, `middleware.py`) calls models through litellm and is bound to tau-bench; `tiers.py` maps tau-bench retail tool names.
 
@@ -295,3 +295,5 @@ Remaining (maintainer authority, outside this phase): human annotation review pr
 5. **Licensing is the maintainer's call.** `gate-calibrated` is MIT, copyright 2026 Gjusev; nitelos is Apache-2.0. The copyright holder is the maintainer, so relicensing the ported files is permitted, but it is the copyright holder's decision and is recorded here when approved.
 
 **Recommendation:** approve option A with findings 1–5. On approval, NIT-033 becomes assignable: `nitelos.gate` (calibrator, conformal threshold, three policies, host tier map), extra `gate` provisioned centrally first, the negative result and assumptions in docs, synthetic-record tests, independent review.
+
+**Decision (2026-10-21):** the maintainer approved option A, including finding 5: the ported `gate-calibrated` files are relicensed by their copyright holder from MIT to Apache-2.0 for nitelos. NIT-033 is assignable.

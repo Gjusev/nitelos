@@ -296,3 +296,12 @@ Playwright `Page`; browsers are NOT installed by this extra. Not in the dev grou
 | greenlet | 3.5.6 | MIT AND PSF-2.0 | greenlet.readthedocs.io | compiled wheel |
 | playwright | 1.64.0 | Apache-2.0 | github.com/Microsoft/playwright-python | **Release action**: the package itself installs no browsers; if tests or docs ever run a browser, the browser binaries carry their own notices (Chromium BSD-family, Firefox MPL) — review before shipping any such usage |
 | pyee | 14.0.0 | MIT | github.com/jfhbrook/pyee | |
+
+## Optional extra `gate` — `pip install 'nitelos[gate]'`
+
+Added 2026-10-21 (NIT-033, ADR-017). The pre-action gate's calibrator needs numpy only;
+it is the same locked distribution as the `eval` extra.
+
+| Distribution | Version | License | Source | Notes |
+|---|---|---|---|---|
+| numpy | 2.5.4 | BSD-3-Clause | github.com/numpy/numpy | same distribution and release action as the `eval` row |
