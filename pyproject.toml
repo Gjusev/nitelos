@@ -1,6 +1,6 @@
 [project]
 name = "nitelos"
-version = "0.2.0rc1"
+version = "0.3.0"
 description = "Verify the outcome, not the attempt: evidence-based success verification for AI agents."
 readme = "README.md"
 requires-python = ">=3.12,<3.14"
@@ -39,6 +39,15 @@ git = []
 junit = []
 github = []
 claude-code = []
+hooks = [
+    "pyyaml>=6.0.1,<7",
+]
+langfuse = [
+    # SDK v5 (current GA, 5.2.0) is the documented target; `create_score` is
+    # unchanged from v4, so the 4.x line works too (research Q9: document both
+    # floors — v5 needs Langfuse server >= 4.59.0).
+    "langfuse>=4.6,<6",
+]
 http = []
 deepeval = [
     "deepeval>=2.0",
@@ -61,12 +70,14 @@ gate = [
 
 [project.scripts]
 nitelos-hook = "nitelos.claude_code:main"
+nitelos = "nitelos.cli:main"
 
 [dependency-groups]
 dev = [
     "hatchling>=1.32.4",
     "mypy>=2.4.0",
     "opentelemetry-sdk>=1.45.1,<2",
+    "pyyaml>=6.0.1,<7",
     "pytest>=9.1.1",
     "pytest-asyncio>=1.4.0",
     "pytest-cov>=7.1.0",
@@ -100,6 +111,7 @@ markers = [
     "local_model: real local model inference; requires NITELOS_RUN_LOCAL=1 and NITELOS_MODEL_DIR",
     "paid_api: reserved; v0.1 ships no paid adapter",
     "github_live: live GitHub REST against a real PR; requires GITHUB_TOKEN and NITELOS_RUN_GITHUB_LIVE=1",
+    "langfuse_live: live Langfuse API against a real project; requires LANGFUSE_HOST/PUBLIC_KEY/SECRET_KEY and NITELOS_RUN_LANGFUSE_LIVE=1 (skipped by default; makes NO LLM calls)",
 ]
 asyncio_mode = "strict"
 asyncio_default_fixture_loop_scope = "function"
@@ -149,6 +161,18 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 # NIT-025 (langgraph extra, not in the dev group): absent in core-only environments
 module = ["langgraph", "langgraph.*", "langchain_core", "langchain_core.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# NIT-023 (claude-code extra, stdlib-only). PyYAML serves the hooks extra's
+# criteria.yaml support and is imported lazily.
+module = ["yaml", "yaml.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# Project 1B (langfuse extra, deliberately NOT in the dev group): absent in
+# core-only environments, imported lazily inside the integration module
+module = ["langfuse", "langfuse.*"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]

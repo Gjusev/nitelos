@@ -85,7 +85,77 @@ agent's claim.
 | DeepEval metric | Deterministic 1/0 `NitelosOutcomeMetric` | [docs/deepeval.md](docs/deepeval.md) |
 | LangGraph node | `verify_outcome_node` with routing on the decision | [docs/langgraph.md](docs/langgraph.md) |
 | OpenTelemetry | One span per verification with allowlisted attributes | [docs/opentelemetry.md](docs/opentelemetry.md) |
+| Langfuse reporting (v0.3) | Categorical `nitelos_outcome` score per verdict, plus trace backfill from the public API | README section below |
+| Hook adapters: Codex, OpenCode (v0.3) | The verify pipeline behind Codex Stop hooks; observe-only reporting on OpenCode | README section below |
 | Pre-action gate (experimental) | Act/ask decision math from host-supplied confidence signals | [docs/gate.md](docs/gate.md) |
+
+## Langfuse reporting (`nitelos[langfuse]`)
+
+One categorical score per verification: `nitelos_outcome` = `success` /
+`failure` / `abstained`, idempotent (the score id is the nitelos verification
+id), carrying evidence references and a one-line reason in the comment — never
+raw page content. Install: `pip install "nitelos[langfuse]"` (Python SDK v5;
+`create_score` is unchanged from v4).
+
+```python
+from langfuse import get_client
+from nitelos import Verifier, parse_request
+from nitelos.integrations.langfuse import ensure_score_config, record_verdict
+
+client = get_client()
+config_id = ensure_score_config(client)          # creates nitelos_outcome once (never PATCHes)
+result = Verifier().verify(parse_request(request_json))
+if result.execution_status == "ok":
+    record_verdict(result, trace_id=trace_id, client=client, config_id=config_id)
+    # observation-level: record_verdict(result, trace_id, observation_id=span_id, ...)
+```
+
+Backfill existing traces (reads `nitelos.verify` spans via the public API,
+re-verifies where evidence is available, abstains otherwise; idempotent unless
+`--force`; `--dry-run` reports counts only):
+
+```bash
+export LANGFUSE_HOST=... LANGFUSE_PUBLIC_KEY=... LANGFUSE_SECRET_KEY=...
+nitelos langfuse backfill --criterion .nitelos/criteria.yaml --since 2026-11-01 --dry-run
+nitelos langfuse backfill --criterion .nitelos/criteria.yaml --since 2026-11-01
+# -> success: 41 / failure: 7 / abstained: 2 / skipped: 50 / total: 100
+```
+
+Tests are fully offline (fake clients, canned API pages). The single opt-in
+live test (`tests/test_langfuse_integration.py::test_lf_live_record_verdict_roundtrip`,
+marker `langfuse_live`) talks **only to the Langfuse API** and is skipped unless
+`NITELOS_RUN_LANGFUSE_LIVE=1`. Owner rule for any live run: an LLM call must go
+through the Z.ai Coding Plan endpoint (`https://api.z.ai/api/coding/paas/v4`,
+model `glm-5.3-flash`, key env `NITELOS_ZAI_KEY`) — and any billing/endpoint
+error **stops and reports**; the code never falls back to another provider.
+
+## Coding-agent hooks (`nitelos[hooks]`)
+
+The Claude Code plugin ships separately (`claude-code` extra, docs/claude-code.md).
+v0.3 adds adapters for Codex and OpenCode plus an installer:
+
+- **Codex** (`nitelos.integrations.hooks.codex`): same Stop-hook pipeline; a
+  block makes Codex **continue** with the reason as the next prompt (never a
+  turn rejection). Abstention logs to stderr and never blocks; the loop guard
+  respects `stop_hook_active`. The installer prints the mandatory `/hooks`
+  trust step.
+- **OpenCode** (`nitelos.integrations.hooks.opencode`): **observe-and-report
+  only** — OpenCode has no completion-blocking hook. The generated plugin
+  reports on the `session.idle` event; an optional `tool.execute.before` guard
+  (env `NITELOS_OPENCODE_TOOL_GUARD`) can block individual tool calls, the only
+  blocking OpenCode supports.
+- **Installer**: never overwrites an existing config without `--force`.
+
+```bash
+nitelos hooks install --harness codex                # print the .codex/hooks.json snippet
+nitelos hooks install --harness claude-code --target .claude/settings.json
+nitelos hooks install --harness opencode --target .opencode/plugins/nitelos-observe.ts
+nitelos hooks install --harness codex --target .codex/hooks.json --force  # replace
+```
+
+A working demo (an agent claiming "tests pass" while they fail, and the Stop
+hook blocking it) lives in
+[examples/claude_code_stop_hook/](examples/claude_code_stop_hook/).
 
 ## Quickstart
 

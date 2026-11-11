@@ -1,0 +1,9 @@
+{
+  "session_id": "s-1",
+  "prompt_id": "p-1",
+  "transcript_path": "transcript.jsonl",
+  "cwd": ".",
+  "hook_event_name": "Stop",
+  "stop_hook_active": false,
+  "last_assistant_message": "All tests pass."
+}

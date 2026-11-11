@@ -305,3 +305,27 @@ it is the same locked distribution as the `eval` extra.
 | Distribution | Version | License | Source | Notes |
 |---|---|---|---|---|
 | numpy | 2.5.4 | BSD-3-Clause | github.com/numpy/numpy | same distribution and release action as the `eval` row |
+
+## Optional extra `hooks` — `pip install 'nitelos[hooks]'` (v0.3, Project 1B)
+
+Coding-agent hook adapters (Claude Code, Codex, OpenCode). The extra carries
+PyYAML only for `.nitelos/criteria.yaml` support; JSON criteria files need no
+dependency.
+
+| Distribution | Version | License | Source | Notes |
+|---|---|---|---|---|
+| pyyaml | 6.0.3 | MIT | github.com/yaml/pyyaml | lazy import; only needed when a YAML criteria file is loaded |
+
+## Optional extra `langfuse` — `pip install 'nitelos[langfuse]'` (v0.3, Project 1B)
+
+Langfuse verdict reporting and backfill. The SDK is imported lazily inside the
+integration module; the extra is never installed by core. The SDK's own
+dependency closure (OTel exporter stack, httpx, requests) is listed below;
+distributions already inventoried under other sections are not repeated.
+
+| Distribution | Version | License | Source | Notes |
+|---|---|---|---|---|
+| langfuse | 5.2.0 | MIT | github.com/langfuse/langfuse-python | SDK v5 line (works against Langfuse server >= 4.59.0); `create_score` unchanged from v4, so the 4.x line works too — re-verify the license of the installed major before release |
+| opentelemetry-exporter-http-transport | 0.66b1 | Apache-2.0 | github.com/open-telemetry/opentelemetry-python | SDK transitive dependency |
+| opentelemetry-exporter-otlp-proto-http | 1.45.1 | Apache-2.0 | github.com/open-telemetry/opentelemetry-python | SDK transitive dependency |
+

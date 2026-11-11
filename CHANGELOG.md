@@ -6,6 +6,53 @@ follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-11
+
+### Added
+
+- Langfuse reporting extra (`nitelos[langfuse]`, Project 1B): `record_verdict`
+  writes the categorical `nitelos_outcome` score (`success`/`failure`/`abstained`,
+  enforced by an idempotently-created score config) per verification result —
+  idempotent via the verification id as score id, observation-level scores pass
+  both trace and observation ids, evidence references go in the comment (and in
+  metadata only when the client supports it), never raw page content. Backfill
+  CLI (`nitelos langfuse backfill --criterion FILE --since DATE [--dry-run]
+  [--force]`) reads `nitelos.verify` spans via Observations API v2 (cursor
+  pagination, client-side name/since filtering), re-verifies each trace where
+  evidence is available (abstains where it is not), and prints counts per
+  verdict; skips traces already carrying the score unless `--force`. The SDK
+  and network imports stay lazy; offline tests run against fake clients and
+  canned pages, with one opt-in live test behind `NITELOS_RUN_LANGFUSE_LIVE=1`.
+- Hook adapters extra (`nitelos[hooks]`, Project 1B):
+  `nitelos.integrations.hooks` — a Codex Stop-hook adapter (block = the reason
+  becomes the auto-created continuation prompt; abstention logs and never
+  blocks; `stop_hook_active` respected via the shared fingerprint loop guard;
+  installer prints the mandatory `/hooks` trust step), an OpenCode
+  observe-and-report adapter (no completion blocking exists; generated V2
+  plugin reports at `session.idle`, optional `tool.execute.before` tool-call
+  guard behind `NITELOS_OPENCODE_TOOL_GUARD`), a thin Claude Code delegate over
+  the NIT-023 plugin (now also loading `.nitelos/criteria.yaml` when PyYAML is
+  present), and `nitelos hooks install --harness claude-code|codex|opencode
+  [--target FILE] [--force]` which never overwrites an existing config without
+  `--force`. Golden stdin fixtures per harness in `tests/fixtures/hooks/`.
+- `nitelos` console entry point (the CLI previously ran only via
+  `python -m nitelos.cli`); `nitelos collect` behavior is unchanged.
+- Runnable offline demo `examples/claude_code_stop_hook/`: an agent claiming
+  "All tests pass." while the junit report shows a failure — the Stop hook
+  blocks with the failing test named (`bash run_demo.sh`).
+
+### Changed
+
+- Version bumped 0.2.0rc1 → 0.3.0 (minor). Dependency/license inventory gained
+  sections for the new `hooks` (PyYAML) and `langfuse` (SDK v5 line) extras.
+
+### Research basis
+
+- Design and open-question resolutions follow
+  [docs/planning/20-hooks-and-langfuse-research.md](docs/planning/20-hooks-and-langfuse-research.md);
+  the resolved questions (Q1–Q9) and their conservative answers are recorded in
+  [NOTES.md](NOTES.md).
+
 ## [0.2.0rc1] - 2026-10-21
 
 ### Added

@@ -1,0 +1,27 @@
+{
+  "version": "1",
+  "profile": "demo",
+  "checkpoint_id": "stop",
+  "collectors": {
+    "junit": {
+      "evidence_id": "tests-1",
+      "subject": {"suite": "demo"},
+      "report_root": ".",
+      "report_glob": "reports/*.xml"
+    }
+  },
+  "criteria": [
+    {
+      "id": "tests-green",
+      "description": "All tests pass",
+      "kind": "assertion",
+      "scope": "external",
+      "evidence_ids": ["tests-1"],
+      "subject": {"suite": "demo"},
+      "pointer": "/failed",
+      "operator": "equals",
+      "expected": 0
+    }
+  ],
+  "on_abstain": "warn"
+}

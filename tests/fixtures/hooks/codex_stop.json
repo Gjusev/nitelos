@@ -1,0 +1,11 @@
+{
+  "session_id": "s-1",
+  "transcript_path": null,
+  "cwd": ".",
+  "hook_event_name": "Stop",
+  "model": "glm-5.3-flash",
+  "permission_mode": "on-request",
+  "turn_id": "t-1",
+  "stop_hook_active": false,
+  "last_assistant_message": "All tests pass."
+}

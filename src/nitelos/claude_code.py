@@ -281,6 +281,33 @@ def _decide(result: Any, criteria: CriteriaFile, evidence: list[Any]) -> dict[st
     return {}
 
 
+def load_criteria(cwd: Path) -> CriteriaFile:
+    """Load criteria from ``.nitelos/criteria.json`` or ``.nitelos/criteria.yaml``.
+
+    JSON is the repo-native format (no dependency); YAML is accepted for the
+    hook adapters (Project 1B) and needs PyYAML, imported lazily so JSON-only
+    installs never require it. Any load/validation failure propagates to the
+    caller, which turns it into a warning per ADR-016.
+    """
+    json_path = cwd / ".nitelos" / "criteria.json"
+    yaml_path = cwd / ".nitelos" / "criteria.yaml"
+    if json_path.exists():
+        return CriteriaFile.model_validate(json.loads(json_path.read_text(encoding="utf-8")))
+    if yaml_path.exists():
+        try:
+            import yaml  # noqa: PLC0415 - lazy: YAML support is optional (hooks extra ships PyYAML)
+        except ImportError:
+            raise ImportError(
+                "criteria file is YAML but PyYAML is not installed; "
+                'install it with: pip install "nitelos[hooks]"'
+            ) from None
+        loaded = yaml.safe_load(yaml_path.read_text(encoding="utf-8"))
+        if not isinstance(loaded, dict):
+            raise ValueError("criteria.yaml must contain a mapping")
+        return CriteriaFile.model_validate(loaded)
+    raise FileNotFoundError(f"no .nitelos/criteria.json or .nitelos/criteria.yaml under {cwd}")
+
+
 def run_stop(stdin_text: str, *, state_dir: Path, require_turn_start: bool = True) -> dict[str, Any]:
     """The Stop hook: run one verification and return the output document."""
     try:
@@ -292,9 +319,7 @@ def run_stop(stdin_text: str, *, state_dir: Path, require_turn_start: bool = Tru
         return _warn("hook input carries no cwd")
     cwd = Path(cwd_text)
     try:
-        criteria = CriteriaFile.model_validate(
-            json.loads((cwd / ".nitelos" / "criteria.json").read_text(encoding="utf-8"))
-        )
+        criteria = load_criteria(cwd)
     except Exception as error:  # noqa: BLE001 - any criteria failure is a warn
         return _warn(
             f"criteria invalid or missing ({type(error).__name__}); "
