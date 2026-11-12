@@ -402,7 +402,16 @@ def test_hooks13_golden_fixtures_are_valid_json_with_expected_fields() -> None:
 def test_hooks14_demo_repo_blocks_the_agents_claim() -> None:
     """DOC demo: examples/claude_code_stop_hook blocks "tests pass" while failing."""
     import subprocess
+    import sys
 
+    if sys.platform == "win32":
+        # the demo drives a POSIX shell script that invokes the installed
+        # `nitelos` entry point; on Windows runners Git Bash resolves neither
+        # reliably (PowerShell error output leaks in as UTF-16). The demo is
+        # verified on Linux/macOS; see NOTES.md Q12.
+        import unittest
+
+        raise unittest.SkipTest("demo run_demo.sh is POSIX-only (see NOTES.md)")
     demo = ROOT / "examples" / "claude_code_stop_hook"
     proc = subprocess.run(
         ["bash", str(demo / "run_demo.sh")],
