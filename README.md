@@ -103,7 +103,7 @@ from nitelos import Verifier, parse_request
 from nitelos.integrations.langfuse import ensure_score_config, record_verdict
 
 client = get_client()
-config_id = ensure_score_config(client)          # creates nitelos_outcome once (never PATCHes)
+config_id = ensure_score_config(client)  # creates nitelos_outcome once (never PATCHes)
 result = Verifier().verify(parse_request(request_json))
 if result.execution_status == "ok":
     record_verdict(result, trace_id=trace_id, client=client, config_id=config_id)

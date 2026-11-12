@@ -208,17 +208,18 @@ where the set of possible values is known upfront" [4][5].
 
 ```python
 from langfuse import get_client
+
 langfuse = get_client()
 
 # Trace-level categorical score
 langfuse.create_score(
     name="outcome",
-    value="success",                      # string for categorical
+    value="success",  # string for categorical
     trace_id="trace_id_here",
     data_type="CATEGORICAL",
-    comment="...",                        # optional
-    score_id="...",                       # optional idempotency key
-    config_id="...",                      # optional ScoreConfig enforcement
+    comment="...",  # optional
+    score_id="...",  # optional idempotency key
+    config_id="...",  # optional ScoreConfig enforcement
 )
 
 # Observation-level: provide BOTH trace_id and observation_id
