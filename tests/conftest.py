@@ -15,6 +15,8 @@ class NetworkAccessDenied(RuntimeError):
 def _deny_network(monkeypatch: pytest.MonkeyPatch, request: pytest.FixtureRequest) -> None:
     if request.node.get_closest_marker("github_live") is not None:
         return  # opt-in live marker: deselected by default, requires NITELOS_RUN_GITHUB_LIVE=1
+    if request.node.get_closest_marker("langfuse_live") is not None:
+        return  # opt-in live marker: skipped by default, requires NITELOS_RUN_LANGFUSE_LIVE=1
 
     def deny(*_args: object, **_kwargs: object) -> None:
         raise NetworkAccessDenied("network access is disabled in offline tests")

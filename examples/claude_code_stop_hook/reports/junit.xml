@@ -1,0 +1,1 @@
+<testsuites><testsuite tests="2" failures="1" skipped="0" errors="0"><testcase classname="test_email" name="test_basic_address_passes"/><testcase classname="test_email" name="test_email_requires_domain_dot"><failure>assert not is_valid_email(&#x27;bob@localhost&#x27;)</failure></testcase></testsuite></testsuites>

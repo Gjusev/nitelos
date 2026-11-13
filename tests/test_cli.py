@@ -271,3 +271,22 @@ def test_cli03_module_invocation_works(tmp_path: Path) -> None:
     )
     assert proc.returncode == 2
     assert "unknown kind" in proc.stderr
+
+
+def test_cli04_hooks_install_routes_and_refuses_overwrite(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    from nitelos.cli import main
+
+    target = tmp_path / ".codex" / "hooks.json"
+    assert main(["hooks", "install", "--harness", "codex", "--target", str(target)]) == 0
+    assert "trust" in target.read_text(encoding="utf-8").lower()
+    assert main(["hooks", "install", "--harness", "codex", "--target", str(target)]) == 2
+    assert "refusing to overwrite" in capsys.readouterr().err
+
+
+def test_cli05_langfuse_backfill_requires_criterion(tmp_path: Path) -> None:
+    from nitelos.cli import main
+
+    with pytest.raises(SystemExit):
+        main(["langfuse", "backfill"])

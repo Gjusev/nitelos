@@ -183,6 +183,14 @@ PLAYWRIGHT_CLOSURE = {
     "pyee",
 }
 
+HOOKS_CLOSURE = {
+    "pyyaml",
+}
+
+LANGFUSE_CLOSURE = {
+    "langfuse",
+}
+
 
 def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
     data = tomllib.loads((ROOT / "uv.lock").read_text(encoding="utf-8"))
@@ -199,6 +207,8 @@ def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
         "langgraph": [],
         "playwright": [],
         "gate": [],
+        "hooks": [],
+        "langfuse": [],
     }
     for dep in nitelos["metadata"]["requires-dist"]:
         group = "core"
@@ -221,6 +231,10 @@ def _lock() -> tuple[dict[str, str], dict[str, list[str]]]:
                 group = "playwright"
             elif "extra == 'gate'" in dep["marker"]:
                 group = "gate"
+            elif "extra == 'hooks'" in dep["marker"]:
+                group = "hooks"
+            elif "extra == 'langfuse'" in dep["marker"]:
+                group = "langfuse"
             else:
                 raise AssertionError(
                     f"unrecognised extra marker for {dep['name']}: inventory test needs the group"
@@ -277,6 +291,8 @@ def test_direct_dependencies_land_in_the_right_sections() -> None:
     langgraph_rows = {cells[0].lower() for cells in _rows(sections, "extra `langgraph`")}
     playwright_rows = {cells[0].lower() for cells in _rows(sections, "extra `playwright`")}
     gate_rows = {cells[0].lower() for cells in _rows(sections, "extra `gate`")}
+    hooks_rows = {cells[0].lower() for cells in _rows(sections, "extra `hooks`")}
+    langfuse_rows = {cells[0].lower() for cells in _rows(sections, "extra `langfuse`")}
     assert set(direct["core"]) <= core_rows
     assert set(direct["eval"]) <= eval_rows
     assert set(direct["local"]) <= local_rows
@@ -292,6 +308,10 @@ def test_direct_dependencies_land_in_the_right_sections() -> None:
     assert set(direct["playwright"]) <= playwright_rows
     assert playwright_rows >= PLAYWRIGHT_CLOSURE
     assert set(direct["gate"]) <= gate_rows
+    assert set(direct["hooks"]) <= hooks_rows
+    assert hooks_rows >= HOOKS_CLOSURE
+    assert set(direct["langfuse"]) <= langfuse_rows
+    assert langfuse_rows >= LANGFUSE_CLOSURE
     # and the recorded closures are fully covered by their sections
     assert core_rows >= CORE_CLOSURE
     assert eval_rows >= EVAL_CLOSURE

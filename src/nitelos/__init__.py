@@ -4,7 +4,7 @@ Importing this package has no side effects: no logging handlers, no network,
 no optional model or evaluation dependencies.
 """
 
-__version__ = "0.2.0rc1"
+__version__ = "0.3.0"
 
 from nitelos.backends import Backend, BackendCapabilities, DeterministicBackend
 from nitelos.errors import (
